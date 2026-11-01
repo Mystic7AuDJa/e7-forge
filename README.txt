@@ -181,8 +181,6 @@ Changelog
   imports keep their imprint.
 - Sidebar tier badges removed; wording and capitalization made consistent
   (Thief, Earth, Spd, Live Sync, Account-Wide Optimizer).
-- PvP and PvE pages no longer show source links, confidence labels or guide
-  names; App Info still lists every source.
 
 0.1.0
 - PvP and PvE sections replace Team Builder; Counter Planner moved to PvP ->
