@@ -113,7 +113,7 @@ export function candidatesFrom(heroes: Hero[], heroData: (h: Hero) => HeroData |
     const current = currentBuildStats(hero, hd, items).stats;
     return { hero, hd, archetype: detectArchetype(hd).archetype, current, readiness: 0 };
   }).filter(Boolean) as TeamCandidate[];
-  // readiness: gear score of current build relative to your best-geared hero (0..1), plus a +15 speed bonus
+  // readiness: current gear score relative to your best-geared hero (0..1)
   const maxGs = Math.max(1, ...raw.map((r) => r.current.gs));
   for (const r of raw) r.readiness = Math.min(1, r.current.gs / maxGs);
   return raw;

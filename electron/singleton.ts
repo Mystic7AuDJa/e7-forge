@@ -49,7 +49,6 @@ export class SessionGuard {
     this.write();
   }
 
-  /** Clean exit: nothing left to clean up next time. */
   release() {
     try { fs.unlinkSync(this.file); } catch { /* ignore */ }
   }

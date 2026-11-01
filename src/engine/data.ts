@@ -19,7 +19,6 @@ export function toStats(raw: Record<string, number> | undefined): Stats {
   };
 }
 
-/** Builds the hero database from Fribbels-format herodata.json plus optional tag map. */
 export function buildHeroDb(herodata: Record<string, RawHero>, tags: Record<string, string[]> = {}): HeroDb {
   const db: HeroDb = new Map();
   for (const [key, h] of Object.entries(herodata)) {

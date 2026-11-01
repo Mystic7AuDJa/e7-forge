@@ -134,7 +134,6 @@ export function recommend(inp: RecommendInput): Recommendation {
     if (weights.ehp) targets.ehp = s.ehp;
     if (weights.cd) targets.cd = s.cd;
 
-    // Speed reasoning
     const speeds = res.builds.map((b) => b.stats.spd);
     const rosterFaster = inp.roster.filter((r) => r.hero.id !== hero.id && r.spd < s.spd).length;
     reasons.push(`Suggested speed ${s.spd}: best of your gear for this archetype (top results range ${Math.min(...speeds)}–${Math.max(...speeds)}).`);

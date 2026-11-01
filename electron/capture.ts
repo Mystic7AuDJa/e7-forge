@@ -51,7 +51,6 @@ export class CaptureService extends EventEmitter {
     this.emit("status", { state: s, bytes: this.bytes, error: this.lastError, decoderOpen: this.decoder.open, decoderRequests: this.decoder.requests, ...extra });
   }
 
-  /** Find a usable Python 3 interpreter. */
   static findPython(preferred: string): string[] | null {
     const candidates: string[][] = preferred ? [preferred.split(" ")] : process.platform === "win32"
       ? [["py", "-3"], ["python"], ["python3"]]

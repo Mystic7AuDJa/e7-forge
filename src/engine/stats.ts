@@ -179,7 +179,6 @@ function skillDamage(sk: HeroData["skills"]["S1"], v: { atk: number; hp: number;
   return Math.floor(offensive * defensive + extra);
 }
 
-/** Convenience: stats for a hero wearing a specific set of items. */
 export function computeStats(hd: HeroData, bonuses: HeroBonuses, items: Item[], mode: GearMode = "current", calc = DEFAULT_CALC): DerivedStats {
   const acc = new Float64Array(ACC_LEN);
   const sets = new Array(SET_NAMES.length).fill(0);

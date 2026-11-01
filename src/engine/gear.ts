@@ -90,7 +90,6 @@ export function isValidMain(slot: string, main: StatType) {
   return (SLOT_MAINS[slot] ?? []).includes(main);
 }
 
-/** Speed substat value (0 if none). */
 export function subValue(item: Pick<Item, "substats">, type: StatType) {
   return item.substats.find((s) => s.type === type)?.value ?? 0;
 }

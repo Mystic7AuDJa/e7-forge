@@ -49,7 +49,6 @@ let settings: Settings = DEFAULT_SETTINGS;
 let gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; artifacts: Record<string, any>; source: string; heroCount: number };
 let capture: CaptureService;
 
-// ---------------- data -------------------------------------------------------
 function readJson(file: string) { return JSON.parse(fs.readFileSync(file, "utf8")); }
 function dataFile(name: string) {
   const user = path.join(userDataDir, name);
@@ -63,7 +62,6 @@ function loadGameData() {
   gameData = { herodata, tags, artifacts, source, heroCount: Object.keys(herodata).length };
 }
 
-// ---------------- worker pool ------------------------------------------------
 const POOL = Math.max(1, Math.min(os.cpus().length - 2, 12));
 const workers: Worker[] = [];
 let seq = 0;
@@ -109,7 +107,6 @@ function send(channel: string, payload: unknown) {
   win.webContents.send(channel, payload);
 }
 
-// ---------------- window -----------------------------------------------------
 async function createWindow() {
   win = new BrowserWindow({
     width: 1480, height: 940, minWidth: 1100, minHeight: 700, backgroundColor: "#0e1116", title: "E7 Forge",
@@ -206,7 +203,6 @@ function shutdown() {
 app.on("before-quit", shutdown);
 app.on("window-all-closed", () => { shutdown(); app.quit(); });
 
-// ---------------- IPC --------------------------------------------------------
 function registerIpc() {
   ipcMain.handle("app:init", () => ({
     version: app.getVersion(), workers: POOL, killedPrior, runtime: { electron: process.versions.electron, chrome: process.versions.chrome, node: process.versions.node }, platform: process.platform, settings, account,
@@ -299,14 +295,12 @@ function registerIpc() {
   ipcMain.handle("snapshots:list", () => store.snapshots());
   ipcMain.handle("snapshots:restore", (_e, id: number) => { const a = store.restoreSnapshot(id); if (a) setAccount(a, false); return !!a; });
 
-  // capture
   ipcMain.handle("capture:diagnostics", () => capture.diagnostics());
   ipcMain.handle("capture:installScapy", () => capture.installScapy());
   ipcMain.handle("capture:start", () => { capture.start(); return capture.state; });
   ipcMain.handle("capture:stop", () => { capture.stop(); return capture.state; });
   ipcMain.handle("capture:sync", async () => { await capture.sync("manual"); return true; });
 
-  // engine jobs
   ipcMain.handle("job:optimize", async (_e, payload) => {
     const shards = workers.length;
     let nodes = 0;
