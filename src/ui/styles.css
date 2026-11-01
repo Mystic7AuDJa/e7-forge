@@ -35,7 +35,6 @@ h3 { font-size: 13px; margin: 0 0 8px; font-weight: 600; color: var(--muted); te
 .nav { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; color: var(--text); cursor: pointer; user-select: none; }
 .nav:hover { background: var(--panel); }
 .nav.active { background: var(--panel-2); box-shadow: inset 3px 0 0 var(--accent); }
-.nav .tier { margin-left: auto; font-size: 10px; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; }
 .main { overflow: auto; padding: 22px 26px 18px; }
 
 .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }

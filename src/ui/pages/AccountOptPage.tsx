@@ -20,7 +20,7 @@ export default function AccountOptPage() {
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<any>(null);
 
-  // Rows follow the checked heroes (shared with other pages, e.g. PvP "Open in Account-wide Optimizer").
+  // Rows follow the checked heroes (shared with other pages, e.g. PvP "Open in Account-Wide Optimizer").
   useEffect(() => {
     setRows((prev) => {
       const keep = prev.filter((r) => checked.includes(r.heroId));
@@ -39,7 +39,7 @@ export default function AccountOptPage() {
     });
     setRes(null);
   }, [checked, heroById, pageArg]);
-  useEffect(() => { if (pageArg?.fromTeam) toast(`Opened with ${pageArg.fromTeam.length} heroes pre-checked`); }, [pageArg]);
+  useEffect(() => { if (pageArg?.fromTeam) toast(`Opened with ${pageArg.fromTeam.length} heroes pre-selected`); }, [pageArg]);
   if (!account) return <NoAccount />;
 
   const upd = (i: number, f: (r: Row) => Row) => setRows(rows.map((r, j) => (j === i ? f(r) : r)));
@@ -57,13 +57,13 @@ export default function AccountOptPage() {
 
   return (
     <div className="with-roster">
-    <HeroRoster mode="multi" checked={checked} onCheck={setChecked} title="Heroes to solve" height="calc(100vh - 330px)" />
+    <HeroRoster mode="multi" checked={checked} onCheck={setChecked} title="Heroes to Gear" height="calc(100vh - 330px)" />
     <div className="stack">
-      <div><h1>Account-wide Optimizer</h1><p className="sub">Solves several heroes at once so they don't fight over the same gear. Higher priority wins conflicts; speed rules keep your tuning intact.</p></div>
-      <Section title="Checked heroes" right={<span className="muted">Priority decides who wins shared gear</span>}>
-        {!rows.length ? <span className="muted">Tick heroes on the left to gear them together (e.g. your RTA roster). PvP and PvE pages can pre-check a team here.</span> : (
+      <div><h1>Account-Wide Optimizer</h1><p className="sub">Gear multiple heroes at once so they don't fight over the same gear. Higher priority wins conflicts; speed rules keep your tuning intact.</p></div>
+      <Section title="Selected heroes" right={<span className="muted">Priority decides who wins shared gear</span>}>
+        {!rows.length ? <span className="muted">Select heroes on the left to gear them together (e.g. your RTA roster). PvP and PvE pages can pre-select heroes here.</span> : (
           <table>
-            <thead><tr><th>Hero</th><th className="num">Priority</th><th className="num">Min spd</th><th className="num">Max spd</th><th className="num">Min CR</th><th className="num">Min eff</th><th>Profile</th><th /></tr></thead>
+            <thead><tr><th>Hero</th><th className="num">Priority</th><th className="num">Min Spd</th><th className="num">Max Spd</th><th className="num">Min CR</th><th className="num">Min Eff</th><th>Profile</th><th /></tr></thead>
             <tbody>{rows.map((r, i) => (
               <tr key={r.heroId}>
                 <td><HeroName hero={heroById.get(r.heroId)!} /></td>
@@ -74,7 +74,7 @@ export default function AccountOptPage() {
                   return <td key={j} className="num"><Num value={bag[k]} width={64} onChange={(v) => upd(i, (x) => ({ ...x, request: { ...x.request, [isMax ? "max" : "min"]: { ...(isMax ? x.request.max : x.request.min), [k]: v } } }))} /></td>;
                 })}
                 <td className="muted" style={{ whiteSpace: "normal", maxWidth: 280 }}>{r.note}</td>
-                <td><a onClick={() => setChecked(checked.filter((x) => x !== r.heroId))}>remove</a></td>
+                <td><a onClick={() => setChecked(checked.filter((x) => x !== r.heroId))}>Remove</a></td>
               </tr>
             ))}</tbody>
           </table>
@@ -91,7 +91,7 @@ export default function AccountOptPage() {
               </select>
             </label>
             <label className="field">Gear-move penalty (per item pulled from another hero)<Num value={penalty} step={0.01} onChange={(v) => setPenalty(v ?? 0)} /></label>
-            <Toggle on={takeOutside} onChange={setTakeOutside} label="Allow taking gear from heroes outside this roster" />
+            <Toggle on={takeOutside} onChange={setTakeOutside} label="Allow taking gear from heroes not selected" />
           </div>
         </Section>
         <Section title="Preserve speed tuning">
@@ -104,14 +104,14 @@ export default function AccountOptPage() {
           <div style={{ marginTop: 8 }}>{rules.map((r, i) => (
             <div key={i} className="row"><span>{heroById.get(r.faster)?.name} → {heroById.get(r.slower)?.name}</span>
               <span className="muted">margin</span><Num value={Math.round(r.margin * 100)} width={56} onChange={(v) => setRules(rules.map((x, j) => (j === i ? { ...x, margin: (v ?? 0) / 100 } : x)))} />%
-              <a onClick={() => setRules(rules.filter((_, j) => j !== i))}>remove</a></div>
+              <a onClick={() => setRules(rules.filter((_, j) => j !== i))}>Remove</a></div>
           ))}</div>
           <p className="muted" style={{ fontSize: 12 }}>5% margin guarantees the order through speed RNG. Use 0% to only require “faster”.</p>
         </Section>
       </div>
-      <div className="row">{busy ? <Busy label="Solving roster…" /> : <button className="primary" disabled={rows.length < 1} onClick={run}>Solve roster</button>}</div>
+      <div className="row">{busy ? <Busy label="Gearing heroes…" /> : <button className="primary" disabled={rows.length < 1} onClick={run}>Gear heroes</button>}</div>
       {res && (
-        <Section title="Solution" right={<div className="row">
+        <Section title="Results" right={<div className="row">
           <span className="pill info">Team score {fmt(res.teamScore, 2)}</span><span className="pill">CP {fmt(res.totalCp)}</span><span className="pill">Avg GS {res.avgGs}</span>
           <span className="pill warn">{res.movedItems} items taken from other heroes</span><span className="muted">{fmt(res.ms / 1000, 1)} s</span>
           <button className="primary small" onClick={async () => { await api.applyBuilds(res.assignments.filter((a: any) => a.build).map((a: any) => a.build)); toast("All builds saved to your plan"); }}>Save all as planned</button>
@@ -125,7 +125,7 @@ export default function AccountOptPage() {
                 {a.note && <p className="muted">{a.note}</p>}
                 {a.build ? (
                   <>
-                    <div className="mono" style={{ margin: "8px 0" }}>SPD {a.build.stats.spd} · ATK {fmt(a.build.stats.atk)} · HP {fmt(a.build.stats.hp)} · DEF {fmt(a.build.stats.def)} · CR {a.build.stats.cr} · CD {a.build.stats.cd} · EFF {a.build.stats.eff} · RES {a.build.stats.res}</div>
+                    <div className="mono" style={{ margin: "8px 0" }}>Spd {a.build.stats.spd} · Atk {fmt(a.build.stats.atk)} · HP {fmt(a.build.stats.hp)} · Def {fmt(a.build.stats.def)} · CR {a.build.stats.cr} · CD {a.build.stats.cd} · Eff {a.build.stats.eff} · Res {a.build.stats.res}</div>
                     <table><tbody>{GEAR_SLOTS.map((s) => {
                       const id = a.build.items[s]; const mv = a.movedIn.find((m: any) => m.itemId === id && m.fromHeroId);
                       return <tr key={s}><td className="muted"><SlotLabel slot={s} /></td><td><ItemSummary item={itemById.get(id)} />{mv && <span className="pill warn" style={{ marginLeft: 6 }}>from {heroById.get(mv.fromHeroId)?.name}</span>}</td></tr>;

@@ -4,6 +4,7 @@ import { Busy, fmt, HeroIcon, HeroName, HeroSelect, ItemSummary, NoAccount, Num,
 import { ARENA_BANDS, bandForPoints, COUNTER_TEAM_SIZE, GW_BANDS, type Band, type CounterMode } from "../../engine/counters";
 import { TAG_LABELS } from "../../engine/tagger";
 import { GEAR_SLOTS } from "../../engine/types";
+import { classLabel, elementLabel } from "../../engine/labels";
 
 export default function CountersPage() {
   const { account, api, toast, init, heroById, itemById } = useForge();
@@ -64,7 +65,7 @@ export default function CountersPage() {
   return (
     <div className="stack">
       <div>
-        <h1>Offense · Counter Planner</h1>
+        <h1>Offense (Counter Planner)</h1>
         <p className="sub">Enter an enemy defense. Their builds are estimated from community builds in the gear-score band that matches their arena points, then teams from your roster are ranked by how well they answer the enemy kit, take the first turn and match elements.</p>
       </div>
 
@@ -83,7 +84,7 @@ export default function CountersPage() {
                 <div key={i} className={"enemy-slot" + (ok ? " ok" : "")}>
                   {ok ? <span className="hero-cell big"><HeroIcon name={v} /></span> : <span className="enemy-empty">{i + 1}</span>}
                   <input list="all-heroes" placeholder="Type a hero…" value={v} onChange={(e) => { const a = [...enemy]; a[i] = e.target.value; setEnemy(a); }} />
-                  {ok && <span className="muted" style={{ fontSize: 11 }}>{init.gameData.herodata[v]?.attribute} · {init.gameData.herodata[v]?.role}</span>}
+                  {ok && <span className="muted" style={{ fontSize: 11 }}>{elementLabel(init.gameData.herodata[v]?.attribute)} · {classLabel(init.gameData.herodata[v]?.role)}</span>}
                 </div>
               );
             })}

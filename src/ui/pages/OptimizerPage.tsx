@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForge } from "../state";
 import { HeroRoster } from "../HeroRoster";
 import { AddPlanningHero, HeroHeader } from "../HeroDetail";
-import { Busy, fmt, ItemSummary, NoAccount, Num, Section, SetPicker, StatLine, Toggle, SlotLabel, SetIcons, SortTh, useSort } from "../components";
+import { Busy, fmt, ItemSummary, NoAccount, Num, Section, SetPicker, StatLine, Toggle, SlotLabel, SetIcons, SortTh, useSort, statShort } from "../components";
 import { SLOT_MAINS, STAT_LABEL } from "../../engine/constants";
 import { baseRequest, detectArchetype, type Archetype } from "../../engine/recommend";
 import { targetMatch, type StatKey } from "../../engine/optimizer";
@@ -182,7 +182,7 @@ export default function OptimizerPage() {
                   </span>
                 );
               }) : <span className="muted">No common set combo in the cohort.</span>)}
-              <Toggle on={allowEquipped} onChange={setAllowEquipped} label="Use gear equipped on other heroes" />
+              <Toggle on={allowEquipped} onChange={setAllowEquipped} label="Use gear from other heroes" />
               <Toggle on={predict} onChange={setPredict} label="Predict unfinished gear at +15 (and reforge 85s)" />
             </div>
           </Section>
@@ -197,7 +197,7 @@ export default function OptimizerPage() {
         </Section>
         <Section title="Bounds (min / max)">
           <table><tbody>{BOUND_KEYS.map((k) => (
-            <tr key={k}><td>{k.toUpperCase()}</td><td><Num value={min[k]} placeholder="min" onChange={(v) => setMin({ ...min, [k]: v })} /></td><td><Num value={max[k]} placeholder="max" onChange={(v) => setMax({ ...max, [k]: v })} /></td></tr>
+            <tr key={k}><td>{statShort(k)}</td><td><Num value={min[k]} placeholder="min" onChange={(v) => setMin({ ...min, [k]: v })} /></td><td><Num value={max[k]} placeholder="max" onChange={(v) => setMax({ ...max, [k]: v })} /></td></tr>
           ))}</tbody></table>
         </Section>
         <Section title="Gear filters">
@@ -213,7 +213,7 @@ export default function OptimizerPage() {
                 })}
               </div>
             ))}
-            <Toggle on={allowEquipped} onChange={setAllowEquipped} label="Use gear equipped on other heroes" />
+            <Toggle on={allowEquipped} onChange={setAllowEquipped} label="Use gear from other heroes" />
             <Toggle on={predict} onChange={setPredict} label="Predict unfinished gear at +15 (and reforge 85s)" />
             <label className="field">Minimum enhance<Num value={minEnhance} onChange={(v) => setMinEnhance(v ?? 0)} /></label>
           </div>
@@ -270,7 +270,7 @@ function TargetCompare({ build, current, targets, priorities, builds }: { build:
         const r = m.perStat[k] ?? 0; const pri = priorities.indexOf(k);
         return (
           <tr key={k}>
-            <td>{pri >= 0 && <span className="prio-rank sm">{pri + 1}</span>}{k.toUpperCase()}</td>
+            <td>{pri >= 0 && <span className="prio-rank sm">{pri + 1}</span>}{statShort(k)}</td>
             <td className="num muted">{fmt(targets[k])}</td><td className="num">{fmt(build[k])}</td><td className="num muted">{fmt(current?.[k])}</td>
             <td style={{ width: "28%" }}><div className="bar"><span style={{ width: `${Math.min(100, r * 100)}%`, background: r >= 1 ? "var(--good)" : undefined }} /></div></td>
             {top && <td className="num">Top {top[k as keyof typeof top]}%</td>}

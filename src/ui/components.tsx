@@ -12,6 +12,8 @@ export const STAT_COLS: { k: keyof DerivedStats; label: string }[] = [
   { k: "cp", label: "CP" }, { k: "ehp", label: "EHP" }, { k: "dmg", label: "Dmg" }, { k: "gs", label: "GS" },
 ];
 
+export const statShort = (k: string) => STAT_COLS.find((c) => c.k === k)?.label ?? k.toUpperCase();
+
 const ICON_BASE = "./icons";
 
 export function SetIcon({ set, size = 20 }: { set: string; size?: number }) {
@@ -165,7 +167,7 @@ export function Section({ title, children, right }: { title: string; children: R
 
 export function NoAccount() {
   const { go } = useForge();
-  return <div className="card empty">No account data yet. <a onClick={() => go("account")}>Turn on Live sync or import a file</a>.</div>;
+  return <div className="card empty">No account data yet. <a onClick={() => go("account")}>Turn on Live Sync or import a file</a>.</div>;
 }
 
 export function Busy({ label }: { label: string }) {

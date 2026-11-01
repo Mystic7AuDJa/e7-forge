@@ -134,7 +134,7 @@ async function runSmoke(w: BrowserWindow, dir: string) {
     return;
   }
   if (process.env.E7FORGE_SMOKE_CLOSE) {
-    // Reproduce "close the window while Live sync is on".
+    // Reproduce "close the window while Live Sync is on".
     settings.capture.iface = "lo";
     await js("window.forge.captureStart()");
     for (let i = 0; i < 40 && capture.state !== "listening"; i++) await wait(250);

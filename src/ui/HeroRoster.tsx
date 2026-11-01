@@ -100,7 +100,7 @@ export function HeroRoster(props: {
                 <span className="muted roster-sub">{heroLevelText(h)} · {ROLES.find((r) => r.k === (h.role || data?.role))?.label ?? h.role}</span>
               </span>
               <span className="roster-stats mono">
-                <span>{fmt(s?.spd)} <i>spd</i></span>
+                <span>{fmt(s?.spd)} <i>Spd</i></span>
                 <span className="muted">{s?.cp ? `${Math.round(s.cp / 1000)}k` : "—"}</span>
               </span>
             </div>

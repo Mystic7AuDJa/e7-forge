@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForge } from "../state";
 import { HeroRoster } from "../HeroRoster";
 import { HeroHeader } from "../HeroDetail";
-import { Busy, fmt, ItemSummary, NoAccount, Section, StatLine, Toggle, SlotLabel, SetIcons } from "../components";
+import { Busy, fmt, ItemSummary, NoAccount, Section, StatLine, Toggle, SlotLabel, SetIcons, statShort } from "../components";
 import { GEAR_SLOTS } from "../../engine/types";
 
 export default function RecommendPage() {
@@ -48,7 +48,7 @@ export default function RecommendPage() {
               <thead><tr><th>Stat</th><th className="num">Target</th><th className="num">Now</th><th className="num">Gap</th></tr></thead>
               <tbody>{Object.entries(rec.targets).map(([k, v]) => {
                 const now = rec.current[k] as number; const gap = (v as number) - now;
-                return <tr key={k}><td>{k.toUpperCase()}</td><td className="num" style={{ color: "var(--accent)" }}>{fmt(v as number)}</td><td className="num">{fmt(now)}</td><td className="num" style={{ color: gap > 0 ? "var(--warn)" : "var(--good)" }}>{gap > 0 ? "+" + fmt(gap) : "✓"}</td></tr>;
+                return <tr key={k}><td>{statShort(k)}</td><td className="num" style={{ color: "var(--accent)" }}>{fmt(v as number)}</td><td className="num">{fmt(now)}</td><td className="num" style={{ color: gap > 0 ? "var(--warn)" : "var(--good)" }}>{gap > 0 ? "+" + fmt(gap) : "✓"}</td></tr>;
               })}</tbody>
             </table>
             <h3 style={{ marginTop: 14 }}>Reasoning</h3>
@@ -56,7 +56,7 @@ export default function RecommendPage() {
             {rec.relaxed.length > 0 && <><h3 style={{ marginTop: 12 }}>Relaxed to fit your gear</h3>{rec.relaxed.map((r: string, i: number) => <div key={i} className="reason" style={{ borderColor: "var(--warn)" }}>{r}</div>)}</>}
           </Section>
           <Section title="Build from your gear" right={rec.build && <div className="row">
-            <button className="small" onClick={() => go("optimizer", hero.id)}>Tweak in optimizer</button>
+            <button className="small" onClick={() => go("optimizer", hero.id)}>Open in Hero Optimizer</button>
             <button className="small primary" onClick={async () => { await api.applyBuilds([rec.build]); toast("Saved as planned build"); }}>Save as planned</button></div>}>
             {rec.build ? (
               <div className="col">

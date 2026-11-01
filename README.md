@@ -8,11 +8,11 @@ Personal project. Version 0.1.0.
 
 1. Extract `E7-Forge-win-x64.zip` anywhere, e.g. `C:\Tools\E7 Forge`. For updates, delete the old folder and extract fresh. Your data is in `%APPDATA%\e7-forge`, not the app folder, so nothing is lost.
 2. Run `E7 Forge.exe`.
-3. Live sync needs three things, once:
+3. Live Sync needs three things, once:
    - Python 3 from python.org, with "Add python.exe to PATH" ticked.
    - Npcap from npcap.com, with "WinPcap API-compatible mode" ticked.
    - scapy: *Account & Live Sync → Install scapy*, or `py -m pip install scapy==2.8.0`.
-4. Turn on **Live sync** (top right), start the game, open Inventory, then the Heroes list. Each screen imports about 4 s after it loads. **Sync now** forces it.
+4. Turn on **Live Sync** (top right), start the game, open Inventory, then the Heroes list. Each screen imports about 4 s after it loads. **Sync now** forces it.
 5. Artifact, imprint and EE bonuses aren't in the captured data. Enter them once per hero from the hero header in Hero Optimizer (the bonus editor). Later syncs keep them.
 
 No Python or Npcap? Use *Import Fribbels / RexQian save…* instead. Fribbels, the RexQian fork and the Dodaca Linux fork all write the same format.
@@ -25,7 +25,7 @@ Data
 
 Optimize
 - **Hero Optimizer**: pick a hero from the roster on the left. Benchmark mode (default) targets the community's top 1% for that hero; you choose 1–4 priority stats. Custom mode is the old weights/bounds optimizer.
-- **Account-wide Optimizer**: tick heroes, set priorities and speed-order rules, and it gears them together without sharing items.
+- **Account-Wide Optimizer**: select heroes, set priorities and speed-order rules, and it gears them together without sharing items.
 - **Speed Tuning**: turn-order sim with 0–5% starting CR, pushes, speed buffs. Tells you the speed needed to guarantee an order.
 
 Analyze
@@ -41,18 +41,18 @@ PvE
 - **Labyrinth & Azmakalis Raid, Dimensional Exploration**: teams ranked on camp morale (CeciliaBot Camp Simulator rules) and sustain.
 - **Abyss**: pick a floor range and floor.
 
-Every suggested team has a button that opens it in the Account-wide Optimizer with those heroes ticked. For PvE it also carries the required breakpoints over as minimums.
+Every suggested team has a button that opens it in the Account-Wide Optimizer with those heroes pre-selected. For PvE it also carries the required breakpoints over as minimums.
 
 Back / Home / Forward are in the top bar (also Alt+Left, Alt+Home, Alt+Right and the mouse side buttons).
 
-## Live sync details
+## Live Sync details
 
 - `capture/e7forge_sniffer.py` sniffs TCP ports 3333/5222 with scapy + Npcap and streams the payloads to the app. It never sends anything to the game.
 - Decoding goes through Fribbels' public decoder (`…/dev/getItems`), same as Fribbels and every fork. To keep load on it low:
   - only new buffers are sent, never tiny keep-alives or ones already decoded;
   - auto-syncs are at least 20 s apart;
-  - one keep-alive connection, closed normally when Live sync stops;
-  - Live sync turns itself off after 10 min with no decoder traffic (Settings → Live capture).
+  - one keep-alive connection, closed normally when Live Sync stops;
+  - Live Sync turns itself off after 10 min with no decoder traffic (Settings → Live Sync).
 - Items match by in-game ID, heroes by name. Equipment is relinked from the game's "equipped by" IDs, so it doesn't matter which screen you open first. Every sync saves a snapshot; the last 25 can be restored.
 
 ## Data sources
@@ -79,7 +79,7 @@ App Info in the app lists every source, what it's used for, and its license.
 ## Troubleshooting
 
 - **"Npcap is not installed"**: reinstall Npcap with WinPcap compatibility mode ticked.
-- **"No new game data"**: the screen loaded before Live sync was on. Reopen Inventory or Heroes.
+- **"No new game data"**: the screen loaded before Live Sync was on. Reopen Inventory or Heroes.
 - **Nothing decodes**: VPNs and Hyper-V virtual switches can hide traffic, so try without them. If the decoder is down, use file import until it's back (the URL is in Settings).
 - **"Time limit hit" in the optimizer**: you're seeing the best found so far. Narrow sets or main stats, or add bounds.
 - On start, E7 Forge closes any previous E7 Forge window and leftover sniffer process. It only touches its own exe and Python processes running `e7forge_sniffer.py`, and tells you what it closed.
@@ -105,7 +105,7 @@ npm test         :: engine and capture tests
 - Gear substats in columns, with filters; sortable tables.
 - Benchmark mode is the Hero Optimizer default.
 - Counter Planner, App Info page, app icon.
-- Live sync over Npcap with auto-off; startup cleanup of old sessions.
+- Live Sync over Npcap with auto-off; startup cleanup of old sessions.
 
 ## License
 

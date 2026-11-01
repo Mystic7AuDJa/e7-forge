@@ -67,7 +67,7 @@ export function createMockApi(): ForgeApi {
     captureSync: async () => {
       emit("capture:status", { state: "decoding" });
       setTimeout(() => {
-        emit("capture:syncError", { trigger: "manual", error: "Preview mode: live capture needs the desktop app (Npcap + Python)." });
+        emit("capture:syncError", { trigger: "manual", error: "Preview mode: Live Sync needs the desktop app (Npcap + Python)." });
         emit("capture:status", { state: captureOn ? "listening" : "off" });
       }, 700);
       return true;

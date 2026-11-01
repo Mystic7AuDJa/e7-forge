@@ -5,6 +5,7 @@
 // meta model (tier + RTA) as a proxy, plus each mode's role needs.
 import { analyzeTeam, type Content, type TeamCandidate } from "./teams";
 import type { HeroDb } from "./data";
+import { tagList } from "./labels";
 
 export interface RtaHeroStat { code: string; name: string; pct: number; winRate: number; count: number }
 export interface RtaMeta {
@@ -166,7 +167,7 @@ export function suggestPvp(cands: TeamCandidate[], meta: Map<string, MetaInfo>, 
     if (mode === "arena_def" || mode === "gw_def") {
       const anti = [...new Set(team.flatMap((m) => m.hd.tags.filter((t) => ANTI_CLEAVE.includes(t))))];
       s += anti.length * 0.9;
-      if (anti.length) reasons.push(`Anti-cleave tools: ${anti.slice(0, 6).join(", ").replace(/_/g, " ")}.`);
+      if (anti.length) reasons.push(`Anti-cleave tools: ${tagList(anti.slice(0, 6))}.`);
       const avgRes = team.reduce((a, m) => a + m.current.res, 0) / team.length;
       if (avgRes < 60) warnings.push(`Low average effect resistance (${Math.round(avgRes)}%): openers will land their debuffs.`);
     }

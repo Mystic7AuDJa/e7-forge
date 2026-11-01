@@ -1,5 +1,6 @@
 import type { TeamCandidate } from "./teams";
 import { analyzeTeam } from "./teams";
+import { tagList } from "./labels";
 // Camping (morale) for Labyrinth / Azmakalis, matching CeciliaBot's Camp
 // Simulator: a hero's reaction to a topic = max(0, v[p1]) + max(0, v[p2]) from
 // its two personalities. A topic held by one hero scores the reactions of the
@@ -95,11 +96,11 @@ export function campTeams(cands: TeamCandidate[], camp: Record<string, HeroCamp>
     const warnings: string[] = [];
     if (morale) reasons.push(`Camp morale ${m}: ${morale.holders[0]} talks “${morale.topics[0]}” (+${morale.parts[0]}), ${morale.holders[1]} talks “${morale.topics[1]}” (+${morale.parts[1]}).`);
     else warnings.push("No camping data for enough of these heroes to score morale.");
-    if (sustainTags.length) reasons.push(`Sustain: ${sustainTags.join(", ").replace(/_/g, " ")}${healers >= 2 ? " (two healers)" : ""}.`);
+    if (sustainTags.length) reasons.push(`Sustain: ${tagList(sustainTags)}${healers >= 2 ? " (two healers)" : ""}.`);
     else warnings.push("No healing, barrier, cleanse or revive: long runs will drain HP.");
-    if (need.length) reasons.push(`Covers boss needs: ${need.join(", ").replace(/_/g, " ")}.`);
+    if (need.length) reasons.push(`Covers boss needs: ${tagList(need)}.`);
     const missing = (o.needTags ?? []).filter((t) => !tags.has(t));
-    if (missing.length) warnings.push(`Missing for this boss: ${missing.join(", ").replace(/_/g, " ")}.`);
+    if (missing.length) warnings.push(`Missing for this boss: ${tagList(missing)}.`);
     for (const s of syn.synergies.slice(0, 1)) reasons.push(s);
     for (const w of syn.warnings.slice(0, 1)) warnings.push(w);
     out.push({ heroIds: team.map((x) => x.hero.id), names: team.map((x) => x.hero.name), morale, sustain: Math.round(sustain * 10) / 10, sustainTags, readiness: Math.round(readiness * 100) / 100, score, reasons, warnings });

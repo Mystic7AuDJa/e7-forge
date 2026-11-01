@@ -5,13 +5,13 @@ import { useForge } from "./state";
 import { ARCHETYPE_LABEL, detectArchetype } from "../engine/recommend";
 import { TAG_LABELS } from "../engine/tagger";
 import { GEAR_SLOTS, type HeroBonuses } from "../engine/types";
+import { classLabel, elementLabel } from "../engine/labels";
 
 const BONUS_FIELDS: { k: keyof HeroBonuses; label: string }[] = [
   { k: "atk", label: "Atk (flat)" }, { k: "hp", label: "HP (flat)" }, { k: "def", label: "Def (flat)" },
   { k: "atkPct", label: "Atk %" }, { k: "hpPct", label: "HP %" }, { k: "defPct", label: "Def %" },
   { k: "spd", label: "Speed" }, { k: "cr", label: "Crit %" }, { k: "cd", label: "Crit Dmg %" }, { k: "eff", label: "Eff %" }, { k: "res", label: "Res %" },
 ];
-const ROLE_LABEL: Record<string, string> = { warrior: "Warrior", knight: "Knight", assassin: "Thief", ranger: "Ranger", mage: "Mage", manauser: "Soul Weaver" };
 
 export function HeroHeader({ heroId, right }: { heroId: string; right?: React.ReactNode }) {
   const { heroById, hd, stats, itemById } = useForge();
@@ -28,7 +28,7 @@ export function HeroHeader({ heroId, right }: { heroId: string; right?: React.Re
           <span className="hero-cell big"><HeroIcon name={hero.dataKey || hero.name} /></span>
           <div>
             <h2 style={{ margin: 0 }}>{hero.name}</h2>
-            <div className="muted">{heroLevelText(hero)} · {d?.attribute} · {ROLE_LABEL[d?.role ?? hero.role] ?? hero.role}{d ? ` · ${ARCHETYPE_LABEL[detectArchetype(d).archetype]}` : ""}</div>
+            <div className="muted">{heroLevelText(hero)} · {elementLabel(d?.attribute)} · {classLabel(d?.role ?? hero.role)}{d ? ` · ${ARCHETYPE_LABEL[detectArchetype(d).archetype]}` : ""}</div>
             <div style={{ marginTop: 4 }}>{(d?.tags ?? []).slice(0, 12).map((t) => <span key={t} className="tag">{TAG_LABELS[t] ?? t}</span>)}</div>
           </div>
         </div>
@@ -57,7 +57,7 @@ function BonusEditor({ heroId }: { heroId: string }) {
       </div>
       <div className="row" style={{ marginTop: 8 }}>
         <button className="small primary" onClick={async () => { await api.updateHero({ heroId, bonuses: b }); toast("Bonuses saved"); }}>Save bonuses</button>
-        <span className="muted" style={{ fontSize: 12 }}>Live capture doesn't include artifact or imprint values. Enter the totals once; they're kept across syncs.</span>
+        <span className="muted" style={{ fontSize: 12 }}>Live Sync doesn't include artifact or imprint values. Enter the totals once; they're kept across syncs.</span>
       </div>
     </div>
   );

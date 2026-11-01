@@ -32,7 +32,7 @@ export default function AccountPage() {
     <div className="stack">
       <div>
         <h1>Account & Live Sync</h1>
-        <p className="sub">Live sync sniffs Epic Seven traffic on this PC and imports your full gear and hero list directly. No export/import step.</p>
+        <p className="sub">Live Sync sniffs Epic Seven traffic on this PC and imports your full gear and hero list directly. No export/import step.</p>
       </div>
 
       {kpis && (
@@ -45,7 +45,7 @@ export default function AccountPage() {
       )}
 
       <div className="grid g2">
-        <Section title="Live capture setup" right={<button className="small" onClick={check} disabled={checking}>{checking ? "Checking…" : "Re-check"}</button>}>
+        <Section title="Live Sync setup" right={<button className="small" onClick={check} disabled={checking}>{checking ? "Checking…" : "Re-check"}</button>}>
           {diag ? (
             <table>
               <tbody>
@@ -61,13 +61,13 @@ export default function AccountPage() {
             <li>Install <b>Python 3</b> (tick “Add python.exe to PATH”).</li>
             <li>Install <b>Npcap</b> with “WinPcap API-compatible mode” ticked.</li>
             <li>Click <b>Install scapy</b> above (or run <span className="mono">py -m pip install scapy</span>).</li>
-            <li>Flip <b>Live sync</b> on (top right), then start Epic Seven (emulator, Google Play Games or Steam).</li>
+            <li>Flip <b>Live Sync</b> on (top right), then start Epic Seven (emulator, Google Play Games or Steam).</li>
             <li>In game open the <b>Inventory</b> (gear) screen, then the <b>Heroes</b> list. Each screen syncs automatically ~4 s after it loads; <b>Sync now</b> forces it.</li>
           </ol>
           <p className="muted" style={{ fontSize: 12 }}>Capture is passive (read-only). Captured traffic is decoded by Fribbels' public decoder service, same as Fribbels' scanner. Ports and decoder URL are in Settings.</p>
         </Section>
 
-        <Section title="Live sync status">
+        <Section title="Live Sync status">
           <table>
             <tbody>
               <tr><td>State</td><td><span className={"dot " + capture.state} style={{ display: "inline-block", marginRight: 6 }} />{capture.state}</td></tr>

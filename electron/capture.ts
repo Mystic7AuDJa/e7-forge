@@ -19,7 +19,7 @@ export interface CaptureSettings {
   iface: string;
   minEnhance: number;
   minStars: number;
-  /** Turn Live sync off after this many minutes without a decoder exchange (0 = never). */
+  /** Turn Live Sync off after this many minutes without a decoder exchange (0 = never). */
   autoOffMinutes: number;
   /** Minimum seconds between automatic decoder requests. */
   minAutoIntervalSec: number;
@@ -98,7 +98,7 @@ export class CaptureService extends EventEmitter {
     const s = this.getSettings();
     const py = CaptureService.findPython(s.pythonPath);
     this.lastError = null;
-    if (!py) { this.lastError = "Python 3 not found. See Settings → Live capture setup."; this.setState("error"); return; }
+    if (!py) { this.lastError = "Python 3 not found. See Account & Live Sync → Live Sync setup."; this.setState("error"); return; }
     const args = [...py.slice(1), this.scriptPath, "--ports", s.ports.join(",")];
     if (s.iface) args.push("--iface", s.iface);
     this.bytes = 0; this.lastSyncedBytes = 0;
@@ -123,7 +123,7 @@ export class CaptureService extends EventEmitter {
     child.on("error", (e) => { this.lastError = String(e); this.setState("error"); });
   }
 
-  /** (Re)starts the inactivity timer: no decoder exchange for N minutes -> Live sync off. */
+  /** (Re)starts the inactivity timer: no decoder exchange for N minutes -> Live Sync off. */
   private armAutoOff() {
     if (this.autoOffTimer) clearTimeout(this.autoOffTimer);
     const min = this.getSettings().autoOffMinutes;
@@ -181,7 +181,7 @@ export class CaptureService extends EventEmitter {
 
   /** Flush captured buffers, decode and emit a converted scan. */
   async sync(trigger: "auto" | "manual") {
-    if (!this.child || this.state === "decoding") throw new Error(this.child ? "Already decoding" : "Live capture is off");
+    if (!this.child || this.state === "decoding") throw new Error(this.child ? "Already decoding" : "Live Sync is off");
     const s = this.getSettings();
     this.setState("decoding", { trigger });
     try {

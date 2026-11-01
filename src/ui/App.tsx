@@ -14,14 +14,14 @@ import SettingsPage from "./pages/SettingsPage";
 import AppInfoPage from "./pages/AppInfoPage";
 import CountersPage from "./pages/CountersPage";
 
-const NAV: { id: string; label: string; group: string; tier?: string }[] = [
+const NAV: { id: string; label: string; group: string }[] = [
   { id: "account", label: "Account & Live Sync", group: "Data" },
-  { id: "gear", label: "Gear & Upgrade ROI", group: "Data", tier: "T1" },
+  { id: "gear", label: "Gear & Upgrade ROI", group: "Data" },
   { id: "optimizer", label: "Hero Optimizer", group: "Optimize" },
-  { id: "accountopt", label: "Account-wide Optimizer", group: "Optimize", tier: "T1" },
-  { id: "speed", label: "Speed Tuning", group: "Optimize", tier: "T1" },
-  { id: "bench", label: "Compare Builds Against Community", group: "Analyze", tier: "T1" },
-  { id: "recommend", label: "Stat Recommendations", group: "Analyze", tier: "T2" },
+  { id: "accountopt", label: "Account-Wide Optimizer", group: "Optimize" },
+  { id: "speed", label: "Speed Tuning", group: "Optimize" },
+  { id: "bench", label: "Compare Builds Against Community", group: "Analyze" },
+  { id: "recommend", label: "Stat Recommendations", group: "Analyze" },
   { id: "counters", label: "Offense (Counter Planner)", group: "PvP" },
   { id: "arenadef", label: "Arena Defense", group: "PvP" },
   { id: "rta", label: "RTA Draft", group: "PvP" },
@@ -44,7 +44,7 @@ function LiveSync() {
       else await api.captureStart();
     } catch (e: any) { toast(e.message, true); }
   };
-  const label: Record<string, string> = { off: "Live sync off", starting: "Starting sniffer…", listening: "Listening", decoding: "Decoding…", error: "Capture error" };
+  const label: Record<string, string> = { off: "Live Sync off", starting: "Starting sniffer…", listening: "Listening", decoding: "Decoding…", error: "Capture error" };
   return (
     <div className="live" title={capture.error ?? "Sniffs Epic Seven traffic (Npcap) and imports gear + heroes automatically"}>
       <span className={"switch" + (on ? " on" : "")} onClick={toggle} role="switch" aria-checked={on} />
@@ -104,7 +104,7 @@ export default function App() {
             <div className="group">{g}</div>
             {NAV.filter((n) => n.group === g).map((n) => (
               <div key={n.id} className={"nav" + (page === n.id ? " active" : "")} onClick={() => go(n.id)}>
-                {n.label}{n.tier && <span className="tier">{n.tier}</span>}
+                {n.label}
               </div>
             ))}
           </div>

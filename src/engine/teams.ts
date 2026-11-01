@@ -5,6 +5,7 @@ import { currentBuildStats, type OptimizeOptions, type StatKey } from "./optimiz
 import { baseRequest, detectArchetype, type Archetype } from "./recommend";
 import { TAG_LABELS } from "./tagger";
 import type { DerivedStats, Hero, HeroData, Item } from "./types";
+import { elementLabel } from "./labels";
 
 export type Content = "arena" | "rta" | "gw_offense" | "gw_defense" | "pve";
 
@@ -92,8 +93,8 @@ export function analyzeTeam(members: TeamCandidate[], content: Content, enemyEle
     const adv = members.filter((m) => ELEMENT_ADV[m.hd.attribute] === enemyElement).length;
     const disadv = members.filter((m) => ELEMENT_ADV[enemyElement] === m.hd.attribute).length;
     score += adv * 0.8 - disadv * 0.8;
-    if (adv) synergies.push(`${adv} hero(es) with elemental advantage vs ${enemyElement}.`);
-    if (disadv) warnings.push(`${disadv} hero(es) at elemental disadvantage vs ${enemyElement}.`);
+    if (adv) synergies.push(`${adv} hero(es) with elemental advantage vs ${elementLabel(enemyElement)}.`);
+    if (disadv) warnings.push(`${disadv} hero(es) at elemental disadvantage vs ${elementLabel(enemyElement)}.`);
   }
   const readiness = members.reduce((a, m) => a + m.readiness, 0) / Math.max(1, members.length);
   score += readiness * 3;

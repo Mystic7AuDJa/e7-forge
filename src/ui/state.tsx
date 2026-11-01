@@ -27,7 +27,7 @@ interface Ctx {
   /** Hero picked in the roster; shared by Hero Optimizer, Recommendations and Compare. */
   heroId: string | null;
   setHeroId: (id: string | null) => void;
-  /** Heroes checked for the Account-wide Optimizer; other pages can pre-check them. */
+  /** Heroes selected for the Account-Wide Optimizer; other pages can pre-select them. */
   checked: string[];
   setChecked: (ids: string[]) => void;
   openInAccountOptimizer: (ids: string[], mins?: Record<string, Record<string, number>>) => void;
@@ -88,10 +88,10 @@ export function ForgeProvider({ children }: { children: React.ReactNode }) {
       a.on("capture:synced", (s) => {
         setCapture((c) => ({ ...c, lastSync: s }));
         const r = s.report;
-        toast(`Live sync: ${r.added} new, ${r.updated} updated, ${r.removed} removed items · ${r.heroesAdded} new / ${r.heroesUpdated} updated heroes`);
+        toast(`Live Sync: ${r.added} new, ${r.updated} updated, ${r.removed} removed items · ${r.heroesAdded} new / ${r.heroesUpdated} updated heroes`);
       });
       a.on("capture:syncError", (s) => toast(`Sync: ${s.error}`, true));
-      a.on("capture:autoOff", (s) => toast(`Live sync turned off: no decoder activity for ${s.minutes} min. Connection closed.`));
+      a.on("capture:autoOff", (s) => toast(`Live Sync turned off: no decoder activity for ${s.minutes} min. Connection closed.`));
     }).catch((e) => setError(String(e)));
   }, [toast]);
 

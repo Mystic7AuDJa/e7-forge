@@ -78,7 +78,7 @@ function PvpPage({ mode }: { mode: PvpMode }) {
           </div>
         )}
 
-        <Section title={mode === "rta" ? "Draft cores you can field" : "Teams you can field"} right={<span className="muted">Pick one to open it in the Account-wide Optimizer with these heroes checked</span>}>
+        <Section title={mode === "rta" ? "Draft cores you can field" : "Teams you can field"} right={<span className="muted">Pick one to open it in the Account-Wide Optimizer with these heroes checked</span>}>
           {!result?.teams.length ? <span className="muted">Not enough geared heroes to build a team.</span> : (
             <div className="grid g2">{result.teams.map((t, i) => <PvpTeamCard key={i} rank={i + 1} team={t} mode={mode} metaMap={metaMap!} />)}</div>
           )}

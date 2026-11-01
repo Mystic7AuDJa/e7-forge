@@ -5,6 +5,7 @@ import { benchmark, type CommunityBuild } from "./benchmark";
 import { optimizeHero, currentBuildStats, type StatKey, type OptimizeOptions } from "./optimizer";
 import { winSpeedRace } from "./speedtune";
 import type { Build, DerivedStats, Hero, HeroData, Item, OptimizeRequest } from "./types";
+import { classLabel } from "./labels";
 
 export type Archetype = "crit_dps" | "hp_bruiser" | "def_bruiser" | "speed_dps" | "debuffer" | "support" | "tank";
 
@@ -45,7 +46,7 @@ export function detectArchetype(hd: HeroData): ArchetypeInfo {
     reasons.push(`Applies ${debuffs.slice(0, 4).join(", ")}: effectiveness and speed decide whether it lands.`);
     return { archetype: "debuffer", reasons, critReliant: false };
   }
-  reasons.push(`${hd.role} with Attack-scaling skills (rate ${rateSum.toFixed(2)}).`);
+  reasons.push(`${classLabel(hd.role)} with Attack-scaling skills (rate ${rateSum.toFixed(2)}).`);
   return { archetype: "crit_dps", reasons, critReliant: true };
 }
 

@@ -4,6 +4,7 @@ import { Busy, fmt, HeroSelect, NoAccount, Section } from "../components";
 import { buildTeams, normElement, type TeamCandidate } from "../../engine/teams";
 import { campTeams, type CampTeam } from "../../engine/camping";
 import { Conf, OpenInAccountOpt, SourceLine, TeamHeroes, useCandidates, useMeta, useOwnedByName } from "./metaShared";
+import { classLabel, elementLabel, tagLabel, tagList } from "../../engine/labels";
 
 interface Mech { text: string; source?: string; date?: string; confidence?: string }
 interface Bp { stat: string; op: string; value: number; appliesTo: string; required: boolean; note?: string; source?: string; date?: string; confidence?: string }
@@ -12,15 +13,16 @@ interface PresetTeam { name: string; heroes: PresetHero[]; source?: string; date
 interface Encounter { id?: string; name?: string; element?: { value: string | null; confidence?: string; note?: string }; advantage?: string | null; needTags?: string[]; mechanics?: Mech[]; breakpoints?: Bp[]; relative?: any[]; thresholds?: Mech[]; teams?: PresetTeam[] }
 
 const STAT_LABEL: Record<string, string> = { spd: "Speed", eff: "Effectiveness", res: "Effect Resistance", cr: "Crit Chance", cd: "Crit Damage", hp: "HP", atk: "Attack", def: "Defense" };
+const slotRole = (r: string) => (r === "dps" ? "DPS" : r === "aoe_dps" ? "AoE DPS" : r.charAt(0).toUpperCase() + r.slice(1).replace(/_/g, " "));
 const DEBUFF_ROLES = ["debuffer", "def_breaker", "def breaker", "dispel", "dps/dispel"];
 
 function ElementLine({ e }: { e: Encounter }) {
   const el = e.element;
   return (
     <div className="row" style={{ gap: 14 }}>
-      <span>Boss element: <b>{el?.value ?? "unknown"}</b> <Conf c={el?.confidence} /></span>
-      <span>Bring: <b>{e.advantage ?? "any"}</b></span>
-      {!!e.needTags?.length && <span>Needs: {e.needTags.map((t) => <span key={t} className="tag">{t.replace(/_/g, " ")}</span>)}</span>}
+      <span>Boss element: <b>{elementLabel(el?.value) || "Unknown"}</b> <Conf c={el?.confidence} /></span>
+      <span>Bring: <b>{elementLabel(e.advantage) || "Any"}</b></span>
+      {!!e.needTags?.length && <span>Needs: {e.needTags.map((t) => <span key={t} className="tag">{tagLabel(t)}</span>)}</span>}
       {el?.note && <span className="muted" style={{ fontSize: 12 }}>{el.note}</span>}
     </div>
   );
@@ -77,7 +79,7 @@ function PresetTeamCard({ t, owned, bps }: { t: PresetTeam; owned: Map<string, T
       </div>
       <TeamHeroes heroes={members.map((m) => ({
         name: m.c ? m.c.hero.name : m.slot.name, missing: !m.c,
-        note: <>{m.slot.role}{m.alt ? ` · as alternative for ${m.slot.name}` : ""}{!m.c && m.slot.alternatives?.length ? ` · alt: ${m.slot.alternatives.join(", ")}` : ""}{m.c ? ` · ${m.c.current.spd} spd` : ""}</>,
+        note: <>{slotRole(m.slot.role)}{m.alt ? ` · as alternative for ${m.slot.name}` : ""}{!m.c && m.slot.alternatives?.length ? ` · Alt: ${m.slot.alternatives.join(", ")}` : ""}{m.c ? ` · ${m.c.current.spd} Spd` : ""}</>,
       }))} />
       {checks.length > 0 && (
         <ul className="bpchecks">{checks.map((c, i) => <li key={i} className={c.ok ? "ok" : c.required ? "bad" : "warn"}>{c.ok ? "✓" : "✗"} {c.label}{c.required ? "" : " (optional)"}</li>)}</ul>
@@ -85,7 +87,7 @@ function PresetTeamCard({ t, owned, bps }: { t: PresetTeam; owned: Map<string, T
       {t.notes && <p className="muted" style={{ fontSize: 12 }}>{t.notes}</p>}
       <div className="row" style={{ justifyContent: "space-between" }}>
         <SourceLine source={t.source} date={t.date} confidence={t.confidence} />
-        <OpenInAccountOpt ids={ids} mins={Object.keys(mins).length ? mins : undefined} label={Object.keys(mins).length ? "Gear to breakpoints in Account-wide Optimizer" : undefined} />
+        <OpenInAccountOpt ids={ids} mins={Object.keys(mins).length ? mins : undefined} label={Object.keys(mins).length ? "Gear to breakpoints in Account-Wide Optimizer" : undefined} />
       </div>
     </div>
   );
@@ -101,10 +103,10 @@ function BuiltTeams({ cands, element, need, must }: { cands: TeamCandidate[]; el
       return (
         <div key={i} className="card" style={{ background: "var(--panel-2)" }}>
           <div className="row" style={{ justifyContent: "space-between" }}><b>#{i + 1} from your roster</b><span className="muted">score {fmt(t.report.score, 1)}</span></div>
-          <TeamHeroes heroes={t.members.map((m) => ({ hero: heroById.get(m.hero.id), name: m.hero.name, note: `${m.hd.attribute} · ${m.current.spd} spd · GS ${m.current.gs}` }))} />
+          <TeamHeroes heroes={t.members.map((m) => ({ hero: heroById.get(m.hero.id), name: m.hero.name, note: `${elementLabel(m.hd.attribute)} · ${classLabel(m.hd.role)} · ${m.current.spd} Spd · GS ${m.current.gs}` }))} />
           <ul className="reasons">{t.report.synergies.slice(0, 3).map((s, j) => <li key={j}>{s}</li>)}</ul>
           {(missing.length > 0 || t.report.warnings.length > 0) && <ul className="warnings">
-            {missing.length > 0 && <li>Missing for this fight: {missing.join(", ").replace(/_/g, " ")}</li>}
+            {missing.length > 0 && <li>Missing for this fight: {tagList(missing)}</li>}
             {t.report.warnings.slice(0, 2).map((s, j) => <li key={j}>{s}</li>)}
           </ul>}
           <div className="row" style={{ justifyContent: "flex-end" }}><OpenInAccountOpt ids={t.members.map((m) => m.hero.id)} /></div>

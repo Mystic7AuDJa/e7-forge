@@ -82,6 +82,6 @@ parentPort!.on("message", (msg: any) => {
 });
 
 function need(): Account {
-  if (!account) throw new Error("No account loaded. Import a file or run live sync first.");
+  if (!account) throw new Error("No account loaded. Import a file or turn on Live Sync first.");
   return account;
 }

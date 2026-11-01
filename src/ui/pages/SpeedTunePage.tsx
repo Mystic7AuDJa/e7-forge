@@ -45,7 +45,7 @@ export default function SpeedTunePage() {
 
   return (
     <div className="stack">
-      <div><h1>Speed Tuning Assistant</h1><p className="sub">Models turn order with speed RNG (random 0–{rng}% starting CR), CR pushes, CR reductions and speed buffs/debuffs, then checks your intended opener order over thousands of fights.</p></div>
+      <div><h1>Speed Tuning</h1><p className="sub">Models turn order with speed RNG (random 0–{rng}% starting CR), CR pushes, CR reductions and speed buffs/debuffs, then checks your intended opener order over thousands of fights.</p></div>
       <Section title="Units" right={<div className="row">
         <HeroSelect value={pickHero} onChange={addHero} placeholder="Add ally…" exclude={units.map((u) => u.id)} />
         <input style={{ width: 110 }} value={enemyName} onChange={(e) => setEnemyName(e.target.value)} />
@@ -79,7 +79,7 @@ export default function SpeedTunePage() {
 
       {report && (
         <div className="grid g2">
-          <Section title="Result">
+          <Section title="Results">
             <div className="big" style={{ color: report.successRate > 0.995 ? "var(--good)" : report.successRate > 0.9 ? "var(--warn)" : "var(--bad)" }}>{pct(report.successRate, 1)}</div>
             <p className="muted">of simulated fights follow your order</p>
             {report.warnings.length ? report.warnings.map((w, i) => <div key={i} className="reason" style={{ borderColor: "var(--warn)" }}>{w}</div>) : <div className="reason" style={{ borderColor: "var(--good)" }}>Order holds in every simulated fight.</div>}

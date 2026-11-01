@@ -12,7 +12,7 @@ const SOFTWARE: Src[] = [
   { name: "sql.js (SQLite → WebAssembly)", url: "https://github.com/sql-js/sql.js", license: "MIT (SQLite: public domain)", tone: "good", use: "Local database for gear, heroes, snapshots, caches.", shipped: "Yes, bundled" },
   { name: "Vite, esbuild, TypeScript, Vitest", url: "https://vitejs.dev/", license: "MIT (TypeScript: Apache-2.0)", tone: "good", use: "Build and test tools.", shipped: "No, build only" },
   { name: "electron-builder, resedit", url: "https://www.electron.build/", license: "MIT", tone: "good", use: "Packaging the Windows build and embedding the icon.", shipped: "No, build only" },
-  { name: "scapy", url: "https://scapy.net/", license: "GPL-2.0", tone: "info", use: "Packet capture for Live sync. Runs as a separate Python process.", shipped: "No, you install it (pip)" },
+  { name: "scapy", url: "https://scapy.net/", license: "GPL-2.0", tone: "info", use: "Packet capture for Live Sync. Runs as a separate Python process.", shipped: "No, you install it (pip)" },
   { name: "Npcap", url: "https://npcap.com/", license: "Npcap License (free edition for personal use)", tone: "info", use: "Windows capture driver used by scapy.", shipped: "No, you install it" },
   { name: "Python 3", url: "https://www.python.org/", license: "PSF License", tone: "good", use: "Runs the capture sidecar.", shipped: "No, you install it" },
 ];
@@ -25,7 +25,7 @@ const DATA: Src[] = [
   { name: "Dodaca Linux fork", url: "https://github.com/Dodaca/Fribbels-Epic-7-Optimizer-linux", license: "No license declared (all rights reserved by default)", tone: "warn",
     use: "Reviewed for scanner behaviour and Steam support. Nothing taken.", shipped: "No" },
   { name: "Fribbels online services", url: "https://fribbels.github.io/e7/hero-library.html", license: "No published terms", tone: "warn",
-    use: "Hero library (community builds for benchmarks/targets, cached 3 days), Live sync decoder (captured game traffic is sent here to be decoded), S3 hero-data fallback.", shipped: "No, online only" },
+    use: "Hero library (community builds for benchmarks/targets, cached 3 days), Live Sync decoder (captured game traffic is sent here to be decoded), S3 hero-data fallback.", shipped: "No, online only" },
   { name: "EXCOFF E7 Builder and Guides", url: "https://github.com/EXCOFFee/EXCOFF-E7-Builder-and-Guides", license: "MIT, © 2024 EXCOFFee", tone: "good",
     use: "Bundled hero-effects.json and effects.json (buffs/debuffs per skill) for role tags and team synergy.", shipped: "Yes, data files" },
   { name: "epic7db.com", url: "https://epic7db.com", license: "No open license (site content)", tone: "warn",
@@ -85,7 +85,7 @@ export default function AppInfoPage() {
         <ul className="steps">
           <li>E7 Forge itself is licensed GPL-3.0-or-later (LICENSE in the app folder). Bundled data and icons are not; THIRD_PARTY_NOTICES.md lists their terms.</li>
           <li>"No license declared" means the authors haven't granted reuse rights. Those sources are credited here and used for personal, non-commercial use only. Don't redistribute E7 Forge with their data without asking them.</li>
-          <li>Live sync sends captured game traffic only to the decoder URL in Settings, and only new buffers, over one connection that closes when Live sync stops.</li>
+          <li>Live Sync sends captured game traffic only to the decoder URL in Settings, and only new buffers, over one connection that closes when Live Sync stops.</li>
           <li>Your account data stays on this PC (%APPDATA%\e7-forge). Community lookups send only the hero's name.</li>
         </ul>
       </Section>

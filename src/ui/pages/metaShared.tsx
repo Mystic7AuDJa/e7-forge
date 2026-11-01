@@ -66,7 +66,7 @@ export function TeamHeroes({ heroes, sub }: { heroes: { hero?: Hero; name: strin
   );
 }
 
-export function OpenInAccountOpt({ ids, mins, label = "Open in Account-wide Optimizer" }: { ids: string[]; mins?: Record<string, Record<string, number>>; label?: string }) {
+export function OpenInAccountOpt({ ids, mins, label = "Open in Account-Wide Optimizer" }: { ids: string[]; mins?: Record<string, Record<string, number>>; label?: string }) {
   const { openInAccountOptimizer } = useForge();
   return <button className="small primary" disabled={!ids.length} onClick={() => openInAccountOptimizer(ids, mins)}>{label} ▸</button>;
 }
