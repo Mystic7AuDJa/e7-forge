@@ -1,0 +1,872 @@
+{
+  "1314": {
+    "name": "Multilayer Barrier (Undispellable)",
+    "description": "Increases Hit Chance by 50% and is unaffected by debuffs and some harmful effects.",
+    "type": "buff",
+    "icon": null
+  },
+  "1400": {
+    "name": "Phantom Sword (Unique Effect)",
+    "description": "When attacking, if the target is a Hero, ignores damage reduction and damage sharing effects, and when defeating an enemy, Phantom Sword changes into Neo Phantom Sword.",
+    "type": "buff",
+    "icon": null
+  },
+  "1401": {
+    "name": "Neo Phantom Sword (Unique Effect)",
+    "description": "When attacking, if the target is a Hero, ignores damage reduction and damage sharing effects, and increases damage dealt proportional to the target's max Health. Dispelled after attacking.\nDamage increase: 30% of the target's max Health.",
+    "type": "buff",
+    "icon": null
+  },
+  "cmn_random_debuff3": {
+    "name": "Random Debuff",
+    "description": "Silence, Decrease Defense, Decrease Attack, Unhealable",
+    "type": "debuff",
+    "icon": null
+  },
+  "stic_1402_omen": {
+    "name": "Omen (Unique Effect)",
+    "description": "Something is watching.",
+    "type": "debuff",
+    "icon": null
+  },
+  "stic_ab_up_block": {
+    "name": "Restrict",
+    "description": "Cannot receive Combat Readiness increase effects other than that provided by the Speed stat.",
+    "type": "debuff",
+    "icon": "stic_ab_up_block.png"
+  },
+  "stic_abyss_eye_0_aura": {
+    "name": "Deterrence (Unique Effect)",
+    "description": "Maintains detain. Unaffected by cooldown increase and decrease effects.\n\nDetain: Temporarily removes the target from the battlefield. Can only apply to one hero on the battlefield. Unaffected by Effect Resistance.",
+    "type": "buff",
+    "icon": "stic_abyss_eye_0_aura.png"
+  },
+  "stic_acc_up": {
+    "name": "Increase Effectiveness",
+    "description": "Increases Effectiveness by 50%.",
+    "type": "buff",
+    "icon": "stic_acc_up.png"
+  },
+  "stic_almighty_keep": {
+    "name": "Deify (Undispellable)",
+    "description": "When attacking, increases Critical Hit Chance by 50%, and when attacked, decreases damage suffered by 50%. When more than one damage reduction effect is granted, only the strongest effect is applied.",
+    "type": "buff",
+    "icon": "stic_almighty_keep.png"
+  },
+  "stic_att_dn": {
+    "name": "Decrease Attack",
+    "description": "Decrease Attack by 50%",
+    "type": "debuff",
+    "icon": "stic_att_dn.png"
+  },
+  "stic_att_inc": {
+    "name": "Exploiting Weak Points",
+    "description": "When attacking, increases damage dealt by 20%. After attacking, this effect is dispelled.",
+    "type": "buff",
+    "icon": "stic_att_inc.png"
+  },
+  "stic_att_up": {
+    "name": "Increase Attack",
+    "description": "Increases Attack by 50%.",
+    "type": "buff",
+    "icon": "stic_att_up.png"
+  },
+  "stic_att_up2": {
+    "name": "Increase Attack (Greater)",
+    "description": "Increases Attack by 75%.",
+    "type": "buff",
+    "icon": "stic_att_up2.png"
+  },
+  "stic_barriermagic_keep": {
+    "name": "Defensive Magic (Undispellable)",
+    "description": "When attacked, consumes 4 Soul, nullifying damage from skills.",
+    "type": "buff",
+    "icon": "stic_barriermagic_keep.png"
+  },
+  "stic_battlegod_aura": {
+    "name": "God of Battle (Unique Effect)",
+    "description": "All stats are doubled. Dispelled at the end of the battle.",
+    "type": "buff",
+    "icon": "stic_battlegod_aura.png"
+  },
+  "stic_blaze": {
+    "name": "Burn",
+    "description": "At the start of the turn, suffers huge damage proportional to the caster's Attack.\n70% of caster's Attack as damage, ignores 70% of defense.",
+    "type": "debuff",
+    "icon": "stic_blaze.png"
+  },
+  "stic_bless": {
+    "name": "Revive",
+    "description": "Upon receiving lethal damage, revives with 30% of max Health.",
+    "type": "buff",
+    "icon": "stic_bless.png"
+  },
+  "stic_blind": {
+    "name": "Decrease Hit Chance",
+    "description": "Decrease Hit Chance by 50%",
+    "type": "debuff",
+    "icon": "stic_blind.png"
+  },
+  "stic_blood": {
+    "name": "Bleed",
+    "description": "Target receives damage proportional to the caster's Attack at the start of the turn.\n40% of caster's Attack as damage, ignores 70% of defense.",
+    "type": "debuff",
+    "icon": "stic_blood.png"
+  },
+  "stic_bloodaura_keep": {
+    "name": "Blood Aura (Undispellable)",
+    "description": "Increases Effectiveness and Speed by 30%.",
+    "type": "buff",
+    "icon": "stic_bloodaura_keep.png"
+  },
+  "stic_bomb": {
+    "name": "Bomb",
+    "description": "At the end of the debuff duration, the target receives damage proportional to the caster's Attack and becomes unable to move for 1 turn. Debuff duration cannot be extended or decreased.\n150% of caster's Attack as damage, ignores 70% of defense.",
+    "type": "debuff",
+    "icon": "stic_bomb.png"
+  },
+  "stic_buf_impossible": {
+    "name": "Cannot Buff",
+    "description": "Makes the target unable to be buffed.",
+    "type": "debuff",
+    "icon": "stic_buf_impossible.png"
+  },
+  "stic_challenge_keep": {
+    "name": "Challenge (Undispellable)",
+    "description": "After using a basic skill, when the target is a Hero, deals additional damage equivalent to 10% of the target's max Health. Dispelled after the effect activates and increases Speed of the bearer for 2 turns.",
+    "type": "buff",
+    "icon": "stic_challenge_keep.png"
+  },
+  "stic_chiron_keep": {
+    "name": "Chain of Chiron (Undispellable)",
+    "description": "After attacking, inflicts a random debuff on the target for 1 turn.\n\nRandom debuff: Stun, Cannot Buff, Decrease Hit Chance, Restrict",
+    "type": "buff",
+    "icon": "stic_chiron_keep.png"
+  },
+  "stic_circlemagic": {
+    "name": "Dawn (Undispellable)",
+    "description": "Increases the amount of Soul acquired by 100%. After attacking, has a 25% chance to inflict stun on the target for 1 turn.",
+    "type": "buff",
+    "icon": null
+  },
+  "stic_class_debuff_1": {
+    "name": "Class Debuff",
+    "description": "Thief, Warrior, Ranger, Mage: Decreased Attack\nKnight, Soul-Weaver: Decreased Defense",
+    "type": "debuff",
+    "icon": null
+  },
+  "stic_collapse": {
+    "name": "Collapse",
+    "description": "Decreases max Health by 25%. This effect is doubled when applied to Heroes.",
+    "type": "debuff",
+    "icon": "stic_collapse.png"
+  },
+  "stic_coop_keep": {
+    "name": "Enhanced Dual Attack (Undispellable)",
+    "description": "When an ally except for the bearer uses a skill and the bearer is available to use a Dual Attack, attacks the same target with a basic attack. Enhanced Dual Attack is dispelled when the bearer uses a Dual Attack.",
+    "type": "buff",
+    "icon": "stic_coop_keep.png"
+  },
+  "stic_corrupt_keep": {
+    "name": "Engulf (Undispellable)",
+    "description": "Increases Effectiveness and Critical Hit Resistance by 100%. Upon receiving lethal damage, grants cascade to all allies, and is dispelled.",
+    "type": "buff",
+    "icon": "stic_corrupt_keep.png"
+  },
+  "stic_counter": {
+    "name": "Counterattack",
+    "description": "Counterattacks with basic skill when attacked. Is not triggered by extra attacks or counterattacks.",
+    "type": "buff",
+    "icon": "stic_counter.png"
+  },
+  "stic_covenant_keep": {
+    "name": "Sacred Covenant (Undispellable)",
+    "description": "Cannot be affected by any debuffs or some harmful effects. Upon dying, revives with 100% Health.",
+    "type": "buff",
+    "icon": "stic_covenant_keep.png"
+  },
+  "stic_crack_1_aura": {
+    "name": "Fracture (Unique Effect)",
+    "description": "Increases Attack by 20%, but decreases Defense by 5%. Can stack up to 10 times. Remains even after reviving.",
+    "type": "debuff",
+    "icon": "stic_crack_1_aura.png"
+  },
+  "stic_cri_up": {
+    "name": "Increase Critical Hit Chance",
+    "description": "Increase Critical Hit Chance by 50%.",
+    "type": "buff",
+    "icon": "stic_cri_up.png"
+  },
+  "stic_cridmg_up": {
+    "name": "Increase Critical Hit Damage",
+    "description": "Increase Critical Hit Damage by 70%.",
+    "type": "buff",
+    "icon": "stic_cridmg_up.png"
+  },
+  "stic_crires_up": {
+    "name": "Increase Critical Hit Resistance",
+    "description": "Increase Critical Hit Resistance by 50%.",
+    "type": "buff",
+    "icon": "stic_crires_up.png"
+  },
+  "stic_curse2": {
+    "name": "Curse",
+    "description": "When an ally except for the bearer is attacked, deals additional damage equivalent to 60% of damage dealt to the bearer.",
+    "type": "debuff",
+    "icon": "stic_curse2.png"
+  },
+  "stic_danger_4": {
+    "name": "Immobilize",
+    "description": "Cannot receive Combat Readiness increase effects provided by the Speed stat. Dispelled at the start of someone's fourth turn.",
+    "type": "debuff",
+    "icon": "stic_danger_4.png"
+  },
+  "stic_death_0_keep": {
+    "name": "Death Sentence (Undispellable)",
+    "description": "At the start of someone's 12th turn, deals 50,000 fixed damage to the bearer. Ignores damage sharing effects. Dispelled when the caster dies.",
+    "type": "debuff",
+    "icon": "stic_death_0_keep.png"
+  },
+  "stic_debuf_impossible": {
+    "name": "Immunity",
+    "description": "Cannot be affected by any debuffs or some harmful effects.",
+    "type": "buff",
+    "icon": "stic_debuf_impossible.png"
+  },
+  "stic_deceptive": {
+    "name": "Beguile",
+    "description": "At the end of the turn, deals additional damage to all allies of the bearer except for the target equivalent to 10% of their respective max Health. Beguile effect applies to Heroes only, and is dispelled once the effect is activated.",
+    "type": "debuff",
+    "icon": "stic_deceptive.png"
+  },
+  "stic_def_dn": {
+    "name": "Decrease Defense",
+    "description": "Decrease Defense by 70%",
+    "type": "debuff",
+    "icon": "stic_def_dn.png"
+  },
+  "stic_def_up": {
+    "name": "Increase Defense",
+    "description": "Increase Defense by 60%.",
+    "type": "buff",
+    "icon": "stic_def_up.png"
+  },
+  "stic_defensive_aura": {
+    "name": "Defensive Mission (Unique Effect)",
+    "description": "Increases max Health of all allies by 10%. When allies are attacked 10 times, the mission is completed.",
+    "type": "buff",
+    "icon": "stic_defensive_aura.png"
+  },
+  "stic_delusion_keep": {
+    "name": "Daydream (Undispellable)",
+    "description": "After attacking, inflicts a random debuff on the target for 1 turn.",
+    "type": "buff",
+    "icon": "stic_delusion_keep.png"
+  },
+  "stic_detection_keep": {
+    "name": "Perception (Undispellable)",
+    "description": "Increase Critical Hit Chance and Critical Hit Damage by 15%.",
+    "type": "buff",
+    "icon": "stic_detection_keep.png"
+  },
+  "stic_discharge_aura": {
+    "name": "Energy Depletion (Unique Effect)",
+    "description": "Decreases Attack and Speed by 50%.",
+    "type": "debuff",
+    "icon": "stic_discharge_aura.png"
+  },
+  "stic_divine_4_aura": {
+    "name": "Divinity (Unique Effect)",
+    "description": "Immune to debuffs. Increases Health and Defense by 20%. The effect increases by the number of stacks.",
+    "type": "buff",
+    "icon": "stic_divine_4_aura.png"
+  },
+  "stic_divine_aura": {
+    "name": "Fragment of Life (Unique Effect)",
+    "description": "Become a Fragment of Life. At the start of the second turn, returns to the original Hero.",
+    "type": "buff",
+    "icon": "stic_divine_aura.png"
+  },
+  "stic_dizzy": {
+    "name": "Seal",
+    "description": "Passive skill effects do not activate. Applies to Heroes only.",
+    "type": "debuff",
+    "icon": "stic_dizzy.png"
+  },
+  "stic_dmg_fixed_keep": {
+    "name": "Cascade (Undispellable)",
+    "description": "After attacking, deals 4,000 fixed damage per target. Dispelled after attacking.",
+    "type": "buff",
+    "icon": "stic_dmg_fixed_keep.png"
+  },
+  "stic_dmg_limit": {
+    "name": "Damage Limit",
+    "description": "Damage suffered in one attack does not exceed 35% of max Health.",
+    "type": "buff",
+    "icon": "stic_dmg_limit.png"
+  },
+  "stic_dodge_dn": {
+    "name": "Decrease Speed",
+    "description": "Decrease Speed by 30%",
+    "type": "debuff",
+    "icon": "stic_dodge_dn.png"
+  },
+  "stic_dodge_up": {
+    "name": "Increase Evasion",
+    "description": "Increases Evasion by 50%.",
+    "type": "buff",
+    "icon": "stic_dodge_up.png"
+  },
+  "stic_dot": {
+    "name": "Poison",
+    "description": "Receives damage equivalent to 5% of max Health at the start of the turn.",
+    "type": "debuff",
+    "icon": "stic_dot.png"
+  },
+  "stic_endure": {
+    "name": "Skill Nullifier",
+    "description": "Negates damage from skills.",
+    "type": "buff",
+    "icon": "stic_endure.png"
+  },
+  "stic_explosive_keep": {
+    "name": "Explosives (Undispellable)",
+    "description": "After attacking, plants bombs on the target for 2 turns. Dispelled after attacking.",
+    "type": "buff",
+    "icon": "stic_explosive_keep.png"
+  },
+  "stic_fear": {
+    "name": "Fear",
+    "description": "Cannot act for a certain number of turns. At the start of the turn, has a 40% chance to be dispelled.",
+    "type": "debuff",
+    "icon": "stic_fear.png"
+  },
+  "stic_flame_alchemist_keep": {
+    "name": "Flame Alchemist (Undispellable)",
+    "description": "lncreases Hit Chance and Attack by 20%. Flame Alchemist is dispelled after being attacked by an Ice elemental enemy.",
+    "type": "buff",
+    "icon": "stic_flame_alchemist_keep.png"
+  },
+  "stic_formula_aura": {
+    "name": "Solution (Unique Effect)",
+    "description": "Enhances the next Once-in-a-Lifetime Research. Dispelled after activating the effect. Remains even after reviving.",
+    "type": "buff",
+    "icon": "stic_formula_aura.png"
+  },
+  "stic_freepass_keep": {
+    "name": "Oasis All-Ride Pass (Undispellable)",
+    "description": "Does not cost any Soul to activate the first Soulburn. Dispelled once the effect is activated.",
+    "type": "buff",
+    "icon": "stic_freepass_keep.png"
+  },
+  "stic_freezing": {
+    "name": "Frostbite",
+    "description": "Cannot be subject to any damage reduction or damage sharing effects. Does not affect damage suffered amount limit effect. Frostbite effect applies to Heroes only.",
+    "type": "debuff",
+    "icon": "stic_freezing.png"
+  },
+  "stic_friendship_keep": {
+    "name": "Special Friendship (Undispellable)",
+    "description": "After attacking on the bearer's turn, a critical hit deals additional damage proportional to the bearer's max Health to the target.\nDeals 8% of the bearer's max Health as additional damage on Critical Hit.",
+    "type": "buff",
+    "icon": "stic_friendship_keep.png"
+  },
+  "stic_guard": {
+    "name": "Escort",
+    "description": "Grants 40% damage share from the damage received by all allies.",
+    "type": "buff",
+    "icon": "stic_guard.png"
+  },
+  "stic_guard_block": {
+    "name": "Ignore Sharing",
+    "description": "When attacking, ignores damage sharing effects. Applies to Heroes only.",
+    "type": "buff",
+    "icon": "stic_guard_block.png"
+  },
+  "stic_guardian_keep": {
+    "name": "Ferocious Stand (Undispellable)",
+    "description": "Allies except for the bearer cannot be selected as a target for attacks.",
+    "type": "buff",
+    "icon": "stic_guardian_keep.png"
+  },
+  "stic_haki": {
+    "name": "Vigor (Undispellable)",
+    "description": "Increase Attack and Defense by 30%.",
+    "type": "buff",
+    "icon": "stic_haki.png"
+  },
+  "stic_hawkeye_keep": {
+    "name": "Hawk's Eye (Undispellable)",
+    "description": "Increases Speed and Critical Hit Damage by 30%.",
+    "type": "buff",
+    "icon": "stic_hawkeye_keep.png"
+  },
+  "stic_heal": {
+    "name": "Continuous Heal",
+    "description": "Recovers 15% of max Health at the start of every turn. This effect can stack.",
+    "type": "buff",
+    "icon": "stic_heal.png"
+  },
+  "stic_heal_impossible": {
+    "name": "Unhealable",
+    "description": "Cannot receive recover Health effects.",
+    "type": "debuff",
+    "icon": "stic_heal_impossible.png"
+  },
+  "stic_hide": {
+    "name": "Stealth",
+    "description": "When there are other allies, cannot be targeted. When suffering an AoE attack, decrease damage suffered and is dispelled upon suffering damage.\n50% reduced damage taken.",
+    "type": "buff",
+    "icon": "stic_hide.png"
+  },
+  "stic_icecream_keep": {
+    "name": "Ice Cream (Undispellable)",
+    "description": "After being attacked, recovers 20% of max Health. Dispelled after being attacked.",
+    "type": "buff",
+    "icon": "stic_icecream_keep.png"
+  },
+  "stic_illusion_aura": {
+    "name": "Illusion (Unique Effect)",
+    "description": "When an ally capable of being attacked is still remaining, the caster cannot be selected as a target for attacks.",
+    "type": "buff",
+    "icon": "stic_illusion_aura.png"
+  },
+  "stic_immortality": {
+    "name": "Immortal",
+    "description": "Cannot die for a certain number of turns.",
+    "type": "buff",
+    "icon": "stic_immortality.png"
+  },
+  "stic_increase_hit": {
+    "name": "Increase Hit Chance",
+    "description": "Increase Hit Chance by 50%.",
+    "type": "buff",
+    "icon": "stic_increase_hit.png"
+  },
+  "stic_indomitable_keep": {
+    "name": "Indomitable (Undispellable)",
+    "description": "Increases Defense and Effect Resistance by 30%.",
+    "type": "buff",
+    "icon": "stic_indomitable_keep.png"
+  },
+  "stic_invincible": {
+    "name": "Invincible",
+    "description": "Neutralizes all of damage taken when attacked.",
+    "type": "buff",
+    "icon": "stic_invincible.png"
+  },
+  "stic_isolation": {
+    "name": "Block",
+    "description": "Unaffected by any buffs, some beneficial effects, and dispel debuff effects except when granted by the bearer. Applies to Heroes only.",
+    "type": "debuff",
+    "icon": "stic_isolation.png"
+  },
+  "stic_laceration": {
+    "name": "Laceration",
+    "description": "When attacked, increases damage suffered by 15%, and when Health is reduced, inflicts injuries equivalent to the amount of Health reduced. Applies to Heroes only.",
+    "type": "debuff",
+    "icon": "stic_laceration.png"
+  },
+  "stic_lovely": {
+    "name": "Loveliness (Undispellable)",
+    "description": "\"Don't stop there, serve me already, meow!\"",
+    "type": "buff",
+    "icon": "stic_lovely.png"
+  },
+  "stic_madness": {
+    "name": "Rage (Undispellable)",
+    "description": "Increase Attack and Speed by 20%.",
+    "type": "buff",
+    "icon": "stic_madness.png"
+  },
+  "stic_mercedes_stable_aura": {
+    "name": "Immense Power (Unique Effect)",
+    "description": "Increases Attack by 15% and revives with 50% Health after receiving lethal damage. Can revive only once per battle.",
+    "type": "buff",
+    "icon": "stic_mercedes_stable_aura.png"
+  },
+  "stic_mercedes_unstable_aura": {
+    "name": "Volatility (Unique Effect)",
+    "description": "Increases Attack by 15% but increases damage suffered by 10%.",
+    "type": "debuff",
+    "icon": "stic_mercedes_unstable_aura.png"
+  },
+  "stic_milim_dragoneye_keep": {
+    "name": "Dragon Eye (Milim Eye) (Undispellable)",
+    "description": "Increases Hit Chance and Evasion by 20%.",
+    "type": "buff",
+    "icon": null
+  },
+  "stic_morale": {
+    "name": "Morale",
+    "description": "Increases damage dealt by 10% when attacking. This effect can stack.",
+    "type": "buff",
+    "icon": "stic_morale.png"
+  },
+  "stic_nail": {
+    "name": "Magic Nail",
+    "description": "When attacked, inflicts additional damage proportional to the attacker's Attack.\nDeals 80% of the attackers Attack as damage.",
+    "type": "debuff",
+    "icon": "stic_nail.png"
+  },
+  "stic_nocounterattack": {
+    "name": "Cannot Counterattack",
+    "description": "Disables counterattack. Cannot Counterattack does not apply to monsters.",
+    "type": "debuff",
+    "icon": "stic_nocounterattack.png"
+  },
+  "stic_offensive_aura": {
+    "name": "Offensive Mission (Unique Effect)",
+    "description": "Increases Attack of all allies by 10%. When allies attack 10 times, the mission is completed.",
+    "type": "buff",
+    "icon": "stic_offensive_aura.png"
+  },
+  "stic_oni_keep": {
+    "name": "Demon Mode (Undispellable)",
+    "description": "Unaffected by debuffs and some harmful effects. When attacking ignores Effect Resistance. This effect only applies to Hero skills.",
+    "type": "buff",
+    "icon": "stic_oni_keep.png"
+  },
+  "stic_overload_aura": {
+    "name": "Overload (Unique Effect)",
+    "description": "Increases Attack and Speed by 50%. Upon ending, inflicts energy depletion for 1 turn.",
+    "type": "buff",
+    "icon": "stic_overload_aura.png"
+  },
+  "stic_overrun_keep": {
+    "name": "Rampage (Undispellable)",
+    "description": "Increases Speed and Evasion by 20%.",
+    "type": "buff",
+    "icon": "stic_overrun_keep.png"
+  },
+  "stic_passion_keep_1": {
+    "name": "Zeal (Undispellable)",
+    "description": "Increases damage dealt by Rising Dragon Spire. Can stack up to 2 times. Dispelled at the end of turn after using Rising Dragon Spire.",
+    "type": "buff",
+    "icon": "stic_passion_keep_1.png"
+  },
+  "stic_penres_up.png": {
+    "name": "Increase Penetration Resistance",
+    "description": "Increases Penetration Resistance by 50%.",
+    "type": "buff",
+    "icon": "stic_penres_up.png"
+  },
+  "stic_possession_keep": {
+    "name": "Possession (Undispellable)",
+    "description": "Increases Attack by 25%. Counterattacks when suffering a critical hit.",
+    "type": "buff",
+    "icon": "stic_possession_keep.png"
+  },
+  "stic_protect": {
+    "name": "Barrier",
+    "description": "When suffering damage, absorbs a certain amount of damage instead of Health.",
+    "type": "buff",
+    "icon": "stic_protect.png"
+  },
+  "stic_provoke": {
+    "name": "Provoke",
+    "description": "Target attacks the enemy who provoked them with a basic skill at the start of the turn.",
+    "type": "debuff",
+    "icon": "stic_provoke.png"
+  },
+  "stic_provoke_hp": {
+    "name": "Redirected Provoke",
+    "description": "At the start of the turn, forcibly uses basic attack skill on the enemy with the highest max Health.",
+    "type": "debuff",
+    "icon": "stic_provoke_hp.png"
+  },
+  "stic_radiance_keep": {
+    "name": "Radiance (Undispellable)",
+    "description": "When attacked, grants 50% damage reduction.",
+    "type": "buff",
+    "icon": "stic_radiance_keep.png"
+  },
+  "stic_random_buff1": {
+    "name": "Random Buff",
+    "description": "Immunity, Increase Attack, Increase Critical Hit Resistance, Increase Effect Resistance",
+    "type": "buff",
+    "icon": null
+  },
+  "stic_random_buff2": {
+    "name": "Random Buff",
+    "description": "Increase Attack, Increase Critical Hit Damage, Increase Speed, Immunity",
+    "type": "buff",
+    "icon": null
+  },
+  "stic_random_buff3": {
+    "name": "Random Buff",
+    "description": "Increase Effectiveness, Increase Critical Hit Chance, Continuous Healing",
+    "type": "buff",
+    "icon": null
+  },
+  "stic_random_buff5": {
+    "name": "Random Buff",
+    "description": "Increase Critical Hit Damage, Increase Effectiveness, Increase Evasion, Immunity",
+    "type": "buff",
+    "icon": null
+  },
+  "stic_random_buff6": {
+    "name": "Random Buff",
+    "description": "Increase Attack (Greater), Increase Critical Hit Chance, Increase Critical Hit Damage, Increase Defense, Continuous Heal, Increase Evasion, Immunity",
+    "type": "buff",
+    "icon": null
+  },
+  "stic_random_buff7": {
+    "name": "Random Buff",
+    "description": "Increase Attack (Greater), Increase Critical Hit Chance, Increase Critical Hit Damage, Increase Speed, Increase Defense, Increase Critical Hit Resistance, Immunity, Revive, Barrier, Stealth",
+    "type": "buff",
+    "icon": null
+  },
+  "stic_random_debuff1": {
+    "name": "Random Debuff",
+    "description": "Decreased Attack, Decrease Hit Chance, Provoke, Silence, Restrict",
+    "type": "debuff",
+    "icon": null
+  },
+  "stic_random_debuff2": {
+    "name": "Random Debuff",
+    "description": "Silence, Decrease Defense, Decrease Speed",
+    "type": "debuff",
+    "icon": null
+  },
+  "stic_random_debuff4": {
+    "name": "Random Debuff",
+    "description": "Decrease Attack, Decrease Hit Chance, Decrease Speed, Cannot Buff",
+    "type": "debuff",
+    "icon": null
+  },
+  "stic_random_debuff5": {
+    "name": "Random Debuff",
+    "description": "Stun, Cannot Buff, Decrease Hit Chance, Restrict",
+    "type": "debuff",
+    "icon": null
+  },
+  "stic_random_debuff6": {
+    "name": "Random Debuff",
+    "description": "Poison, Decrease Speed, Decrease Defense",
+    "type": "debuff",
+    "icon": null
+  },
+  "stic_random_debuff7": {
+    "name": "Random Debuff",
+    "description": "Stun, Sleep, Redirected Provoke",
+    "type": "debuff",
+    "icon": null
+  },
+  "stic_reflect": {
+    "name": "Reflect",
+    "description": "When attacked, reflects 30% of the damage suffered to the attacker. Reflected damage cannot be higher than the bearer's max Health.\n30% of damage taken reflected (counts your defense, does defense ignoring damage to the enemy).",
+    "type": "buff",
+    "icon": "stic_reflect.png"
+  },
+  "stic_res_inc": {
+    "name": "Increase Effect Resistance",
+    "description": "Increases Effect Resistance by 50%.",
+    "type": "buff",
+    "icon": "stic_res_inc.png"
+  },
+  "stic_restrict": {
+    "name": "Bind",
+    "description": "When it's not the bearer's turn, cannot activate additional skills, counterattacks, and Dual Attacks. Applies to Heroes only.",
+    "type": "debuff",
+    "icon": "stic_restrict.png"
+  },
+  "stic_richness_aura": {
+    "name": "Abundance (Unique Effect)",
+    "description": "After attacking, inflicts 2,000 additional damage on the target.",
+    "type": "buff",
+    "icon": "stic_richness_aura.png"
+  },
+  "stic_rupture": {
+    "name": "Rupture",
+    "description": "When attacked, inflicts additional damage proportional to max Health. Applies to Heroes only.",
+    "type": "debuff",
+    "icon": "stic_rupture.png"
+  },
+  "stic_rush": {
+    "name": "Swift Attack",
+    "description": "At the end of the turn, increases Combat Readiness by 50%. It is dispelled once the effect is activated.",
+    "type": "buff",
+    "icon": "stic_rush.png"
+  },
+  "stic_sacrifice_aura": {
+    "name": "Offering (Unique Effect)",
+    "description": "Grants 70% damage sharing of the damage received by all allies. Upon receiving lethal damage, grants immortality for 1 turn. Immortality can only be activated once.",
+    "type": "buff",
+    "icon": "stic_sacrifice_aura.png"
+  },
+  "stic_shame_keep": {
+    "name": "Shyness (Undispellable)",
+    "description": "Solitaria... You said it wouldn't be revealing!",
+    "type": "buff",
+    "icon": "stic_shame_keep.png"
+  },
+  "stic_showtime_aura": {
+    "name": "Idol (Unique Effect)",
+    "description": "\"My live show won‘t stop until my turn is over!\"",
+    "type": "buff",
+    "icon": "stic_showtime_aura.png"
+  },
+  "stic_shroud_1": {
+    "name": "Skill Effect Nullifier",
+    "description": "Nullifies an effect from skills of enemy Heroes and artifacts.",
+    "type": "buff",
+    "icon": "stic_shroud_1.png"
+  },
+  "stic_silence": {
+    "name": "Silence",
+    "description": "The target cannot use skills that require cooldowns.",
+    "type": "debuff",
+    "icon": "stic_silence.png"
+  },
+  "stic_sleep": {
+    "name": "Sleep",
+    "description": "Cannot act for a certain number of turns. Decreases Critical Hit Resistance and Evasion by 100%, and when suffering damage, is dispelled.",
+    "type": "debuff",
+    "icon": "stic_sleep.png"
+  },
+  "stic_speed_up": {
+    "name": "Increase Speed",
+    "description": "Increase Speed by 30%.",
+    "type": "buff",
+    "icon": "stic_speed_up.png"
+  },
+  "stic_spirit_keep": {
+    "name": "Spirit's Blessing (Unidspellable)",
+    "description": "Increases Effect Resistance by 60%.",
+    "type": "buff",
+    "icon": "stic_spirit_keep.png"
+  },
+  "stic_spiritlord_keep": {
+    "name": "Spirit Lord's Protection (Undispellable)",
+    "description": "Upon receiving lethal damage, revives with 50% Health and increases Combat Readiness by 50%.",
+    "type": "buff",
+    "icon": "stic_spiritlord_keep.png"
+  },
+  "stic_starfield_keep": {
+    "name": "Star's Blessing (Undispellable)",
+    "description": "Increases Attack and Critical Hit Damage by 15%.",
+    "type": "buff",
+    "icon": "stic_starfield_keep.png"
+  },
+  "stic_starlore_aura": {
+    "name": "Knowledge of the Stars (Unique Effect)",
+    "description": "Increases additional damage dealt by 100%.",
+    "type": "buff",
+    "icon": "stic_starlore_aura.png"
+  },
+  "stic_stealth_keep": {
+    "name": "Concealment (Undispellable)",
+    "description": "When another ally is present, prevents enemies from selecting the bearer as a skill target.",
+    "type": "buff",
+    "icon": "stic_stealth_keep.png"
+  },
+  "stic_stigma": {
+    "name": "Stigma",
+    "description": "Decreases amount recovered by 50% and reduces the effect of Combat Readiness increases by 50%.",
+    "type": "debuff",
+    "icon": "stic_stigma.png"
+  },
+  "stic_stun": {
+    "name": "Stun",
+    "description": "Cannot act for a certain number of turns.",
+    "type": "debuff",
+    "icon": "stic_stun.png"
+  },
+  "stic_suck": {
+    "name": "Vampirism",
+    "description": "When attacking, absorbs 30% of damage dealt as Health.",
+    "type": "buff",
+    "icon": "stic_suck.png"
+  },
+  "stic_superhuman_keep": {
+    "name": "Superhumanization (Undispellable)",
+    "description": "Increases max Health and Speed by 100%.",
+    "type": "buff",
+    "icon": "stic_superhuman_keep.png"
+  },
+  "stic_target": {
+    "name": "Target",
+    "description": "Increases damage received by the target by 15%, while decreasing Evasion by 50%.",
+    "type": "debuff",
+    "icon": "stic_target.png"
+  },
+  "stic_thief_aura": {
+    "name": "Spoils (Unique Effect)",
+    "description": "Increases Attack, Health, and Defense by 20%. Can stack up to 4 times. Upon death, dispels all Pilfer from all enemies.",
+    "type": "buff",
+    "icon": null
+  },
+  "stic_thievery_aura": {
+    "name": "Pilfer (Unique Effect)",
+    "description": "Decreases Attack, Health, and Defense by 20%, and grants spoils to the attacker. Can only apply to Heroes and remains even after dying. Unaffected by Effect Resistance or whether the attack hits.",
+    "type": "debuff",
+    "icon": "stic_thievery_aura.png"
+  },
+  "stic_tingling_keep": {
+    "name": "Bzzt! (Undispellable)",
+    "description": "After attacking, inflicts 2,500 additional damage and up to 10% injuries on all enemies.",
+    "type": "buff",
+    "icon": "stic_tingling_keep.png"
+  },
+  "stic_torrent_keep": {
+    "name": "Torrent (Undispellable)",
+    "description": "After attacking with a basic skill, if it is a Single Attack, deals additional damage to the target proportional to damage dealt. Torrent is dispelled after attacking.\nAdditional damage 70% of the damage dealt. Dispelled after a single target attack.",
+    "type": "buff",
+    "icon": "stic_torrent_keep.png"
+  },
+  "stic_trauma_aura": {
+    "name": "Trauma (Unique Effect)",
+    "description": "Decreases Defense by 70%, but increases Attack and Speed by 100%. If the Defense prior to the effect of trauma is 2000 or higher, the stat increase effects are doubled.",
+    "type": "debuff",
+    "icon": "stic_trauma_aura.png"
+  },
+  "stic_vampire": {
+    "name": "Vampiric Touch",
+    "description": "When attacked, recovers 10% of the attacker's max Health.",
+    "type": "debuff",
+    "icon": "stic_vampire.png"
+  },
+  "stic_venom": {
+    "name": "Venom",
+    "description": "At the start of the turn, suffers damage equivalent of 10% of max Health and is inflicted with injuries proportional to damage suffered. Venom effect applies to Heroes only.",
+    "type": "debuff",
+    "icon": "stic_venom.png"
+  },
+  "stic_venomspread_keep": {
+    "name": "Pestilence (Undispellable)",
+    "description": "After attacking on the bearer's turn, inflicts venom for 1 turn and at the end of the turn, detonates venom effects inflicted on the enemy.",
+    "type": "buff",
+    "icon": "stic_venomspread_keep.png"
+  },
+  "stic_vow_keep": {
+    "name": "Oath of Punishment (Undispellable)",
+    "description": "Unaffected by any debuffs and some harmful effects. After attacking on the bearer's turn, deals 2,500 fixed damage to the target.",
+    "type": "buff",
+    "icon": "stic_vow_keep.png"
+  },
+  "stic_wargod_aura": {
+    "name": "War God",
+    "description": "Increases Defense Penetration of Deliverance: Soul Exchange by 50%. Dispelled after the effect activates.",
+    "type": "buff",
+    "icon": "stic_wargod_aura.png"
+  },
+  "stic_weakness_keep": {
+    "name": "Weakness Shared (Undispellable)",
+    "description": "When an ally attacks, if the target is an Elite or Boss monster, increases damage dealt by 10%.",
+    "type": "buff",
+    "icon": "stic_weakness_keep.png"
+  },
+  "stic_wildeye": {
+    "name": "Mind's Eye (Undispellable)",
+    "description": "When attacking, inflicts injuries. The severity of injuries increases proportional to damage dealt. Injuries decrease max Health of the target by up to 10% every time this skill is used.",
+    "type": "buff",
+    "icon": "stic_wildeye.png"
+  },
+  "stic_willflame_keep": {
+    "name": "Willful Flame (Undispellable)",
+    "description": "When a Fire element ally attacks, penetrates the target's Defense by 15%. ",
+    "type": "buff",
+    "icon": "stic_willflame_keep.png"
+  }
+}

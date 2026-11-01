@@ -1,0 +1,75 @@
+{
+  "name": "e7-forge",
+  "productName": "E7 Forge",
+  "version": "0.1.0",
+  "description": "Personal Epic Seven gear optimizer: account-wide optimization, speed tuning, upgrade ROI, community benchmarks, stat recommendations and team building. Imports Fribbels optimizer exports.",
+  "author": "E7 Forge contributors",
+  "license": "MIT",
+  "private": true,
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "npm run build:main && concurrently -k \"vite\" \"wait-on tcp:5173 && cross-env VITE_DEV=1 electron .\"",
+    "build:main": "node scripts/build-main.mjs",
+    "build:renderer": "vite build",
+    "build": "npm run build:main && npm run build:renderer",
+    "start": "npm run build && electron .",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "dist:win": "npm run build && npx --yes electron-builder@26.18.0 --win dir --x64 && node scripts/set-exe-icon.mjs \"release/win-unpacked/E7 Forge.exe\""
+  },
+  "build": {
+    "appId": "app.e7forge.desktop",
+    "productName": "E7 Forge",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "data/**",
+      "!data/epic7db-skills.json",
+      "capture/**",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "data/**",
+      "capture/**",
+      "dist-electron/worker.js",
+      "dist-electron/sql-wasm.wasm"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "dir",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "signAndEditExecutable": false,
+      "icon": "build/icon.ico"
+    }
+  },
+  "dependencies": {
+    "sql.js": "^1.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/sql.js": "^1.4.9",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "electron": "^45.2.1",
+    "esbuild": "^0.24.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "resedit": "^2.0.3",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vitest": "^2.1.8",
+    "wait-on": "^8.0.1"
+  }
+}

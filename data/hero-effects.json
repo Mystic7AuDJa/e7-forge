@@ -1,0 +1,6211 @@
+{
+  "Abigail": {
+    "S2": {
+      "buffs": [
+        "stic_immortality",
+        "stic_suck"
+      ],
+      "debuffs": [
+        "stic_curse2"
+      ]
+    }
+  },
+  "Abyssal Yufine": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_trauma_aura"
+      ]
+    }
+  },
+  "Achates": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_invincible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Adin": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_weakness_keep"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Adlay": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Adventurer Ras": {
+    "S3": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "ae-GISELLE": {
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "ae-KARINA": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_def_up",
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "ae-NINGNING": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "ae-WINTER": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_hide",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Afternoon Soak Flan": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Ainos": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ainos 2.0": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ains": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Ainz Ooal Gown": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect",
+        "stic_counter"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_death_0_keep"
+      ]
+    }
+  },
+  "Aither": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Aki": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_blaze"
+      ]
+    }
+  },
+  "Albedo": {
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Alencia": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_wildeye"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Alexa": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dot"
+      ]
+    }
+  },
+  "All-Rounder Wanda": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_target"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Ambitious Tywin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_madness"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Amid": {
+    "S2": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_rush",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Amiki": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_immortality",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Angel of Light Angelica": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible",
+        "stic_silence"
+      ]
+    }
+  },
+  "Angelic Montmorancy": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Angelica": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Apocalypse Ravi": {
+    "S3": {
+      "buffs": [
+        "stic_endure",
+        "stic_wargod_aura"
+      ],
+      "debuffs": []
+    }
+  },
+  "Aram": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_acc_up",
+        "stic_haki",
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_inc"
+      ],
+      "debuffs": []
+    }
+  },
+  "Aramintha": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_heal_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_blaze",
+        "stic_stun"
+      ]
+    }
+  },
+  "Arbiter Vildred": {
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_blind"
+      ]
+    }
+  },
+  "Archdemon's Shadow": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dizzy"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_blaze"
+      ]
+    }
+  },
+  "Architect Laika": {
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": [
+        "stic_target"
+      ]
+    }
+  },
+  "Argent Waves Hwayoung": {
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_haki"
+      ],
+      "debuffs": []
+    }
+  },
+  "Aria": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up",
+        "stic_counter",
+        "stic_hide",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Armin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Arowell": {
+    "S2": {
+      "buffs": [
+        "stic_guard"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect",
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Arunka": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    }
+  },
+  "Assassin Cartuja": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_stun"
+      ]
+    }
+  },
+  "Assassin Cidd": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_dodge_up"
+      ],
+      "debuffs": [
+        "stic_silence"
+      ]
+    }
+  },
+  "Assassin Coli": {
+    "S1": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_hide"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun",
+        "stic_silence"
+      ]
+    }
+  },
+  "Astromancer Elena": {
+    "S2": {
+      "buffs": [
+        "stic_starfield_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_starfield_keep"
+      ],
+      "debuffs": [
+        "stic_heal_impossible",
+        "stic_ab_up_block"
+      ]
+    }
+  },
+  "Aubade Ludwig": {
+    "S1": {
+      "buffs": [
+        "stic_circlemagic"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_circlemagic",
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_isolation",
+        "stic_silence"
+      ]
+    }
+  },
+  "Aube": {
+    "S2": {
+      "buffs": [
+        "stic_dmg_fixed_keep",
+        "stic_endure"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_stealth_keep"
+      ],
+      "debuffs": [
+        "stic_danger_4",
+        "stic_ab_up_block"
+      ]
+    }
+  },
+  "Auxiliary Lots": {
+    "S2": {
+      "buffs": [
+        "stic_att_inc",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Azalea": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke",
+        "stic_heal_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Baal & Sezan": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dot"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible",
+        "stic_dodge_dn",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Bad Cat Armin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_cridmg_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect",
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Baiken": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    }
+  },
+  "Basar": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "cmn_random_debuff3",
+        "stic_silence",
+        "stic_def_dn",
+        "stic_att_dn",
+        "stic_heal_impossible"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind",
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible"
+      ]
+    }
+  },
+  "Bask": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Batisse": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Beehoo": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible",
+        "stic_blaze"
+      ]
+    }
+  },
+  "Belian": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_blind"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_random_buff3",
+        "stic_acc_up",
+        "stic_cri_up",
+        "stic_heal"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Bellona": {
+    "S2": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Benevolent Romann": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_silence"
+      ]
+    }
+  },
+  "Benimaru": {
+    "S2": {
+      "buffs": [
+        "1314"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Bernard": {
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Birgitta": {
+    "S2": {
+      "buffs": [
+        "stic_rush"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_restrict",
+        "stic_isolation"
+      ]
+    }
+  },
+  "Blaze Dingo": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_invincible",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Blood Blade Karin": {
+    "S2": {
+      "buffs": [
+        "stic_immortality"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Blood Moon Haste": {
+    "S2": {
+      "buffs": [
+        "stic_protect",
+        "stic_debuf_impossible",
+        "stic_bloodaura_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_immortality"
+      ],
+      "debuffs": []
+    }
+  },
+  "Blooming Lidica": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": []
+    }
+  },
+  "Bomb Model Kanna": {
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Boss Arunka": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_guardian_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up",
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Briar Witch Iseria": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_immortality"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_buf_impossible"
+      ]
+    }
+  },
+  "Brieg": {
+    "S2": {
+      "buffs": [
+        "stic_protect",
+        "stic_detection_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_dodge_dn"
+      ]
+    }
+  },
+  "Byblis": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_blind"
+      ]
+    }
+  },
+  "Camilla": {
+    "S1": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Captain Rikoris": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_ab_up_block"
+      ]
+    }
+  },
+  "Carmainerose": {
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Carrot": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    }
+  },
+  "Cartuja": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    }
+  },
+  "Cecilia": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Celeste": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Celestial Mercedes": {
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Celine": {
+    "S1": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_dodge_up",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Cerise": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun",
+        "stic_buf_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_invincible"
+      ],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_ab_up_block"
+      ]
+    }
+  },
+  "Cermia": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up2"
+      ],
+      "debuffs": []
+    }
+  },
+  "Challenger Dominiel": {
+    "S3": {
+      "buffs": [
+        "stic_cridmg_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Champion Zerato": {
+    "S3": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_att_dn"
+      ]
+    }
+  },
+  "Charles": {
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_def_up",
+        "stic_counter"
+      ],
+      "debuffs": []
+    }
+  },
+  "Charlotte": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible"
+      ]
+    }
+  },
+  "Chloe": {
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_nail"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Choux": {
+    "S3": {
+      "buffs": [
+        "stic_crires_up",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Christy": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Church of Ilryos Axe": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Cidd": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_speed_up",
+        "stic_random_buff5",
+        "stic_cridmg_up",
+        "stic_acc_up",
+        "stic_dodge_up",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Clarissa": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_madness"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Claudia": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Closer Charles": {
+    "S2": {
+      "buffs": [
+        "stic_dodge_up",
+        "stic_detection_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_dodge_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Coli": {
+    "S2": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood",
+        "stic_bomb"
+      ]
+    }
+  },
+  "Command Model Laika": {
+    "S2": {
+      "buffs": [
+        "stic_att_up2"
+      ],
+      "debuffs": [
+        "stic_target"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_sleep"
+      ]
+    }
+  },
+  "Commander Pavel": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Conqueror Lilias": {
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_provoke_hp",
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_haki"
+      ],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    }
+  },
+  "Corvus": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_indomitable_keep"
+      ],
+      "debuffs": []
+    }
+  },
+  "Crescent Moon Rin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_cridmg_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Crimson Armin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_invincible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Crozet": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect",
+        "stic_def_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Dark Corvus": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Death Dealer Ray": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_acc_up",
+        "stic_venomspread_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep",
+        "stic_venom"
+      ]
+    }
+  },
+  "Desert Jewel Basar": {
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Designer Lilibet": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_def_up",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Destina": {
+    "S3": {
+      "buffs": [
+        "stic_spirit_keep"
+      ],
+      "debuffs": []
+    }
+  },
+  "Diene": {
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up",
+        "stic_penres_up.png"
+      ],
+      "debuffs": []
+    }
+  },
+  "Dingo": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_cri_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Disciplinary Prefect Aria": {
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Dizzy": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_att_dn",
+        "stic_blind"
+      ]
+    }
+  },
+  "Doll Maker Pearlhorizon": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Dominiel": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect",
+        "stic_reflect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Doris": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_heal",
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Dragon Bride Senya": {
+    "S1": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect",
+        "stic_vow_keep"
+      ],
+      "debuffs": []
+    }
+  },
+  "Dragon King Sharun": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_dmg_fixed_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible",
+        "stic_class_debuff_1",
+        "stic_att_dn",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Eaton": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Eda": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Edward Elric": {
+    "S1": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_random_debuff1",
+        "stic_att_dn",
+        "stic_blind",
+        "stic_provoke",
+        "stic_silence",
+        "stic_ab_up_block"
+      ]
+    }
+  },
+  "Elena": {
+    "S3": {
+      "buffs": [
+        "stic_invincible",
+        "stic_res_inc"
+      ],
+      "debuffs": []
+    }
+  },
+  "Eligos": {
+    "S2": {
+      "buffs": [
+        "stic_att_up2"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_target"
+      ]
+    }
+  },
+  "Elphelt": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Elson": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Elvira": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_deceptive"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_immortality"
+      ],
+      "debuffs": [
+        "stic_heal_impossible",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Emilia": {
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Empyrean Ilynav": {
+    "S3": {
+      "buffs": [
+        "stic_indomitable_keep"
+      ],
+      "debuffs": []
+    }
+  },
+  "Enott": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_buf_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ervalen": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_counter",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Estelle": {
+    "S1": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Eternal Wanderer Ludwig": {
+    "S1": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_increase_hit",
+        "stic_endure"
+      ],
+      "debuffs": []
+    }
+  },
+  "Eye of the Abyss Fumyr": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_abyss_eye_0_aura",
+        "stic_protect",
+        "stic_hide"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ezra": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible",
+        "stic_ab_up_block",
+        "stic_blind"
+      ]
+    }
+  },
+  "Fairytale Tenebria": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke_hp"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_random_debuff2",
+        "stic_silence",
+        "stic_def_dn",
+        "stic_dodge_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible",
+        "stic_provoke_hp"
+      ]
+    }
+  },
+  "Faithless Lidica": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_laceration"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_endure",
+        "stic_hide"
+      ],
+      "debuffs": []
+    }
+  },
+  "Falconer Kluri": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Fallen Cecilia": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": []
+    }
+  },
+  "Fenne": {
+    "S1": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_madness"
+      ],
+      "debuffs": []
+    }
+  },
+  "Fenris": {
+    "S1": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up2"
+      ],
+      "debuffs": []
+    }
+  },
+  "Fern": {
+    "S1": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Festive Eda": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_hide",
+        "stic_shame_keep"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_silence"
+      ]
+    }
+  },
+  "Fighter Maya": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Flan": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_cridmg_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Free Spirit Tieria": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Frida": {
+    "S1": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_freepass_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_guard_block"
+      ],
+      "debuffs": []
+    }
+  },
+  "Frieren": {
+    "S1": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_barriermagic_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Fumyr": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Furious": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_cri_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "General Purrgis": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Genesis Ras": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dizzy",
+        "stic_collapse"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_covenant_keep"
+      ],
+      "debuffs": []
+    }
+  },
+  "Glenn": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_torrent_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up2",
+        "stic_increase_hit"
+      ],
+      "debuffs": []
+    }
+  },
+  "Godmother": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_target"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind",
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up",
+        "stic_acc_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Great Chief Khawana": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_ab_up_block"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Guard Captain Krau": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_haki"
+      ],
+      "debuffs": []
+    }
+  },
+  "Guider Aither": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Gunther": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Harsetti": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible",
+        "stic_nocounterattack"
+      ]
+    }
+  },
+  "Haru": {
+    "S1": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_indomitable_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_morale"
+      ],
+      "debuffs": []
+    }
+  },
+  "Hasol": {
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Haste": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible",
+        "stic_vampire"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Hataan": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Hazel": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Hecate": {
+    "S1": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_att_up2"
+      ],
+      "debuffs": []
+    }
+  },
+  "Helen": {
+    "S2": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_counter",
+        "stic_speed_up",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Helga": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Hellion Lua": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_challenge_keep",
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Holiday Yufine": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Holy Flame Adin": {
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_willflame_keep"
+      ],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Hurado": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence"
+      ]
+    }
+  },
+  "Hwayoung": {
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ian": {
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": [
+        "stic_blind"
+      ]
+    }
+  },
+  "Ilynav": {
+    "S3": {
+      "buffs": [
+        "stic_cridmg_up",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Immortal Wukong": {
+    "S1": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Inferno Khawazu": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_haki"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    }
+  },
+  "Infinite Horizon Achates": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_random_buff7",
+        "stic_att_up2",
+        "stic_cri_up",
+        "stic_cridmg_up",
+        "stic_speed_up",
+        "stic_def_up",
+        "stic_crires_up",
+        "stic_debuf_impossible",
+        "stic_bless",
+        "stic_protect",
+        "stic_hide"
+      ],
+      "debuffs": []
+    }
+  },
+  "Inheritor Amiki": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_immortality",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Iseria": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up2"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_buf_impossible"
+      ]
+    }
+  },
+  "Ivana": {
+    "S2": {
+      "buffs": [
+        "stic_radiance_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_guard_block",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Jack-O'": {
+    "S1": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_chiron_keep"
+      ],
+      "debuffs": [
+        "stic_random_debuff5",
+        "stic_stun",
+        "stic_buf_impossible",
+        "stic_blind",
+        "stic_ab_up_block"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Januta": {
+    "S2": {
+      "buffs": [
+        "stic_speed_up",
+        "stic_madness"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    }
+  },
+  "Jecht": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_heal"
+      ],
+      "debuffs": []
+    }
+  },
+  "Jena": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": [
+        "stic_freezing"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Jenua": {
+    "S1": {
+      "buffs": [
+        "stic_att_up",
+        "stic_att_up2"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_immortality",
+        "stic_madness"
+      ],
+      "debuffs": []
+    }
+  },
+  "Judge Kise": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind",
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_invincible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Judith": {
+    "S1": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": []
+    }
+  },
+  "Juni": {
+    "S2": {
+      "buffs": [
+        "stic_detection_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_buf_impossible"
+      ]
+    }
+  },
+  "Kane": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_immortality",
+        "stic_suck",
+        "stic_madness"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up2"
+      ],
+      "debuffs": []
+    }
+  },
+  "Karin": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Kawerik": {
+    "S2": {
+      "buffs": [
+        "stic_hide",
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Kayron": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_immortality",
+        "stic_dodge_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ken": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_blaze"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_haki"
+      ],
+      "debuffs": [
+        "stic_stun",
+        "stic_att_dn"
+      ]
+    }
+  },
+  "Khawana": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_endure"
+      ],
+      "debuffs": []
+    }
+  },
+  "Khawazu": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Kikirat v2": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    }
+  },
+  "Kiris ": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dot"
+      ]
+    }
+  },
+  "Kise": {
+    "S3": {
+      "buffs": [
+        "stic_hide",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Kitty Clarissa": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_lovely"
+      ],
+      "debuffs": []
+    }
+  },
+  "Kizuna AI": {
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_protect",
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Kluri": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Krau": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Lady of the Scales": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_fear"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_sacrifice_aura"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_richness_aura"
+      ],
+      "debuffs": []
+    }
+  },
+  "Landy": {
+    "S2": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Last Piece Karin": {
+    "S2": {
+      "buffs": [
+        "stic_hide",
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "1400",
+        "1401"
+      ],
+      "debuffs": []
+    }
+  },
+  "Last Rider Krau": {
+    "S1": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Leah": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_cridmg_up",
+        "stic_att_inc"
+      ],
+      "debuffs": []
+    }
+  },
+  "Lena": {
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Leo": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_stun"
+      ]
+    }
+  },
+  "Lethe": {
+    "S1": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_1402_omen"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_freezing",
+        "stic_ab_up_block"
+      ]
+    }
+  },
+  "Lidica": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_restrict"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Lilias": {
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Lilibet": {
+    "S3": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": []
+    }
+  },
+  "Lilka": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_att_dn",
+        "stic_dodge_dn"
+      ]
+    }
+  },
+  "Lionheart Cermia": {
+    "S1": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_def_up",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Lisette": {
+    "S2": {
+      "buffs": [
+        "stic_divine_4_aura",
+        "stic_divine_aura"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Little Queen Charlotte": {
+    "S1": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Lone Crescent Bellona": {
+    "S1": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_haki",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Lone Wolf Peira": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_overrun_keep",
+        "stic_rush"
+      ],
+      "debuffs": []
+    }
+  },
+  "Lots": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_heal"
+      ],
+      "debuffs": []
+    }
+  },
+  "Lua": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_deceptive"
+      ]
+    }
+  },
+  "Lucy": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_ab_up_block"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_ab_up_block",
+        "stic_dodge_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ludwig": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Luluca": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_def_up",
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Luna": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Magic Scholar Doris": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_heal",
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Maid Chloe": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_bless",
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Martial Artist Ken": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_haki"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Mascot Hazel": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_att_up2"
+      ],
+      "debuffs": []
+    }
+  },
+  "Maya": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_provoke",
+        "stic_att_dn"
+      ]
+    }
+  },
+  "Mediator Kawerik": {
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Mei Lin": {
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_passion_keep_1"
+      ],
+      "debuffs": []
+    }
+  },
+  "Melany": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_stigma"
+      ]
+    }
+  },
+  "Melissa": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_immortality",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_curse2"
+      ]
+    }
+  },
+  "Mercedes": {
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_mercedes_stable_aura"
+      ],
+      "debuffs": [
+        "stic_mercedes_unstable_aura"
+      ]
+    }
+  },
+  "Mercenary Helga": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_acc_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Midnight Gala Lilias": {
+    "S2": {
+      "buffs": [
+        "stic_dmg_limit",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Milim": {
+    "S1": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_milim_dragoneye_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_dodge_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Mirsa": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence"
+      ]
+    }
+  },
+  "Mistychain": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible",
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_bless"
+      ],
+      "debuffs": []
+    }
+  },
+  "Monarch of the Sword Iseria": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_crack_1_aura"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_crack_1_aura"
+      ]
+    }
+  },
+  "Montmorancy": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Moon Bunny Dominiel": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_endure",
+        "stic_shroud_1"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_haki",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Mort": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_fear"
+      ]
+    }
+  },
+  "Mucacha": {
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Mui": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_target"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood",
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Muse Rima": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Muwi": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Nahkwol": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_dizzy"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_restrict"
+      ]
+    }
+  },
+  "Navy Captain Landy": {
+    "S2": {
+      "buffs": [
+        "stic_crires_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Nemunas": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "New Kid Adin": {
+    "S2": {
+      "buffs": [
+        "stic_haki"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "New Moon Luna": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_shroud_1"
+      ],
+      "debuffs": [
+        "stic_dizzy",
+        "stic_buf_impossible"
+      ]
+    }
+  },
+  "Notos": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_battlegod_aura"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ocean Breeze Luluca": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence",
+        "stic_blind"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up",
+        "stic_icecream_keep"
+      ],
+      "debuffs": []
+    }
+  },
+  "Operator Sigret": {
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Orte": {
+    "S2": {
+      "buffs": [
+        "stic_detection_keep",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Otillie": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence"
+      ]
+    }
+  },
+  "Pavel": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Peacemaker Furious": {
+    "S2": {
+      "buffs": [
+        "stic_speed_up",
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Pearlhorizon": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Peira": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_ab_up_block",
+        "stic_buf_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_hide",
+        "stic_guard",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Penelope": {
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": [
+        "stic_att_dn",
+        "stic_stun"
+      ]
+    }
+  },
+  "Perfumer Byblis": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_acc_up"
+      ],
+      "debuffs": [
+        "stic_provoke_hp",
+        "stic_venom"
+      ]
+    }
+  },
+  "Pernilla": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    }
+  },
+  "Pirate Captain Flan": {
+    "S2": {
+      "buffs": [
+        "stic_rush"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_bomb"
+      ]
+    }
+  },
+  "Politis": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind",
+        "stic_buf_impossible"
+      ]
+    }
+  },
+  "Purrgis": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Pyllis": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Ragnvald": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Ram": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up2"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Ran": {
+    "S2": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_endure",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": [
+        "stic_freezing",
+        "stic_ab_up_block",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Ras": {
+    "S3": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ravi": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Ray": {
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Rem": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_oni_keep"
+      ],
+      "debuffs": [
+        "stic_heal_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_blind"
+      ]
+    }
+  },
+  "Remnant Violet": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Requiem Roana": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Requiemroar": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Researcher Carrot": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    }
+  },
+  "Revna": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dot"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_inc"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_target",
+        "stic_dodge_dn"
+      ]
+    }
+  },
+  "Rhianna and Luciella": {
+    "S1": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_restrict",
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_fear"
+      ]
+    }
+  },
+  "Righteous Thief Roozid": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Rikoris": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_ab_up_block"
+      ]
+    }
+  },
+  "Rima": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    }
+  },
+  "Rimuru": {
+    "S1": {
+      "buffs": [
+        "stic_random_buff1",
+        "stic_debuf_impossible",
+        "stic_att_up",
+        "stic_crires_up",
+        "stic_res_inc"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Rin": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_random_buff6",
+        "stic_att_up2",
+        "stic_cri_up",
+        "stic_cridmg_up",
+        "stic_def_up",
+        "stic_heal",
+        "stic_dodge_up",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Rinak": {
+    "S2": {
+      "buffs": [
+        "stic_thief_aura",
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_thievery_aura"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Riza Hawkeye": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_target"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_hawkeye_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_att_inc"
+      ],
+      "debuffs": []
+    }
+  },
+  "Roaming Warrior Leo": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_bomb"
+      ]
+    }
+  },
+  "Roana": {
+    "S1": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect",
+        "stic_bless"
+      ],
+      "debuffs": []
+    }
+  },
+  "Robin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_rush"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Romann": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_ab_up_block",
+        "stic_dot"
+      ]
+    }
+  },
+  "Roozid": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Rose": {
+    "S1": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Roy Mustang": {
+    "S2": {
+      "buffs": [
+        "stic_flame_alchemist_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_flame_alchemist_keep"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ruele of Light": {
+    "S2": {
+      "buffs": [
+        "stic_protect",
+        "stic_dmg_limit"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_invincible",
+        "stic_spiritlord_keep"
+      ],
+      "debuffs": []
+    }
+  },
+  "Ruiza": {
+    "S1": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": [
+        "stic_laceration",
+        "stic_silence"
+      ]
+    }
+  },
+  "Sage Baal & Sezan": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence"
+      ]
+    }
+  },
+  "Salome": {
+    "S2": {
+      "buffs": [
+        "stic_endure"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_collapse",
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Saria": {
+    "S3": {
+      "buffs": [
+        "stic_invincible",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Savior Adin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_invincible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Schniel": {
+    "S2": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_indomitable_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "School Nurse Yulha": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_superhuman_keep"
+      ],
+      "debuffs": []
+    }
+  },
+  "Sea Phantom Politis": {
+    "S2": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_madness"
+      ],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    }
+  },
+  "Sealed Eye Surin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_hide",
+        "stic_madness"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_blood"
+      ]
+    }
+  },
+  "Seaside Bellona": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_target"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible",
+        "stic_heal_impossible"
+      ]
+    }
+  },
+  "Senya": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect",
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_counter"
+      ],
+      "debuffs": [
+        "stic_blind",
+        "stic_provoke"
+      ]
+    }
+  },
+  "Serene Purity Adin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_torrent_keep"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    }
+  },
+  "Serila": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    }
+  },
+  "Setsuka": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_deceptive",
+        "stic_blind"
+      ]
+    }
+  },
+  "Sez": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible"
+      ]
+    }
+  },
+  "Shadow Knight Pyllis": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Shadow Rose": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_heal_impossible"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Shalltear": {
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_hide"
+      ],
+      "debuffs": []
+    }
+  },
+  "Sharun": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_venom"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_random_buff2",
+        "stic_att_up",
+        "stic_cridmg_up",
+        "stic_speed_up",
+        "stic_debuf_impossible",
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_venom"
+      ]
+    }
+  },
+  "Shepherd Jena": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": [
+        "stic_freezing"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Shepherd of the Dark Diene": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_rupture"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_immortality"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dizzy"
+      ]
+    }
+  },
+  "Shooting Star Achates": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_immortality"
+      ],
+      "debuffs": []
+    }
+  },
+  "Shuna": {
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep",
+        "stic_att_dn"
+      ]
+    }
+  },
+  "Sigret": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible",
+        "stic_blood"
+      ]
+    }
+  },
+  "Silk": {
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    }
+  },
+  "Silver Blade Aramintha": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze",
+        "stic_stun"
+      ]
+    }
+  },
+  "Silvertide Christy": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_def_up",
+        "stic_acc_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Sinful Angelica": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_immortality",
+        "stic_att_up",
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Sol": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible"
+      ]
+    }
+  },
+  "Solitaria of the Snow": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_delusion_keep",
+        "stic_hide"
+      ],
+      "debuffs": [
+        "stic_random_debuff4",
+        "stic_att_dn",
+        "stic_blind",
+        "stic_dodge_dn",
+        "stic_buf_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Sonia": {
+    "S1": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Specimen Sez": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Specter Tenebria": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dot"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_illusion_aura"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Spirit Eye Celine": {
+    "S1": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_possession_keep",
+        "stic_immortality"
+      ],
+      "debuffs": []
+    }
+  },
+  "Stark": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Straze": {
+    "S3": {
+      "buffs": [
+        "stic_invincible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Successor Taeyou": {
+    "S1": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_possession_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_invincible"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Summer Break Charlotte": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_coop_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Summer's Disciple Alexa": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dot"
+      ]
+    }
+  },
+  "Summertime Iseria": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_bomb"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    }
+  },
+  "Surin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood",
+        "stic_att_dn"
+      ]
+    }
+  },
+  "Suthan": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_heal_impossible",
+        "stic_blaze"
+      ]
+    }
+  },
+  "Sven": {
+    "S2": {
+      "buffs": [
+        "stic_immortality",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Swift Flagbearer Sigret": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_silence"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_target"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up",
+        "stic_dodge_up"
+      ],
+      "debuffs": [
+        "stic_fear"
+      ]
+    }
+  },
+  "Tactical Archetype Coli": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_rush"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_overload_aura"
+      ],
+      "debuffs": [
+        "stic_discharge_aura",
+        "stic_bomb",
+        "stic_freezing"
+      ]
+    }
+  },
+  "Taeyou": {
+    "S2": {
+      "buffs": [
+        "stic_madness",
+        "stic_endure"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up",
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Talaz": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Talia": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible"
+      ]
+    }
+  },
+  "Tamarinne": {
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_showtime_aura"
+      ],
+      "debuffs": []
+    }
+  },
+  "Taranor Guard": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Taranor Royal Guard": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke"
+      ]
+    }
+  },
+  "Tempest Surin": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blood"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_hide",
+        "stic_suck"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible",
+        "stic_silence"
+      ]
+    }
+  },
+  "Tenebria": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_sleep"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn",
+        "stic_buf_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_sleep"
+      ]
+    }
+  },
+  "Tidal Rift Elvira": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dizzy",
+        "stic_fear"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_corrupt_keep",
+        "stic_dmg_fixed_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_curse2"
+      ]
+    }
+  },
+  "Tieria": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blind"
+      ]
+    }
+  },
+  "Top Model Luluca": {
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_hide",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Tori": {
+    "S1": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_dmg_fixed_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_speed_up",
+        "stic_increase_hit"
+      ],
+      "debuffs": []
+    }
+  },
+  "Troublemaker Crozet": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up",
+        "stic_crires_up",
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Twisted Eidolon Kayron": {
+    "S1": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_counter"
+      ],
+      "debuffs": []
+    }
+  },
+  "Tywin": {
+    "S2": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Unbound Knight Arowell": {
+    "S2": {
+      "buffs": [
+        "stic_guard"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect",
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Uncharted Pioneer Politis": {
+    "S2": {
+      "buffs": [
+        "stic_offensive_aura",
+        "stic_defensive_aura",
+        "stic_starlore_aura"
+      ],
+      "debuffs": []
+    }
+  },
+  "Urban Shadow Choux": {
+    "S2": {
+      "buffs": [
+        "stic_tingling_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Verdant Adin": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_buf_impossible"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_weakness_keep"
+      ],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    }
+  },
+  "Veronica": {
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_bomb"
+      ]
+    }
+  },
+  "Victorika": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_counter"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Vigilante Leader Glenn": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_torrent_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up2",
+        "stic_cri_up",
+        "stic_increase_hit"
+      ],
+      "debuffs": []
+    }
+  },
+  "Vildred": {
+    "S2": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Violet": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_att_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_detection_keep"
+      ],
+      "debuffs": []
+    }
+  },
+  "Vivian": {
+    "S3": {
+      "buffs": [
+        "stic_debuf_impossible",
+        "stic_att_up",
+        "stic_att_up2"
+      ],
+      "debuffs": []
+    }
+  },
+  "Wanda": {
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_target"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Wanderer Silk": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_target"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": [
+        "stic_silence",
+        "stic_att_dn"
+      ]
+    }
+  },
+  "Wandering Prince Cidd": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_bomb",
+        "stic_dodge_dn"
+      ]
+    }
+  },
+  "Watcher Schuri": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_target"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Westwind Executioner Schuri": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_explosive_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_blaze"
+      ]
+    }
+  },
+  "Witch of the Mere Tenebria": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_random_debuff6",
+        "stic_dot",
+        "stic_dodge_dn",
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect",
+        "stic_hide"
+      ],
+      "debuffs": [
+        "stic_rupture",
+        "stic_ab_up_block"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_isolation",
+        "stic_random_debuff7",
+        "stic_stun",
+        "stic_sleep",
+        "stic_provoke_hp"
+      ]
+    }
+  },
+  "Wretched Rose": {
+    "S1": {
+      "buffs": [
+        "stic_hide"
+      ],
+      "debuffs": []
+    },
+    "S2": {
+      "buffs": [
+        "stic_crires_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_protect",
+        "stic_formula_aura"
+      ],
+      "debuffs": []
+    }
+  },
+  "Yoonryoung": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_ab_up_block"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_debuf_impossible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Young Senya": {
+    "S2": {
+      "buffs": [
+        "stic_friendship_keep"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_heal"
+      ],
+      "debuffs": []
+    }
+  },
+  "Yufine": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn"
+      ]
+    },
+    "S2": {
+      "buffs": [],
+      "debuffs": [
+        "stic_def_dn",
+        "stic_silence"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Yulha": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_provoke_hp"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_protect"
+      ],
+      "debuffs": []
+    }
+  },
+  "Yuna": {
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_speed_up"
+      ],
+      "debuffs": []
+    }
+  },
+  "Zahhak": {
+    "S2": {
+      "buffs": [
+        "stic_att_up",
+        "stic_increase_hit"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_invincible"
+      ],
+      "debuffs": []
+    }
+  },
+  "Zealot Carmainerose": {
+    "S2": {
+      "buffs": [
+        "stic_speed_up"
+      ],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [
+        "stic_att_up",
+        "stic_def_up"
+      ],
+      "debuffs": [
+        "stic_buf_impossible"
+      ]
+    }
+  },
+  "Zeno": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_freezing"
+      ]
+    },
+    "S2": {
+      "buffs": [
+        "stic_madness",
+        "stic_def_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_rupture",
+        "stic_buf_impossible"
+      ]
+    }
+  },
+  "Zerato": {
+    "S1": {
+      "buffs": [],
+      "debuffs": [
+        "stic_dodge_dn"
+      ]
+    },
+    "S3": {
+      "buffs": [],
+      "debuffs": [
+        "stic_stun"
+      ]
+    }
+  },
+  "Zio": {
+    "S1": {
+      "buffs": [
+        "stic_att_up"
+      ],
+      "debuffs": []
+    },
+    "S3": {
+      "buffs": [
+        "stic_almighty_keep"
+      ],
+      "debuffs": [
+        "stic_silence"
+      ]
+    }
+  }
+}

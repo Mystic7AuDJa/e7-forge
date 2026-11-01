@@ -1,0 +1,2600 @@
+{
+ "generated": "2026-11-01",
+ "notes": [
+  "Built only from research notes (hunts.md, raids_abyss.md) dated 2026-11-01; no web browsing.",
+  "epic7db guides are undated and probably 2019-2021-era; hero pools are old meta.",
+  "ludo.guide 2026 pages look auto-generated and unreliable; used only as conflict notes.",
+  "Numeric breakpoints are sourced only for Wyvern 13 and Azimanak 13 (65% Eff rule applies to those two only).",
+  "200% Effect Resistance is optional (resists CR pushback / debuffs), not a team requirement.",
+  "Raid and Abyss 101-110 data are legacy-2020."
+ ],
+ "hunts": [
+  {
+   "id": "wyvern",
+   "name": "Wyvern Hunt",
+   "stage": "13",
+   "element": {
+    "value": "fire",
+    "confidence": "inferred",
+    "note": "Only weak source: ludo.guide (2026, low reliability) says Fire; all epic7db W13 teams are mono-Ice, which is consistent."
+   },
+   "advantage": "ice",
+   "needTags": [
+    "def_break"
+   ],
+   "avoidTags": [],
+   "mechanics": [
+    {
+     "text": "Boss has 80 Effect Resistance and 100 Effectiveness. Debuffers need 65% Effectiveness; 200% Effect Resistance fully resists its Combat Readiness pushback (optional).",
+     "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "Attacks a random unit unless it has 2 debuffs, in which case it always attacks the front tank. First attack always hits the front tank.",
+     "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "If the Wyvern shield goes up and is not broken it is probably a wipe.",
+     "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "Casts a barrier every few turns; must out-damage it. Vulnerable to single-target damage over AoE; high Defense so Penetration is useful.",
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "text": "Bask skills should be turned off to improve the chance of decreasing Wyvern Attack; his Dual Attacks proc only from his Basic Skill.",
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "Conflicting claim (low reliability): 3+ debuffs makes it skip its Barrier. Conflicts with the 2-debuff targeting threshold above, which governs targeting not the barrier.",
+     "source": "https://www.ludo.guide/guide/epic-seven/side-quests-activities/hunts",
+     "date": "2026-05/06 (unreliable)",
+     "confidence": "undated-guide"
+    }
+   ],
+   "breakpoints": [
+    {
+     "stat": "eff",
+     "op": ">=",
+     "value": 65,
+     "appliesTo": "debuffers",
+     "required": true,
+     "note": "Boss Res 80; 65% Eff to maximize debuff chance (Furious, Muwi).",
+     "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "stat": "res",
+     "op": ">=",
+     "value": 200,
+     "appliesTo": "team",
+     "required": false,
+     "note": "OPTIONAL: to fully resist Combat Readiness pushback (boss Eff 100). Not a team requirement.",
+     "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "stat": "spd",
+     "op": ">=",
+     "value": 140,
+     "appliesTo": "Sigret",
+     "required": true,
+     "note": "Described as mandatory (140+).",
+     "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "stat": "spd",
+     "op": ">=",
+     "value": 140,
+     "appliesTo": "Muwi",
+     "required": true,
+     "note": "Described as mandatory (140+).",
+     "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "stat": "cr",
+     "op": ">=",
+     "value": 35,
+     "appliesTo": "Sigret",
+     "required": false,
+     "note": "Recommended 35-50% Crit Chance (recommended range, not a hard minimum).",
+     "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    }
+   ],
+   "relative": [
+    {
+     "text": "Furious speed >= Muwi speed + 13 (act before Muwi)",
+     "a": "Furious",
+     "b": "Muwi",
+     "delta": 13,
+     "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
+     "confidence": "sourced"
+    }
+   ],
+   "teams": [
+    {
+     "name": "Standard",
+     "heroes": [
+      {
+       "name": "Crozet",
+       "role": "tank",
+       "alternatives": [
+        "Angelic Montmorancy"
+       ]
+      },
+      {
+       "name": "Furious",
+       "role": "def_breaker"
+      },
+      {
+       "name": "Sigret",
+       "role": "dps"
+      },
+      {
+       "name": "Muwi",
+       "role": "debuffer",
+       "alternatives": [
+        "Clarissa",
+        "Seaside Bellona",
+        "Alexa"
+       ]
+      }
+     ],
+     "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced",
+     "notes": "Crozet: free Lv75 HP set, Aurius or Steadfast Guardian; Angelic Montmorancy tank alt uses Rod of Amaryllis / Magaraha's Tome. Muwi replacements: Clarissa (4*, needs EE), Seaside Bellona (5*, unreliable procs), Alexa (3*, makes wave 1 hard to tune; W12 suggested instead)."
+    },
+    {
+     "name": "3-star",
+     "heroes": [
+      {
+       "name": "Angelic Montmorancy",
+       "role": "tank",
+       "alternatives": [
+        "Helen",
+        "Bask"
+       ]
+      },
+      {
+       "name": "Muwi",
+       "role": "debuffer"
+      },
+      {
+       "name": "Alexa",
+       "role": "dps"
+      },
+      {
+       "name": "Taranor Guard",
+       "role": "support",
+       "alternatives": [
+        "Ian"
+       ]
+      },
+      {
+       "name": "Ian",
+       "role": "support"
+      }
+     ],
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced",
+     "notes": "Ian can replace Taranor Guard if you have Song of Stars. Later swap Angelic Montmorancy for Helen (team Speed buff) or Bask (free from Eulogy for a Saint)."
+    },
+    {
+     "name": "BlueStacks A",
+     "heroes": [
+      {
+       "name": "Crozet",
+       "role": "option"
+      },
+      {
+       "name": "Angelica",
+       "role": "option"
+      },
+      {
+       "name": "Sigret",
+       "role": "option"
+      },
+      {
+       "name": "Karin",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks B",
+     "heroes": [
+      {
+       "name": "General Purrgis",
+       "role": "option"
+      },
+      {
+       "name": "Angelica",
+       "role": "option"
+      },
+      {
+       "name": "Sigret",
+       "role": "option"
+      },
+      {
+       "name": "Karin",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks C",
+     "heroes": [
+      {
+       "name": "General Purrgis",
+       "role": "option"
+      },
+      {
+       "name": "Seaside Bellona",
+       "role": "option"
+      },
+      {
+       "name": "Sigret",
+       "role": "option"
+      },
+      {
+       "name": "Karin",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks D",
+     "heroes": [
+      {
+       "name": "Crozet",
+       "role": "option"
+      },
+      {
+       "name": "Furious",
+       "role": "option"
+      },
+      {
+       "name": "Summer's Disciple Alexa",
+       "role": "option"
+      },
+      {
+       "name": "Karin",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    }
+   ]
+  },
+  {
+   "id": "golem",
+   "name": "Golem Hunt",
+   "stage": "13",
+   "element": {
+    "value": "earth",
+    "confidence": "undated-guide",
+    "note": "BlueStacks and ludo.guide hunts page say Earth (Fire preferred). ludo.guide Golem 13 page contradicts itself (\"weak to Ice\"); ignored as unreliable."
+   },
+   "advantage": "fire",
+   "needTags": [
+    "barrier",
+    "def_buff",
+    "immunity"
+   ],
+   "avoidTags": [],
+   "mechanics": [
+    {
+     "text": "Mainly attacks the front line: needs a durable tank. Applies a healing-reduction debuff, so mitigation (shields, Defense buffs) and lifesteal beat pure healers. Adds: Cyllid (Water, inflicts debuffs) and Flower (buffs Golem Attack, heals it).",
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "text": "Two crystals: left buffs the Golem, right heals it. Kill them or apply Unbuffable/Unhealable.",
+     "source": "https://www.ludo.guide/guide/epic-seven/side-quests-activities/hunts",
+     "date": "2026-05/06 (unreliable)",
+     "confidence": "undated-guide"
+    },
+    {
+     "text": "Claudia gives team-wide Immunity and lowers Golem damage.",
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "No numeric Effectiveness, Effect Resistance or HP breakpoint found for Golem 13.",
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "undated-guide"
+    }
+   ],
+   "breakpoints": [],
+   "relative": [],
+   "teams": [
+    {
+     "name": "BlueStacks A",
+     "heroes": [
+      {
+       "name": "Lidica",
+       "role": "option"
+      },
+      {
+       "name": "Shadow Rose",
+       "role": "option"
+      },
+      {
+       "name": "Crimson Armin",
+       "role": "option"
+      },
+      {
+       "name": "Sol",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks B",
+     "heroes": [
+      {
+       "name": "Tenebria",
+       "role": "option"
+      },
+      {
+       "name": "Melissa",
+       "role": "option"
+      },
+      {
+       "name": "Tamarinne",
+       "role": "option"
+      },
+      {
+       "name": "Sol",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks C",
+     "heroes": [
+      {
+       "name": "Kayron",
+       "role": "option"
+      },
+      {
+       "name": "Assassin Cidd",
+       "role": "option"
+      },
+      {
+       "name": "Ken",
+       "role": "option"
+      },
+      {
+       "name": "Mascot Hazel",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks D",
+     "heroes": [
+      {
+       "name": "Charlotte",
+       "role": "option"
+      },
+      {
+       "name": "Challenger Dominiel",
+       "role": "option"
+      },
+      {
+       "name": "Destina",
+       "role": "option"
+      },
+      {
+       "name": "Iseria",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "3-star conventional",
+     "heroes": [
+      {
+       "name": "Adventurer Ras",
+       "role": "tank",
+       "alternatives": [
+        "Claudia"
+       ]
+      },
+      {
+       "name": "Camilla",
+       "role": "dps"
+      },
+      {
+       "name": "Zealot Carmainerose",
+       "role": "dps"
+      },
+      {
+       "name": "Mascot Hazel",
+       "role": "support"
+      }
+     ],
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "name": "3-star unconventional",
+     "heroes": [
+      {
+       "name": "Mascot Hazel",
+       "role": "speed order 1"
+      },
+      {
+       "name": "Camilla",
+       "role": "speed order 2 (forces Dual Attacks)"
+      },
+      {
+       "name": "Captain Rikoris",
+       "role": "speed order 3 (AoE S3; S2 cycles Hazel)"
+      },
+      {
+       "name": "Nemunas",
+       "role": "speed order 4 (S2 scales off target Max HP)"
+      }
+     ],
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced"
+    }
+   ]
+  },
+  {
+   "id": "banshee",
+   "name": "Banshee Hunt",
+   "stage": "13",
+   "element": {
+    "value": null,
+    "confidence": "undated-guide",
+    "note": "Unsourced. BlueStacks/ludo.guide hint at Dark (low reliability, wording unclear); Earth-heavy 3-star teams hint Ice. Neither confirmed; not encoded."
+   },
+   "advantage": null,
+   "needTags": [
+    "cleanse",
+    "immunity",
+    "aoe"
+   ],
+   "avoidTags": [],
+   "mechanics": [
+    {
+     "text": "At about 50% HP she splits into 4 minions that must be killed within a turn limit or they reform into a stronger Banshee. Often cleanses, high counter chance, reflects damage while in Stealth, inflicts Poison (cleanse or Immunity recommended).",
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "text": "Pre-phase (one-shot) teams aim to kill her before the split; the 3-star guide cites an uncontrollable 15% loss factor.",
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "Banshee 11: Poison stacks each turn unless removed; deal about 1/3 of Queen HP per turn to force the split before Poison stacks; kill at least 2 Mistychains before their first turn.",
+     "source": "https://gamepress.gg/epicseven/banshee-hunt-11-guide-advanced",
+     "date": "undated",
+     "confidence": "undated-guide"
+    },
+    {
+     "text": "No Effect Resistance or Crit breakpoint found for Banshee 13. The 65% Effectiveness rule is NOT applied here (sourced only for Wyvern 13 and Azimanak 13).",
+     "source": "https://gamepress.gg/epicseven/banshee-hunt-11-guide-advanced",
+     "date": "undated",
+     "confidence": "undated-guide"
+    }
+   ],
+   "breakpoints": [
+    {
+     "stat": "spd",
+     "op": ">=",
+     "value": 170,
+     "appliesTo": "healers",
+     "required": false,
+     "note": "Banshee 11 ONLY (2-healer setup): both healers act before the Banshee Queen to cleanse Poison. Not validated for stage 13.",
+     "source": "https://gamepress.gg/epicseven/banshee-hunt-11-guide-advanced",
+     "date": "undated",
+     "confidence": "undated-guide"
+    }
+   ],
+   "relative": [],
+   "teams": [
+    {
+     "name": "BlueStacks A",
+     "heroes": [
+      {
+       "name": "Yufine",
+       "role": "option"
+      },
+      {
+       "name": "Charles",
+       "role": "option"
+      },
+      {
+       "name": "General Purrgis",
+       "role": "option"
+      },
+      {
+       "name": "Karin",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks B",
+     "heroes": [
+      {
+       "name": "Jecht",
+       "role": "option"
+      },
+      {
+       "name": "Silk",
+       "role": "option"
+      },
+      {
+       "name": "Rin",
+       "role": "option"
+      },
+      {
+       "name": "Charles",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks C",
+     "heroes": [
+      {
+       "name": "Bellona",
+       "role": "option"
+      },
+      {
+       "name": "Clarissa",
+       "role": "option"
+      },
+      {
+       "name": "Angelica",
+       "role": "option"
+      },
+      {
+       "name": "Diene",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks D",
+     "heroes": [
+      {
+       "name": "Silk",
+       "role": "option"
+      },
+      {
+       "name": "Jecht",
+       "role": "option"
+      },
+      {
+       "name": "Destina",
+       "role": "option"
+      },
+      {
+       "name": "Cidd",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "3-star standard",
+     "heroes": [
+      {
+       "name": "Falconer Kluri",
+       "role": "tank"
+      },
+      {
+       "name": "Mercenary Helga",
+       "role": "dps"
+      },
+      {
+       "name": "Lilka",
+       "role": "dps"
+      },
+      {
+       "name": "Angelic Montmorancy",
+       "role": "healer"
+      }
+     ],
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced",
+     "notes": "No good 3-star Earth Soul Weaver exists, hence Angelic Montmorancy."
+    },
+    {
+     "name": "3-star pre-phase",
+     "heroes": [
+      {
+       "name": "Lucy",
+       "role": "turn order 1 (Barrier, Restrict, Speed Down)"
+      },
+      {
+       "name": "Captain Rikoris",
+       "role": "turn order 2 (S3, then S2, then S1)"
+      },
+      {
+       "name": "Batisse",
+       "role": "turn order 3 (100% Def Break, 3-turn CD, triggered by Rikoris S2)"
+      },
+      {
+       "name": "Summer's Disciple Alexa",
+       "role": "turn order 4 (S3 cycled by Rikoris S2)"
+      }
+     ],
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced",
+     "notes": "Cheese option noted in source as \"Fluri plus Christy\" (Fluri unmatched)."
+    },
+    {
+     "name": "Banshee 11 role template (old)",
+     "heroes": [
+      {
+       "name": "General Purrgis",
+       "role": "atk buffer"
+      },
+      {
+       "name": "Charles",
+       "role": "AoE cleaver",
+       "alternatives": [
+        "Vildred",
+        "Blood Blade Karin",
+        "Ludwig"
+       ]
+      },
+      {
+       "name": "Karin",
+       "role": "def breaker",
+       "alternatives": [
+        "Falconer Kluri",
+        "Iseria"
+       ]
+      },
+      {
+       "name": "Yufine",
+       "role": "single-target nuker",
+       "alternatives": [
+        "Baiken"
+       ]
+      }
+     ],
+     "source": "https://gamepress.gg/epicseven/banshee-hunt-11-guide-advanced",
+     "date": "undated",
+     "confidence": "undated-guide",
+     "notes": "Banshee 11 template; example 40s clear. 2-healer variant: Jecht / Angelic Montmorancy / Angelica / Tamarinne / Diene with >=170 Speed."
+    }
+   ]
+  },
+  {
+   "id": "azimanak",
+   "name": "Azimanak Hunt",
+   "stage": "13",
+   "element": {
+    "value": "light",
+    "confidence": "undated-guide",
+    "note": "BlueStacks and ludo.guide hunts page say Light; ludo.guide A13 page says Earth (contradiction). BlueStacks says no elemental weaknesses."
+   },
+   "advantage": null,
+   "needTags": [
+    "strip",
+    "aoe"
+   ],
+   "avoidTags": [
+    "bleed",
+    "poison",
+    "burn"
+   ],
+   "mechanics": [
+    {
+     "text": "Boss has 80 Effect Resistance and 100 Effectiveness. Debuffers need 65% Effectiveness; 200% Effect Resistance fully resists its debuffs (optional).",
+     "source": "https://epic7db.com/guides/setting-up-your-first-azimanak-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "At 3+ debuffs on the boss it cleanses, resets cooldowns, takes an extra turn and gains a 2-turn Attack buff. Bring at most 2 unique debuffs. Bleed, Poison and Burn units are unusable.",
+     "source": "https://epic7db.com/guides/setting-up-your-first-azimanak-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "Same 3-debuff cleanse rule stated by game8.",
+     "source": "https://game8.co/games/Epic-Seven/archives/282749",
+     "date": "2020-08-28",
+     "confidence": "legacy-2020"
+    },
+    {
+     "text": "Every 4th attack taken it gains 1 Berserk stack (max 4) raising Attack, Defense and Speed; a buff stripper removes it.",
+     "source": "https://epic7db.com/guides/setting-up-your-first-azimanak-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "Deals extra damage per debuff on your unit, more with dead units. Below 30% HP it reduces your healing by 50%.",
+     "source": "https://epic7db.com/guides/setting-up-your-first-azimanak-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "Strip chances: Unbound Knight Arowell S1 75% (two chances), Adventurer Ras S1 75%, Blood Moon Haste S1 100%.",
+     "source": "https://epic7db.com/guides/setting-up-your-first-azimanak-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "Savior Adin S2 must one-shot revived eggs on an Evade; Juni gains Perception when eggs revive.",
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "Must cleave the Azimanus Observers before damaging the boss.",
+     "source": "https://game8.co/games/Epic-Seven/archives/282749",
+     "date": "2020-08-28",
+     "confidence": "legacy-2020"
+    },
+    {
+     "text": "Conflict: BlueStacks says Azimanak is susceptible to Poison and Bleed; contradicts the 3-debuff rule. epic7db rule encoded.",
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "text": "Game8 role pools (2020): Cleave Vivian/Vildred/Blood Blade Karin; Main DPS Cermia/Watcher Schuri/Celestial Mercedes; Def Break Bellona/Shadow Rose; Dispel Charles/Tywin/Tamarinne/Iseria/Rin.",
+     "source": "https://game8.co/games/Epic-Seven/archives/282749",
+     "date": "2020-08-28",
+     "confidence": "legacy-2020"
+    }
+   ],
+   "breakpoints": [
+    {
+     "stat": "eff",
+     "op": ">=",
+     "value": 65,
+     "appliesTo": "debuffers",
+     "required": true,
+     "note": "Boss Res 80.",
+     "source": "https://epic7db.com/guides/setting-up-your-first-azimanak-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "stat": "res",
+     "op": ">=",
+     "value": 200,
+     "appliesTo": "team",
+     "required": false,
+     "note": "OPTIONAL: to fully resist boss debuffs (boss Eff 100). Not a team requirement.",
+     "source": "https://epic7db.com/guides/setting-up-your-first-azimanak-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    }
+   ],
+   "relative": [],
+   "teams": [
+    {
+     "name": "Budget",
+     "heroes": [
+      {
+       "name": "Adventurer Ras",
+       "role": "tank"
+      },
+      {
+       "name": "Mercedes",
+       "role": "aoe_dps"
+      },
+      {
+       "name": "Falconer Kluri",
+       "role": "support"
+      },
+      {
+       "name": "Angelic Montmorancy",
+       "role": "healer"
+      }
+     ],
+     "source": "https://epic7db.com/guides/setting-up-your-first-azimanak-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "name": "Decent",
+     "heroes": [
+      {
+       "name": "Adventurer Ras",
+       "role": "tank"
+      },
+      {
+       "name": "Mercedes",
+       "role": "aoe_dps"
+      },
+      {
+       "name": "Iseria",
+       "role": "support"
+      },
+      {
+       "name": "Tamarinne",
+       "role": "healer"
+      }
+     ],
+     "source": "https://epic7db.com/guides/setting-up-your-first-azimanak-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "name": "Best",
+     "heroes": [
+      {
+       "name": "Unbound Knight Arowell",
+       "role": "tank",
+       "alternatives": [
+        "Blood Moon Haste"
+       ]
+      },
+      {
+       "name": "Vildred",
+       "role": "aoe_dps",
+       "alternatives": [
+        "Bomb Model Kanna",
+        "Arbiter Vildred"
+       ]
+      },
+      {
+       "name": "Iseria",
+       "role": "support",
+       "alternatives": [
+        "Luluca"
+       ]
+      },
+      {
+       "name": "Tamarinne",
+       "role": "healer"
+      }
+     ],
+     "source": "https://epic7db.com/guides/setting-up-your-first-azimanak-13-auto-team",
+     "date": "undated",
+     "confidence": "sourced",
+     "notes": "Arowell and Vildred with skills off."
+    },
+    {
+     "name": "3-star",
+     "heroes": [
+      {
+       "name": "Unbound Knight Arowell",
+       "role": "dispel"
+      },
+      {
+       "name": "Savior Adin",
+       "role": "dps"
+      },
+      {
+       "name": "Juni",
+       "role": "dps/dispel"
+      },
+      {
+       "name": "Ainos 2.0",
+       "role": "support"
+      }
+     ],
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced",
+     "notes": "Claimed 100% win rate in worst case; only useful until you have 1-2 good Rage sets."
+    },
+    {
+     "name": "BlueStacks A",
+     "heroes": [
+      {
+       "name": "Bellona",
+       "role": "option"
+      },
+      {
+       "name": "Destina",
+       "role": "option"
+      },
+      {
+       "name": "Angelica",
+       "role": "option"
+      },
+      {
+       "name": "Falconer Kluri",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks B",
+     "heroes": [
+      {
+       "name": "Cermia",
+       "role": "option"
+      },
+      {
+       "name": "Vivian",
+       "role": "option"
+      },
+      {
+       "name": "Charles",
+       "role": "option"
+      },
+      {
+       "name": "Shadow Rose",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks C",
+     "heroes": [
+      {
+       "name": "Gloomyrain",
+       "role": "option"
+      },
+      {
+       "name": "Carmainerose",
+       "role": "option"
+      },
+      {
+       "name": "Mascot Hazel",
+       "role": "option"
+      },
+      {
+       "name": "Falconer Kluri",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "name": "BlueStacks D",
+     "heroes": [
+      {
+       "name": "Rin",
+       "role": "option"
+      },
+      {
+       "name": "Vildred",
+       "role": "option"
+      },
+      {
+       "name": "Basar",
+       "role": "option"
+      },
+      {
+       "name": "Tamarinne",
+       "role": "option"
+      }
+     ],
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    }
+   ]
+  },
+  {
+   "id": "caides",
+   "name": "Caides Hunt",
+   "stage": "13",
+   "element": {
+    "value": null,
+    "confidence": "undated-guide",
+    "note": "Not stated in any source; Earth-heavy 3-star teams only hint at Ice. Not encoded."
+   },
+   "advantage": null,
+   "needTags": [
+    "restrict"
+   ],
+   "avoidTags": [],
+   "mechanics": [
+    {
+     "text": "Need non-attack skills for long-term survival and Restrict is important. Runs take about 60-75s (about 50s at best).",
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced"
+    },
+    {
+     "text": "BlueStacks skips Caides as it requires a rigid team composition.",
+     "source": "https://www.bluestacks.com/blog/game-guides/epic-seven/es-hunt-guide-en.html",
+     "date": "2024-09-11 (page metadata says updated 2021-10-04)",
+     "confidence": "undated-guide"
+    },
+    {
+     "text": "No burn, Defense or numeric mechanic data found. The 65% Effectiveness rule is NOT applied here.",
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "undated-guide"
+    }
+   ],
+   "breakpoints": [],
+   "relative": [],
+   "teams": [
+    {
+     "name": "Safe",
+     "heroes": [
+      {
+       "name": "Falconer Kluri",
+       "role": "option"
+      },
+      {
+       "name": "Mercenary Helga",
+       "role": "option"
+      },
+      {
+       "name": "Lucy",
+       "role": "healer",
+       "alternatives": [
+        "Angelic Montmorancy"
+       ]
+      },
+      {
+       "name": "Captain Rikoris",
+       "role": "option"
+      }
+     ],
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced",
+     "notes": "Swap Angelic Montmorancy in for Lucy if taking too much damage."
+    },
+    {
+     "name": "Fast",
+     "heroes": [
+      {
+       "name": "Ainos 2.0",
+       "role": "option"
+      },
+      {
+       "name": "Camilla",
+       "role": "option"
+      },
+      {
+       "name": "Captain Rikoris",
+       "role": "option"
+      },
+      {
+       "name": "Commander Lorina",
+       "role": "option"
+      }
+     ],
+     "source": "https://epic7db.com/guides/3-only-guide-to-hunts",
+     "date": "undated",
+     "confidence": "sourced"
+    }
+   ]
+  }
+ ],
+ "azmakalis": {
+  "note": "Legacy-2020. The Raid bosses come from a 2020 game8 guide and are encoded as appearing inside the Azmakalis labyrinth raid. No post-2020 source confirms they still exist; the April 2025 Origin update made all Labyrinths (incl. Royal Capital Azmakalis) permanently free. No numeric stat breakpoints exist for any boss; the only numbers are HP-phase thresholds (50%, 70%/40%, 40%).",
+  "bosses": [
+   {
+    "id": "devourer_arahakan",
+    "name": "Devourer Arahakan",
+    "element": {
+     "value": "dark",
+     "confidence": "legacy-2020",
+     "note": "game8 Raid guide (2020-08-28)"
+    },
+    "advantage": "light",
+    "needTags": [
+     "aoe"
+    ],
+    "avoidTags": [],
+    "mechanics": [
+     {
+      "text": "Corrupted Web gives Immunity and damage reduction while minions live; minions regenerate the boss, so kill them first.",
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020"
+     }
+    ],
+    "teams": [
+     {
+      "name": "Normal",
+      "heroes": [
+       {
+        "name": "Kise",
+        "role": "option"
+       },
+       {
+        "name": "Angelic Montmorancy",
+        "role": "option"
+       },
+       {
+        "name": "Angelica",
+        "role": "option"
+       },
+       {
+        "name": "Tamarinne",
+        "role": "option"
+       },
+       {
+        "name": "Commander Lorina",
+        "role": "option"
+       },
+       {
+        "name": "Ravi",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "normal"
+     },
+     {
+      "name": "Hell support",
+      "heroes": [
+       {
+        "name": "Tamarinne",
+        "role": "option"
+       },
+       {
+        "name": "Angelic Montmorancy",
+        "role": "option"
+       },
+       {
+        "name": "Angelica",
+        "role": "option"
+       },
+       {
+        "name": "Ray",
+        "role": "option"
+       },
+       {
+        "name": "Desert Jewel Basar",
+        "role": "option"
+       },
+       {
+        "name": "Achates",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     },
+     {
+      "name": "Hell DPS",
+      "heroes": [
+       {
+        "name": "Judge Kise",
+        "role": "option"
+       },
+       {
+        "name": "Arbiter Vildred",
+        "role": "option"
+       },
+       {
+        "name": "Ravi",
+        "role": "option"
+       },
+       {
+        "name": "Clarissa",
+        "role": "option"
+       },
+       {
+        "name": "Blood Blade Karin",
+        "role": "option"
+       },
+       {
+        "name": "Free Spirit Tieria",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     }
+    ]
+   },
+   {
+    "id": "executioner_karkanis",
+    "name": "Executioner Karkanis",
+    "element": {
+     "value": "fire",
+     "confidence": "legacy-2020",
+     "note": "game8 Raid guide (2020-08-28)"
+    },
+    "advantage": "water",
+    "needTags": [
+     "aoe",
+     "silence",
+     "immunity"
+    ],
+    "avoidTags": [],
+    "mechanics": [
+     {
+      "text": "Uses Stealth (AoE cancels it), counterattacks, and AoE attacks that lower Defense. Below 40% HP uses Wild Slash; Silence the boss, or have Immunity and full HP. Avoid Earth heroes.",
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020"
+     }
+    ],
+    "teams": [
+     {
+      "name": "Normal",
+      "heroes": [
+       {
+        "name": "Kise",
+        "role": "option"
+       },
+       {
+        "name": "Tywin",
+        "role": "option"
+       },
+       {
+        "name": "Angelica",
+        "role": "option"
+       },
+       {
+        "name": "Tamarinne",
+        "role": "option"
+       },
+       {
+        "name": "Dizzy",
+        "role": "option"
+       },
+       {
+        "name": "Ravi",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "normal"
+     },
+     {
+      "name": "Hell AoE",
+      "heroes": [
+       {
+        "name": "Kise",
+        "role": "option"
+       },
+       {
+        "name": "Tywin",
+        "role": "option"
+       },
+       {
+        "name": "Seaside Bellona",
+        "role": "option"
+       },
+       {
+        "name": "Ravi",
+        "role": "option"
+       },
+       {
+        "name": "Clarissa",
+        "role": "option"
+       },
+       {
+        "name": "Free Spirit Tieria",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     },
+     {
+      "name": "Hell dispel",
+      "heroes": [
+       {
+        "name": "Tamarinne",
+        "role": "option"
+       },
+       {
+        "name": "Angelic Montmorancy",
+        "role": "option"
+       },
+       {
+        "name": "Elena",
+        "role": "option"
+       },
+       {
+        "name": "Ray",
+        "role": "option"
+       },
+       {
+        "name": "Destina",
+        "role": "option"
+       },
+       {
+        "name": "Achates",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     }
+    ]
+   },
+   {
+    "id": "secretary_vera",
+    "name": "Secretary Vera",
+    "element": {
+     "value": "earth",
+     "confidence": "legacy-2020",
+     "note": "game8 Raid guide (2020-08-28)"
+    },
+    "advantage": "fire",
+    "needTags": [
+     "aoe"
+    ],
+    "avoidTags": [],
+    "mechanics": [
+     {
+      "text": "Azimanus Watchers hatch and stack Attack and Speed, so AoE is required. At 50% HP she becomes a Cocoon and summons 2 Karax Chargers.",
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020"
+     }
+    ],
+    "teams": [
+     {
+      "name": "Normal",
+      "heroes": [
+       {
+        "name": "Cermia",
+        "role": "option"
+       },
+       {
+        "name": "Sol",
+        "role": "option"
+       },
+       {
+        "name": "Angelica",
+        "role": "option"
+       },
+       {
+        "name": "Tamarinne",
+        "role": "option"
+       },
+       {
+        "name": "Commander Lorina",
+        "role": "option"
+       },
+       {
+        "name": "Ravi",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "normal"
+     },
+     {
+      "name": "Hell AoE DPS",
+      "heroes": [
+       {
+        "name": "Cermia",
+        "role": "option"
+       },
+       {
+        "name": "Sol",
+        "role": "option"
+       },
+       {
+        "name": "Bellona",
+        "role": "option"
+       },
+       {
+        "name": "Ravi",
+        "role": "option"
+       },
+       {
+        "name": "Ludwig",
+        "role": "option"
+       },
+       {
+        "name": "Vildred",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     },
+     {
+      "name": "Hell support",
+      "heroes": [
+       {
+        "name": "Angelic Montmorancy",
+        "role": "option"
+       },
+       {
+        "name": "Tamarinne",
+        "role": "option"
+       },
+       {
+        "name": "Angelica",
+        "role": "option"
+       },
+       {
+        "name": "Vivian",
+        "role": "option"
+       },
+       {
+        "name": "Achates",
+        "role": "option"
+       },
+       {
+        "name": "Kizuna AI",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     }
+    ]
+   },
+   {
+    "id": "juleeve_council",
+    "name": "Juleeve Council",
+    "element": {
+     "value": "light",
+     "confidence": "legacy-2020",
+     "note": "game8 Raid guide (2020-08-28)"
+    },
+    "advantage": "dark",
+    "needTags": [
+     "cleanse"
+    ],
+    "avoidTags": [],
+    "mechanics": [
+     {
+      "text": "Applies stacking Poison which must be cleansed. Splits into three at 70% and 40% HP; kill all three.",
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020"
+     },
+     {
+      "text": "Do not debuff the boss: debuffed hits can give it random buffs.",
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020"
+     }
+    ],
+    "teams": [
+     {
+      "name": "Normal",
+      "heroes": [
+       {
+        "name": "Bellona",
+        "role": "option"
+       },
+       {
+        "name": "Angelic Montmorancy",
+        "role": "option"
+       },
+       {
+        "name": "Angelica",
+        "role": "option"
+       },
+       {
+        "name": "Tamarinne",
+        "role": "option"
+       },
+       {
+        "name": "Commander Lorina",
+        "role": "option"
+       },
+       {
+        "name": "Arbiter Vildred",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "normal"
+     },
+     {
+      "name": "Hell dispel",
+      "heroes": [
+       {
+        "name": "Tamarinne",
+        "role": "option"
+       },
+       {
+        "name": "Angelic Montmorancy",
+        "role": "option"
+       },
+       {
+        "name": "Elena",
+        "role": "option"
+       },
+       {
+        "name": "Ray",
+        "role": "option"
+       },
+       {
+        "name": "Destina",
+        "role": "option"
+       },
+       {
+        "name": "Achates",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     },
+     {
+      "name": "Hell DPS",
+      "heroes": [
+       {
+        "name": "Little Queen Charlotte",
+        "role": "option"
+       },
+       {
+        "name": "Judge Kise",
+        "role": "option"
+       },
+       {
+        "name": "Luna",
+        "role": "option"
+       },
+       {
+        "name": "Arbiter Vildred",
+        "role": "option"
+       },
+       {
+        "name": "Kayron",
+        "role": "option"
+       },
+       {
+        "name": "Commander Lorina",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     }
+    ]
+   },
+   {
+    "id": "queen_azumashik",
+    "name": "Queen Azumashik",
+    "element": {
+     "value": "light",
+     "confidence": "legacy-2020",
+     "note": "game8 Raid guide (2020-08-28)"
+    },
+    "advantage": "dark",
+    "needTags": [
+     "strip",
+     "aoe"
+    ],
+    "avoidTags": [],
+    "mechanics": [
+     {
+      "text": "Eggs are invincible. Summons 2 Devourer Arahakan at start and 2 Raqix Flying Troops below 50% HP. Flying Troops counterattack if you hit the boss while she is buffed: strip her buffs and kill the troops first.",
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020"
+     }
+    ],
+    "teams": [
+     {
+      "name": "Normal",
+      "heroes": [
+       {
+        "name": "Tywin",
+        "role": "option"
+       },
+       {
+        "name": "Angelic Montmorancy",
+        "role": "option"
+       },
+       {
+        "name": "Angelica",
+        "role": "option"
+       },
+       {
+        "name": "Tamarinne",
+        "role": "option"
+       },
+       {
+        "name": "Commander Lorina",
+        "role": "option"
+       },
+       {
+        "name": "Arbiter Vildred",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "normal"
+     },
+     {
+      "name": "Hell strippers",
+      "heroes": [
+       {
+        "name": "Tywin",
+        "role": "option"
+       },
+       {
+        "name": "Charles",
+        "role": "option"
+       },
+       {
+        "name": "Iseria",
+        "role": "option"
+       },
+       {
+        "name": "Tamarinne",
+        "role": "option"
+       },
+       {
+        "name": "Falconer Kluri",
+        "role": "option"
+       },
+       {
+        "name": "Adventurer Ras",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     },
+     {
+      "name": "Hell support",
+      "heroes": [
+       {
+        "name": "Destina",
+        "role": "option"
+       },
+       {
+        "name": "Ray",
+        "role": "option"
+       },
+       {
+        "name": "Angelic Montmorancy",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     },
+     {
+      "name": "Hell DPS",
+      "heroes": [
+       {
+        "name": "Little Queen Charlotte",
+        "role": "option"
+       },
+       {
+        "name": "Judge Kise",
+        "role": "option"
+       },
+       {
+        "name": "Luna",
+        "role": "option"
+       },
+       {
+        "name": "Chloe",
+        "role": "option"
+       },
+       {
+        "name": "Kayron",
+        "role": "option"
+       },
+       {
+        "name": "Commander Lorina",
+        "role": "option"
+       }
+      ],
+      "source": "https://game8.co/games/Epic-Seven/archives/284194",
+      "date": "2020-08-28",
+      "confidence": "legacy-2020",
+      "difficulty": "hell"
+     }
+    ]
+   }
+  ]
+ },
+ "abyss": {
+  "note": "Abyss thresholds are mechanic/turn limits, not stat minimums; no guide gives numeric speed/eff/res/HP breakpoints. 101-110 data is legacy-2020 (hero lists predate many newer heroes). ludo.guide says 100 floors but a 2024 player report cleared 120, so the tower has at least 120 floors. Floors 111-120 and 1-80 have no data; 81-100 only floor 92 (player report; a Mar-2020 Reddit 91-100 guide exists but was not fetched).",
+  "groups": [
+   {
+    "id": "1-80",
+    "label": "Floors 1-80",
+    "floors": []
+   },
+   {
+    "id": "81-90",
+    "label": "Floors 81-90",
+    "floors": []
+   },
+   {
+    "id": "91-100",
+    "label": "Floors 91-100",
+    "floors": [
+     {
+      "floor": 92,
+      "element": {
+       "value": null,
+       "confidence": "legacy-2020",
+       "note": "No element data in notes."
+      },
+      "advantage": null,
+      "needTags": [
+       "bleed",
+       "poison"
+      ],
+      "mechanics": [
+       {
+        "text": "Player report: Tywin's barrier breaks only to bleed or poison; kill Romann first and use Arkasus.",
+        "source": "https://redlib.belloworld.it/r/EpicSeven/comments/1g2z8vd/120_is_done_now_into_rta",
+        "date": "2024-10 (approx.)",
+        "confidence": "sourced"
+       }
+      ],
+      "thresholds": [],
+      "teams": []
+     }
+    ]
+   },
+   {
+    "id": "101-110",
+    "label": "Floors 101-110 (legacy-2020)",
+    "floors": [
+     {
+      "floor": 101,
+      "element": {
+       "value": "water",
+       "confidence": "legacy-2020",
+       "note": "Water-Powered Energia is Water (Reddit 2020)."
+      },
+      "advantage": "earth",
+      "needTags": [
+       "poison",
+       "aoe",
+       "cleanse"
+      ],
+      "mechanics": [
+       {
+        "text": "Water-Powered Energia: poison it and kill it before its 7th turn or it goes Berserk. Furious cleanses and gains 3 skill nullifiers at 70% and 40% HP, and counters AoE while buffed. Advantage Earth is inferred from the standard wheel, not stated.",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "thresholds": [
+       {
+        "text": "Kill Energia before its 7th turn",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "teams": [
+       {
+        "name": "Reddit 2020 options",
+        "heroes": [
+         {
+          "name": "Kiris",
+          "role": "dps"
+         },
+         {
+          "name": "Dizzy",
+          "role": "support",
+          "alternatives": [
+           "Basar"
+          ]
+         }
+        ],
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020",
+        "notes": "Dizzy or Basar with Iela Violin (artifact, not a hero)."
+       }
+      ]
+     },
+     {
+      "floor": 102,
+      "element": {
+       "value": "earth",
+       "confidence": "legacy-2020",
+       "note": "Most enemies are Earth (game8 2020-12-01), so bring Fire."
+      },
+      "advantage": "fire",
+      "needTags": [
+       "crit_buff",
+       "stun"
+      ],
+      "mechanics": [
+       {
+        "text": "Captain Rikoris, Cele Gigantes, Mascot Hazel, Celine. Every 5 hits on Hazel gives enemies skill nullifiers. Celine counters non-attack skills and her S3 dispels debuffs.",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       },
+       {
+        "text": "Critical Chance is crucial (qualitative; no number).",
+        "source": "https://game8.co/games/Epic-Seven/archives/309425",
+        "date": "2020-12-01",
+        "confidence": "legacy-2020"
+       },
+       {
+        "text": "Player report: cleared with Ainos, Fire Tenebria, Fire Aramintha, Fire Cecilia after long being stuck relying on Kiris.",
+        "source": "https://redlib.belloworld.it/r/EpicSeven/comments/1g2z8vd/120_is_done_now_into_rta",
+        "date": "2024-10 (approx.)",
+        "confidence": "sourced"
+       }
+      ],
+      "thresholds": [
+       {
+        "text": "Every 5 hits on Mascot Hazel gives the enemies skill nullifiers",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "teams": [
+       {
+        "name": "Reddit 2020 options",
+        "heroes": [
+         {
+          "name": "Kiris",
+          "role": "dps",
+          "alternatives": [
+           "Specter Tenebria"
+          ]
+         },
+         {
+          "name": "Tenebria",
+          "role": "cc"
+         },
+         {
+          "name": "Ravi",
+          "role": "cc"
+         }
+        ],
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020",
+        "notes": "CC from Tenebria, SC Wanda (unmatched), Fire Lidica or Ravi; Lilias and Schuri also suggested."
+       },
+       {
+        "name": "game8 102 recommendation",
+        "heroes": [
+         {
+          "name": "Kiris",
+          "role": "Hit set"
+         },
+         {
+          "name": "All-Rounder Wanda",
+          "role": "option"
+         },
+         {
+          "name": "Lidica",
+          "role": "Speed/Crit set"
+         },
+         {
+          "name": "Celine",
+          "role": "Speed/Crit set"
+         },
+         {
+          "name": "Specter Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Ravi",
+          "role": "option"
+         }
+        ],
+        "source": "https://game8.co/games/Epic-Seven/archives/309425",
+        "date": "2020-12-01",
+        "confidence": "legacy-2020"
+       },
+       {
+        "name": "Player clear report (all-Fire)",
+        "heroes": [
+         {
+          "name": "Ainos",
+          "role": "option"
+         },
+         {
+          "name": "Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Aramintha",
+          "role": "option"
+         },
+         {
+          "name": "Cecilia",
+          "role": "option"
+         }
+        ],
+        "source": "https://redlib.belloworld.it/r/EpicSeven/comments/1g2z8vd/120_is_done_now_into_rta",
+        "date": "2024-10 (approx.)",
+        "confidence": "sourced"
+       }
+      ]
+     },
+     {
+      "floor": 103,
+      "element": {
+       "value": null,
+       "confidence": "legacy-2020",
+       "note": "No element data in notes."
+      },
+      "advantage": null,
+      "needTags": [
+       "aoe",
+       "evasion"
+      ],
+      "mechanics": [
+       {
+        "text": "Respawning mice (AoE needed), Cidd and Blaze Dingo. Non-attack skills give Cidd a 50% evasion buff. Dingo becomes invincible after his S3.",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "thresholds": [],
+      "teams": [
+       {
+        "name": "Reddit 2020 options",
+        "heroes": [
+         {
+          "name": "Vildred",
+          "role": "option"
+         },
+         {
+          "name": "Specter Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Dizzy",
+          "role": "option"
+         },
+         {
+          "name": "Falconer Kluri",
+          "role": "option"
+         }
+        ],
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020",
+        "notes": "Vildred (two variants); DDJ (artifact) also listed."
+       }
+      ]
+     },
+     {
+      "floor": 104,
+      "element": {
+       "value": null,
+       "confidence": "legacy-2020",
+       "note": "No element data in notes."
+      },
+      "advantage": null,
+      "needTags": [
+       "aoe"
+      ],
+      "mechanics": [
+       {
+        "text": "High Priest; Ranok summoned at 50% HP; Flame Curse (killed mobs turn into bombs).",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "thresholds": [],
+      "teams": [
+       {
+        "name": "Reddit 2020 options",
+        "heroes": [
+         {
+          "name": "Falconer Kluri",
+          "role": "option"
+         },
+         {
+          "name": "Tamarinne",
+          "role": "option"
+         },
+         {
+          "name": "Lilias",
+          "role": "option"
+         },
+         {
+          "name": "Specter Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Luna",
+          "role": "option"
+         },
+         {
+          "name": "Sigret",
+          "role": "option"
+         },
+         {
+          "name": "Alexa",
+          "role": "option"
+         },
+         {
+          "name": "Elena",
+          "role": "option"
+         },
+         {
+          "name": "Diene",
+          "role": "option"
+         },
+         {
+          "name": "Luluca",
+          "role": "option"
+         },
+         {
+          "name": "Krau",
+          "role": "option"
+         },
+         {
+          "name": "Angelic Montmorancy",
+          "role": "option"
+         },
+         {
+          "name": "Dizzy",
+          "role": "option"
+         }
+        ],
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020",
+        "notes": "Option pool, not a single team."
+       }
+      ]
+     },
+     {
+      "floor": 105,
+      "element": {
+       "value": null,
+       "confidence": "legacy-2020",
+       "note": "No element data in notes."
+      },
+      "advantage": null,
+      "needTags": [
+       "revive",
+       "cleanse"
+      ],
+      "mechanics": [
+       {
+        "text": "Scorpion Queen (listed \"fire-less\"; meaning unclear), then Bloody Black Knight (BBK). BBK is immune to poison, HP% damage and Arky, and gains reflect when hit by non-attack skills. Yellow mob cannot lose more than 25% HP to one attack. BBK 11th turn is a one-shot.",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "thresholds": [
+       {
+        "text": "BBK must die before her 12th turn (her 11th turn is a one-shot)",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       },
+       {
+        "text": "Yellow mob cannot lose more than 25% of its HP to one attack",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "teams": [
+       {
+        "name": "Reddit 2020 options",
+        "heroes": [
+         {
+          "name": "Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Specter Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Yufine",
+          "role": "option"
+         },
+         {
+          "name": "Ravi",
+          "role": "option"
+         },
+         {
+          "name": "Tamarinne",
+          "role": "option"
+         },
+         {
+          "name": "Iseria",
+          "role": "option"
+         }
+        ],
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020",
+        "notes": "Fire Tenebria (Abyssal Crown), S Tene (Kal'adra), plus a reviver and SC Ras (unmatched) or Tama."
+       }
+      ]
+     },
+     {
+      "floor": 106,
+      "element": {
+       "value": null,
+       "confidence": "legacy-2020",
+       "note": "No element data in notes."
+      },
+      "advantage": null,
+      "needTags": [
+       "atk_buff",
+       "def_buff"
+      ],
+      "mechanics": [
+       {
+        "text": "Luluca plus mobs that inflict Miss, then Rahel of the Dark at 50% HP. Team needs at least 2 buffs before hitting Luluca.",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "thresholds": [
+       {
+        "text": "At least 2 buffs on the team before hitting Luluca",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "teams": [
+       {
+        "name": "Reddit 2020 options",
+        "heroes": [
+         {
+          "name": "Diene",
+          "role": "option"
+         },
+         {
+          "name": "Elena",
+          "role": "option"
+         },
+         {
+          "name": "Rin",
+          "role": "option"
+         },
+         {
+          "name": "Luluca",
+          "role": "option"
+         },
+         {
+          "name": "Arbiter Vildred",
+          "role": "option"
+         },
+         {
+          "name": "Specter Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Challenger Dominiel",
+          "role": "option"
+         },
+         {
+          "name": "Charles",
+          "role": "option"
+         },
+         {
+          "name": "Yufine",
+          "role": "option"
+         },
+         {
+          "name": "Ervalen",
+          "role": "option"
+         }
+        ],
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020",
+        "notes": "Option pool; Riolet unmatched; Ervalen also suggested."
+       }
+      ]
+     },
+     {
+      "floor": 107,
+      "element": {
+       "value": null,
+       "confidence": "legacy-2020",
+       "note": "No element data in notes."
+      },
+      "advantage": null,
+      "needTags": [
+       "aoe"
+      ],
+      "mechanics": [
+       {
+        "text": "Temple Guardian (barrier that cannot be dispelled), cannons, Summer Angara, Pavel (non-attack skills give him evasion), Roozid at 50% HP.",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "thresholds": [],
+      "teams": [
+       {
+        "name": "Reddit 2020 options",
+        "heroes": [
+         {
+          "name": "Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Ravi",
+          "role": "option"
+         },
+         {
+          "name": "Schuri",
+          "role": "option"
+         },
+         {
+          "name": "Ken",
+          "role": "option"
+         },
+         {
+          "name": "Specter Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Bellona",
+          "role": "option"
+         },
+         {
+          "name": "Elena",
+          "role": "option"
+         },
+         {
+          "name": "Desert Jewel Basar",
+          "role": "option"
+         },
+         {
+          "name": "Maid Chloe",
+          "role": "option"
+         }
+        ],
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020",
+        "notes": "Option pool; Celestine and SC Ras unmatched; DDJ artifact for Ken."
+       }
+      ]
+     },
+     {
+      "floor": 108,
+      "element": {
+       "value": null,
+       "confidence": "legacy-2020",
+       "note": "No element data in notes."
+      },
+      "advantage": null,
+      "needTags": [
+       "poison"
+      ],
+      "mechanics": [
+       {
+        "text": "Melissa curses the highest-HP unit and is weak to poison. Five non-attack skills remove the curse.",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "thresholds": [
+       {
+        "text": "Five non-attack skills remove the curse",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "teams": [
+       {
+        "name": "Reddit 2020 options",
+        "heroes": [
+         {
+          "name": "Lots",
+          "role": "option"
+         },
+         {
+          "name": "Auxiliary Lots",
+          "role": "option"
+         },
+         {
+          "name": "Angelic Montmorancy",
+          "role": "option"
+         },
+         {
+          "name": "Achates",
+          "role": "option"
+         },
+         {
+          "name": "Arbiter Vildred",
+          "role": "option"
+         },
+         {
+          "name": "General Purrgis",
+          "role": "option"
+         },
+         {
+          "name": "Specter Tenebria",
+          "role": "option"
+         },
+         {
+          "name": "Kiris",
+          "role": "option"
+         }
+        ],
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020",
+        "notes": "Option pool, or a DDJ carry."
+       }
+      ]
+     },
+     {
+      "floor": 109,
+      "element": {
+       "value": null,
+       "confidence": "legacy-2020",
+       "note": "No element data in notes."
+      },
+      "advantage": null,
+      "needTags": [
+       "aoe",
+       "cleanse"
+      ],
+      "mechanics": [
+       {
+        "text": "Mobs with a counter buff, mushrooms (spawn if you hold more than 10 souls), and ML Angelica (5 skill nullifiers and Immunity that cannot be dispelled at the end).",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "thresholds": [
+       {
+        "text": "Hold 10 or fewer souls to avoid mushrooms",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "teams": [
+       {
+        "name": "Reddit 2020 options",
+        "heroes": [
+         {
+          "name": "Tamarinne",
+          "role": "option"
+         },
+         {
+          "name": "Lilias",
+          "role": "option"
+         },
+         {
+          "name": "Iseria",
+          "role": "option"
+         },
+         {
+          "name": "Commander Lorina",
+          "role": "option"
+         },
+         {
+          "name": "Specter Tenebria",
+          "role": "option"
+         }
+        ],
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020",
+        "notes": "Option pool; SC Ras and ML Angelica (as ally pick) unmatched; DDJ carry."
+       }
+      ]
+     },
+     {
+      "floor": 110,
+      "element": {
+       "value": null,
+       "confidence": "legacy-2020",
+       "note": "No element data in notes."
+      },
+      "advantage": null,
+      "needTags": [
+       "crit_buff"
+      ],
+      "mechanics": [
+       {
+        "text": "Silver Blade Aramintha with two addons that each need 4 crit hits. Crit Chance on everyone.",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "thresholds": [
+       {
+        "text": "Each of two addons needs 4 crit hits",
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020"
+       }
+      ],
+      "teams": [
+       {
+        "name": "Reddit 2020 options",
+        "heroes": [
+         {
+          "name": "Achates",
+          "role": "option"
+         },
+         {
+          "name": "Taranor Guard",
+          "role": "option"
+         },
+         {
+          "name": "Kitty Clarissa",
+          "role": "option"
+         }
+        ],
+        "source": "https://reddit.birdcat.cafe/r/EpicSeven/comments/jcikdm/abyss_tower_101110_guide",
+        "date": "2020-10-16",
+        "confidence": "legacy-2020",
+        "notes": "SC Ras unmatched; Crit Chance on everyone."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "111-120",
+    "label": "Floors 111-120 (no guide found)",
+    "floors": []
+   }
+  ]
+ },
+ "otherworldly": {
+  "note": "No Hell/Otherworldly-specific guide found; app uses the stage-13 data for each hunt."
+ },
+ "dimensionalExploration": {
+  "note": "Roguelike mode added at the 8th anniversary (2026) with permanent and seasonal versions, optional challenge with runs of about 30 minutes; Offline Battle Delegation (farming) added in the Aug 27 update. No team or stat data found.",
+  "sources": [
+   "https://labs.invenglobal.com/articles/25346/producer-kwang-jin-tak-for-epic-sevens-8th-anniversary-we-prepared-with-the-mindset-that-we-must-adapt-to-survive"
+  ]
+ },
+ "labyrinth": {
+  "note": "April 2025 Origin update (article 2025-04-09): all Labyrinths, including Royal Capital Azmakalis, are permanently accessible without any currency cost; monster drop rewards, Labyrinth Shop and some currencies removed. Notes say nothing about morale or Raid. The 2022 roadmap planned Azmakalis as a challenge boss where cleared heroes cannot be reused. Reddit wiki has Azmakalis Normal and Nightmare guides but no team data in these notes.",
+  "sources": [
+   "https://epic7db.com/news/410-thu-epic-seven-origin-update-content-part-1",
+   "https://www.bluestacks.com/blog/updates/epic-seven/es-2023-roadmap-en.html",
+   "https://lr.eu.psf.lt/r/EpicSeven/wiki/index"
+  ]
+ },
+ "unmatched": [
+  {
+   "text": "Fluri (cheese option \"Fluri plus Christy\")",
+   "where": "hunts.md Banshee 3-star pre-phase team"
+  },
+  {
+   "text": "SC Wanda (abbreviation/name not resolvable to a herodata key)",
+   "where": "raids_abyss.md abyss 101-110 team lists"
+  },
+  {
+   "text": "SC Ras (abbreviation/name not resolvable to a herodata key)",
+   "where": "raids_abyss.md abyss 101-110 team lists"
+  },
+  {
+   "text": "ML Angelica (abbreviation/name not resolvable to a herodata key)",
+   "where": "raids_abyss.md abyss 101-110 team lists"
+  },
+  {
+   "text": "Riolet (abbreviation/name not resolvable to a herodata key)",
+   "where": "raids_abyss.md abyss 101-110 team lists"
+  },
+  {
+   "text": "Celestine (abbreviation/name not resolvable to a herodata key)",
+   "where": "raids_abyss.md abyss 101-110 team lists"
+  }
+ ]
+}
