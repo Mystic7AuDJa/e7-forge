@@ -6,6 +6,7 @@ import { baseRequest, detectArchetype, type Archetype } from "./recommend";
 import { TAG_LABELS } from "./tagger";
 import type { DerivedStats, Hero, HeroData, Item } from "./types";
 import { elementLabel } from "./labels";
+import { auraBonuses, fmtImprint, teamAuras } from "./imprint";
 
 export type Content = "arena" | "rta" | "gw_offense" | "gw_defense" | "pve";
 
@@ -33,6 +34,8 @@ const ARCH_VALUE: Record<Content, Partial<Record<Archetype, number>>> = {
 };
 
 /** attacker element -> element it beats. herodata uses "wind" for Earth. */
+const STAT_SHORT: Record<string, string> = { spd: "Spd", cr: "CR", eff: "Eff", res: "Res", hp: "HP", atk: "Atk", def: "Def" };
+
 const ELEMENT_ADV: Record<string, string> = { fire: "wind", wind: "ice", ice: "fire", light: "dark", dark: "light" };
 /** Normalizes guide spellings (earth, water, ...) to herodata elements. */
 export function normElement(e?: string | null): string | undefined {
@@ -96,6 +99,11 @@ export function analyzeTeam(members: TeamCandidate[], content: Content, enemyEle
     if (adv) synergies.push(`${adv} hero(es) with elemental advantage vs ${elementLabel(enemyElement)}.`);
     if (disadv) warnings.push(`${disadv} hero(es) at elemental disadvantage vs ${elementLabel(enemyElement)}.`);
   }
+  // Imprint Release auras: small nudge, since a team is rarely picked for its imprints.
+  for (const a of teamAuras(members)) {
+    score += a.position === "all" ? 0.4 : 0.2;
+    synergies.push(`Imprint Release: ${a.from} (${a.grade}) gives ${fmtImprint(a.stat, a.label, a.value)} to ${a.positionLabel}.`);
+  }
   const readiness = members.reduce((a, m) => a + m.readiness, 0) / Math.max(1, members.length);
   score += readiness * 3;
 
@@ -158,8 +166,11 @@ export interface TeamPlan {
 
 /** Recommended builds for a team, solved together so heroes don't fight over gear. */
 export function planTeam(team: TeamCandidate[], items: Item[], heroData: (h: Hero) => HeroData | undefined, opts: OptimizeOptions = {}, allowEquipped = true, minSpeed: Record<string, number> = {}): TeamPlan {
+  const extra = auraBonuses(teamAuras(team));
+  const hasAura = Object.keys(extra).length > 0;
   const reqs = team.map((m, i) => {
     const request = baseRequest(m.hero, m.hd, m.current, undefined, allowEquipped).request;
+    if (hasAura) request.extraBonuses = extra;
     if (minSpeed[m.hero.id]) request.min = { ...(request.min ?? {}), spd: Math.max(request.min?.spd ?? 0, minSpeed[m.hero.id]) };
     return { request, priority: team.length - i };
   });
@@ -178,7 +189,7 @@ export function planTeam(team: TeamCandidate[], items: Item[], heroData: (h: Her
     .map((p) => {
       const gap = p.missing.reduce((a, m) => a + (m.target - m.current) / Math.max(1, m.target), 0);
       const top = p.missing.sort((a, b) => (b.target - b.current) / b.target - (a.target - a.current) / a.target)[0];
-      return { heroId: p.heroId, name: p.name, gapScore: Math.round(gap * 100) / 100, reason: top ? `${top.stat.toUpperCase()} ${top.current} → ${top.target}` : "Already at target" };
+      return { heroId: p.heroId, name: p.name, gapScore: Math.round(gap * 100) / 100, reason: top ? `${STAT_SHORT[top.stat] ?? top.stat} ${top.current} → ${top.target}` : "Already at target" };
     })
     .sort((a, b) => b.gapScore - a.gapScore);
   return { account, perHero, upgradePriority };

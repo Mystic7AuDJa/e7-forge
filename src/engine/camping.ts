@@ -101,7 +101,7 @@ export function campTeams(cands: TeamCandidate[], camp: Record<string, HeroCamp>
     if (need.length) reasons.push(`Covers boss needs: ${tagList(need)}.`);
     const missing = (o.needTags ?? []).filter((t) => !tags.has(t));
     if (missing.length) warnings.push(`Missing for this boss: ${tagList(missing)}.`);
-    for (const s of syn.synergies.slice(0, 1)) reasons.push(s);
+    for (const s of syn.synergies.filter((x) => !x.startsWith("Imprint Release")).slice(0, 1)) reasons.push(s);
     for (const w of syn.warnings.slice(0, 1)) warnings.push(w);
     out.push({ heroIds: team.map((x) => x.hero.id), names: team.map((x) => x.hero.name), morale, sustain: Math.round(sustain * 10) / 10, sustainTags, readiness: Math.round(readiness * 100) / 100, score, reasons, warnings });
   };

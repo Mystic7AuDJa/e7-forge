@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { useForge } from "../state";
 import { Busy, fmt, HeroIcon, HeroSelect, NoAccount, Section, Toggle } from "../components";
 import { buildMeta, PVP_SIZE, suggestPvp, type PvpMode, type PvpTeam, type TeamStyle } from "../../engine/meta";
-import { OpenInAccountOpt, TeamHeroes, useCandidates, useMeta, useOwnedByName } from "./metaShared";
+import { ImprintAuras, OpenInAccountOpt, TeamHeroes, useCandidates, useMeta, useOwnedByName } from "./metaShared";
 
 const INFO: Record<PvpMode, { title: string; sub: string }> = {
   arena_def: {
@@ -73,7 +73,7 @@ function PvpPage({ mode }: { mode: PvpMode }) {
           </div>
         )}
 
-        <Section title={mode === "rta" ? "Draft cores you can field" : "Teams you can field"} right={<span className="muted">Pick one to open it in the Account-Wide Optimizer with these heroes checked</span>}>
+        <Section title={mode === "rta" ? "Draft cores you can field" : "Teams you can field"} right={<span className="muted">Open a team in the Account-Wide Optimizer with its heroes pre-selected</span>}>
           {!result?.teams.length ? <span className="muted">Not enough geared heroes to build a team.</span> : (
             <div className="grid g2">{result.teams.map((t, i) => <PvpTeamCard key={i} rank={i + 1} team={t} mode={mode} metaMap={metaMap!} />)}</div>
           )}
@@ -117,6 +117,7 @@ function PvpTeamCard({ rank, team, mode, metaMap }: { rank: number; team: PvpTea
         const h = heroById.get(id)!; const m = metaMap.get(h.dataKey || h.name);
         return { hero: h, name: h.name, note: [team.tiers[i] && `Tier ${team.tiers[i]}`, m?.rtaPick != null && `${fmt(m.rtaPick, 1)}% RTA picks`].filter(Boolean).join(" · ") };
       })} />
+      <ImprintAuras ids={team.heroIds} />
       <ul className="reasons">{team.reasons.map((r, i) => <li key={i}>{r}</li>)}</ul>
       {team.warnings.length > 0 && <ul className="warnings">{team.warnings.map((r, i) => <li key={i}>{r}</li>)}</ul>}
       {mode === "rta" && <p className="muted" style={{ fontSize: 12 }}>In draft you pick five and play four. Treat this as a core to build around; expect at least one to be banned.</p>}

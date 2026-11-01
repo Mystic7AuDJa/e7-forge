@@ -46,7 +46,7 @@ let win: BrowserWindow | null = null;
 let store: Store;
 let account: Account | null = null;
 let settings: Settings = DEFAULT_SETTINGS;
-let gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; artifacts: Record<string, any>; source: string; heroCount: number };
+let gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; imprints: Record<string, any>; artifacts: Record<string, any>; source: string; heroCount: number };
 let capture: CaptureService;
 
 function readJson(file: string) { return JSON.parse(fs.readFileSync(file, "utf8")); }
@@ -58,8 +58,9 @@ function loadGameData() {
   const herodata = readJson(dataFile("herodata.json"));
   const tags = { ...readJson(dataFile("hero-tags.json")), ...store.heroTags() };
   const artifacts = readJson(dataFile("artifactdata.json"));
+  const imprints = readJson(dataFile("imprints.json"));
   const source = fs.existsSync(path.join(userDataDir, "herodata.json")) ? store.get("data_source", "updated") : "bundled (RexQian fork v1.12.9-offline)";
-  gameData = { herodata, tags, artifacts, source, heroCount: Object.keys(herodata).length };
+  gameData = { herodata, tags, imprints, artifacts, source, heroCount: Object.keys(herodata).length };
 }
 
 const POOL = Math.max(1, Math.min(os.cpus().length - 2, 12));
@@ -71,7 +72,7 @@ function startWorkers() {
   // worker_threads and sql.js need real files, so these live outside the asar archive when packaged.
   const file = path.join(__dirname, "worker.js").replace("app.asar" + path.sep, "app.asar.unpacked" + path.sep);
   for (let i = 0; i < POOL; i++) {
-    const w = new Worker(file, { workerData: { herodata: gameData.herodata, tags: gameData.tags } });
+    const w = new Worker(file, { workerData: { herodata: gameData.herodata, tags: gameData.tags, imprints: gameData.imprints } });
     w.on("message", (m) => {
       const p = pending.get(m.id);
       if (!p) return;
@@ -206,7 +207,7 @@ app.on("window-all-closed", () => { shutdown(); app.quit(); });
 function registerIpc() {
   ipcMain.handle("app:init", () => ({
     version: app.getVersion(), workers: POOL, killedPrior, runtime: { electron: process.versions.electron, chrome: process.versions.chrome, node: process.versions.node }, platform: process.platform, settings, account,
-    gameData: { herodata: gameData.herodata, tags: gameData.tags, source: gameData.source, heroCount: gameData.heroCount },
+    gameData: { herodata: gameData.herodata, tags: gameData.tags, imprints: gameData.imprints, source: gameData.source, heroCount: gameData.heroCount },
     capture: { state: capture.state, error: capture.lastError },
   }));
 
@@ -248,12 +249,13 @@ function registerIpc() {
     fs.writeFileSync(r.filePath, JSON.stringify({ heroes, items }));
     return r.filePath;
   });
-  ipcMain.handle("account:updateHero", (_e, { heroId, bonuses, dataKey }) => {
+  ipcMain.handle("account:updateHero", (_e, { heroId, bonuses, dataKey, imprint }) => {
     if (!account) return null;
     const h = account.heroes.find((x) => x.id === heroId);
     if (!h) return null;
     if (bonuses) h.bonuses = { ...h.bonuses, ...bonuses };
     if (dataKey) h.dataKey = dataKey;
+    if (imprint !== undefined) { if (imprint) h.imprint = imprint; else delete h.imprint; }
     setAccount(account, true);
     return h;
   });
@@ -408,7 +410,7 @@ function registerIpc() {
     if (artifacts) fs.writeFileSync(path.join(userDataDir, "artifactdata.json"), JSON.stringify(artifacts));
     store.set("data_source", `${source} (${new Date().toISOString().slice(0, 10)})`);
     loadGameData();
-    await broadcast("setData", { herodata: gameData.herodata, tags: gameData.tags });
+    await broadcast("setData", { herodata: gameData.herodata, tags: gameData.tags, imprints: gameData.imprints });
     const newHeroes = Object.keys(herodata).filter((k) => !gameData.tags[k] || !gameData.tags[k].length);
     return { source, heroes: gameData.heroCount, added: gameData.heroCount - before, untagged: newHeroes };
   });
@@ -426,7 +428,7 @@ function registerIpc() {
       await new Promise((r) => setTimeout(r, 1200)); // be polite to epic7db
     }
     loadGameData();
-    await broadcast("setData", { herodata: gameData.herodata, tags: gameData.tags });
+    await broadcast("setData", { herodata: gameData.herodata, tags: gameData.tags, imprints: gameData.imprints });
     return done;
   });
 

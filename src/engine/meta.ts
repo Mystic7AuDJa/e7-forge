@@ -169,7 +169,7 @@ export function suggestPvp(cands: TeamCandidate[], meta: Map<string, MetaInfo>, 
       s += anti.length * 0.9;
       if (anti.length) reasons.push(`Anti-cleave tools: ${tagList(anti.slice(0, 6))}.`);
       const avgRes = team.reduce((a, m) => a + m.current.res, 0) / team.length;
-      if (avgRes < 60) warnings.push(`Low average effect resistance (${Math.round(avgRes)}%): openers will land their debuffs.`);
+      if (avgRes < 60) warnings.push(`Low average Effect Resistance (${Math.round(avgRes)}%): openers will land their debuffs.`);
     }
     if (mode === "rta") {
       const banned = team.filter((m, i) => (metas[i]?.rtaPreban ?? 0) >= 30);
@@ -179,7 +179,7 @@ export function suggestPvp(cands: TeamCandidate[], meta: Map<string, MetaInfo>, 
     if (strong.length) reasons.push(`${strong.length} of ${team.length} rated A–SS in the tier list (${strong.map((m) => `${m.hero.name} ${mi(m)?.tier}`).join(", ")}).`);
     const popular = team.filter((_, i) => (metas[i]?.rtaPick ?? 0) >= 5);
     if (popular.length) reasons.push(`Picked often by Champion+ RTA players: ${popular.map((m) => `${m.hero.name} ${mi(m)?.rtaPick?.toFixed(1)}%`).join(", ")}.`);
-    for (const x of syn.synergies.slice(0, 2)) reasons.push(x);
+    for (const x of syn.synergies.filter((s) => !s.startsWith("Imprint Release")).slice(0, 2)) reasons.push(x);
     if (readiness < 0.5) warnings.push("Several of these heroes are lightly geared on your account.");
     scored.push({
       heroIds: team.map((m) => m.hero.id), names: team.map((m) => m.hero.name), style: teamStyle,

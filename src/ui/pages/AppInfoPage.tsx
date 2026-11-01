@@ -31,7 +31,7 @@ const DATA: Src[] = [
   { name: "epic7db.com", url: "https://epic7db.com", license: "No open license (site content)", tone: "warn",
     use: "Skill pages read to derive role tags (strip, cleanse, CR push…). Only the derived tags ship; 'Fetch missing role tags' reads pages on demand at 1 request per 1.2 s.", shipped: "Derived tags only" },
   { name: "epic7db.com tier lists", url: "https://epic7db.com/tierlists/epic-seven-rta-tier-list", license: "No open license (site content)", tone: "warn",
-    use: "RTA and PvE tier placements (SS to D) bundled as epic7db-tiers.json for the PvP pages. Also epic7db hunt guides (Wyvern 13 setup, 3-star hunts) for PvE teams and breakpoints.", shipped: "Derived lists only" },
+    use: "RTA and PvE tier placements (SS to D) bundled as epic7db-tiers.json for the PvP pages, and Memory Imprint values per hero (imprints.json). Also epic7db hunt guides (Wyvern 13 setup, 3-star hunts) for PvE teams and breakpoints.", shipped: "Derived lists only" },
   { name: "epic7rtastats.com", url: "https://www.epic7rtastats.com/meta", license: "No published license; robots.txt allows crawling", tone: "warn",
     use: "Champion+ RTA pick, win and pre-ban rates for the top 20 heroes, with the date window shown on each PvP page. Fetched at most once a day; the last good copy is kept.", shipped: "No, online only" },
   { name: "CeciliaBot Camp Simulator", url: "https://ceciliabot.github.io/camping-simulator/", license: "No license declared (all rights reserved by default)", tone: "warn",

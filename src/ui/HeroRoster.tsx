@@ -15,7 +15,7 @@ export function heroLevelText(h: Hero) {
   if (h.level) parts.push(`Lv ${h.level}`);
   if (h.stars) parts.push(`${h.stars}★`);
   if (h.awaken != null) parts.push(`A${h.awaken}`);
-  return parts.join(" · ") || "—";
+  return parts.join(" · ");
 }
 
 type SortKey = "cp" | "spd" | "name" | "level" | "gs";
@@ -80,8 +80,8 @@ export function HeroRoster(props: {
         {props.mode === "multi" && (
           <>
             <span style={{ flex: 1 }} />
-            <span className="muted" style={{ fontSize: 12 }}>{checked.length}{props.max ? `/${props.max}` : ""} checked</span>
-            <button className="small ghost" onClick={() => setOnlyChecked(!onlyChecked)}>{onlyChecked ? "Show all" : "Checked only"}</button>
+            <span className="muted" style={{ fontSize: 12 }}>{checked.length}{props.max ? `/${props.max}` : ""} selected</span>
+            <button className="small ghost" onClick={() => setOnlyChecked(!onlyChecked)}>{onlyChecked ? "Show all" : "Selected only"}</button>
             <button className="small ghost" disabled={!checked.length} onClick={() => props.onCheck?.([])}>Clear</button>
           </>
         )}
@@ -97,7 +97,7 @@ export function HeroRoster(props: {
               <span className="roster-icon"><HeroIcon name={h.dataKey || h.name} /><span className="el-dot abs" style={{ background: EL_COLOR[h.attribute || data?.attribute] ?? "#777" }} /></span>
               <span className="roster-main">
                 <span className="roster-name">{h.name}</span>
-                <span className="muted roster-sub">{heroLevelText(h)} · {ROLES.find((r) => r.k === (h.role || data?.role))?.label ?? h.role}</span>
+                <span className="muted roster-sub">{[heroLevelText(h), ROLES.find((r) => r.k === (h.role || data?.role))?.label ?? h.role].filter(Boolean).join(" · ")}</span>
               </span>
               <span className="roster-stats mono">
                 <span>{fmt(s?.spd)} <i>Spd</i></span>

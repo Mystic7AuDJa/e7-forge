@@ -3,7 +3,7 @@ import { useForge } from "../state";
 import { Busy, fmt, HeroSelect, NoAccount, Section } from "../components";
 import { buildTeams, normElement, type TeamCandidate } from "../../engine/teams";
 import { campTeams, type CampTeam } from "../../engine/camping";
-import { OpenInAccountOpt, TeamHeroes, useCandidates, useMeta, useOwnedByName } from "./metaShared";
+import { ImprintAuras, OpenInAccountOpt, TeamHeroes, useCandidates, useMeta, useOwnedByName } from "./metaShared";
 import { classLabel, elementLabel, tagLabel, tagList } from "../../engine/labels";
 
 interface Mech { text: string; source?: string; date?: string; confidence?: string }
@@ -17,7 +17,10 @@ interface Encounter { id?: string; name?: string; element?: { value: string | nu
 const META_RE = /\b(bluestacks|game8|reddit|epic7db|ludo(\.guide)?|sourced?|unsourced|inferred|not stated|cites|contradicts?|conflict(ing)?|low reliability|legacy|encoded)\b/i;
 function clean(text?: string) {
   if (!text) return "";
-  return (text.match(/[^.!?]+[.!?]*(\s+|$)/g) ?? [text]).filter((x) => !META_RE.test(x)).join("").trim();
+  const parts = text.match(/[^.!?]+[.!?]*(\s+|$)/g) ?? [text];
+  // A note that opens with a source remark is about the source as a whole.
+  if (META_RE.test(parts[0])) return "";
+  return parts.filter((x) => !META_RE.test(x)).join("").replace(/>=/g, "≥").trim();
 }
 
 const STAT_LABEL: Record<string, string> = { spd: "Speed", eff: "Effectiveness", res: "Effect Resistance", cr: "Crit Chance", cd: "Crit Damage", hp: "HP", atk: "Attack", def: "Defense" };
@@ -89,6 +92,7 @@ function PresetTeamCard({ t, n, owned, bps }: { t: PresetTeam; n: number; owned:
         name: m.c ? m.c.hero.name : m.slot.name, missing: !m.c,
         note: [m.slot.role !== "option" && slotRole(m.slot.role), m.alt && `in place of ${m.slot.name}`, !m.c && m.slot.alternatives?.length && `Alt: ${m.slot.alternatives.join(", ")}`, m.c && `${m.c.current.spd} Spd`].filter(Boolean).join(" · "),
       }))} />
+      <ImprintAuras ids={ids} />
       {checks.length > 0 && (
         <ul className="bpchecks">{checks.map((c, i) => <li key={i} className={c.ok ? "ok" : c.required ? "bad" : "warn"}>{c.ok ? "✓" : "✗"} {c.label}{c.required ? "" : " (optional)"}</li>)}</ul>
       )}
@@ -112,7 +116,8 @@ function BuiltTeams({ cands, element, need, must }: { cands: TeamCandidate[]; el
         <div key={i} className="card" style={{ background: "var(--panel-2)" }}>
           <div className="row" style={{ justifyContent: "space-between" }}><b>#{i + 1} from your roster</b><span className="muted">score {fmt(t.report.score, 1)}</span></div>
           <TeamHeroes heroes={t.members.map((m) => ({ hero: heroById.get(m.hero.id), name: m.hero.name, note: `${elementLabel(m.hd.attribute)} · ${classLabel(m.hd.role)} · ${m.current.spd} Spd · GS ${m.current.gs}` }))} />
-          <ul className="reasons">{t.report.synergies.slice(0, 3).map((s, j) => <li key={j}>{s}</li>)}</ul>
+          <ImprintAuras ids={t.members.map((m) => m.hero.id)} />
+          <ul className="reasons">{t.report.synergies.filter((s) => !s.startsWith("Imprint Release")).slice(0, 3).map((s, j) => <li key={j}>{s}</li>)}</ul>
           {(missing.length > 0 || t.report.warnings.length > 0) && <ul className="warnings">
             {missing.length > 0 && <li>Missing for this fight: {tagList(missing)}</li>}
             {t.report.warnings.slice(0, 2).map((s, j) => <li key={j}>{s}</li>)}
@@ -141,7 +146,7 @@ function EncounterBody({ e, cands, owned, must, extraNote }: { e: Encounter; can
       <Mechanics items={e.mechanics} />
       <Mechanics items={e.thresholds} title="Limits" />
       {bps.length > 0 && <>
-        <h3>Stat breakpoints from guides</h3>
+        <h3>Stat breakpoints</h3>
         <table><thead><tr><th>Who</th><th>Stat</th><th className="num">Target</th><th>Required?</th><th>Why</th></tr></thead>
           <tbody>{bps.map((b, i) => <tr key={i}><td>{b.appliesTo.charAt(0).toUpperCase() + b.appliesTo.slice(1)}</td><td>{STAT_LABEL[b.stat] ?? b.stat}</td><td className="num">{b.op === ">=" ? "≥" : b.op} {b.value}</td><td>{b.required ? "Yes" : <span className="muted">Optional</span>}</td><td className="muted" style={{ whiteSpace: "normal" }}>{clean(b.note?.replace(/^OPTIONAL:\s*/i, ""))}</td></tr>)}</tbody></table>
       </>}
@@ -172,7 +177,7 @@ export function HuntsPage() {
   const e = hunts.find((h) => h.id === hunt) ?? hunts[0];
   return (
     <div className="stack">
-      <div><h1>Hunts</h1><p className="sub">Guide teams and stat breakpoints for stage 13, checked against your heroes, plus teams built from your own roster. Otherworldly / Hell hunts reuse the stage 13 data.</p></div>
+      <div><h1>Hunts</h1><p className="sub">Recommended teams and stat breakpoints for stage 13, compared with your heroes, plus teams built from your own roster. Otherworldly / Hell hunts reuse the stage 13 data.</p></div>
       <div className="row">
         <div className="seg">{hunts.map((h) => <button key={h.id} className={hunt === h.id ? "on" : ""} onClick={() => setHunt(h.id!)}>{h.name?.replace(" Hunt", "")}</button>)}</div>
         <div className="seg">
@@ -202,7 +207,7 @@ export function AbyssPage() {
   const f = g.floors.find((x) => x.floor === floor) ?? g.floors[0];
   return (
     <div className="stack">
-      <div><h1>Abyss</h1><p className="sub">Pick a floor range, then a floor. Shows the floor's mechanics and limits, the guide teams you can field, and teams built from your roster.</p></div>
+      <div><h1>Abyss</h1><p className="sub">Pick a floor range, then a floor. Shows the floor's mechanics and limits, the recommended teams you can field, and teams built from your roster.</p></div>
       <div className="row">
         <div className="seg">{groups.map((x) => <button key={x.id} className={g.id === x.id ? "on" : ""} onClick={() => { setGroup(x.id); setFloor(null); }}>{x.id}{x.floors.length ? "" : " ·"}</button>)}</div>
         {g.floors.length > 0 && <select value={f?.floor} onChange={(e) => setFloor(Number(e.target.value))}>{g.floors.map((x) => <option key={x.floor} value={x.floor}>Floor {x.floor}</option>)}</select>}
@@ -230,6 +235,7 @@ function CampResults({ teams, moraleOk }: { teams: CampTeam[]; moraleOk: boolean
           <span className="muted">{moraleOk ? <>morale <b className="mono">{t.morale?.morale ?? "—"}</b> · </> : null}sustain {fmt(t.sustain, 1)} · geared {fmt(t.readiness * 100, 0)}%</span>
         </div>
         <TeamHeroes heroes={t.heroIds.map((id) => { const h = heroById.get(id)!; return { hero: h, name: h.name }; })} />
+        <ImprintAuras ids={t.heroIds} />
         <ul className="reasons">{t.reasons.map((r, j) => <li key={j}>{r}</li>)}</ul>
         {t.warnings.length > 0 && <ul className="warnings">{t.warnings.map((r, j) => <li key={j}>{r}</li>)}</ul>}
         <div className="row" style={{ justifyContent: "flex-end" }}><OpenInAccountOpt ids={t.heroIds} /></div>

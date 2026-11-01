@@ -2,6 +2,7 @@
 // (it can't sniff from a browser), everything else runs for real on the sample export.
 import herodata from "../../data/herodata.json";
 import heroTags from "../../data/hero-tags.json";
+import imprintsJson from "../../data/imprints.json";
 import sample from "../../data/sample-fribbels-export.json";
 import { buildHeroDb, findHeroData } from "../engine/data";
 import { importFribbels } from "../engine/importer";
@@ -21,7 +22,7 @@ import type { Account, Hero } from "../engine/types";
 import type { ForgeApi, Settings } from "./api";
 
 export function createMockApi(): ForgeApi {
-  const db = buildHeroDb(herodata as any, heroTags as any);
+  const db = buildHeroDb(herodata as any, heroTags as any, imprintsJson as any);
   const hdOf = (h: Hero) => findHeroData(db, h.dataKey || h.name);
   let account: Account | null = importFribbels(sample, "sample-fribbels-export.json").account;
   let settings: Settings = {
@@ -37,14 +38,14 @@ export function createMockApi(): ForgeApi {
   return {
     init: async () => ({
       version: "0.1.0-preview", workers: 1, runtime: { electron: "preview", chrome: navigator.userAgent.match(/Chrome\/([\d.]+)/)?.[1] ?? "?", node: "n/a" }, platform: "browser", settings, account,
-      gameData: { herodata: herodata as any, tags: heroTags as any, source: "bundled (RexQian fork v1.12.9-offline)", heroCount: Object.keys(herodata).length },
+      gameData: { herodata: herodata as any, tags: heroTags as any, imprints: imprintsJson as any, source: "bundled (RexQian fork v1.12.9-offline)", heroCount: Object.keys(herodata).length },
       capture: { state: "off", error: null },
     }),
     setSettings: async (s) => (settings = { ...settings, ...s, capture: { ...settings.capture, ...(s.capture ?? {}) } }),
     importFile: async () => { throw new Error("File dialogs need the desktop app. Paste JSON instead."); },
     importText: async (text) => { const r = importFribbels(text, "pasted"); account = r.account; emit("account:changed", {}); return r.report; },
     exportFile: async () => null,
-    updateHero: async ({ heroId, bonuses }) => { const h = need().heroes.find((x) => x.id === heroId)!; h.bonuses = { ...h.bonuses, ...bonuses }; emit("account:changed", {}); return h; },
+    updateHero: async ({ heroId, bonuses, imprint }) => { const h = need().heroes.find((x) => x.id === heroId)!; h.bonuses = { ...h.bonuses, ...bonuses }; if (imprint !== undefined) { if (imprint) h.imprint = imprint; else delete h.imprint; } emit("account:changed", {}); return h; },
     applyBuilds: async (builds) => {
       const acc = need();
       for (const b of builds) { const h = acc.heroes.find((x) => x.id === b.heroId)!; for (const [s, id] of Object.entries(b.items)) { for (const o of acc.heroes) if (o.equipment[s as keyof Hero["equipment"]] === id) delete o.equipment[s as keyof Hero["equipment"]]; (h.equipment as any)[s] = id; const it = acc.items.find((i) => i.id === id); if (it) it.equippedById = h.id; } }

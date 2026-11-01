@@ -73,6 +73,7 @@ export interface Hero {
   level?: number;
   awaken?: number;
   bonuses: HeroBonuses;
+  imprint?: import("./imprint").HeroImprint;
   equipment: Partial<Record<GearSlot, string>>; // slot -> item id
   artifactName?: string;
 }
@@ -92,6 +93,8 @@ export interface HeroData {
   role: string;
   base: Stats; // lv60 6* fully awakened
   imprint?: { type: string; grades: Record<string, number> };
+  /** Release / Concentration from data/imprints.json. */
+  imprints?: import("./imprint").ImprintData;
   exEquip?: { type: string; value: number }[];
   skills: { S1?: SkillData; S2?: SkillData; S3?: SkillData };
   tags: string[]; // functional tags (strip, cleanse, cr_push, def_break...)
@@ -133,6 +136,8 @@ export interface OptimizeRequest {
    * Priorities (1-4, in order) weigh most; other target stats act as tie-breakers.
    */
   targets?: { stats: Partial<Record<keyof DerivedStats, number>>; priorities: (keyof DerivedStats)[] };
+  /** Extra bonuses for this solve only, e.g. team Imprint Release auras. */
+  extraBonuses?: Partial<HeroBonuses>;
 }
 
 export interface Build {

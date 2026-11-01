@@ -9,7 +9,7 @@ import { upgradeQueue } from "../src/engine/roi";
 import { counterTeams, estimateEnemy } from "../src/engine/counters";
 import type { Account, Hero } from "../src/engine/types";
 
-let db: HeroDb = buildHeroDb(workerData.herodata, workerData.tags);
+let db: HeroDb = buildHeroDb(workerData.herodata, workerData.tags, workerData.imprints);
 let account: Account | null = null;
 const hdOf = (h: Hero) => findHeroData(db, h.dataKey || h.name);
 
@@ -19,7 +19,7 @@ parentPort!.on("message", (msg: any) => {
   const fail = (e: unknown) => parentPort!.postMessage({ id, ok: false, error: (e as Error)?.message ?? String(e) });
   try {
     switch (type) {
-      case "setData": db = buildHeroDb(payload.herodata, payload.tags); return reply(true);
+      case "setData": db = buildHeroDb(payload.herodata, payload.tags, payload.imprints); return reply(true);
       case "setAccount": account = payload; return reply(true);
       case "optimize": {
         const acc = need();

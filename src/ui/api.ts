@@ -12,7 +12,7 @@ export interface Settings {
 
 export interface InitData {
   version: string; workers: number; platform: string; killedPrior?: string[]; runtime?: { electron: string; chrome: string; node: string }; settings: Settings; account: Account | null;
-  gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; source: string; heroCount: number };
+  gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; imprints?: Record<string, any>; source: string; heroCount: number };
   capture: { state: string; error: string | null };
 }
 
@@ -22,7 +22,7 @@ export interface ForgeApi {
   importFile(): Promise<any>;
   importText(text: string): Promise<any>;
   exportFile(): Promise<string | null>;
-  updateHero(a: { heroId: string; bonuses?: any; dataKey?: string }): Promise<any>;
+  updateHero(a: { heroId: string; bonuses?: any; dataKey?: string; imprint?: import("../engine/imprint").HeroImprint | null }): Promise<any>;
   applyBuilds(b: Build[]): Promise<any>;
   addHero(name: string): Promise<any>;
   snapshots(): Promise<any[]>;

@@ -2,6 +2,7 @@
 // The RexQian fork (v1.12.x-offline) writes the identical format.
 import { gearScore, estimateRolls } from "./gear";
 import { GEAR_SLOTS, STAT_TYPES, type Account, type GearSlot, type Hero, type HeroBonuses, type Item, type Rank, type StatType } from "./types";
+import type { HeroImprint } from "./imprint";
 
 const num = (v: unknown, d = 0) => (typeof v === "number" && isFinite(v) ? v : typeof v === "string" && v.trim() !== "" && isFinite(+v) ? +v : d);
 
@@ -41,6 +42,16 @@ export function normalizeItem(raw: any, warnings: string[]): Item | null {
   estimateRolls(item);
   item.gs = gearScore(item.substats);
   return item;
+}
+
+// Fribbels saves the self imprint as a number ("21.0") and already folds it into
+// the aei* bonus fields, so it's marked inBonuses to avoid counting it twice.
+// The grade is worked out later from the value (see gradeForValue).
+function importedImprint(h: any): HeroImprint | undefined {
+  if (h.imprint?.mode) return h.imprint as HeroImprint;
+  const v = parseFloat(h.imprintNumber);
+  if (!isFinite(v) || v <= 0) return undefined;
+  return { grade: null, value: v, mode: "concentration", source: "import", inBonuses: true };
 }
 
 function bonusesFrom(h: any): HeroBonuses {
@@ -97,6 +108,7 @@ export function importFribbels(json: unknown, source = "fribbels"): { account: A
       level: num(h.level ?? h.lv, 0) || undefined,
       awaken: h.awaken != null ? num(h.awaken) : undefined,
       bonuses: bonusesFrom(h), equipment, artifactName: h.artifactName,
+      ...(importedImprint(h) ? { imprint: importedImprint(h) } : {}),
     };
   });
 

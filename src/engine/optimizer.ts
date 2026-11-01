@@ -3,7 +3,8 @@
 // accumulated gear stats, so "partial + best remaining" is an upper bound.
 import { SETS } from "./constants";
 import { A, ACC_LEN, accumulate, finalize, gearView, makeEvaluator, SET_INDEX, SET_NAMES, type GearMode, type CalcSettings, DEFAULT_CALC } from "./stats";
-import { GEAR_SLOTS, type Build, type DerivedStats, type GearSlot, type Hero, type HeroData, type Item, type OptimizeRequest } from "./types";
+import { GEAR_SLOTS, type Build, type DerivedStats, type GearSlot, type Hero, type HeroBonuses, type HeroData, type Item, type OptimizeRequest } from "./types";
+import { effectiveBonuses } from "./imprint";
 
 export type StatKey = keyof DerivedStats;
 export const STAT_KEYS: StatKey[] = ["atk", "hp", "def", "spd", "cr", "cd", "eff", "res", "dac", "cp", "ehp", "dmg", "mcdmg", "dmgps", "ehpps", "s1", "s2", "s3", "gs"];
@@ -137,7 +138,7 @@ export function optimizeHero(hero: Hero, hd: HeroData, items: Item[], req: Optim
   const requiredSets = new Set((req.sets ?? []).flat());
 
   const equippedNow = GEAR_SLOTS.map((s) => items.find((i) => i.id === hero.equipment[s])).filter(Boolean) as Item[];
-  const currentStats = computeFor(hd, hero, equippedNow, mode, calc);
+  const currentStats = computeFor(hd, hero, equippedNow, mode, calc, req.extraBonuses);
   const refs = statRefs(hd, currentStats);
   const score = req.targets ? (st: DerivedStats) => targetMatch(st, req.targets!).score : (st: DerivedStats) => objective(st, weights, refs);
 
@@ -210,7 +211,8 @@ export function optimizeHero(hero: Hero, hd: HeroData, items: Item[], req: Optim
   }
 
   const needSkills = ["s1", "s2", "s3"].some((k) => (weights as any)[k] || (req.min as any)?.[k] != null || (req.max as any)?.[k] != null);
-  const evalFast = makeEvaluator(hd, hero.bonuses, calc, needSkills);
+  const bonuses = effectiveBonuses(hero, hd, req.extraBonuses);
+  const evalFast = makeEvaluator(hd, bonuses, calc, needSkills);
   const scratch = {} as DerivedStats;
   // max-bound check needs minimum remaining (0 is safe lower bound)
   const maxB = req.max ?? {};
@@ -328,7 +330,7 @@ function setsOf(items: Item[]): string[] {
   return out.sort();
 }
 
-export function computeFor(hd: HeroData, hero: Hero, items: Item[], mode: GearMode = "current", calc = DEFAULT_CALC): DerivedStats {
+export function computeFor(hd: HeroData, hero: Hero, items: Item[], mode: GearMode = "current", calc = DEFAULT_CALC, extra?: Partial<HeroBonuses>): DerivedStats {
   const acc = new Float64Array(ACC_LEN);
   const sets = new Int32Array(SET_NAMES.length);
   for (const it of items) {
@@ -336,7 +338,7 @@ export function computeFor(hd: HeroData, hero: Hero, items: Item[], mode: GearMo
     const si = SET_INDEX[it.set];
     if (si != null) sets[si]++;
   }
-  return finalize(hd, hero.bonuses, acc, sets, calc);
+  return finalize(hd, effectiveBonuses(hero, hd, extra), acc, sets, calc);
 }
 
 export function currentBuildStats(hero: Hero, hd: HeroData, items: Item[], mode: GearMode = "current") {

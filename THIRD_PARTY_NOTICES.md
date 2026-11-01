@@ -54,6 +54,11 @@ epic7db content has no open license; only the derived tags are included.
 Tier placements copied from epic7db.com's RTA and PvE tier lists
 (https://epic7db.com/tierlists/). No open license.
 
+## data/imprints.json
+
+Memory Imprint Release / Concentration values and formation slots, read from
+epic7db.com hero pages. No open license.
+
 ## data/camping-topics.json
 
 Topic reaction table read from CeciliaBot's Camp Simulator

@@ -1,4 +1,5 @@
 import type { HeroData, Stats } from "./types";
+import type { ImprintData } from "./imprint";
 
 export type HeroDb = Map<string, HeroData>;
 
@@ -19,7 +20,7 @@ export function toStats(raw: Record<string, number> | undefined): Stats {
   };
 }
 
-export function buildHeroDb(herodata: Record<string, RawHero>, tags: Record<string, string[]> = {}): HeroDb {
+export function buildHeroDb(herodata: Record<string, RawHero>, tags: Record<string, string[]> = {}, imprints: Record<string, ImprintData> = {}): HeroDb {
   const db: HeroDb = new Map();
   for (const [key, h] of Object.entries(herodata)) {
     if (!h || !h.calculatedStatus) continue;
@@ -31,6 +32,7 @@ export function buildHeroDb(herodata: Record<string, RawHero>, tags: Record<stri
       role: h.role,
       base: toStats(h.calculatedStatus.lv60SixStarFullyAwakened ?? h.calculatedStatus.lv50FiveStarFullyAwakened),
       imprint: h.self_devotion,
+      imprints: imprints[key],
       exEquip: (h.ex_equip ?? []).map((e) => ({ type: e.stat.type, value: e.stat.value })),
       skills: (h.skills ?? {}) as HeroData["skills"],
       tags: tags[key] ?? [],

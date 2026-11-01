@@ -2,7 +2,8 @@ import React, { useEffect, useMemo } from "react";
 import { useForge } from "../state";
 import { HeroIcon } from "../components";
 import { candidatesFrom, type TeamCandidate } from "../../engine/teams";
-import type { Hero } from "../../engine/types";
+import type { Hero, HeroData } from "../../engine/types";
+import { fmtImprint, teamAuras } from "../../engine/imprint";
 
 export function useCandidates(): TeamCandidate[] {
   const { account, hd } = useForge();
@@ -48,4 +49,18 @@ export function TeamHeroes({ heroes, sub }: { heroes: { hero?: Hero; name: strin
 export function OpenInAccountOpt({ ids, mins, label = "Open in Account-Wide Optimizer" }: { ids: string[]; mins?: Record<string, Record<string, number>>; label?: string }) {
   const { openInAccountOptimizer } = useForge();
   return <button className="small primary" disabled={!ids.length} onClick={() => openInAccountOptimizer(ids, mins)}>{label} ▸</button>;
+}
+
+export function ImprintAuras({ ids }: { ids: string[] }) {
+  const { heroById, hd } = useForge();
+  const members = ids.map((id) => heroById.get(id)).filter(Boolean).map((h) => ({ hero: h!, hd: hd(h!) })).filter((m) => m.hd) as { hero: Hero; hd: HeroData }[];
+  const auras = teamAuras(members);
+  const unset = members.filter((m) => !m.hero.imprint).length;
+  if (!auras.length && !unset) return null;
+  return (
+    <div className="muted" style={{ fontSize: 12, margin: "4px 0" }}>
+      {auras.length > 0 && <>Imprint Release: {auras.map((a) => `${a.from} ${a.grade} → ${fmtImprint(a.stat, a.label, a.value)} to ${a.positionLabel}`).join("; ")}. </>}
+      {unset > 0 && <>{unset} hero{unset > 1 ? "es have" : " has"} no Memory Imprint set (Hero Optimizer).</>}
+    </div>
+  );
 }

@@ -5,6 +5,7 @@ import { Busy, fmt, HeroName, HeroSelect, ItemSummary, NoAccount, Num, Section, 
 import { baseRequest } from "../../engine/recommend";
 import type { OptimizeRequest } from "../../engine/types";
 import { GEAR_SLOTS } from "../../engine/types";
+import { auraBonuses, fmtImprint, teamAuras } from "../../engine/imprint";
 
 interface Row { heroId: string; priority: number; request: OptimizeRequest; note: string }
 
@@ -14,6 +15,7 @@ export default function AccountOptPage() {
   const [objective, setObjective] = useState<"balanced" | "power" | "gs">("balanced");
   const [penalty, setPenalty] = useState(0.02);
   const [takeOutside, setTakeOutside] = useState(false);
+  const [useAuras, setUseAuras] = useState(true);
   const [rules, setRules] = useState<{ faster: string; slower: string; margin: number }[]>([]);
   const [rf, setRf] = useState<string | null>(null);
   const [rs, setRs] = useState<string | null>(null);
@@ -44,11 +46,16 @@ export default function AccountOptPage() {
 
   const upd = (i: number, f: (r: Row) => Row) => setRows(rows.map((r, j) => (j === i ? f(r) : r)));
 
+  const teamSized = rows.length >= 2 && rows.length <= 4;
+  const members = rows.map((r) => heroById.get(r.heroId)!).filter(Boolean).map((h) => ({ hero: h, hd: hd(h)! })).filter((m) => m.hd);
+  const auras = teamSized && useAuras ? teamAuras(members) : [];
+  const extra = auraBonuses(auras);
+
   const run = async () => {
     setBusy(true); setRes(null);
     try {
       const out = await api.optimizeAccount({ request: {
-        heroes: rows.map((r) => ({ request: { ...r.request, allowEquipped: takeOutside }, priority: r.priority })),
+        heroes: rows.map((r) => ({ request: { ...r.request, allowEquipped: takeOutside, extraBonuses: auras.length ? extra : undefined }, priority: r.priority })),
         objective, movePenalty: penalty, speedOrder: rules, buildsPerHero: 60,
       } });
       setRes(out);
@@ -92,6 +99,10 @@ export default function AccountOptPage() {
             </label>
             <label className="field">Gear-move penalty (per item pulled from another hero)<Num value={penalty} step={0.01} onChange={(v) => setPenalty(v ?? 0)} /></label>
             <Toggle on={takeOutside} onChange={setTakeOutside} label="Allow taking gear from heroes not selected" />
+            {teamSized && <Toggle on={useAuras} onChange={setUseAuras} label="Treat as one team: apply Imprint Release from these heroes" />}
+            {teamSized && useAuras && <span className="muted" style={{ fontSize: 12 }}>{auras.length
+              ? auras.map((a) => `${a.from} ${a.grade}: ${fmtImprint(a.stat, a.label, a.value)} to ${a.positionLabel}${a.position === "all" ? "" : " (not applied; depends on formation)"}`).join(" · ")
+              : "None of these heroes has a Release imprint set (Hero Optimizer → Memory Imprint)."}</span>}
           </div>
         </Section>
         <Section title="Preserve speed tuning">

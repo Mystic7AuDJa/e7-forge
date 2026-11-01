@@ -95,7 +95,7 @@ export function ForgeProvider({ children }: { children: React.ReactNode }) {
     }).catch((e) => setError(String(e)));
   }, [toast]);
 
-  const db = useMemo(() => buildHeroDb(init?.gameData.herodata ?? {}, init?.gameData.tags ?? {}), [init?.gameData]);
+  const db = useMemo(() => buildHeroDb(init?.gameData.herodata ?? {}, init?.gameData.tags ?? {}, init?.gameData.imprints ?? {}), [init?.gameData]);
   const hd = useCallback((h: Hero) => findHeroData(db, h.dataKey || h.name), [db]);
   const statsCache = useMemo(() => new Map<string, DerivedStats | null>(), [account, db]);
   const stats = useCallback((h: Hero) => {

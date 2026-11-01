@@ -5,6 +5,7 @@ import { ARENA_BANDS, bandForPoints, COUNTER_TEAM_SIZE, GW_BANDS, type Band, typ
 import { TAG_LABELS } from "../../engine/tagger";
 import { GEAR_SLOTS } from "../../engine/types";
 import { classLabel, elementLabel } from "../../engine/labels";
+import { ImprintAuras } from "./metaShared";
 
 export default function CountersPage() {
   const { account, api, toast, init, heroById, itemById } = useForge();
@@ -165,6 +166,7 @@ export default function CountersPage() {
             <div className="timeline" style={{ margin: "8px 0" }}>{t.race.sample.slice(0, 8).map((e: any, k: number) => <div key={k} className={"t" + (e.side === "enemy" ? " enemy" : "")}>{k + 1}. {e.name}</div>)}</div>
             {t.reasons.map((r: string, k: number) => <div key={k} className="reason">{r}</div>)}
             {t.unanswered.length > 0 && <div className="reason" style={{ borderColor: "var(--bad)" }}>Not answered: {t.unanswered.join("; ")}</div>}
+            <ImprintAuras ids={t.heroIds} />
             <button className="small primary" style={{ marginTop: 10 }} disabled={!!busy} onClick={() => planGear(i)}>Plan gear for this team</button>
           </div>
         ))}</div>

@@ -2,7 +2,7 @@
 
 Gear optimizer for Epic Seven on Windows, built because Fribbels stopped getting updates. It reads gear and heroes from game traffic, so there's no export/import step.
 
-Personal project. Version 0.1.0.
+Personal project. Version 0.1.1.
 
 ## Install (portable build)
 
@@ -13,7 +13,7 @@ Personal project. Version 0.1.0.
    - Npcap from npcap.com, with "WinPcap API-compatible mode" ticked.
    - scapy: *Account & Live Sync → Install scapy*, or `py -m pip install scapy==2.8.0`.
 4. Turn on **Live Sync** (top right), start the game, open Inventory, then the Heroes list. Each screen imports about 4 s after it loads. **Sync now** forces it.
-5. Artifact, imprint and EE bonuses aren't in the captured data. Enter them once per hero from the hero header in Hero Optimizer (the bonus editor). Later syncs keep them.
+5. Memory Imprints, artifacts and EE aren't in the captured data. In Hero Optimizer, set each hero's **Memory Imprint** (Release or Concentration, and grade) and enter artifact / EE bonuses once. Later syncs keep them.
 
 No Python or Npcap? Use *Import Fribbels / RexQian save…* instead. Fribbels, the RexQian fork and the Dodaca Linux fork all write the same format.
 
@@ -41,6 +41,8 @@ PvE
 - **Labyrinth & Azmakalis Raid, Dimensional Exploration**: teams ranked on camp morale (CeciliaBot Camp Simulator rules) and sustain.
 - **Abyss**: pick a floor range and floor.
 
+Team suggestions show the Imprint Release each team gives. Auras that cover all allies are added to every member when a team is geared together; slot-limited ones (e.g. left and right) are listed but not applied, since they depend on your formation. Concentration is added to that hero's own stats everywhere.
+
 Every suggested team has a button that opens it in the Account-Wide Optimizer with those heroes pre-selected. For PvE it also carries the required breakpoints over as minimums.
 
 Back / Home / Forward are in the top bar (also Alt+Left, Alt+Home, Alt+Right and the mouse side buttons).
@@ -63,6 +65,7 @@ App Info in the app lists every source, what it's used for, and its license.
 - Role tags: EXCOFF E7 Builder `hero-effects.json` (MIT) plus epic7db skill pages.
 - PvP: epic7db RTA tier list (bundled) and epic7rtastats.com Champion+ rates (fetched at most once a day). e7rtabot.com isn't used because its terms forbid automated access.
 - PvE: `data/pve-presets.json`, summarised from epic7db, game8, Reddit and BlueStacks guides. Each line keeps its source, date and a confidence label.
+- Memory Imprints: Release and Concentration values per hero from epic7db hero pages (`data/imprints.json`).
 - Camping: CeciliaBot's camping data, fetched at runtime and cached for 7 days.
 - Stat math follows Fribbels' `StatCalculator`; a test checks one hero against Fribbels' numbers.
 
@@ -96,6 +99,11 @@ npm test         :: engine and capture tests
 ```
 
 ## Changelog
+
+0.1.1
+- Memory Imprints: set Release or Concentration and grade per hero; Release auras show on team suggestions and apply when gearing a team; Fribbels imports keep their imprint.
+- Sidebar tier badges removed; wording and capitalization made consistent (Thief, Earth, Spd, Live Sync, Account-Wide Optimizer).
+- PvP and PvE pages no longer show source links, confidence labels or guide names; App Info still lists every source.
 
 0.1.0
 - PvP and PvE sections replace Team Builder; Counter Planner moved to PvP → Offense.
