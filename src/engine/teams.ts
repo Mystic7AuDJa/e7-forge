@@ -1,6 +1,5 @@
-// AI team builder (feature #2) + team synergy analyzer (Tier 2).
-// Scores teams from owned heroes by role coverage for the chosen content,
-// pairwise synergies, elemental fit and how well each hero is already geared.
+// Team score = role coverage for the content + pairwise synergies + element fit
+// + how geared each hero already is. Weights below are hand-tuned, not fitted.
 import { optimizeAccount, type AccountResult } from "./account";
 import { currentBuildStats, type OptimizeOptions, type StatKey } from "./optimizer";
 import { baseRequest, detectArchetype, type Archetype } from "./recommend";

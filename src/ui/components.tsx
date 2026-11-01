@@ -174,7 +174,6 @@ export function Busy({ label }: { label: string }) {
   return <span className="pill info"><span className="dot decoding" /> {label}</span>;
 }
 
-// ---- Sortable tables -------------------------------------------------------
 export type SortState = { key: string; dir: 1 | -1 };
 type Getter<T> = (row: T) => number | string | null | undefined;
 

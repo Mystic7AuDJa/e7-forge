@@ -141,7 +141,6 @@ export function optimizeHero(hero: Hero, hd: HeroData, items: Item[], req: Optim
   const refs = statRefs(hd, currentStats);
   const score = req.targets ? (st: DerivedStats) => targetMatch(st, req.targets!).score : (st: DerivedStats) => objective(st, weights, refs);
 
-  // ---- per-slot candidate scoring & pruning --------------------------------
   const pools = candidateItems(hero, items, req, opts.reserved);
   type Cand = { item: Item; acc: Float64Array; set: number; h: number };
   const slotCands: Cand[][] = [];
@@ -217,7 +216,6 @@ export function optimizeHero(hero: Hero, hd: HeroData, items: Item[], req: Optim
   const maxB = req.max ?? {};
   const minB = req.min ?? {};
 
-  // ---- branch & bound ------------------------------------------------------
   const heap: { score: number; ids: number[]; stats: DerivedStats }[] = [];
   const pushResult = (score: number, picks: number[], stats: DerivedStats) => {
     if (heap.length < limit) {

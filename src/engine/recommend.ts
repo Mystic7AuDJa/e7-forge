@@ -1,7 +1,6 @@
-// Gear recommendation AI (feature #3): proposes target stats for a hero,
-// builds it from your gear, and explains the reasoning. Rule-based and
-// transparent: archetype from skill scaling + tags, targets from community
-// cohorts when available, feasibility from the optimizer.
+// Rule-based on purpose so every target can be explained in the UI:
+// archetype from skill scaling + tags, targets from community cohorts when we
+// have them, and the optimizer decides what's actually reachable.
 import { benchmark, type CommunityBuild } from "./benchmark";
 import { optimizeHero, currentBuildStats, type StatKey, type OptimizeOptions } from "./optimizer";
 import { winSpeedRace } from "./speedtune";

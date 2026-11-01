@@ -48,8 +48,6 @@ export function mapCamping(data: Record<string, any>, heroDb: Record<string, { n
   return out;
 }
 
-// ---- Labyrinth / Azmakalis / Dimensional Exploration team search ----
-
 const SUSTAIN: Record<string, number> = { heal: 2, barrier: 1.5, cleanse: 1.2, revive: 1.2, immunity: 1, immortal: 0.8, invincible: 0.8, def_buff: 0.6, provoke: 0.4 };
 
 export interface CampTeam {

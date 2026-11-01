@@ -5,8 +5,6 @@ import { buildTeams, normElement, type TeamCandidate } from "../../engine/teams"
 import { campTeams, type CampTeam } from "../../engine/camping";
 import { Conf, OpenInAccountOpt, SourceLine, TeamHeroes, useCandidates, useMeta, useOwnedByName } from "./metaShared";
 
-// ---------- shared pieces ----------
-
 interface Mech { text: string; source?: string; date?: string; confidence?: string }
 interface Bp { stat: string; op: string; value: number; appliesTo: string; required: boolean; note?: string; source?: string; date?: string; confidence?: string }
 interface PresetHero { name: string; role: string; alternatives?: string[] }
@@ -150,8 +148,6 @@ function EncounterBody({ e, cands, owned, must, extraNote }: { e: Encounter; can
   </>;
 }
 
-// ---------- Hunts ----------
-
 export function HuntsPage() {
   const { account } = useForge();
   const { meta } = useMeta();
@@ -179,8 +175,6 @@ export function HuntsPage() {
     </div>
   );
 }
-
-// ---------- Abyss ----------
 
 export function AbyssPage() {
   const { account } = useForge();
@@ -215,8 +209,6 @@ export function AbyssPage() {
     </div>
   );
 }
-
-// ---------- Labyrinth & Azmakalis, Dimensional Exploration (morale + sustain) ----------
 
 function CampResults({ teams, moraleOk }: { teams: CampTeam[]; moraleOk: boolean }) {
   const { heroById } = useForge();

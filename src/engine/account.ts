@@ -1,4 +1,3 @@
-// Account-wide optimization (feature #1).
 // 1) Each hero is optimized against the shared pool to get its top-K builds.
 // 2) A branch-and-bound assignment picks one build per hero with no shared
 //    items, maximizing the team objective minus a gear-move penalty, while

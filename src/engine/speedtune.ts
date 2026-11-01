@@ -1,6 +1,3 @@
-// Speed-tuning assistant (feature #5): turn-order simulation with speed RNG,
-// combat-readiness pushes/reductions and speed buffs/debuffs.
-//
 // Model: each unit's CR fills at a rate equal to its effective speed. At
 // battle start each unit gets a random starting CR in [0, rng*100]. The unit
 // whose CR reaches 100 first acts, then resets to 0 and applies its effects.

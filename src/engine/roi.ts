@@ -1,5 +1,5 @@
-// Gear upgrade ROI engine (feature #8): Monte Carlo forecast of an item's
-// final value from its current enhancement level.
+// Monte Carlo: roll the remaining enhances many times instead of trying to
+// get a closed form (sub reveals and reforge make the math messy).
 import { GS_WEIGHTS, SLOT_MAINS, START_SUBS } from "./constants";
 import { gearScore, reforgedSubs, rollRanges } from "./gear";
 import { STAT_TYPES, type Item, type StatType, type Substat } from "./types";

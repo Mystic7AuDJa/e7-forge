@@ -71,8 +71,6 @@ export function estimateEnemy(name: string, hd: HeroData | undefined, builds: Co
   };
 }
 
-// ---- Threats ----------------------------------------------------------------
-
 export interface Threat { id: string; label: string; heroes: string[]; severity: number; answers: string[]; advice: string }
 
 /** Enemy kit features and which of YOUR tags answer them. */
@@ -96,8 +94,6 @@ export function analyzeThreats(enemies: EnemyEstimate[]): Threat[] {
   }
   return out.sort((a, b) => b.severity - a.severity);
 }
-
-// ---- Turn order -------------------------------------------------------------
 
 function effectsOf(hd?: HeroData): TurnEffect[] {
   const t = new Set(hd?.tags ?? []);
@@ -150,8 +146,6 @@ export function speedRace(mine: { name: string; spd: number; hd?: HeroData }[], 
     sample,
   };
 }
-
-// ---- Counter teams ----------------------------------------------------------
 
 const ELEMENT_ADV: Record<string, string> = { fire: "earth", earth: "ice", ice: "fire", light: "dark", dark: "light" };
 

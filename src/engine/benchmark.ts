@@ -1,4 +1,3 @@
-// Build benchmark database (feature #4).
 // Community data: Fribbels hero library (`getBuilds`), ~3000 recent builds per
 // hero. The data has no player-rank field, so "Emperor/Legend/tournament"
 // tiers are approximated by gear-score cohorts (top 10% / top 1%).
@@ -79,8 +78,6 @@ export function topPercentLocal(value: number, population: number[]): number {
   if (!population.length) return 100;
   return Math.max(0.1, Math.round((population.filter((v) => v > value).length / population.length) * 1000) / 10);
 }
-
-// ---- Benchmark-driven optimizer targets -------------------------------------
 
 /** Community set code -> E7 Forge set name. */
 export const SET_FROM_CODE: Record<string, string> = {
