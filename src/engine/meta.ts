@@ -176,7 +176,7 @@ export function suggestPvp(cands: TeamCandidate[], meta: Map<string, MetaInfo>, 
       if (banned.length) warnings.push(`Often pre-banned at Champion+: ${banned.map((m) => m.hero.name).join(", ")}. Have a backup.`);
     }
     const strong = team.filter((_, i) => (metas[i]?.tierScore ?? 0) >= TIER_SCORE.A);
-    if (strong.length) reasons.push(`${strong.length} of ${team.length} rated A–SS on epic7db (${strong.map((m) => `${m.hero.name} ${mi(m)?.tier}`).join(", ")}).`);
+    if (strong.length) reasons.push(`${strong.length} of ${team.length} rated A–SS in the tier list (${strong.map((m) => `${m.hero.name} ${mi(m)?.tier}`).join(", ")}).`);
     const popular = team.filter((_, i) => (metas[i]?.rtaPick ?? 0) >= 5);
     if (popular.length) reasons.push(`Picked often by Champion+ RTA players: ${popular.map((m) => `${m.hero.name} ${mi(m)?.rtaPick?.toFixed(1)}%`).join(", ")}.`);
     for (const x of syn.synergies.slice(0, 2)) reasons.push(x);

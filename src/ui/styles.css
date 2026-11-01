@@ -228,9 +228,6 @@ ul.bpchecks { list-style: none; padding-left: 0; columns: 2; }
 .team-hero { display: flex; align-items: center; gap: 8px; min-width: 150px; font-size: 13px; }
 .team-hero.missing { opacity: .45; }
 .team-hero.missing > div > div:first-child::after { content: " · not owned"; color: #ef7a7a; font-size: 11px; }
-.conf { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; padding: 1px 6px; border-radius: 5px; border: 1px solid currentColor; }
-.conf.ok { color: #6fcf8a; } .conf.warn { color: #e3b75a; } .conf.legacy { color: #9aa6ff; } .conf.bad { color: #ef7a7a; }
-.srcline { display: inline-flex; gap: 6px; align-items: center; font-size: 11px; margin-left: 4px; }
 .tierchip { font-weight: 700; font-size: 11px; padding: 1px 7px; border-radius: 5px; background: #273246; }
 .tierchip.tSS { background: #6b2f2f; color: #ffd0d0; } .tierchip.tS { background: #5c4420; color: #ffe2a8; } .tierchip.tA { background: #234a38; color: #b9f0cf; }
 .team-hero img, td .row img { width: 40px; height: 40px; border-radius: 50%; flex: none; object-fit: cover; background: #222b3a; }

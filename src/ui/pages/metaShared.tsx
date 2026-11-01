@@ -28,27 +28,6 @@ export function useOwnedByName(cands: TeamCandidate[]) {
   }, [cands]);
 }
 
-const CONF_CLASS: Record<string, string> = { sourced: "ok", "undated-guide": "warn", inferred: "warn", "legacy-2020": "legacy", "player-report": "warn", unsourced: "bad" };
-
-export function Conf({ c }: { c?: string | null }) {
-  if (!c) return null;
-  return <span className={"conf " + (CONF_CLASS[c] ?? "warn")} title="How much to trust this line">{c}</span>;
-}
-
-export function SourceLine({ source, date, confidence }: { source?: string; date?: string; confidence?: string }) {
-  const { api } = useForge();
-  if (!source && !date && !confidence) return null;
-  let host = "";
-  try { host = source ? new URL(source).hostname.replace(/^www\./, "") : ""; } catch { host = source ?? ""; }
-  return (
-    <span className="srcline">
-      <Conf c={confidence} />
-      {date && <span className="muted">{date}</span>}
-      {source && <a onClick={() => api.openExternal(source)} title={source}>{host}</a>}
-    </span>
-  );
-}
-
 export function TeamHeroes({ heroes, sub }: { heroes: { hero?: Hero; name: string; note?: React.ReactNode; missing?: boolean }[]; sub?: (i: number) => React.ReactNode }) {
   return (
     <div className="team-heroes">

@@ -90,7 +90,7 @@
      "value": 140,
      "appliesTo": "Sigret",
      "required": true,
-     "note": "Described as mandatory (140+).",
+     "note": "Mandatory (140+).",
      "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
      "date": "undated",
      "confidence": "sourced"
@@ -101,7 +101,7 @@
      "value": 140,
      "appliesTo": "Muwi",
      "required": true,
-     "note": "Described as mandatory (140+).",
+     "note": "Mandatory (140+).",
      "source": "https://epic7db.com/guides/setting-up-your-first-wyvern-13-auto-team",
      "date": "undated",
      "confidence": "sourced"

@@ -11,7 +11,7 @@ const INFO: Record<PvpMode, { title: string; sub: string }> = {
   },
   rta: {
     title: "RTA Draft",
-    sub: "A five-hero draft core from your roster, ranked against what Champion+ players pick, win with and pre-ban, plus epic7db's RTA tier list.",
+    sub: "A five-hero draft core from your roster, ranked against what Champion+ players pick, win with and pre-ban, plus the RTA tier list.",
   },
   gw_off: {
     title: "Guild War Offense",
@@ -49,12 +49,6 @@ function PvpPage({ mode }: { mode: PvpMode }) {
   return (
     <div className="stack">
       <div><h1>{info.title}</h1><p className="sub">{info.sub}</p></div>
-      <div className="callout">
-        <b>Where the "top players" picture comes from.</b> No public site tracks Arena or Guild War teams, so every PvP page uses the same two sources: epic7db's RTA tier list (heroes rated A to SS) and live RTA rates for Champion and higher ranks from epic7rtastats.com
-        {rta ? <> ({rta.start.slice(0, 10)} to {rta.end.slice(0, 10)}, fetched {new Date(rta.fetchedAt).toLocaleDateString()})</> : " (not loaded)"}.
-        {meta?.tiers?.rta?.created && <> Tier list first published {meta.tiers.rta.created}; epic7db updates it over time.</>}
-        <span style={{ float: "right" }}>{metaBusy ? <Busy label="Loading meta…" /> : <button className="small" onClick={() => loadMeta(true)}>Refresh</button>}</span>
-      </div>
 
       {!meta ? <Busy label="Loading tier lists and RTA rates…" /> : <>
         <div className="row">
@@ -69,6 +63,7 @@ function PvpPage({ mode }: { mode: PvpMode }) {
           {must.map((id) => <span key={id} className="tag">{heroById.get(id)?.name} <a onClick={() => setMust(must.filter((x) => x !== id))}>×</a></span>)}
           <span style={{ flex: 1 }} />
           <span className="muted">You own {ownedPool.length} of {pool.length} heroes in the top-player pool</span>
+          {metaBusy ? <Busy label="Refreshing…" /> : <button className="small" onClick={() => loadMeta(true)}>Refresh</button>}
         </div>
 
         {mode === "gw_off" && result && (
@@ -86,7 +81,7 @@ function PvpPage({ mode }: { mode: PvpMode }) {
 
         <Section title="Top-player hero pool" right={<Toggle on={ownedOnly} onChange={setOwnedOnly} label="Owned only" />}>
           <table>
-            <thead><tr><th>Hero</th><th>epic7db tier</th><th className="num">RTA pick %</th><th className="num">RTA win %</th><th className="num">Pre-ban %</th><th className="num">Meta score</th><th>Yours</th><th className="num">Your GS</th></tr></thead>
+            <thead><tr><th>Hero</th><th>Tier</th><th className="num">RTA pick %</th><th className="num">RTA win %</th><th className="num">Pre-ban %</th><th className="num">Meta score</th><th>Yours</th><th className="num">Your GS</th></tr></thead>
             <tbody>{shown.map((m) => {
               const c = owned.get(m.name);
               return (
@@ -103,7 +98,7 @@ function PvpPage({ mode }: { mode: PvpMode }) {
               );
             })}</tbody>
           </table>
-          <p className="muted" style={{ fontSize: 12 }}>Pick, win and pre-ban rates are per game at Champion+ in RTA; the site publishes them for the top 20 heroes in each list, so other heroes show a dash. Pre-ban rate is per side, so ~50% means one of the two players bans it in about half of games. Sources: <a onClick={() => api.openExternal("https://www.epic7rtastats.com/meta")}>epic7rtastats.com</a>, <a onClick={() => api.openExternal(meta.tiers.rta.url)}>epic7db RTA tier list</a>.</p>
+          <p className="muted" style={{ fontSize: 12 }}>Pick, win and pre-ban rates are per game at Champion and above in RTA, and are only available for the 20 most-picked heroes. Pre-ban rate is per side, so ~50% means one of the two players bans it in about half of games.</p>
         </Section>
       </>}
     </div>

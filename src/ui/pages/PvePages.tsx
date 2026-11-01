@@ -3,7 +3,7 @@ import { useForge } from "../state";
 import { Busy, fmt, HeroSelect, NoAccount, Section } from "../components";
 import { buildTeams, normElement, type TeamCandidate } from "../../engine/teams";
 import { campTeams, type CampTeam } from "../../engine/camping";
-import { Conf, OpenInAccountOpt, SourceLine, TeamHeroes, useCandidates, useMeta, useOwnedByName } from "./metaShared";
+import { OpenInAccountOpt, TeamHeroes, useCandidates, useMeta, useOwnedByName } from "./metaShared";
 import { classLabel, elementLabel, tagLabel, tagList } from "../../engine/labels";
 
 interface Mech { text: string; source?: string; date?: string; confidence?: string }
@@ -11,6 +11,14 @@ interface Bp { stat: string; op: string; value: number; appliesTo: string; requi
 interface PresetHero { name: string; role: string; alternatives?: string[] }
 interface PresetTeam { name: string; heroes: PresetHero[]; source?: string; date?: string; confidence?: string; notes?: string; difficulty?: string }
 interface Encounter { id?: string; name?: string; element?: { value: string | null; confidence?: string; note?: string }; advantage?: string | null; needTags?: string[]; mechanics?: Mech[]; breakpoints?: Bp[]; relative?: any[]; thresholds?: Mech[]; teams?: PresetTeam[] }
+
+// Preset data keeps notes about where each line came from (shown on App Info).
+// Pages show only the game advice, so sentences about sources are dropped here.
+const META_RE = /\b(bluestacks|game8|reddit|epic7db|ludo(\.guide)?|sourced?|unsourced|inferred|not stated|cites|contradicts?|conflict(ing)?|low reliability|legacy|encoded)\b/i;
+function clean(text?: string) {
+  if (!text) return "";
+  return (text.match(/[^.!?]+[.!?]*(\s+|$)/g) ?? [text]).filter((x) => !META_RE.test(x)).join("").trim();
+}
 
 const STAT_LABEL: Record<string, string> = { spd: "Speed", eff: "Effectiveness", res: "Effect Resistance", cr: "Crit Chance", cd: "Crit Damage", hp: "HP", atk: "Attack", def: "Defense" };
 const slotRole = (r: string) => (r === "dps" ? "DPS" : r === "aoe_dps" ? "AoE DPS" : r.charAt(0).toUpperCase() + r.slice(1).replace(/_/g, " "));
@@ -20,20 +28,20 @@ function ElementLine({ e }: { e: Encounter }) {
   const el = e.element;
   return (
     <div className="row" style={{ gap: 14 }}>
-      <span>Boss element: <b>{elementLabel(el?.value) || "Unknown"}</b> <Conf c={el?.confidence} /></span>
+      <span>Boss element: <b>{elementLabel(el?.value) || "Unknown"}</b></span>
       <span>Bring: <b>{elementLabel(e.advantage) || "Any"}</b></span>
       {!!e.needTags?.length && <span>Needs: {e.needTags.map((t) => <span key={t} className="tag">{tagLabel(t)}</span>)}</span>}
-      {el?.note && <span className="muted" style={{ fontSize: 12 }}>{el.note}</span>}
     </div>
   );
 }
 
 function Mechanics({ items, title = "Mechanics" }: { items?: Mech[]; title?: string }) {
-  if (!items?.length) return null;
+  const lines = (items ?? []).map((m) => clean(m.text)).filter(Boolean);
+  if (!lines.length) return null;
   return (
     <div>
       <h3>{title}</h3>
-      <ul className="mech">{items.map((m, i) => <li key={i}>{m.text} <SourceLine source={m.source} date={m.date} confidence={m.confidence} /></li>)}</ul>
+      <ul className="mech">{lines.map((t, i) => <li key={i}>{t}</li>)}</ul>
     </div>
   );
 }
@@ -55,7 +63,7 @@ function bpTargets(bp: Bp, members: { c?: TeamCandidate; slot: PresetHero }[]) {
   return members.filter((m) => m.slot.name === a || m.c?.hero.name === a || m.slot.alternatives?.includes(a));
 }
 
-function PresetTeamCard({ t, owned, bps }: { t: PresetTeam; owned: Map<string, TeamCandidate>; bps: Bp[] }) {
+function PresetTeamCard({ t, n, owned, bps }: { t: PresetTeam; n: number; owned: Map<string, TeamCandidate>; bps: Bp[] }) {
   const used = new Set<string>();
   const members = t.heroes.map((slot) => { const r = resolveSlot(slot, owned, used); if (r) used.add(r.c.hero.id); return { slot, c: r?.c, alt: r?.alt }; });
   const have = members.filter((m) => m.c).length;
@@ -74,19 +82,19 @@ function PresetTeamCard({ t, owned, bps }: { t: PresetTeam; owned: Map<string, T
   return (
     <div className="card" style={{ background: "var(--panel-2)" }}>
       <div className="row" style={{ justifyContent: "space-between" }}>
-        <b>{t.name}{t.difficulty ? ` · ${t.difficulty}` : ""}</b>
+        <b>Team {n}{t.difficulty ? ` · ${t.difficulty === "hell" ? "Hell" : "Normal"}` : ""}</b>
         <span className={have === members.length ? "ok" : "muted"}>{have === members.length ? "You can run this" : `You have ${have} of ${members.length}`}</span>
       </div>
       <TeamHeroes heroes={members.map((m) => ({
         name: m.c ? m.c.hero.name : m.slot.name, missing: !m.c,
-        note: <>{slotRole(m.slot.role)}{m.alt ? ` · as alternative for ${m.slot.name}` : ""}{!m.c && m.slot.alternatives?.length ? ` · Alt: ${m.slot.alternatives.join(", ")}` : ""}{m.c ? ` · ${m.c.current.spd} Spd` : ""}</>,
+        note: [m.slot.role !== "option" && slotRole(m.slot.role), m.alt && `in place of ${m.slot.name}`, !m.c && m.slot.alternatives?.length && `Alt: ${m.slot.alternatives.join(", ")}`, m.c && `${m.c.current.spd} Spd`].filter(Boolean).join(" · "),
       }))} />
       {checks.length > 0 && (
         <ul className="bpchecks">{checks.map((c, i) => <li key={i} className={c.ok ? "ok" : c.required ? "bad" : "warn"}>{c.ok ? "✓" : "✗"} {c.label}{c.required ? "" : " (optional)"}</li>)}</ul>
       )}
-      {t.notes && <p className="muted" style={{ fontSize: 12 }}>{t.notes}</p>}
+      {clean(t.notes) && <p className="muted" style={{ fontSize: 12 }}>{clean(t.notes)}</p>}
       <div className="row" style={{ justifyContent: "space-between" }}>
-        <SourceLine source={t.source} date={t.date} confidence={t.confidence} />
+        <span />
         <OpenInAccountOpt ids={ids} mins={Object.keys(mins).length ? mins : undefined} label={Object.keys(mins).length ? "Gear to breakpoints in Account-Wide Optimizer" : undefined} />
       </div>
     </div>
@@ -134,14 +142,14 @@ function EncounterBody({ e, cands, owned, must, extraNote }: { e: Encounter; can
       <Mechanics items={e.thresholds} title="Limits" />
       {bps.length > 0 && <>
         <h3>Stat breakpoints from guides</h3>
-        <table><thead><tr><th>Who</th><th>Stat</th><th className="num">Target</th><th>Required?</th><th>Why</th><th>Source</th></tr></thead>
-          <tbody>{bps.map((b, i) => <tr key={i}><td>{b.appliesTo}</td><td>{STAT_LABEL[b.stat] ?? b.stat}</td><td className="num">{b.op} {b.value}</td><td>{b.required ? "yes" : <span className="muted">optional</span>}</td><td className="muted" style={{ whiteSpace: "normal" }}>{b.note}</td><td><SourceLine source={b.source} date={b.date} confidence={b.confidence} /></td></tr>)}</tbody></table>
+        <table><thead><tr><th>Who</th><th>Stat</th><th className="num">Target</th><th>Required?</th><th>Why</th></tr></thead>
+          <tbody>{bps.map((b, i) => <tr key={i}><td>{b.appliesTo.charAt(0).toUpperCase() + b.appliesTo.slice(1)}</td><td>{STAT_LABEL[b.stat] ?? b.stat}</td><td className="num">{b.op === ">=" ? "≥" : b.op} {b.value}</td><td>{b.required ? "Yes" : <span className="muted">Optional</span>}</td><td className="muted" style={{ whiteSpace: "normal" }}>{clean(b.note?.replace(/^OPTIONAL:\s*/i, ""))}</td></tr>)}</tbody></table>
       </>}
-      {!!e.relative?.length && <ul className="mech">{e.relative.map((r: any, i: number) => <li key={i}>{r.text} <SourceLine source={r.source} confidence={r.confidence} /></li>)}</ul>}
+      {!!e.relative?.length && <ul className="mech">{e.relative.map((r: any, i: number) => <li key={i}>{clean(r.text)}</li>)}</ul>}
     </Section>
     {!!e.teams?.length && (
-      <Section title="Guide teams vs. what you own" right={<span className="muted">Your best owned copy fills each slot; alternatives are used when you lack the main pick</span>}>
-        <div className="grid g2">{e.teams.map((t, i) => <PresetTeamCard key={i} t={t} owned={owned} bps={bps} />)}</div>
+      <Section title="Recommended teams vs. what you own" right={<span className="muted">Your best owned copy fills each slot; alternatives are used when you lack the main pick</span>}>
+        <div className="grid g2">{e.teams.map((t, i) => <PresetTeamCard key={i} n={i + 1} t={t} owned={owned} bps={bps} />)}</div>
       </Section>
     )}
     <Section title="Teams built from your roster" right={<span className="muted">Role coverage, element and gear readiness</span>}>
@@ -173,7 +181,7 @@ export function HuntsPage() {
         </div>
         <MustInclude must={must} setMust={setMust} />
       </div>
-      <EncounterBody e={e} cands={cands} owned={owned} must={must} extraNote={tier === "hell" ? <p className="callout">No public Otherworldly / Hell guide was found, so this shows the stage 13 teams and breakpoints as a baseline. Expect higher boss stats: treat the breakpoints as minimums and aim higher. {meta.presets.otherworldly?.note}</p> : null} />
+      <EncounterBody e={e} cands={cands} owned={owned} must={must} extraNote={tier === "hell" ? <p className="callout">Otherworldly / Hell uses the stage 13 teams and breakpoints. Boss stats are higher, so treat the breakpoints as minimums and aim above them.</p> : null} />
     </div>
   );
 }
@@ -195,7 +203,6 @@ export function AbyssPage() {
   return (
     <div className="stack">
       <div><h1>Abyss</h1><p className="sub">Pick a floor range, then a floor. Shows the floor's mechanics and limits, the guide teams you can field, and teams built from your roster.</p></div>
-      <p className="callout">{meta.presets.abyss?.note}</p>
       <div className="row">
         <div className="seg">{groups.map((x) => <button key={x.id} className={g.id === x.id ? "on" : ""} onClick={() => { setGroup(x.id); setFloor(null); }}>{x.id}{x.floors.length ? "" : " ·"}</button>)}</div>
         {g.floors.length > 0 && <select value={f?.floor} onChange={(e) => setFloor(Number(e.target.value))}>{g.floors.map((x) => <option key={x.floor} value={x.floor}>Floor {x.floor}</option>)}</select>}
@@ -203,7 +210,7 @@ export function AbyssPage() {
       </div>
       {f ? <EncounterBody e={{ ...f, name: `Floor ${f.floor}` }} cands={cands} owned={owned} must={must} /> : <>
         <Section title={g.label}>
-          <p className="muted">No guide data exists for these floors. Choose the enemy element to build a team from your roster.</p>
+          <p className="muted">No preset teams for these floors. Choose the enemy element to build a team from your roster.</p>
           <select value={element} onChange={(e) => setElement(e.target.value)}><option value="">Any element</option>{["fire", "ice", "earth", "light", "dark"].map((x) => <option key={x}>{x}</option>)}</select>
         </Section>
         <Section title="Teams built from your roster"><BuiltTeams cands={cands} element={element || null} must={must} /></Section>
@@ -238,11 +245,11 @@ function useCamp(cands: TeamCandidate[], o: Parameters<typeof campTeams>[3]) {
 }
 
 function CampingCredit() {
-  const { meta, api } = useForge();
+  const { meta } = useForge();
   return (
     <p className="muted" style={{ fontSize: 12 }}>
-      Morale is scored the way <a onClick={() => api.openExternal("https://ceciliabot.github.io/camping-simulator/")}>CeciliaBot's Camp Simulator</a> does it: each hero has two personalities and two topics; a topic's morale is how much the other three heroes like it, and the camp uses the two best topics.
-      {meta?.camping ? ` Camping data for ${Object.keys(meta.camping.heroes).length} heroes, fetched ${new Date(meta.camping.fetchedAt).toLocaleDateString()}.` : " Camping data isn't loaded, so morale is skipped."}
+      Each hero has two personalities and two topics. A topic's morale is how much the other three heroes like it, and the camp uses the two best topics.
+      {meta?.camping ? "" : " Camping data isn't loaded, so morale is skipped."}
     </p>
   );
 }
@@ -264,7 +271,6 @@ export function LabyrinthPage() {
   return (
     <div className="stack">
       <div><h1>Labyrinth & Azmakalis Raid</h1><p className="sub">Long runs come down to camp morale and team sustain. Teams are ranked by camp morale, healing / barrier / cleanse / revive, the boss's needs and how well each hero is geared.</p></div>
-      <p className="callout">{meta.presets.azmakalis?.note} {meta.presets.labyrinth?.note}</p>
       <div className="row">
         <select value={boss} onChange={(e) => setBoss(e.target.value)}>
           <option value="explore">Exploration (no boss)</option>
@@ -277,16 +283,14 @@ export function LabyrinthPage() {
         <MustInclude must={must} setMust={setMust} />
       </div>
       {b && (
-        <Section title={`${b.name} (legacy 2020 raid boss)`}>
+        <Section title={b.name ?? "Boss"}>
           <ElementLine e={b} />
           <Mechanics items={b.mechanics} />
           {presetTeams.length > 0 && <>
-            <h3>Heroes the 2020 guide used ({diff})</h3>
+            <h3>Common picks ({diff === "hell" ? "Hell" : "Normal"})</h3>
             {presetTeams.map((t, i) => (
               <div key={i} style={{ marginBottom: 8 }}>
-                <b>{t.name}:</b>{" "}
                 {t.heroes.map((h) => <span key={h.name} className={"tag" + (owned.has(h.name) ? " owned" : " dim")}>{owned.has(h.name) ? "✓ " : ""}{h.name}</span>)}
-                {" "}<SourceLine source={t.source} date={t.date} confidence={t.confidence} />
               </div>
             ))}
           </>}
@@ -298,7 +302,7 @@ export function LabyrinthPage() {
 }
 
 export function DimensionalPage() {
-  const { account, api } = useForge();
+  const { account } = useForge();
   const { meta } = useMeta();
   const cands = useCandidates();
   const [focus, setFocus] = useState<"balanced" | "sustain" | "morale">("balanced");
@@ -307,11 +311,10 @@ export function DimensionalPage() {
   const teams = useCamp(cands, { size: 4, mustInclude: must, moraleWeight: w[0], sustainWeight: w[1], top: 6 });
   if (!account) return <NoAccount />;
   if (!meta) return <Busy label="Loading PvE data…" />;
-  const de = meta.presets.dimensionalExploration;
   return (
     <div className="stack">
       <div><h1>Dimensional Exploration</h1><p className="sub">Roguelike runs where the same team carries through many fights, so sustain and morale matter more than burst. Teams are ranked on both, plus how well each hero is geared.</p></div>
-      <p className="callout">{de?.note} No team or stat guides exist yet, so these teams come from your roster only. {de?.sources?.[0] && <a onClick={() => api.openExternal(de.sources[0])}>Source</a>}</p>
+      <p className="callout">No preset teams for Dimensional Exploration yet, so these come from your roster only.</p>
       <div className="row">
         <div className="seg">
           {(["balanced", "sustain", "morale"] as const).map((f) => <button key={f} className={focus === f ? "on" : ""} onClick={() => setFocus(f)}>{f === "balanced" ? "Balanced" : f === "sustain" ? "Sustain first" : "Morale first"}</button>)}
