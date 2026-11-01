@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Personal Epic Seven gear optimizer: account-wide optimization, speed tuning, upgrade ROI, community benchmarks, stat recommendations and team building. Imports Fribbels optimizer exports.",
   "author": "E7 Forge contributors",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "private": true,
   "main": "dist-electron/main.js",
   "scripts": {
