@@ -1,7 +1,7 @@
 // Rule-based on purpose so every target can be explained in the UI:
 // archetype from skill scaling + tags, targets from community cohorts when we
 // have them, and the optimizer decides what's actually reachable.
-import { benchmark, type CommunityBuild } from "./benchmark";
+import { benchmark, eliteProfile, type CommunityBuild, type EliteProfile } from "./benchmark";
 import { optimizeHero, currentBuildStats, type StatKey, type OptimizeOptions } from "./optimizer";
 import { winSpeedRace } from "./speedtune";
 import type { Build, DerivedStats, Hero, HeroData, Item, OptimizeRequest } from "./types";
@@ -71,6 +71,12 @@ export interface RecommendInput {
 
 export interface Recommendation {
   archetype: Archetype;
+  /** Top 1% community profile used as the target, when community builds were loaded. */
+  elite: { sample: number; cohort: number; setCombos: EliteProfile["setCombos"] } | null;
+  /** Stats in priority order (first = most important). */
+  priorities: StatKey[];
+  /** Your best build's value for each target stat. */
+  best: Partial<Record<StatKey, number>>;
   archetypeLabel: string;
   request: OptimizeRequest;
   build: Build | null;
@@ -101,18 +107,62 @@ export function baseRequest(hero: Hero, hd: HeroData, current: DerivedStats, com
   }
   if (info.archetype === "tank" || info.archetype === "support") {
     const target = bench ? Math.round(Math.max(0, bench.topCohortMedian.res * 0.8)) : 80;
-    if (target > 0) { min.res = target; reasons.push(`Effect resistance ${target}% to resist enemy openers.`); }
+    if (target > 0) { min.res = target; reasons.push(`Effect Resistance ${target}% to resist enemy openers.`); }
   }
   const request: OptimizeRequest = { heroId: hero.id, weights, min, allowEquipped, limit: 30 };
   return { info, reasons, request, min, weights, bench };
 }
+
+const STAT_NAME: Partial<Record<StatKey, string>> = { spd: "Speed", atk: "Attack", hp: "Health", def: "Defense", cr: "Crit Chance", cd: "Crit Damage", eff: "Effectiveness", res: "Effect Resistance", ehp: "EHP" };
+
+// Which top-1% stats matter most for each archetype, in order.
+const ARCH_PRIORITIES: Record<Archetype, StatKey[]> = {
+  crit_dps: ["cr", "cd", "atk", "spd"],
+  speed_dps: ["spd", "cr", "cd", "atk"],
+  hp_bruiser: ["hp", "spd", "cr", "cd"],
+  def_bruiser: ["def", "spd", "cr", "cd"],
+  debuffer: ["spd", "eff", "hp", "def"],
+  support: ["spd", "hp", "res", "def"],
+  tank: ["hp", "def", "res", "spd"],
+};
 
 export function recommend(inp: RecommendInput): Recommendation {
   const { hero, hd, items } = inp;
   const current = currentBuildStats(hero, hd, items).stats;
   const { info, reasons, request, min, weights, bench } = baseRequest(hero, hd, current, inp.community, inp.allowEquipped ?? false);
   const relaxed: string[] = [];
+  const elite = inp.community?.length ? eliteProfile(inp.community, 0.01) : null;
+  const priorities = ARCH_PRIORITIES[info.archetype];
+  if (elite) {
+    // Aim at the community's top 1% (median of the best-geared 1% of builds), like Hero Optimizer's Benchmark mode.
+    const stats: Partial<Record<StatKey, number>> = {};
+    for (const k of ["spd", "atk", "hp", "def", "cr", "cd", "eff", "res"] as StatKey[]) {
+      const v = elite.targets[k as keyof typeof elite.targets];
+      if (v > 0) stats[k] = Math.round(v);
+    }
+    request.targets = { stats, priorities };
+    // Floors follow the top 1% too (baseRequest used the top 10%).
+    const dropReason = (prefix: string) => { const i = reasons.findIndex((r) => r.startsWith(prefix)); if (i >= 0) reasons.splice(i, 1); };
+    if (min.eff != null && stats.eff) {
+      min.eff = Math.round(Math.max(80, stats.eff * 0.95));
+      dropReason("Effectiveness"); reasons.push(`Effectiveness floor ${min.eff}%: ~95% of the top 1% median (${stats.eff}%).`);
+    }
+    if (min.res != null && stats.res != null) {
+      min.res = Math.round(stats.res * 0.8) || undefined;
+      dropReason("Effect Resistance");
+      if (min.res) reasons.push(`Effect Resistance floor ${min.res}%: 80% of the top 1% median (${stats.res}%), to resist openers.`);
+    }
+    if (!min.res) delete min.res;
+    const combos = elite.setCombos.filter((c) => c.share >= 0.15).slice(0, 2).map((c) => c.sets);
+    if (combos.length) request.sets = combos;
+    reasons.push(`Targets are the median of the top 1% of ${elite.sample} community builds by gear score (${elite.cohort} builds). Priorities: ${priorities.map((k) => STAT_NAME[k]).join(" > ")}.`);
+  }
   let res = optimizeHero(hero, hd, items, request, inp.options);
+  if (!res.builds.length && request.sets?.length) {
+    relaxed.push(`Sets ${request.sets.map((c) => c.map((n) => n.replace(/Set$/, "")).join(" + ")).join(" / ")} → any (not buildable with your gear)`);
+    delete request.sets;
+    res = optimizeHero(hero, hd, items, request, inp.options);
+  }
   // Progressive relaxation if constraints cannot be met with your gear.
   const steps: [StatKey, number][] = [["eff", 0.85], ["res", 0.6], ["cr", 0.9], ["eff", 0.7], ["res", 0]];
   for (const [k, f] of steps) {
@@ -120,31 +170,43 @@ export function recommend(inp: RecommendInput): Recommendation {
     const before = min[k]!;
     min[k] = Math.round(before * f) || undefined;
     if (!min[k]) delete min[k];
-    relaxed.push(`${k.toUpperCase()} ${before} → ${min[k] ?? "none"} (not reachable with your gear)`);
+    relaxed.push(`${STAT_NAME[k]} ${before} → ${min[k] ?? "none"} (not reachable with your gear)`);
     res = optimizeHero(hero, hd, items, request, inp.options);
   }
   const build = res.builds[0] ?? null;
   const targets: Partial<Record<StatKey, number>> = {};
+  const best: Partial<Record<StatKey, number>> = {};
+  if (build && request.targets) {
+    for (const k of priorities) if (request.targets.stats[k] != null) targets[k] = request.targets.stats[k];
+    for (const k of Object.keys(min) as StatKey[]) if (targets[k] == null) targets[k] = min[k];
+    for (const k of Object.keys(targets) as StatKey[]) best[k] = build.stats[k] as number;
+    const reached = priorities.filter((k) => targets[k] != null && (build.stats[k] as number) >= (targets[k] as number));
+    reasons.push(`Your best build reaches ${reached.length} of ${priorities.filter((k) => targets[k] != null).length} top-1% priority targets${reached.length ? ` (${reached.map((k) => STAT_NAME[k]).join(", ")})` : ""}.`);
+  }
   if (build) {
     const s = build.stats;
-    targets.spd = s.spd;
+    if (!request.targets) {
+      targets.spd = s.spd;
     for (const k of Object.keys(min) as StatKey[]) targets[k] = min[k];
     if (weights.dmg) targets.atk = s.atk;
     if (weights.hp) targets.hp = s.hp;
     if (weights.def) targets.def = s.def;
     if (weights.ehp) targets.ehp = s.ehp;
     if (weights.cd) targets.cd = s.cd;
+    for (const k of Object.keys(targets) as StatKey[]) best[k] = s[k] as number;
+    }
 
     const speeds = res.builds.map((b) => b.stats.spd);
     const rosterFaster = inp.roster.filter((r) => r.hero.id !== hero.id && r.spd < s.spd).length;
-    reasons.push(`Suggested speed ${s.spd}: best of your gear for this archetype (top results range ${Math.min(...speeds)}–${Math.max(...speeds)}).`);
+    if (!request.targets) reasons.push(`Suggested speed ${s.spd}: best of your gear for this archetype (top results range ${Math.min(...speeds)}–${Math.max(...speeds)}).`);
     if (inp.roster.length > 1) reasons.push(`Outspeeds ${rosterFaster} of ${inp.roster.length - 1} other heroes on your account at their current builds.`);
     const [lo, hi] = inp.enemySpeed ?? [220, 290];
     reasons.push(`Wins the opening speed race vs. enemies at ${lo}–${hi} speed in ${Math.round(winSpeedRace(s.spd, lo, hi) * 100)}% of fights (5% speed RNG).`);
     if (bench) {
       const b2 = benchmark(s, inp.community!);
-      reasons.push(`Against ${bench.sample} community builds: speed top ${b2.topPct.spd}%, HP top ${b2.topPct.hp}%, GS top ${b2.topPct.gs}%.`);
-      if (bench.commonSets[0]) reasons.push(`Most common community sets: ${bench.commonSets.slice(0, 2).map((x) => `${x.sets} (${Math.round(x.share * 100)}%)`).join(", ")}.`);
+      reasons.push(`Your best build against ${bench.sample} community builds: Speed top ${b2.topPct.spd}%, HP top ${b2.topPct.hp}%, GS top ${b2.topPct.gs}%.`);
+      if (elite?.setCombos[0]) reasons.push(`Most common sets in the top 1%: ${elite.setCombos.slice(0, 2).map((x) => `${x.sets.map((n) => n.replace(/Set$/, "")).join(" + ")} (${Math.round(x.share * 100)}%)`).join(", ")}.`);
+      else if (bench.commonSets[0]) reasons.push(`Most common community sets: ${bench.commonSets.slice(0, 2).map((x) => `${x.sets} (${Math.round(x.share * 100)}%)`).join(", ")}.`);
     }
   } else {
     reasons.push("No complete build found with the current gear pool. Try allowing equipped gear or loosening sets.");
@@ -155,5 +217,8 @@ export function recommend(inp: RecommendInput): Recommendation {
     .filter((m) => m.gap > 0)
     .sort((a, b) => b.gap / Math.max(1, b.target) - a.gap / Math.max(1, a.target));
 
-  return { archetype: info.archetype, archetypeLabel: ARCHETYPE_LABEL[info.archetype], request, build, current, targets, reasons, relaxed, missing };
+  return {
+    archetype: info.archetype, archetypeLabel: ARCHETYPE_LABEL[info.archetype], request, build, current, targets, reasons, relaxed, missing,
+    elite: elite ? { sample: elite.sample, cohort: elite.cohort, setCombos: elite.setCombos } : null, priorities, best,
+  };
 }

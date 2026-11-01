@@ -44,11 +44,20 @@ export default function RecommendPage() {
       {rec && hero && (
         <div className="grid g2">
           <Section title={`Suggested: ${rec.archetypeLabel}`}>
+            {rec.elite && <p className="muted" style={{ marginTop: 0 }}>Target = median of the top 1% of {rec.elite.sample} community builds ({rec.elite.cohort} builds). Gap compares your best build with that target.</p>}
+            {!rec.elite && <p className="muted" style={{ marginTop: 0 }}>No community builds loaded, so targets are the best your gear can do for this archetype.</p>}
             <table>
-              <thead><tr><th>Stat</th><th className="num">Target</th><th className="num">Now</th><th className="num">Gap</th></tr></thead>
+              <thead><tr><th>Stat</th><th className="num">{rec.elite ? "Top 1%" : "Target"}</th><th className="num">Your best</th><th className="num">Now</th><th className="num">Gap</th></tr></thead>
               <tbody>{Object.entries(rec.targets).map(([k, v]) => {
-                const now = rec.current[k] as number; const gap = (v as number) - now;
-                return <tr key={k}><td>{statShort(k)}</td><td className="num" style={{ color: "var(--accent)" }}>{fmt(v as number)}</td><td className="num">{fmt(now)}</td><td className="num" style={{ color: gap > 0 ? "var(--warn)" : "var(--good)" }}>{gap > 0 ? "+" + fmt(gap) : "✓"}</td></tr>;
+                const now = rec.current[k] as number; const best = (rec.best?.[k] ?? now) as number; const gap = (v as number) - best;
+                const pri = rec.priorities?.indexOf(k) ?? -1;
+                return <tr key={k}>
+                  <td>{pri >= 0 && rec.elite && <span className="prio-rank sm">{pri + 1}</span>}{statShort(k)}</td>
+                  <td className="num" style={{ color: "var(--accent)" }}>{fmt(v as number)}</td>
+                  <td className="num">{fmt(best)}</td>
+                  <td className="num muted">{fmt(now)}</td>
+                  <td className="num" style={{ color: gap > 0 ? "var(--warn)" : "var(--good)" }}>{gap > 0 ? "−" + fmt(gap) : "✓"}</td>
+                </tr>;
               })}</tbody>
             </table>
             <h3 style={{ marginTop: 14 }}>Reasoning</h3>

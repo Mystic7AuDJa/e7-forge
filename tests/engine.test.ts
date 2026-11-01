@@ -208,7 +208,20 @@ describe("recommendation + teams", () => {
     const h = heroByName("Cermia");
     const r = recommend({ hero: h, hd: hd("Cermia"), items: account.items, roster: [], allowEquipped: true, options: { timeLimitMs: 6000 } });
     expect(r.reasons.length).toBeGreaterThan(2);
-    if (r.build && !r.relaxed.some((x) => x.startsWith("CR"))) expect(r.build.stats.cr).toBeGreaterThanOrEqual(r.archetype === "crit_dps" ? 85 : 0);
+    if (r.build && !r.relaxed.some((x) => x.startsWith("Crit Chance"))) expect(r.build.stats.cr).toBeGreaterThanOrEqual(r.archetype === "crit_dps" ? 85 : 0);
+  }, 60000);
+  it("targets the community top 1% when builds are loaded", () => {
+    const h = heroByName("Cermia");
+    // 1000 builds; the best 1% by GS (10 builds) all have 250 speed and 300 CD.
+    const community = Array.from({ length: 1000 }, (_, i) => ({
+      gs: i < 10 ? 400 : 200 + (i % 50), spd: i < 10 ? 250 : 180, atk: 3500, hp: 15000, def: 900,
+      chc: 100, chd: i < 10 ? 300 : 220, eff: 0, efr: 0, sets: { set_cri_dmg: "4", set_speed: "2" },
+    })) as any;
+    const r = recommend({ hero: h, hd: hd("Cermia"), items: account.items, roster: [], community, allowEquipped: true, options: { timeLimitMs: 6000 } });
+    expect(r.elite?.cohort).toBe(10);
+    expect(r.targets.spd).toBe(250);
+    expect(r.targets.cd).toBe(300);
+    expect(r.reasons.some((x) => x.includes("top 1%"))).toBe(true);
   }, 60000);
   it("builds unique teams of the right size", () => {
     const c = candidatesFrom(account.heroes, (h) => findHeroData(db, h.name), account.items);
@@ -259,7 +272,7 @@ import { analyzeThreats, bandForPoints, counterTeams, estimateEnemy, speedRace }
 describe("counter planner", () => {
   const builds = Array.from({ length: 200 }, (_, i) => ({ atk: 3000 + i, hp: 9000 + i * 10, def: 800, spd: 180 + Math.floor(i / 2), chc: 100, chd: 280, eff: 0, efr: 0, gs: i + 1, sets: { set_speed: "4", set_cri: "2" } as Record<string, string> }));
   it("maps points to a gear band and estimates from that slice", () => {
-    expect(bandForPoints(4100).from).toBe(3);
+    expect(bandForPoints(4100).from).toBe(1);
     expect(bandForPoints(1200).to).toBe(70);
     const top = estimateEnemy("Ran", hd("Ruele of Light"), builds, { from: 0, to: 10, label: "" });
     const low = estimateEnemy("Ran", hd("Ruele of Light"), builds, { from: 50, to: 80, label: "" });

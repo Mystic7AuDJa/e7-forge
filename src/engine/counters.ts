@@ -18,7 +18,7 @@ export interface Band { from: number; to: number; label: string }
 
 /** Default arena points -> community gear-score band. Rough, editable; there is no official mapping. */
 export const ARENA_BANDS: { minPts: number; band: Band }[] = [
-  { minPts: 4000, band: { from: 3, to: 12, label: "top 3–12%" } },
+  { minPts: 4000, band: { from: 1, to: 12, label: "top 1–12%" } },
   { minPts: 3500, band: { from: 8, to: 20, label: "top 8–20%" } },
   { minPts: 3000, band: { from: 15, to: 30, label: "top 15–30%" } },
   { minPts: 2500, band: { from: 25, to: 45, label: "top 25–45%" } },

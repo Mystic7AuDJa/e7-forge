@@ -2,7 +2,7 @@
 
 Gear optimizer for Epic Seven on Windows, built because Fribbels stopped getting updates. It reads gear and heroes from game traffic, so there's no export/import step.
 
-Personal project. Version 0.1.1.
+Personal project. Version 0.1.2.
 
 ## Install (portable build)
 
@@ -30,7 +30,7 @@ Optimize
 
 Analyze
 - **Compare Builds Against Community**: your hero vs. about 3,000 recent builds from the Fribbels hero library.
-- **Stat Recommendations**: target stats from the hero's kit and community cohorts, built from your gear, with the reasoning shown.
+- **Stat Recommendations**: targets the community top 1% for the hero, weighted by what its kit needs, builds the closest match from your gear, and explains the gaps.
 
 PvP
 - **Offense (Counter Planner)**: enter an enemy defense, get estimated enemy builds, the threats in it, and counter teams from your roster.
@@ -99,6 +99,10 @@ npm test         :: engine and capture tests
 ```
 
 ## Changelog
+
+0.1.2
+- Stat Recommendations aim at the community top 1% (median of the best-geared 1% of builds) with archetype priorities and the top 1%'s sets, and show Top 1% / Your best / Now.
+- Counter Planner: 4000+ arena points now map to the top 1–12% gear band.
 
 0.1.1
 - Memory Imprints: set Release or Concentration and grade per hero; Release auras show on team suggestions and apply when gearing a team; Fribbels imports keep their imprint.
