@@ -11,7 +11,7 @@ Version 0.1.0 · October 2026 · personal use.
 3. Live sync needs, once:
    - **Python 3** from python.org, with "Add python.exe to PATH" ticked.
    - **Npcap** from npcap.com, with "WinPcap API-compatible mode" ticked.
-   - **scapy**: in E7 Forge go to *Account & Live Sync → Install scapy* (or run `py -m pip install scapy`).
+   - **scapy**: in E7 Forge go to *Account & Live Sync → Install scapy* (or run `py -m pip install scapy==2.8.0`).
 4. Flip **Live sync** on (top right), start Epic Seven, open the **Inventory**, then the **Heroes** list. Each screen imports ~4 s after it loads; **Sync now** forces it.
 5. On *Heroes*, enter artifact/imprint/EE bonuses per hero once (capture doesn't include them). They survive later syncs.
 

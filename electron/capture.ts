@@ -84,7 +84,7 @@ export class CaptureService extends EventEmitter {
     const py = CaptureService.findPython(this.getSettings().pythonPath);
     if (!py) return Promise.resolve({ ok: false, output: "Python 3 was not found. Install it from python.org (tick 'Add to PATH')." });
     return new Promise((resolve) => {
-      const p = spawn(py[0], [...py.slice(1), "-m", "pip", "install", "--user", "--upgrade", "--disable-pip-version-check", "--no-warn-script-location", "scapy"], { windowsHide: true });
+      const p = spawn(py[0], [...py.slice(1), "-m", "pip", "install", "--user", "--upgrade", "--disable-pip-version-check", "--no-warn-script-location", "scapy==2.8.0"], { windowsHide: true });
       let out = "";
       p.stdout.on("data", (d) => (out += d));
       p.stderr.on("data", (d) => (out += d));
