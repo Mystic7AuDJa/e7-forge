@@ -24,6 +24,7 @@ export interface ForgeApi {
   exportFile(): Promise<string | null>;
   updateHero(a: { heroId: string; bonuses?: any; dataKey?: string; imprint?: import("../engine/imprint").HeroImprint | null }): Promise<any>;
   applyBuilds(b: Build[]): Promise<any>;
+  updateItem(a: { itemId: string; enhance?: number; substats?: import("../engine/types").Substat[] }): Promise<import("../engine/types").Item | null>;
   addHero(name: string): Promise<any>;
   snapshots(): Promise<any[]>;
   restoreSnapshot(id: number): Promise<boolean>;

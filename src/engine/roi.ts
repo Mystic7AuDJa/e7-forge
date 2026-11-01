@@ -1,11 +1,38 @@
 // Monte Carlo: roll the remaining enhances many times instead of trying to
 // get a closed form (sub reveals and reforge make the math messy).
 import { GS_WEIGHTS, SLOT_MAINS, START_SUBS } from "./constants";
-import { gearScore, reforgedSubs, rollRanges } from "./gear";
+import { estimateRolls, gearScore, reforgedSubs, rollRanges } from "./gear";
 import { STAT_TYPES, type Item, type StatType, type Substat } from "./types";
 
 export interface RoiTiers { S: number; A: number; B: number } // GS thresholds at +15 (reforged if 85)
 export const DEFAULT_TIERS: RoiTiers = { S: 70, A: 60, B: 50 };
+export type Tier = "S" | "A" | "B" | "Sell";
+
+export function tierOf(score: number, t: RoiTiers = DEFAULT_TIERS): Tier {
+  return score >= t.S ? "S" : score >= t.A ? "A" : score >= t.B ? "B" : "Sell";
+}
+
+/** Hover text for the tier thresholds. */
+export function tierHelp(t: RoiTiers = DEFAULT_TIERS) {
+  return [
+    "Tiers grade the item's score at +15 (after reforging, for level 85 gear).",
+    `S ≥ ${t.S}: endgame piece. A ≥ ${t.A}: solid, keep. B ≥ ${t.B}: usable filler. Below ${t.B}: sell or extract.`,
+    "Score = gear score: each % stat point counts 1, Speed 2, Crit Chance 1.6, Crit Damage 1.14, flat Atk/HP/Def scaled down.",
+    "Focus modes count only the stats that role uses (other substats score 0), on the same scale, so the same tiers apply.",
+  ].join("\n");
+}
+
+/** Apply a manual edit (enhance level and substats) and recompute rolls and gear score. */
+export function editItem(item: Item, edit: { enhance?: number; substats?: Substat[] }): Item {
+  const next: Item = {
+    ...item,
+    enhance: Math.max(0, Math.min(15, edit.enhance ?? item.enhance)),
+    substats: (edit.substats ?? item.substats).filter((x) => x.type && x.value > 0).map((x) => ({ ...x, rolls: undefined, modified: x.modified })),
+  };
+  estimateRolls(next);
+  next.gs = gearScore(next.substats);
+  return next;
+}
 
 export interface RoiOptions {
   trials?: number;
@@ -23,6 +50,10 @@ export interface RoiResult {
   /** Probability distribution of final speed substat. */
   speed: { p12: number; p15: number; p18: number; expected: number };
   risk: "low" | "medium" | "high";
+  /** Most likely tier at +15. */
+  likely: Tier;
+  /** Score now (reforged if finished 85 gear). */
+  now: number;
   recommendation: string;
   stepsLeft: number;
 }
@@ -98,7 +129,10 @@ export function forecastItem(item: Item, o: RoiOptions = {}): RoiResult {
   else if (speed.p15 >= 0.35) recommendation = "Upgrade for speed: solid chance at a 15+ speed substat.";
   else if (pSell >= 0.65) recommendation = "Sell/extract: most outcomes land below B-tier.";
   else recommendation = "Optional: upgrade in steps (+3/+6) and re-check after each reveal.";
-  return { itemId: item.id, trials, pS, pA, pB, pSell, expectedGs, p10: q(0.1), p50: q(0.5), p90: q(0.9), speed, risk, recommendation, stepsLeft };
+  const likely = ([["S", pS], ["A", pA], ["B", pB], ["Sell", pSell]] as [Tier, number][]).sort((a, b) => b[1] - a[1])[0][0];
+  const nowSubs = item.level === 85 && item.enhance >= 15 ? reforgedSubs(item) : item.substats;
+  const now = Math.round(score(nowSubs, o.focus) * 10) / 10;
+  return { itemId: item.id, trials, pS, pA, pB, pSell, expectedGs, p10: q(0.1), p50: q(0.5), p90: q(0.9), speed, risk, recommendation, stepsLeft, likely, now };
 }
 
 /** Ranks unfinished items by expected value so you know where to spend charms/gold first. */

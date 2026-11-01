@@ -3,8 +3,8 @@ import { useForge } from "../state";
 import { Busy, fmt, ItemBadge, NoAccount, Num, pct, Section, SetIcon, SlotIcon, SlotLabel, SortTh, statText, useSort } from "../components";
 import { SETS, STAT_LABEL } from "../../engine/constants";
 import { gearScore, reforgedSubs } from "../../engine/gear";
-import { DEFAULT_TIERS, forecastItem, type RoiTiers } from "../../engine/roi";
-import { GEAR_SLOTS, type Item, type StatType } from "../../engine/types";
+import { DEFAULT_TIERS, editItem, forecastItem, tierHelp, type RoiTiers } from "../../engine/roi";
+import { GEAR_SLOTS, STAT_TYPES, type Item, type StatType, type Substat } from "../../engine/types";
 
 const SUB_COLS: { t: StatType; label: string }[] = [
   { t: "Speed", label: "Spd" }, { t: "CriticalHitChancePercent", label: "CR%" }, { t: "CriticalHitDamagePercent", label: "CD%" },
@@ -69,7 +69,6 @@ export default function GearPage() {
     item: (q: any) => { const it = account?.items.find((x) => x.id === q.itemId); return it ? `${it.rank} ${SETS[it.set]?.label} ${it.gear}` : ""; },
     sa: (q: any) => q.f.pS + q.f.pA, sell: (q: any) => q.f.pSell, spd: (q: any) => q.f.speed.p15,
   }, { key: "sa", dir: -1 });
-  const fc = useMemo(() => (sel ? forecastItem(sel, { trials: 4000, tiers, focus: FOCUS[focus] }) : null), [sel, tiers, focus]);
   if (!account) return <NoAccount />;
   const byId = new Map(account.items.map((i) => [i.id, i]));
 
@@ -90,7 +89,7 @@ export default function GearPage() {
         <button className="small ghost" disabled={!activeFilters} onClick={clearFilters}>Clear filters{activeFilters ? ` (${activeFilters})` : ""}</button>
         <span className="muted">{fmt(items.length)} of {fmt(account.items.length)} items</span>
         <span style={{ flex: 1 }} />
-        <span className="muted">Tiers S/A/B ≥</span>
+        <span className="muted help" title={tierHelp(tiers)}>Tiers S/A/B ≥ ⓘ</span>
         <Num value={tiers.S} width={56} onChange={(v) => setTiers({ ...tiers, S: v ?? 70 })} />
         <Num value={tiers.A} width={56} onChange={(v) => setTiers({ ...tiers, A: v ?? 60 })} />
         <Num value={tiers.B} width={56} onChange={(v) => setTiers({ ...tiers, B: v ?? 50 })} />
@@ -130,21 +129,7 @@ export default function GearPage() {
         </div>
         <div className="stack side-panel">
           <Section title="Forecast" right={<select value={focus} onChange={(e) => setFocus(e.target.value)}>{Object.keys(FOCUS).map((f) => <option key={f}>{f}</option>)}</select>}>
-            {!sel || !fc ? <span className="muted">Select an item.</span> : (
-              <div className="col">
-                <div className="row"><span className="pill"><SetIcon set={sel.set} size={16} /><SlotIcon slot={sel.gear} size={16} />{sel.rank} {sel.gear} +{sel.enhance}</span><span className="pill">{fc.stepsLeft} enhancement steps left</span>
-                  <span className={"pill " + (fc.risk === "low" ? "good" : fc.risk === "medium" ? "warn" : "bad")}>{fc.risk} risk</span></div>
-                <div className="split">
-                  <span style={{ width: pct(fc.pS), background: "var(--good)" }} /><span style={{ width: pct(fc.pA), background: "var(--info)" }} />
-                  <span style={{ width: pct(fc.pB), background: "var(--warn)" }} /><span style={{ width: pct(fc.pSell), background: "#4a3333" }} />
-                </div>
-                <div className="row mono"><span style={{ color: "var(--good)" }}>S {pct(fc.pS)}</span><span style={{ color: "var(--info)" }}>A {pct(fc.pA)}</span><span style={{ color: "var(--warn)" }}>B {pct(fc.pB)}</span><span className="muted">Sell {pct(fc.pSell)}</span></div>
-                <div className="mono">Score p10 {fc.p10} · median {fc.p50} · p90 {fc.p90}</div>
-                <div className="mono">Speed: expected {fc.speed.expected} · P(≥12) {pct(fc.speed.p12)} · P(≥15) {pct(fc.speed.p15)} · P(≥18) {pct(fc.speed.p18)}</div>
-                <div className="reason">{fc.recommendation}</div>
-                {sel.level === 85 && sel.enhance >= 15 && <div className="muted">Reforge: GS {fmt(gearScore(sel.substats), 1)} → {fmt(gearScore(reforgedSubs(sel)), 1)}</div>}
-              </div>
-            )}
+            {!sel ? <span className="muted">Select an item.</span> : <ForecastPanel key={sel.id + ":" + sel.enhance + ":" + sel.substats.map((x) => x.type + x.value).join()} item={sel} focus={FOCUS[focus]} tiers={tiers} onSaved={setSel} />}
           </Section>
           <Section title="Upgrade queue" right={busy ? <Busy label="Simulating…" /> : <button className="small" onClick={async () => { setBusy(true); try { setQueue(await api.upgradeQueue({ options: { tiers, focus: FOCUS[focus] }, max: 200 })); } catch (e: any) { toast(e.message, true); } finally { setBusy(false); } }}>Rank unfinished gear</button>}>
             {!queue ? <span className="muted">Ranks Epic/Heroic gear below +15 by expected outcome.</span> : (
@@ -158,6 +143,77 @@ export default function GearPage() {
           </Section>
         </div>
       </div>
+    </div>
+  );
+}
+
+const TIER_COLOR: Record<string, string> = { S: "var(--good)", A: "var(--info)", B: "var(--warn)", Sell: "var(--muted)" };
+
+function ForecastPanel({ item, focus, tiers, onSaved }: { item: Item; focus?: Partial<Record<StatType, number>>; tiers: RoiTiers; onSaved: (i: Item) => void }) {
+  const { api, toast } = useForge();
+  const [editing, setEditing] = useState(false);
+  const [enhance, setEnhance] = useState(item.enhance);
+  const [subs, setSubs] = useState<Substat[]>(() => [...item.substats.map((x) => ({ ...x })), ...Array(Math.max(0, 4 - item.substats.length)).fill(null).map(() => ({ type: "" as StatType, value: 0 }))]);
+  const dirty = enhance !== item.enhance || subs.some((x, i) => x.type !== (item.substats[i]?.type ?? "") || x.value !== (item.substats[i]?.value ?? 0));
+  const draft = useMemo(() => (dirty ? editItem(item, { enhance, substats: subs }) : item), [item, enhance, subs, dirty]);
+  const fc = useMemo(() => forecastItem(draft, { trials: 4000, tiers, focus }), [draft, tiers, focus]);
+  const help = tierHelp(tiers);
+  const setSub = (i: number, patch: Partial<Substat>) => setSubs(subs.map((x, j) => (j === i ? { ...x, ...patch } : x)));
+  const save = async () => {
+    const saved = await api.updateItem({ itemId: item.id, enhance, substats: subs.filter((x) => x.type && x.value > 0) });
+    if (saved) { toast("Item updated"); onSaved(saved); setEditing(false); }
+  };
+  const subOptions = STAT_TYPES.filter((t) => t !== item.main.type);
+  return (
+    <div className="col">
+      <div className="row">
+        <span className="pill"><SetIcon set={draft.set} size={16} /><SlotIcon slot={draft.gear} size={16} />{draft.rank} {draft.gear} +{draft.enhance}</span>
+        <span className="pill">{fc.stepsLeft ? `${fc.stepsLeft} enhancement step${fc.stepsLeft > 1 ? "s" : ""} left` : "Finished"}</span>
+        <span className={"pill " + (fc.risk === "low" ? "good" : fc.risk === "medium" ? "warn" : "bad")}>{fc.risk} risk</span>
+        {dirty && <span className="pill warn">edited, not saved</span>}
+      </div>
+      <div className="row" title={help} style={{ cursor: "help", alignItems: "baseline" }}>
+        <span className="muted">Likely at +15:</span>
+        <b style={{ fontSize: 22, color: TIER_COLOR[fc.likely] }}>{fc.likely === "Sell" ? "Sell" : `${fc.likely} tier`}</b>
+        <span className="muted">score {fc.now} now → {fc.p50} expected (most results {fc.p10}–{fc.p90})</span>
+      </div>
+      <div className="split" title={help}>
+        <span style={{ width: pct(fc.pS), background: "var(--good)" }} /><span style={{ width: pct(fc.pA), background: "var(--info)" }} />
+        <span style={{ width: pct(fc.pB), background: "var(--warn)" }} /><span style={{ width: pct(fc.pSell), background: "#4a3333" }} />
+      </div>
+      <div className="row mono" title={help} style={{ cursor: "help" }}>
+        <span style={{ color: "var(--good)" }}>S {pct(fc.pS)}</span><span style={{ color: "var(--info)" }}>A {pct(fc.pA)}</span>
+        <span style={{ color: "var(--warn)" }}>B {pct(fc.pB)}</span><span className="muted">Sell {pct(fc.pSell)}</span>
+        <span className="muted" style={{ fontSize: 11 }}>ⓘ hover for tiers</span>
+      </div>
+      <div className="muted">Speed substat at +15: {fc.speed.expected ? `about ${fc.speed.expected}, 15+ in ${pct(fc.speed.p15)} of rolls` : "none possible"}</div>
+      <div className="reason">{fc.recommendation}</div>
+      {draft.level === 85 && draft.enhance >= 15 && <div className="muted">Reforge: GS {fmt(gearScore(draft.substats), 1)} → {fmt(gearScore(reforgedSubs(draft)), 1)}</div>}
+
+      <div className="row" style={{ marginTop: 6 }}>
+        <button className="small ghost" onClick={() => setEditing(!editing)}>{editing ? "Hide editor" : "Update item manually"}</button>
+        {dirty && <button className="small ghost" onClick={() => { setEnhance(item.enhance); setSubs(item.substats.map((x) => ({ ...x }))); }}>Reset</button>}
+        {dirty && <button className="small primary" onClick={save}>Save to item</button>}
+      </div>
+      {editing && (
+        <div className="col" style={{ gap: 6 }}>
+          <span className="muted" style={{ fontSize: 12 }}>Enhanced or rerolled in game without a sync? Enter the new values; the forecast updates as you type.</span>
+          <label className="field">Enhance
+            <select value={enhance} onChange={(e) => setEnhance(Number(e.target.value))}>
+              {Array.from({ length: 16 }, (_, i) => <option key={i} value={i}>+{i}</option>)}
+            </select>
+          </label>
+          {subs.map((x, i) => (
+            <div key={i} className="row">
+              <select value={x.type} onChange={(e) => setSub(i, { type: e.target.value as StatType })} style={{ flex: 1 }}>
+                <option value="">— none —</option>
+                {subOptions.filter((t) => t === x.type || !subs.some((y) => y.type === t)).map((t) => <option key={t} value={t}>{STAT_LABEL[t] ?? t}</option>)}
+              </select>
+              <Num value={x.value || undefined} width={70} onChange={(v) => setSub(i, { value: v ?? 0 })} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

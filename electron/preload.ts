@@ -10,6 +10,7 @@ const api = {
   exportFile: invoke("account:exportFile"),
   updateHero: invoke("account:updateHero"),
   applyBuilds: invoke("account:applyBuilds"),
+  updateItem: invoke("account:updateItem"),
   addHero: invoke("account:addHero"),
   snapshots: invoke("snapshots:list"),
   restoreSnapshot: invoke("snapshots:restore"),

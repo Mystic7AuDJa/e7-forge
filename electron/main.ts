@@ -6,6 +6,7 @@ import { Worker } from "node:worker_threads";
 import { importFribbels } from "../src/engine/importer";
 import { mergeScan, DEFAULT_CAPTURE_PORTS, DEFAULT_DECODER_URL } from "../src/engine/scan";
 import { parseRtaMeta } from "../src/engine/meta";
+import { editItem } from "../src/engine/roi";
 import { mapCamping } from "../src/engine/camping";
 import { deriveTags, epic7dbSlug, parseEpic7dbHeroPage } from "../src/engine/tagger";
 import type { Account, Build, GearSlot } from "../src/engine/types";
@@ -249,6 +250,16 @@ function registerIpc() {
     fs.writeFileSync(r.filePath, JSON.stringify({ heroes, items }));
     return r.filePath;
   });
+  // Manual item edit from the Forecast panel (e.g. after enhancing in game without a sync).
+  ipcMain.handle("account:updateItem", (_e, { itemId, enhance, substats }) => {
+    if (!account) return null;
+    const i = account.items.findIndex((x) => x.id === itemId);
+    if (i < 0) return null;
+    account.items[i] = editItem(account.items[i], { enhance, substats });
+    setAccount(account, true);
+    return account.items[i];
+  });
+
   ipcMain.handle("account:updateHero", (_e, { heroId, bonuses, dataKey, imprint }) => {
     if (!account) return null;
     const h = account.heroes.find((x) => x.id === heroId);

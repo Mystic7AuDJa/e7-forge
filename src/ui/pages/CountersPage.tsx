@@ -72,6 +72,7 @@ export default function CountersPage() {
 
       <div className="grid" style={{ gridTemplateColumns: "minmax(0,1.4fr) minmax(0,1fr)" }}>
         <Section title="Enemy defense" right={<div className="row">
+          <button className="small ghost" disabled={!enemy.some(Boolean)} onClick={() => { setEnemy(["", "", "", ""]); setRes(null); setPlan(null); }}>Reset</button>
           <select value={mode} onChange={(e) => setMode2(e.target.value as CounterMode)}>
             <option value="arena">Arena (4 heroes)</option><option value="gw">Guild War (3 heroes)</option>
           </select>

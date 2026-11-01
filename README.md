@@ -2,7 +2,7 @@
 
 Gear optimizer for Epic Seven on Windows, built because Fribbels stopped getting updates. It reads gear and heroes from game traffic, so there's no export/import step.
 
-Personal project. Version 0.1.2.
+Personal project. Version 0.1.3.
 
 ## Install (portable build)
 
@@ -21,7 +21,7 @@ No Python or Npcap? Use *Import Fribbels / RexQian save…* instead. Fribbels, t
 
 Data
 - **Account & Live Sync**: capture status, file import/export, snapshots.
-- **Gear & Upgrade ROI**: every item with substats in columns and filters. Monte Carlo to +15 for each unfinished item (sub reveals by rank, reforge for 85s), and an upgrade queue.
+- **Gear & Upgrade ROI**: every item with substats in columns and filters. The Forecast simulates each unfinished item to +15 (sub reveals by rank, reforge for 85s) and gives its likely tier; hover the tiers for what they mean. If you enhanced or rerolled in game without syncing, update the item by hand there. Upgrade queue ranks what to enhance next.
 
 Optimize
 - **Hero Optimizer**: pick a hero from the roster on the left. Benchmark mode (default) targets the community's top 1% for that hero; you choose 1–4 priority stats. Custom mode is the old weights/bounds optimizer.
@@ -99,6 +99,11 @@ npm test         :: engine and capture tests
 ```
 
 ## Changelog
+
+0.1.3
+- Counter Planner: Reset button clears the enemy defense.
+- Hero list: element and class filters work for Live Sync heroes (they carry no element/class, so game data is used) and Earth matches.
+- Gear Forecast: shows the likely tier at +15 with score now → expected; hover explains the tiers. "Update item manually" edits enhance level (+0 to +15) and substats, re-forecasts as you type, and saves to the item.
 
 0.1.2
 - Stat Recommendations aim at the community top 1% (median of the best-geared 1% of builds) with archetype priorities and the top 1%'s sets, and show Top 1% / Your best / Now.

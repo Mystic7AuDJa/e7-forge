@@ -10,7 +10,7 @@ import { currentBuildStats, optimizeHero } from "../engine/optimizer";
 import { optimizeAccount } from "../engine/account";
 import { recommend } from "../engine/recommend";
 import { buildTeams, candidatesFrom, planTeam } from "../engine/teams";
-import { upgradeQueue } from "../engine/roi";
+import { editItem, upgradeQueue } from "../engine/roi";
 import { counterTeams, estimateEnemy } from "../engine/counters";
 import { parseRtaMeta } from "../engine/meta";
 import { mapCamping } from "../engine/camping";
@@ -46,6 +46,11 @@ export function createMockApi(): ForgeApi {
     importText: async (text) => { const r = importFribbels(text, "pasted"); account = r.account; emit("account:changed", {}); return r.report; },
     exportFile: async () => null,
     updateHero: async ({ heroId, bonuses, imprint }) => { const h = need().heroes.find((x) => x.id === heroId)!; h.bonuses = { ...h.bonuses, ...bonuses }; if (imprint !== undefined) { if (imprint) h.imprint = imprint; else delete h.imprint; } emit("account:changed", {}); return h; },
+    updateItem: async ({ itemId, enhance, substats }) => {
+      const acc = need(); const i = acc.items.findIndex((x) => x.id === itemId);
+      if (i < 0) return null;
+      acc.items[i] = editItem(acc.items[i], { enhance, substats }); emit("account:changed", {}); return acc.items[i];
+    },
     applyBuilds: async (builds) => {
       const acc = need();
       for (const b of builds) { const h = acc.heroes.find((x) => x.id === b.heroId)!; for (const [s, id] of Object.entries(b.items)) { for (const o of acc.heroes) if (o.equipment[s as keyof Hero["equipment"]] === id) delete o.equipment[s as keyof Hero["equipment"]]; (h.equipment as any)[s] = id; const it = acc.items.find((i) => i.id === id); if (it) it.equippedById = h.id; } }

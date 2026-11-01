@@ -8,7 +8,9 @@ const ROLES: { k: string; label: string }[] = [
   { k: "warrior", label: "Warrior" }, { k: "knight", label: "Knight" }, { k: "assassin", label: "Thief" },
   { k: "ranger", label: "Ranger" }, { k: "mage", label: "Mage" }, { k: "manauser", label: "Soul Weaver" },
 ];
-const EL_COLOR: Record<string, string> = { fire: "#e8664d", ice: "#5aa8f0", earth: "#6cc56a", light: "#e9c95b", dark: "#a674e0" };
+const EL_COLOR: Record<string, string> = { fire: "#e8664d", ice: "#5aa8f0", earth: "#6cc56a", wind: "#6cc56a", light: "#e9c95b", dark: "#a674e0" };
+// Game data calls Earth "wind".
+const elKey = (a?: string) => (a === "wind" ? "earth" : a ?? "");
 
 export function heroLevelText(h: Hero) {
   const parts: string[] = [];
@@ -30,7 +32,7 @@ export function HeroRoster(props: {
   height?: string;
   title?: string;
 }) {
-  const { account, stats, init } = useForge();
+  const { account, stats, init, hd } = useForge();
   const [q, setQ] = useState("");
   const [el, setEl] = useState<string>("");
   const [role, setRole] = useState<string>("");
@@ -40,12 +42,16 @@ export function HeroRoster(props: {
 
   const rows = useMemo(() => {
     const list = (account?.heroes ?? []).map((h) => ({ h, s: stats(h) }))
-      .filter(({ h }) => (!q || h.name.toLowerCase().includes(q.toLowerCase())) && (!el || h.attribute === el) && (!role || h.role === role))
+      // Live Sync heroes carry no element/class, so fall back to game data.
+      .filter(({ h }) => {
+        const d = hd(h);
+        return (!q || h.name.toLowerCase().includes(q.toLowerCase())) && (!el || elKey(h.attribute || d?.attribute) === el) && (!role || (h.role || d?.role) === role);
+      })
       .filter(({ h }) => !onlyChecked || checked.includes(h.id));
     const key = (r: (typeof list)[number]): number | string =>
       sort === "name" ? r.h.name : sort === "level" ? (r.h.level ?? 0) * 100 + (r.h.stars ?? 0) * 10 + (r.h.awaken ?? 0) : ((r.s?.[sort] as number) ?? 0);
     return list.sort((a, b) => (sort === "name" ? String(key(a)).localeCompare(String(key(b))) : (key(b) as number) - (key(a) as number)));
-  }, [account, stats, q, el, role, sort, onlyChecked, checked]);
+  }, [account, stats, hd, q, el, role, sort, onlyChecked, checked]);
 
   const toggle = (id: string) => {
     if (!props.onCheck) return;
