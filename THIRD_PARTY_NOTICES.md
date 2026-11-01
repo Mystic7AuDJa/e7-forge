@@ -17,6 +17,12 @@ From the RexQian fork of Fribbels Epic 7 Optimizer, v1.12.9-offline
 (https://github.com/RexQian/Fribbels-Epic-7-Optimizer). No license declared
 upstream, so all rights stay with the authors.
 
+## data/sample-fribbels-export.json
+
+Sample gear and heroes used by the tests and the browser preview. It is
+`testgear.json` from the Fribbels Epic 7 Optimizer repository (no license
+declared upstream). It is not anyone's live account export.
+
 ## data/hero-effects.json, data/effects.json
 
 From EXCOFF E7 Builder and Guides
