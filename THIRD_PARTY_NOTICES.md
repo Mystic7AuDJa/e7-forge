@@ -1,0 +1,77 @@
+# Third-party notices
+
+E7 Forge's own code is GPL-3.0-or-later (see LICENSE). The files below are
+not covered by that license. They keep their original terms and are included
+for personal, non-commercial use. If you redistribute E7 Forge, check these
+terms first or drop the files and let the app fetch what it can at runtime.
+
+## Game content
+
+Epic Seven names, hero data, set and slot icons (`src/ui/public/icons/`) and
+hero portraits are © Smilegate Megaport / Super Creative. All rights reserved.
+Hero portraits are loaded from their URLs at runtime, not shipped.
+
+## data/herodata.json, data/artifactdata.json
+
+From the RexQian fork of Fribbels Epic 7 Optimizer, v1.12.9-offline
+(https://github.com/RexQian/Fribbels-Epic-7-Optimizer). No license declared
+upstream, so all rights stay with the authors.
+
+## data/hero-effects.json, data/effects.json
+
+From EXCOFF E7 Builder and Guides
+(https://github.com/EXCOFFee/EXCOFF-E7-Builder-and-Guides), MIT:
+
+    MIT License
+
+    Copyright (c) 2024 EXCOFFee
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+## data/hero-tags.json
+
+Role tags derived from the EXCOFF files above and from epic7db.com skill pages.
+epic7db content has no open license; only the derived tags are included.
+
+## data/epic7db-tiers.json
+
+Tier placements copied from epic7db.com's RTA and PvE tier lists
+(https://epic7db.com/tierlists/). No open license.
+
+## data/camping-topics.json
+
+Topic reaction table read from CeciliaBot's Camp Simulator
+(https://ceciliabot.github.io/camping-simulator/). No license declared.
+Per-hero camping data is fetched at runtime and not shipped.
+
+## data/pve-presets.json
+
+Short summaries of community guides (epic7db, game8, Reddit r/EpicSeven,
+BlueStacks). Each entry links its source. The guides keep their own terms.
+
+## Runtime services (not shipped)
+
+- Fribbels decoder and hero library (Live sync decoding, community builds)
+- epic7rtastats.com (RTA rates)
+- CeciliaBot camping data
+
+## Python sidecar
+
+`capture/e7forge_sniffer.py` uses scapy (GPL-2.0, https://scapy.net), which
+you install separately. It runs as its own process.

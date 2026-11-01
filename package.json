@@ -31,6 +31,10 @@
       "capture/**",
       "package.json"
     ],
+    "extraFiles": [
+      "LICENSE",
+      "THIRD_PARTY_NOTICES.md"
+    ],
     "asarUnpack": [
       "data/**",
       "capture/**",

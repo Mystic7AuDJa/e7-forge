@@ -109,4 +109,8 @@ npm test         :: engine and capture tests
 
 ## License
 
-None chosen yet. Third-party data keeps its own terms (see App Info).
+GPL-3.0-or-later, see `LICENSE`. You can use, change and share E7 Forge; if you
+share a modified version, its source has to be available under the same license.
+
+The bundled game data, icons and community data are not covered by the GPL and
+keep their own terms. `THIRD_PARTY_NOTICES.md` lists each one.
