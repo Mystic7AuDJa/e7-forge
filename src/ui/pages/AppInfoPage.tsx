@@ -83,7 +83,7 @@ export default function AppInfoPage() {
       <Section title="Game content and artwork"><Table rows={GAME} /></Section>
       <Section title="Notes">
         <ul className="steps">
-          <li>E7 Forge itself is licensed GPL-3.0-or-later (LICENSE in the app folder). Bundled data and icons are not; THIRD_PARTY_NOTICES.md lists their terms.</li>
+          <li>E7 Forge itself is licensed GPL-3.0-or-later (LICENSE in the app folder). Bundled data and icons are not; THIRD_PARTY_NOTICES.txt lists their terms.</li>
           <li>"No license declared" means the authors haven't granted reuse rights. Those sources are credited here and used for personal, non-commercial use only. Don't redistribute E7 Forge with their data without asking them.</li>
           <li>Live Sync sends captured game traffic only to the decoder URL in Settings, and only new buffers, over one connection that closes when Live Sync stops.</li>
           <li>Your account data stays on this PC (%APPDATA%\e7-forge). Community lookups send only the hero's name.</li>
