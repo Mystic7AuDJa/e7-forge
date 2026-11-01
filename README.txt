@@ -124,6 +124,22 @@ App Info in the app lists every source, what it's used for, and its license.
 - Stat math follows Fribbels' StatCalculator; a test checks one hero against
   Fribbels' numbers.
 
+Weekly meta history
+-------------------
+
+data/meta-history/ keeps one snapshot per week of the Champion+ RTA meta from
+epic7rtastats.com/meta: top picks, pre-bans, bans, win rates, pick order,
+pre-banned pairs, and the most used sets and artifacts per hero. TRENDS.txt
+lists the latest week and what moved since the week before: anything that
+entered or left a top list, picks or pre-bans that moved 3+ points, and win
+rates that moved 2+ points on heroes picked in at least 5% of games.
+
+Run it by hand with: npm run meta:snapshot (one request; it skips a week that
+is already saved). A scheduled task runs it every Monday and pushes the result.
+
+The site publishes per-hero numbers, not full 5-hero teams, so the history
+tracks heroes, pairs, sets and artifacts rather than whole teams.
+
 Known issues
 ------------
 

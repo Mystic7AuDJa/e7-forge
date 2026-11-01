@@ -1,0 +1,48 @@
+RTA meta, Champion+ (2026-10-23 to 2026-10-29), about 105,087 games
+Source: https://www.epic7rtastats.com/meta
+
+Most picked
+ 1. Estelle                             55.7% picked   50.8% win
+ 2. School Nurse Yulha                  54.7% picked   47.8% win
+ 3. Rhianna and Luciella                40.5% picked   50.8% win
+ 4. Perfumer Byblis                     40.3% picked   53.2% win
+ 5. Arbiter Vildred                     38.7% picked   50.4% win
+ 6. Lady of the Scales                  37.5% picked   52.4% win
+ 7. Shepherd of the Dark Diene          36.1% picked   54.3% win
+ 8. Boss Arunka                         35.9% picked   47.9% win
+ 9. Haru                                27.9% picked   49.5% win
+10. Kawerik                             25.9% picked   49.1% win
+11. Eye of the Abyss Fumyr              24.8% picked   50.6% win
+12. Zio                                 24.0% picked   44.0% win
+13. Notos                               22.8% picked   53.8% win
+14. Monarch of the Sword Iseria         21.2% picked   50.4% win
+15. Tidal Rift Elvira                   20.9% picked   52.4% win
+16. Rinak                               20.3% picked   49.3% win
+17. Genesis Ras                         19.8% picked   51.9% win
+18. Belian                              19.0% picked   50.7% win
+19. Harsetti                            17.8% picked   49.6% win
+20. Frieren                             16.2% picked   54.6% win
+
+Most pre-banned pairs
+ 1. Lisette + Lady of the Scales                        35.3%
+ 2. Rhianna and Luciella + Lisette                      23.8%
+ 3. Notos + Lisette                                     20.2%
+ 4. Zio + Harsetti                                      14.7%
+ 5. Rhianna and Luciella + Lady of the Scales           12.0%
+ 6. Notos + Rhianna and Luciella                         9.6%
+ 7. Notos + Lady of the Scales                           6.7%
+ 8. Harsetti + Lisette                                   4.9%
+ 9. Zio + Lisette                                        3.3%
+10. Harsetti + Lady of the Scales                        2.9%
+
+Change vs. the previous week (from the site's own deltas; 1+ point moves)
+v Picks: Haru 33.0% -> 27.9% (-5.1)
+v Picks: School Nurse Yulha 59.1% -> 54.7% (-4.5)
+^ Picks: Rinak 18.6% -> 20.3% (+1.7)
+v Picks: Boss Arunka 37.5% -> 35.9% (-1.6)
+^ Picks: Arbiter Vildred 37.2% -> 38.7% (+1.5)
+v Picks: Frieren 17.7% -> 16.2% (-1.5)
+v Pre-bans: Lady of the Scales 66.4% -> 65.0% (-1.4)
+v Pre-banned pairs: Lisette + Lady of the Scales 36.5% -> 35.3% (-1.2)
+^ Picks: Zio 22.9% -> 24.0% (+1.1)
+^ Picks: Notos 21.7% -> 22.8% (+1.1)
