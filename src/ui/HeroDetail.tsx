@@ -1,5 +1,3 @@
-// Selected-hero summary (from the former Heroes page): level, class, kit tags,
-// current stats, equipped gear, and the artifact / imprint / EE bonus editor.
 import React, { useState } from "react";
 import { HeroIcon, ItemSummary, Num, Section, SlotLabel, StatLine } from "./components";
 import { heroLevelText } from "./HeroRoster";
@@ -65,7 +63,6 @@ function BonusEditor({ heroId }: { heroId: string }) {
   );
 }
 
-/** "Add a hero you don't own yet" for planning. */
 export function AddPlanningHero() {
   const { api, toast, init } = useForge();
   const [name, setName] = useState("");

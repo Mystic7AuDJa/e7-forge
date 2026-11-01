@@ -71,7 +71,6 @@ function NavButtons() {
 export default function App() {
   const { page, go, account, init, back, forward, home } = useForge();
   React.useEffect(() => {
-    // Keyboard and mouse back/forward buttons, like a browser.
     const onKey = (e: KeyboardEvent) => {
       if (!e.altKey) return;
       if (e.key === "ArrowLeft") { e.preventDefault(); back(); }

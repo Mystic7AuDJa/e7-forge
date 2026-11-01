@@ -16,7 +16,6 @@ const WEIGHT_KEYS: { k: StatKey; label: string }[] = [
 ];
 const BOUND_KEYS: StatKey[] = ["spd", "atk", "hp", "def", "cr", "cd", "eff", "res", "ehp", "cp"];
 
-/** Stats you can prioritise in Benchmark mode. */
 const PRIORITY_STATS: { k: StatKey; label: string }[] = [
   { k: "spd", label: "Speed" }, { k: "atk", label: "Attack" }, { k: "hp", label: "Health" }, { k: "def", label: "Defense" },
   { k: "cr", label: "Crit Chance" }, { k: "cd", label: "Crit Damage" }, { k: "eff", label: "Effectiveness" }, { k: "res", label: "Effect Resist" },
@@ -41,7 +40,6 @@ export default function OptimizerPage() {
   const [progress, setProgress] = useState(0);
   const [res, setRes] = useState<any>(null);
   const [pick, setPick] = useState(0);
-  // Benchmark mode (default)
   const [mode, setMode] = useState<"bench" | "custom">(() => { try { return localStorage.getItem("optMode") === "custom" ? "custom" : "bench"; } catch { return "bench"; } });
   const [community, setCommunity] = useState<{ builds: any[]; fetchedAt: string; cached: boolean } | null>(null);
   const [commErr, setCommErr] = useState<string | null>(null);
@@ -58,7 +56,6 @@ export default function OptimizerPage() {
   const cur = hero ? stats(hero) : null;
 
   useEffect(() => { try { localStorage.setItem("optMode", mode); } catch { /* ignore */ } }, [mode]);
-  // Pull community builds for the hero whenever Benchmark mode is active.
   const loadCommunity = async (refresh = false) => {
     if (!hero) return;
     setCommBusy(true); setCommErr(null);

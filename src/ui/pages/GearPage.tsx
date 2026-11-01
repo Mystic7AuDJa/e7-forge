@@ -6,7 +6,6 @@ import { gearScore, reforgedSubs } from "../../engine/gear";
 import { DEFAULT_TIERS, forecastItem, type RoiTiers } from "../../engine/roi";
 import { GEAR_SLOTS, type Item, type StatType } from "../../engine/types";
 
-/** One column per substat; values rounded like the game (.5 up). */
 const SUB_COLS: { t: StatType; label: string }[] = [
   { t: "Speed", label: "Spd" }, { t: "CriticalHitChancePercent", label: "CR%" }, { t: "CriticalHitDamagePercent", label: "CD%" },
   { t: "AttackPercent", label: "Atk%" }, { t: "Attack", label: "Atk" }, { t: "HealthPercent", label: "HP%" }, { t: "Health", label: "HP" },

@@ -19,7 +19,6 @@ export function SetIcon({ set, size = 20 }: { set: string; size?: number }) {
   return <img className="set-icon" src={`${ICON_BASE}/sets/${set}.png`} width={size} height={size} alt={label} title={`${label} Set (${SETS[set]?.pieces ?? "?"}pc)`} />;
 }
 
-/** Completed sets as icons, e.g. Speed + Critical. */
 export function SetIcons({ sets, size = 20 }: { sets: string[]; size?: number }) {
   if (!sets.length) return <span className="muted">Broken</span>;
   return <span className="set-icons">{sets.map((s, i) => <SetIcon key={i} set={s} size={size} />)}</span>;
@@ -87,7 +86,6 @@ export function statText(type: string, value: number) {
 
 const RANK_CLASS: Record<string, string> = { Epic: "epic", Heroic: "heroic", Rare: "rare", Good: "good", Normal: "normal" };
 
-/** In-game style badge: +enhance on top, gear level below, coloured by rank. */
 export function ItemBadge({ item }: { item: Item }) {
   return (
     <span className={"item-badge " + (RANK_CLASS[item.rank] ?? "")} title={`${item.rank} · level ${item.level || "?"} · +${item.enhance}`}>

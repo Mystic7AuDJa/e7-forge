@@ -1,5 +1,3 @@
-// Owned-hero roster used across pages: search, element/class filters, sort,
-// level / stars / awakening, and either single selection or checkboxes.
 import React, { useMemo, useState } from "react";
 import { fmt, HeroIcon } from "./components";
 import { useForge } from "./state";
@@ -28,7 +26,6 @@ export function HeroRoster(props: {
   onSelect?: (id: string) => void;
   checked?: string[];
   onCheck?: (ids: string[]) => void;
-  /** Max checkable heroes (multi). */
   max?: number;
   height?: string;
   title?: string;

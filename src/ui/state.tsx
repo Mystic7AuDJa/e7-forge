@@ -30,7 +30,6 @@ interface Ctx {
   /** Heroes checked for the Account-wide Optimizer; other pages can pre-check them. */
   checked: string[];
   setChecked: (ids: string[]) => void;
-  /** Open the Account-wide Optimizer with these heroes checked. */
   openInAccountOptimizer: (ids: string[], mins?: Record<string, Record<string, number>>) => void;
   /** Tier lists, RTA rates, camping data and PvE presets (loaded on first use). */
   meta: MetaBundle | null;

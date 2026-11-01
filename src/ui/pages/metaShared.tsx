@@ -4,20 +4,18 @@ import { HeroIcon } from "../components";
 import { candidatesFrom, type TeamCandidate } from "../../engine/teams";
 import type { Hero } from "../../engine/types";
 
-/** Candidates (owned heroes with current stats) shared by PvP / PvE pages. */
 export function useCandidates(): TeamCandidate[] {
   const { account, hd } = useForge();
   return useMemo(() => (account ? candidatesFrom(account.heroes, hd, account.items) : []), [account, hd]);
 }
 
-/** Loads tier lists / RTA rates / camping data / presets the first time a page needs them. */
 export function useMeta() {
   const { meta, metaBusy, loadMeta } = useForge();
   useEffect(() => { if (!meta && !metaBusy) loadMeta(); }, [meta, metaBusy]);
   return { meta, metaBusy, loadMeta };
 }
 
-/** Best owned copy per hero name (highest readiness), for matching guide teams. */
+// Duplicates of a hero are common; guides should match the copy you actually gear.
 export function useOwnedByName(cands: TeamCandidate[]) {
   return useMemo(() => {
     const m = new Map<string, TeamCandidate>();
