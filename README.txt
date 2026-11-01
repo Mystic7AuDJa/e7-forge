@@ -127,20 +127,8 @@ App Info in the app lists every source, what it's used for, and its license.
 Known issues
 ------------
 
-- Steam client is untested. The sniffer filters by port, so it should work if
-  Steam uses the same servers. If nothing syncs, find the port in Wireshark
-  and add it under Settings -> Capture ports.
 - Hero level only shows when the capture includes it; otherwise you see stars
   and awakening.
-- No site tracks Arena or Guild War teams, so those pages use RTA data as a
-  stand-in.
-- epic7rtastats publishes rates for the top 20 heroes per list only; everyone
-  else shows a dash.
-- Only Wyvern 13 and Azimanak 13 have sourced stat breakpoints. Raid bosses
-  and Abyss 101–110 come from 2020 guides (labelled "legacy 2020"). Most Abyss
-  floors and Dimensional Exploration have no guide data.
-- Six hero names from the guides couldn't be matched to game data and were
-  dropped (e.g. "SC Wanda").
 - Not built yet: combat simulator, hero investment planner (needs material
   counts, which capture doesn't decode), history dashboard.
 
