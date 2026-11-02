@@ -217,6 +217,7 @@ Changelog
 ---------
 
 0.1.6
+- Gear & Upgrade ROI: trash button at the end of each row deletes an item from E7 Forge (it also leaves the hero wearing it). It asks first, with "Don't ask again this session"; the item comes back on the next Live Sync or import if it's still in the game.
 - Gear & Upgrade ROI: new "+15 tier" column with each item's Monte Carlo rating (S, A, B or Sell, plus that tier's chance for unfinished gear). It follows the tier thresholds and forecast type you set, matches the Forecast panel, and can be sorted.
 
 0.1.5

@@ -11,6 +11,7 @@ const api = {
   updateHero: invoke("account:updateHero"),
   applyBuilds: invoke("account:applyBuilds"),
   updateItem: invoke("account:updateItem"),
+  deleteItem: invoke("account:deleteItem"),
   addHero: invoke("account:addHero"),
   snapshots: invoke("snapshots:list"),
   restoreSnapshot: invoke("snapshots:restore"),

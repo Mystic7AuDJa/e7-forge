@@ -21,6 +21,7 @@ import tiersJson from "../../data/epic7db-tiers.json";
 import presetsJson from "../../data/pve-presets.json";
 import topicsJson from "../../data/camping-topics.json";
 import { preferredSnapshot } from "../engine/e7analyzer";
+import { removeItem } from "../engine/inventory";
 import analyzerIndex from "../../data/meta-history/e7analyzer/index.json";
 import weekIndex from "../../data/meta-history/index.json";
 import { DEFAULT_CAPTURE_PORTS, DEFAULT_DECODER_URL } from "../engine/scan";
@@ -57,6 +58,7 @@ export function createMockApi(): ForgeApi {
       if (i < 0) return null;
       acc.items[i] = editItem(acc.items[i], { enhance, substats }); emit("account:changed", {}); return acc.items[i];
     },
+    deleteItem: async ({ itemId }) => { const ok = removeItem(need(), itemId); if (ok) emit("account:changed", {}); return ok; },
     applyBuilds: async (builds) => {
       const acc = need();
       for (const b of builds) { const h = acc.heroes.find((x) => x.id === b.heroId)!; for (const [s, id] of Object.entries(b.items)) { for (const o of acc.heroes) if (o.equipment[s as keyof Hero["equipment"]] === id) delete o.equipment[s as keyof Hero["equipment"]]; (h.equipment as any)[s] = id; const it = acc.items.find((i) => i.id === id); if (it) it.equippedById = h.id; } }

@@ -49,6 +49,42 @@ function useOutcomes(items: Item[], first: Item[], focusName: string) {
 
 const TIER_COLOR: Record<string, string> = { S: "var(--good)", A: "var(--info)", B: "var(--warn)", Sell: "var(--muted)" };
 const EMPTY_ITEMS: Item[] = [];
+// "Don't ask again this session": kept in memory only, so it resets when the app restarts.
+let skipDeleteConfirm = false;
+
+const TrashIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M3 6h18" /><path d="M8 6V4h8v2" /><path d="M19 6l-1 14H6L5 6" /><path d="M10 11v6" /><path d="M14 11v6" />
+  </svg>
+);
+
+function DeleteDialog({ item, wornBy, onCancel, onConfirm }: { item: Item; wornBy?: string; onCancel: () => void; onConfirm: (dontAsk: boolean) => void }) {
+  const [dontAsk, setDontAsk] = useState(false);
+  useEffect(() => {
+    const key = (e: KeyboardEvent) => { if (e.key === "Escape") onCancel(); };
+    window.addEventListener("keydown", key);
+    return () => window.removeEventListener("keydown", key);
+  }, [onCancel]);
+  return (
+    <div className="modal-backdrop" onClick={onCancel}>
+      <div className="modal card" role="dialog" aria-modal="true" aria-labelledby="del-title" onClick={(e) => e.stopPropagation()}>
+        <h3 id="del-title" style={{ marginTop: 0 }}>Delete this item?</h3>
+        <p style={{ margin: "6px 0" }}>
+          <span className="slot-label"><SetIcon set={item.set} /><SlotIcon slot={item.gear} />{item.rank} {SETS[item.set]?.label ?? item.set} {item.gear} +{item.enhance}</span>
+          <span className="muted"> · {statText(item.main.type, item.main.value)} · GS {fmt(item.gs, 1)}</span>
+        </p>
+        {wornBy && <p className="warn" style={{ margin: "6px 0" }}>{wornBy} is wearing it; that slot will be empty.</p>}
+        <p className="muted" style={{ fontSize: 12, margin: "6px 0 10px" }}>This removes it from E7 Forge only. If it's still in your game inventory, the next Live Sync or import adds it back.</p>
+        <label className="row" style={{ gap: 6, fontSize: 13 }}><input type="checkbox" checked={dontAsk} onChange={(e) => setDontAsk(e.target.checked)} />Don't ask again this session</label>
+        <div className="row" style={{ justifyContent: "flex-end", marginTop: 12 }}>
+          <button className="small ghost" onClick={onCancel} autoFocus>Cancel</button>
+          <button className="small danger" onClick={() => onConfirm(dontAsk)}>Delete</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const TIER_RANK: Record<string, number> = { S: 4, A: 3, B: 2, Sell: 1 };
 
 function TierCell({ split, tiers }: { split?: TierSplit; tiers: RoiTiers }) {
@@ -80,6 +116,16 @@ export default function GearPage() {
   const [tiers, setTiers] = useState<RoiTiers>(DEFAULT_TIERS);
   const [queue, setQueue] = useState<any[] | null>(null);
   const [busy, setBusy] = useState(false);
+  const [confirmDel, setConfirmDel] = useState<Item | null>(null);
+  const deleteItem = async (item: Item) => {
+    try {
+      if (!(await api.deleteItem({ itemId: item.id }))) throw new Error("Item not found.");
+      if (sel?.id === item.id) setSel(null);
+      setQueue((q) => q?.filter((x) => x.itemId !== item.id) ?? null);
+      toast(`Deleted ${item.rank} ${item.gear} +${item.enhance}.`);
+    } catch (e: any) { toast(e.message, true); }
+  };
+  const askDelete = (item: Item) => (skipDeleteConfirm ? deleteItem(item) : setConfirmDel(item));
   const items = useMemo(() => (account?.items ?? []).filter((i) => {
     if (slot && i.gear !== slot) return false;
     if (set && i.set !== set) return false;
@@ -121,6 +167,8 @@ export default function GearPage() {
 
   return (
     <div className="stack">
+      {confirmDel && <DeleteDialog item={confirmDel} wornBy={confirmDel.equippedById ? heroById.get(confirmDel.equippedById)?.name : undefined}
+        onCancel={() => setConfirmDel(null)} onConfirm={(dontAsk) => { if (dontAsk) skipDeleteConfirm = true; const it = confirmDel; setConfirmDel(null); deleteItem(it); }} />}
       <div><h1>Gear & Upgrade ROI</h1><p className="sub">Monte Carlo forecast of where unfinished gear lands at +15 (reforged for level-85 gear), so you know what to enhance, what to stop, and what to sell.</p></div>
       <div className="row">
         <select value={slot} onChange={(e) => setSlot(e.target.value)}><option value="">All slots</option>{GEAR_SLOTS.map((s) => <option key={s}>{s}</option>)}</select>
@@ -152,7 +200,7 @@ export default function GearPage() {
               {SUB_COLS.map((c) => <SortTh key={c.t} k={c.t} label={c.label} num sort={sort} onSort={toggle} title={`Sort by ${c.label} substat`} />)}
               <SortTh k="gs" label="GS" num sort={sort} onSort={toggle} />
               <SortTh k="tier" label="+15 tier" num sort={sort} onSort={toggle} title={"Monte Carlo rating at +15 for the forecast type and tiers set on this page. Finished gear is graded as it is; unfinished gear shows its most likely tier and that tier's chance.\n\n" + tierHelp(tiers)} />
-              <SortTh k="worn" label="Worn by" text sort={sort} onSort={toggle} />
+              <SortTh k="worn" label="Worn by" text sort={sort} onSort={toggle} /><th style={{ width: 30 }} />
             </tr>
             <tr className="filter-row">
               <th colSpan={6} className="muted" style={{ fontWeight: 400 }}>Minimum substat ≥ (blank = any)</th>
@@ -160,10 +208,10 @@ export default function GearPage() {
                 <th key={c.t} className="num"><input type="number" className="mini" value={subMin[c.t] ?? ""} placeholder="–"
                   onChange={(e) => setSubMin({ ...subMin, [c.t]: e.target.value === "" ? undefined : Number(e.target.value) })} /></th>
               ))}
-              <th colSpan={3} />
+              <th colSpan={4} />
             </tr></thead>
             <tbody>{shown.length === 0 && (
-              <tr><td colSpan={6 + SUB_COLS.length + 3} className="empty">No items match these filters. <a onClick={clearFilters}>Clear filters</a></td></tr>
+              <tr><td colSpan={6 + SUB_COLS.length + 4} className="empty">No items match these filters. <a onClick={clearFilters}>Clear filters</a></td></tr>
             )}{shown.map((i) => (
               <tr key={i.id} className={sel?.id === i.id ? "sel" : ""} onClick={() => setSel(i)} style={{ cursor: "pointer" }}>
                 <td><ItemBadge item={i} /></td>
@@ -172,6 +220,7 @@ export default function GearPage() {
                 {SUB_COLS.map((c) => { const v = subVal(i, c.t); const hit = v != null && subMin[c.t] != null; return (
                   <td key={c.t} className={"num sub" + (c.t === "Speed" && v != null ? " spd" : "") + (hit ? " hit" : "")}>{v ?? ""}</td>); })}
                 <td className="num">{fmt(i.gs, 1)}</td><TierCell split={splitOf(i)} tiers={tiers} /><td className="muted worn" title={i.equippedById ? heroById.get(i.equippedById)?.name : ""}>{i.equippedById ? heroById.get(i.equippedById)?.name : ""}</td>
+                <td><button className="icon-btn" title="Delete item" aria-label="Delete item" onClick={(e) => { e.stopPropagation(); askDelete(i); }}><TrashIcon /></button></td>
               </tr>
             ))}</tbody>
           </table>

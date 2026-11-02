@@ -168,7 +168,7 @@ td.sub.spd { color: var(--accent); }
 td.sub.hit { background: #2b2416 !important; }
 
 .gear-table th, .gear-table td { padding-left: 5px; padding-right: 5px; }
-.gear-table td.worn { max-width: 130px; overflow: hidden; text-overflow: ellipsis; }
+.gear-table td.worn { max-width: 110px; overflow: hidden; text-overflow: ellipsis; }
 /* Hero roster */
 .roster { padding: 12px; display: flex; flex-direction: column; gap: 6px; }
 .roster-filters { display: flex; flex-wrap: wrap; gap: 4px; }
@@ -242,3 +242,9 @@ td .row img { width: 26px; height: 26px; }
 .draft-input img { width: 26px; height: 26px; border-radius: 50%; }
 .draft-input.ok input { border-color: #2f5a3f; }
 .gear-table td.roi-tier { white-space: nowrap; cursor: help; }
+.icon-btn { background: transparent; border: 1px solid transparent; padding: 4px 5px; border-radius: 6px; color: var(--muted); line-height: 0; }
+.icon-btn:hover:not(:disabled) { color: var(--bad, #e06c6c); border-color: #4a3333; background: #2a1c1c; }
+button.danger { background: #7a2e2e; border-color: #9a3c3c; color: #ffe1e1; font-weight: 600; }
+button.danger:hover:not(:disabled) { background: #8f3636; }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(5, 8, 12, .6); display: flex; align-items: center; justify-content: center; z-index: 100; }
+.modal { width: min(440px, calc(100vw - 32px)); box-shadow: 0 12px 40px rgba(0, 0, 0, .5); }
