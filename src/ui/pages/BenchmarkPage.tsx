@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useForge } from "../state";
 import { HeroRoster } from "../HeroRoster";
 import { HeroHeader } from "../HeroDetail";
@@ -8,7 +8,9 @@ import { benchmark, BENCH_STATS, type BenchmarkResult } from "../../engine/bench
 const LABEL: Record<string, string> = { spd: "Speed", hp: "HP", atk: "Attack", def: "Defense", cr: "Crit %", cd: "Crit Dmg %", eff: "Effectiveness", res: "Effect Res", gs: "Gear Score" };
 
 export default function BenchmarkPage() {
-  const { account, pageArg, heroById, stats, api, toast , heroId, setHeroId } = useForge();
+  const { account, pageArg, heroById, stats, api, toast, heroId, setHeroId, init } = useForge();
+  const byCode = useMemo(() => new Map(Object.values(init.gameData.artifacts ?? {}).map((a) => [a.code, a.name])), [init.gameData.artifacts]);
+  const artifactName = (code: string) => byCode.get(code) ?? code;
   const [busy, setBusy] = useState(false);
   const [data, setData] = useState<{ fetchedAt: string; builds: any[]; cached: boolean; stale?: boolean } | null>(null);
   const hero = heroId ? heroById.get(heroId) : undefined;
@@ -62,7 +64,10 @@ export default function BenchmarkPage() {
             <Section title="Within your account">
               <p>Speed: faster than {100 - localTop("spd")}% of your heroes' current builds.</p>
               <p>Gear score: higher than {100 - localTop("gs")}% of your heroes.</p>
-              <p className="muted" style={{ fontSize: 12 }}>Most common artifacts: {r.commonArtifacts.map((a) => `${a.code} (${pct(a.share)})`).join(", ") || "—"}</p>
+              <p className="muted" style={{ fontSize: 12 }}>Most common artifacts: {r.commonArtifacts.length ? r.commonArtifacts.map((a, i) => {
+                const name = artifactName(a.code);
+                return <span key={a.code} title={init.gameData.artifactInfo?.[name]?.effect}>{i ? ", " : ""}{name} ({pct(a.share)})</span>;
+              }) : "—"}</p>
             </Section>
           </div>
         </>

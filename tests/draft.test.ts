@@ -3,7 +3,6 @@ import herodata from "../data/herodata.json";
 import tags from "../data/hero-tags.json";
 import tiers from "../data/epic7db-tiers.json";
 import sample from "../data/sample-fribbels-export.json";
-import analyzerIndex from "../data/meta-history/e7analyzer/index.json";
 import { buildHeroDb } from "../src/engine/data";
 import { importFribbels } from "../src/engine/importer";
 import { candidatesFrom } from "../src/engine/teams";
@@ -11,7 +10,9 @@ import { banAdvice, buildDraftData, nextTurn, pairBonus, recommendPicks, slotKey
 import { buildMeta, suggestPvp } from "../src/engine/meta";
 import fs from "node:fs";
 
-const analyzer = JSON.parse(fs.readFileSync(`data/meta-history/e7analyzer/${(analyzerIndex as string[]).at(-1)}`, "utf8"));
+const load = (f: string) => JSON.parse(fs.readFileSync(`data/meta-history/e7analyzer/${f}`, "utf8"));
+const analyzer = load("2026-11-02-all-ranks.json");
+const champ = load("2026-11-02-champion-plus.json");
 const db = buildHeroDb(herodata as any, tags as any);
 const acc = importFribbels(sample as any).account;
 const cands = candidatesFrom(acc.heroes, (h) => db.get(h.dataKey || h.name), acc.items);
@@ -31,6 +32,21 @@ describe("draft data", () => {
   it("knows proven pairs, including the corrected cut-off one", () => {
     expect(pairBonus(d, "Lisette", "Shepherd of the Dark Diene").combo?.games).toBe(3234);
     expect(pairBonus(d, "Lisette", "Shepherd of the Dark Diene").pts).toBeGreaterThan(0);
+  });
+});
+
+describe("draft-position tables", () => {
+  const dc = buildDraftData(champ, null, tiers as any);
+  it("loads all five picks for both sides", () => {
+    expect(dc.slotStats?.first).toHaveLength(5);
+    expect(dc.slotStats?.second[3].get("Shepherd of the Dark Diene")?.games).toBe(28543);
+    expect(dc.sideMean.first).toBeCloseTo(57.5);
+  });
+  it("scores a hero for the exact pick top players take it at", () => {
+    const owned = cands.find((c) => dc.slotStats!.first[0].has(c.hd.name));
+    if (!owned) return;
+    const [r] = recommendPicks(base, [owned], dc, hd, 1);
+    expect(r.parts.some((p) => p.label.startsWith("Top players take it at their pick 1"))).toBe(true);
   });
 });
 

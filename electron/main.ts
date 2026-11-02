@@ -7,6 +7,7 @@ import { importFribbels } from "../src/engine/importer";
 import { mergeScan, DEFAULT_CAPTURE_PORTS, DEFAULT_DECODER_URL } from "../src/engine/scan";
 import { parseRtaMeta } from "../src/engine/meta";
 import { parseMetaSnapshot } from "../src/engine/metaHistory";
+import { preferredSnapshot } from "../src/engine/e7analyzer";
 import { editItem } from "../src/engine/roi";
 import { mapCamping } from "../src/engine/camping";
 import { deriveTags, epic7dbSlug, parseEpic7dbHeroPage } from "../src/engine/tagger";
@@ -48,7 +49,7 @@ let win: BrowserWindow | null = null;
 let store: Store;
 let account: Account | null = null;
 let settings: Settings = DEFAULT_SETTINGS;
-let gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; imprints: Record<string, any>; artifacts: Record<string, any>; source: string; heroCount: number };
+let gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; imprints: Record<string, any>; artifacts: Record<string, any>; artifactInfo: Record<string, any>; source: string; heroCount: number };
 let capture: CaptureService;
 
 function readJson(file: string) { return JSON.parse(fs.readFileSync(file, "utf8")); }
@@ -61,8 +62,11 @@ function loadGameData() {
   const tags = { ...readJson(dataFile("hero-tags.json")), ...store.heroTags() };
   const artifacts = readJson(dataFile("artifactdata.json"));
   const imprints = readJson(dataFile("imprints.json"));
+  // Bundled only: "Update hero data" refreshes artifact stats, not this effect text.
+  let artifactInfo = {};
+  try { artifactInfo = readJson(path.join(bundledData, "artifact-dictionary.json")).artifacts; } catch { /* effect text is optional */ }
   const source = fs.existsSync(path.join(userDataDir, "herodata.json")) ? store.get("data_source", "updated") : "bundled (RexQian fork v1.12.9-offline)";
-  gameData = { herodata, tags, imprints, artifacts, source, heroCount: Object.keys(herodata).length };
+  gameData = { herodata, tags, imprints, artifacts, artifactInfo, source, heroCount: Object.keys(herodata).length };
 }
 
 const POOL = Math.max(1, Math.min(os.cpus().length - 2, 12));
@@ -395,14 +399,14 @@ function registerIpc() {
       } catch (e: any) { errors.push(`Camping data: ${e.message}${camping ? " (showing last good copy)" : ""}`); }
     }
     // Bundled history (data/meta-history): latest E7 Analyzer export, and the latest weekly snapshot as a fallback.
-    const latest = (dir: string) => {
+    const latest = (dir: string, pick: (files: string[]) => string | undefined = (f) => f.at(-1)) => {
       try {
         const base = path.join(bundledData, "meta-history", dir);
-        const index: string[] = readJson(path.join(base, "index.json"));
-        return index.length ? readJson(path.join(base, index[index.length - 1])) : null;
+        const file = pick(readJson(path.join(base, "index.json")));
+        return file ? readJson(path.join(base, file)) : null;
       } catch { return null; }
     };
-    const analyzer = latest("e7analyzer");
+    const analyzer = latest("e7analyzer", preferredSnapshot);
     week ??= latest("");
     return { tiers, presets, campingTopics, rta, camping, analyzer, week, errors };
   });

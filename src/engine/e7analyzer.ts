@@ -8,6 +8,8 @@
 export interface PoolHero { name: string; win: number; games: number; pickBan: number }
 export interface Combo { heroes: string[]; win: number; games: number; firstPick?: { win: number; games: number }; secondPick?: { win: number; games: number } }
 export interface Mover { name: string; value: number; change: number }
+/** One row of an expanded "📋 Collapse Table" (the PDF only keeps its first rows). */
+export interface TableRow { name: string; games: number; win: number }
 
 export interface AnalyzerSnapshot {
   source: string;
@@ -26,6 +28,10 @@ export interface AnalyzerSnapshot {
   synergies: Combo[];
   trios: Combo[];
   servers: { server: string; win: number; games: number }[];
+  /** Expanded "Hero Performance" tables: overall, and when the tracked player picked first / second. */
+  performance?: { overall: TableRow[]; first: TableRow[]; second: TableRow[] };
+  /** Expanded "Draft Position" tables: [0] is the side's 1st pick … [4] its 5th. */
+  draftSlots?: { first: TableRow[][]; second: TableRow[][] };
   /** Names the parser couldn't match to hero data (kept as printed). */
   unmatched: string[];
 }
@@ -110,6 +116,22 @@ function parseCombos(raw: string, startMarker: string, endMarker: string, resolv
   return out;
 }
 
+/** Rows after each "Collapse Table" line in a section, one list per table, until "N heroes shown". */
+function parseTables(raw: string, startMarker: string, endMarker: string, resolve: (s: string) => string): TableRow[][] {
+  const start = raw.indexOf(startMarker);
+  if (start < 0) return [];
+  const end = raw.indexOf(endMarker, start + startMarker.length);
+  const tables: TableRow[][] = [];
+  let cur: TableRow[] | null = null;
+  for (const l of raw.slice(start, end < 0 ? undefined : end).split("\n").map((x) => x.trim())) {
+    if (/Collapse Table/.test(l)) { cur = []; tables.push(cur); continue; }
+    if (/heroes shown/.test(l)) { cur = null; continue; }
+    const m = cur && l.match(/^(.+?) (\d+) (\d+(?:\.\d+)?)%$/);
+    if (m) cur!.push({ name: resolve(m[1]), games: Number(m[2]), win: Number(m[3]) });
+  }
+  return tables;
+}
+
 function parseMovers(raw: string, resolve: (s: string) => string): AnalyzerSnapshot["movers"] {
   const m = raw.match(/Movers and Shifters (\d{4}-\d{2}-\d{2}) → (\d{4}-\d{2}-\d{2})/);
   if (!m) return null;
@@ -147,10 +169,34 @@ export function parseAnalyzer(raw: string, layout: string, knownHeroes: string[]
     servers: [...raw.matchAll(/^(Global|Korea|Asia|Europe|Japan) (\d+(?:\.\d+)?)% \((\d+) games\)$/gm)].map((m) => ({ server: m[1], win: Number(m[2]), games: Number(m[3]) })),
     unmatched: [],
   };
+  const perf = (title: string, next: string) => parseTables(raw, title, next, resolve)[0] ?? [];
+  const overall = perf("Hero Performance — Overall", "First Pick Performance");
+  if (overall.length) snap.performance = { overall, first: perf("First Pick Performance", "Second Pick Performance"), second: perf("Second Pick Performance", "Most Popular Preban Pairs") };
+  const first = parseTables(raw, "Draft Position — First Pick", "Draft Position — Second Pick", resolve);
+  const second = parseTables(raw, "Draft Position — Second Pick", "Win Rate by Server", resolve);
+  if (first.length === 5 && second.length === 5) snap.draftSlots = { first, second };
   if (snap.heroes.length < 20) throw new Error("Hero pool not found; expand 'Meta Hero Pool' (click 'show more') before saving the PDF.");
   snap.unmatched = [...unmatched];
   return snap;
 }
+
+/** File name for a snapshot: date plus rank filter, so an All Ranks and a Champion+ export of the same day don't collide. */
+export function snapshotFile(snap: Pick<AnalyzerSnapshot, "generatedAt" | "window">) {
+  const rank = snap.window.split(",").slice(1).join(",").trim().toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return `${snap.generatedAt.slice(0, 10)}${rank ? "-" + rank : ""}.json`;
+}
+
+/**
+ * Which export the app uses: the newest date; on the same date a Champion+
+ * export wins over All Ranks, since draft advice is about top-ranked play.
+ */
+export function preferredSnapshot(files: string[]): string | undefined {
+  const score = (f: string) => f.slice(0, 10) + (/champion/.test(f) ? "2" : "1");
+  return [...files].sort((a, b) => score(a).localeCompare(score(b))).at(-1);
+}
+
+/** Same dashboard filter (window and rank), so cumulative numbers can be subtracted. */
+export const sameWindow = (a: AnalyzerSnapshot, b: AnalyzerSnapshot) => a.window === b.window;
 
 export interface Correction { section: "prebanPairs" | "synergies" | "trios"; known: string; games: number; win: number; partner: string; note?: string }
 
@@ -203,13 +249,20 @@ export function analyzerReport(cur: AnalyzerSnapshot, prev: AnalyzerSnapshot | n
   L.push("");
   L.push("Most pre-banned pairs");
   cur.prebanPairs.slice(0, 10).forEach((t) => L.push(`- ${t.heroes.join(" + ")}: ${fmt(t.games)} games`));
+  if (cur.draftSlots) {
+    for (const [side, label] of [["first", "first"], ["second", "second"]] as const) {
+      L.push("");
+      L.push(`Draft position when picking ${label} (most taken at each of the side's picks)`);
+      cur.draftSlots[side].forEach((rows, i) => L.push(`Pick ${i + 1}: ${rows.slice(0, 6).map((r) => `${r.name} ${fmt(r.games)} (${pct(r.win)})`).join(", ")}`));
+    }
+  }
   if (cur.movers) {
     L.push("");
     L.push(`Movers ${cur.movers.from} to ${cur.movers.to} (dashboard's own week-over-week)`);
     for (const [label, list] of [["Win rate up", cur.movers.winRising], ["Win rate down", cur.movers.winFalling], ["Pick rate up", cur.movers.pickRising], ["Pick rate down", cur.movers.pickFalling]] as const)
       L.push(`${label}: ${list.map((m) => `${m.name} ${m.change > 0 ? "+" : ""}${m.change.toFixed(1)}`).join(", ") || "-"}`);
   }
-  if (prev) {
+  if (prev && sameWindow(prev, cur)) {
     const w = heroWindowStats(prev, cur);
     L.push("");
     L.push(`Since the previous export (${prev.generatedAt.slice(0, 10)}): ${fmt(cur.matches - prev.matches)} new matches`);

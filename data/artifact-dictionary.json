@@ -1,0 +1,1416 @@
+{
+ "source": "https://slendy.gg (E7 Dictionary)",
+ "gameData": "2026-10-10",
+ "artifacts": {
+  "3F": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "After attacking, has a 50-100% chance to inflict additional damage proportional to the caster's max Health on the target."
+  },
+  "A Little Queen's Huge Crown": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases damage by 8-16% when the caster attacks with a Single Attack and increases damage by an additional 8-16% if the enemy is granted a barrier."
+  },
+  "A Precious Connection": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "Increases Health by 10%. At the start of the turn, gains 10 Soul. Can only be activated twice. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "A Symbol of Unity": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "When attacking, increases Hit Chance by 10-20% and damage dealt by 8-16%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Abyssal Crown": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "15-30% chance to stun the enemy for 1 turn after attacking."
+  },
+  "Air-to-Surface Missile: MISHA": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "Increases Hit Chance by 10-20% and Critical Hit Damage by 15-30%."
+  },
+  "Alabastron": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 35%. After attacking with a Single Attack, has a 35-70% chance to inflict a random debuff on the target for 2 turns. Can only be activated once per turn. (Decrease Attack, Decrease Defense, Decrease Speed, or Unhealable)"
+  },
+  "Alencinox's Wrath": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 15%. After activating an extra attack on the caster's turn, increases Combat Readiness by 10-20%."
+  },
+  "Alexa's Basket": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "35-70% chance to increase Attack for 1 turn and a 20-40% chance to grant increased Attack (Greater) for 1 turn each to the caster at the start of the turn."
+  },
+  "An Assassin's Pledge": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After using an attack that targets all enemies, gains 10 Soul, and has a 50-100% chance to inflict burn for 1 turn. Soul can only be acquired once."
+  },
+  "An Offer You Can't Refuse": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "When attacking with a Single Attack, penetrates the target's Defense by 10-20%. After attacking with a Single Attack, when the target receives damage equivalent to 50% or more of max Health, has a 50-100% chance to increase Combat Readiness of all allies by 15%. Combat Readiness increase effect can only be activated once per turn."
+  },
+  "Ancient Dragon's Legacy": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "After the caster uses a non-attack skill, decreases skill cooldowns of all allies by 1 turn, and has a 50-100% chance to increase Critical Hit Damage of the caster for 2 turns. Skill cooldown reduction effect can only be activated once."
+  },
+  "Anti-Magic Mask": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "At the start of the turn, has a 50-100% chance to grant a random buff to the caster for 2 turns. (Immunity, Increase Attack, Increase Defense, Increase Critical Hit Damage, Increase Speed)"
+  },
+  "Aubade Orb": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "At the start of the first battle, acquires 10 Soul. At the end of the turn, has a 50-100% chance to acquire 5 Soul. Can only be activated three times."
+  },
+  "Awakened Leaf": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After using a non-attack skill, increases Combat Readiness of the caster and the ally in the back row except for the caster by 12-24%. Can only be activated once every 2 turns."
+  },
+  "Azure Comet": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 15%. When somebody dies, increases Combat Readiness of the caster by 12-24%. Can be activated once per turn."
+  },
+  "Bastion of Hope": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "Increases Effect Resistance of all allies by 10-20%, and the caster's Effect Resistance by an additional 25-50%. The caster's Effect Resistance decreases by 3% with each attack suffered, down to 10-35%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Bastion of Perlutia": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "At the start of battle, grants the caster and the ally in the back row immunity for 1 turn and a barrier equivalent to 15-30% of the caster's max Health for 2 turns."
+  },
+  "Beguiling Wings": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Effect Resistance by 15-30%. After using an attack except for a basic skill, when a non-critical hit is made, removes 10-20 Soul from the enemy. Soul removal can only be activated once every 4 turns."
+  },
+  "Benimaru's Tachi": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "At the start of the first battle, has a 50-100% chance to grant immunity for 1 turn. At the start of the turn, when the caster does not have a debuff, has a 50-100% chance to grant increased Attack for 1 turn."
+  },
+  "Bird's-Eye View": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "After using a non-attack skill, acquires 10-20 Soul. Can only be activated once."
+  },
+  "Black Hand of the Goddess": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 15%. At the start of battle, increases Critical Hit Damage by 18-36%. This effect decreases by 3% for each attack made, down to 6-24%."
+  },
+  "Bloodstone": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After attacking, heals the ally with the lowest Health by 13-26% of damage dealt."
+  },
+  "Bloody Rose": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 30-60% on a Single Attack. After attacking with a Single Attack, has a 25-50% chance to inflict vampiric touch on the target for 2 turns. Vampiric touch effect is not activated by a counterattack, Dual Attack, or extra attack."
+  },
+  "Border Coin": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "After using a non-attack skill, increases Attack by 7.5-15% and Speed by 5-10%. Effects can only stack up to 3 times."
+  },
+  "Broken Will of the Priest": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "Increases Hit Chance by 10-20%. When attacking, penetrates the target's Defense by 8-16%."
+  },
+  "Butterfly Hair Ornament": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases Attack by 10-20%. After attacking, grants a barrier equivalent to 25-50% of Attack for 2 turns. Can only be activated once per turn."
+  },
+  "Butterfly's Baptism": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Evasion by 10-20%. At the start of an extra turn, increases Attack and Speed by 5% each. Can stack up to 3 times."
+  },
+  "Celestine": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "After attacking with a Single Attack, heals the ally with the lowest Health by 8-16%."
+  },
+  "Champion's Trophy": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 15-30%. 13-26% chance to stun the enemy for 1 turn after using a basic skill. This effect is not activated by a counterattack, Dual Attack, or extra attack."
+  },
+  "Chatty": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "At the start of battle, grants a barrier for 2 turns. After being attacked, has a 50-100% chance to be granted a barrier for 2 turns when the caster's Health is 50% or less. Barrier strength is proportional to the caster's Attack. The effect after being attacked can only be activated once every 2 turns."
+  },
+  "Circus Fantasia": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 15%. Increases the caster's Effectiveness by 25-50% at the start of battle. Effectiveness decreases by 2.5-5% every time the caster attacks, down to 12.5-25%."
+  },
+  "Cradle of Life": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "40-80% chance to inflict a random debuff for 2 turns after using a Single Attack on the caster's turn. (Decrease Attack, Decrease Hit Chance, Burn, or Bleeding)."
+  },
+  "Creation & Destruction": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "After using a skill, has a 10-20% chance to reset cooldown of the skill."
+  },
+  "Crimson Moon of Nightmares": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases Dual Attack chance by 7-14%. When it is not the caster's turn, increases Effectiveness by 20-40%."
+  },
+  "Crown of Glory": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "When an ally suffers an attack that targets all allies, grants 10-20% damage reduction, and removes 10 Soul from the enemy. Soul removal effect can only be activated once per skill."
+  },
+  "Cruel Mischief": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "Increases Attack in the Hall of Trials by 20-40%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Cure-All Magic Wand": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Effect Resistance by 15%. When an ally's Health is 50% or less after being attacked, recovers Health of the target by 10-20%. Can only be activated once per turn."
+  },
+  "Custom-Made Power Anchor": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "At the start of the first battle, has a 50-100% chance to gain 10 Soul. After an ally is attacked by a Single Attack, increases the caster's Combat Readiness by 8-16%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Dark Blood Keeper": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 15%. After using a non- attack skill, has a 50-100% chance to grant stealth for 2 turns. Stealth can only be granted once every 3 turns."
+  },
+  "Dignus Orb": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Grants a barrier equivalent to 60-120% of Attack for 2 turns when the caster uses a non- attack skill and increases the damage of the next attack by 15%."
+  },
+  "Discreet Hands": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 10-20%. At the end of the turn, when the caster has a debuff, increases Combat Readiness by 15-30% and grants stealth for 2 turns."
+  },
+  "Doctor's Bag": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Dispels one debuff from all allies and recovers 7-14% of each ally's max Health after using a non-attack skill. Can only be activated once every 3 turns."
+  },
+  "Double-Edged Decrescent": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Evasion by 20%. When successfully evading, has a 25-50% chance to counterattack."
+  },
+  "Draco Plate": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Critical Hit Damage by 15-30%. When suffering a critical hit, grants 15-30% damage reduction."
+  },
+  "Dreamlike Holiday": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "Increases Critical Hit Damage by 15-30%. If the caster attacks when it's not their turn, has a 50-100% chance to increase Attack of the caster for 1 turn before attacking. Can only be activated once per turn."
+  },
+  "Durandal": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "After being attacked, increases Combat Readiness by 4-8% and when the caster's Health is 75% or less, increases Combat Readiness by an additional 4-8%."
+  },
+  "Dux Noctis": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "Increases Attack by 6-12%. When an ally inflicts a critical hit, increases Attack of the caster by 2-4% for each critical hit. This effect can stack up to 6 times."
+  },
+  "Elbris Ritual Sword": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "Has a 10-20% chance to counterattack when an ally except for the caster is attacked."
+  },
+  "Elegiac Candle": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After attacking, has a 30-60% chance to inflict decreased Defense on the target for 1 turn. This effect is not activated by a counterattack, Dual Attack, or extra attack."
+  },
+  "Etica's Scepter": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "25-50% chance to decrease skill cooldown by 1 turn at the beginning of the turn."
+  },
+  "Excommunicant's Censer": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Effect Resistance by 15-30%. At the end of an enemy's turn, when the caster does not have a debuff, increases Combat Readiness of the caster by 10-20%. Can only be activated once per turn."
+  },
+  "EXIF Detective (E.d.) Gadget": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "After using a non-attack skill, increases Combat Readiness of the caster by 10-20%, and removes 10-20 Soul from the enemy. Soul removal can only be activated once every 4 turns."
+  },
+  "Fairy Tale for a Nightmare": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "After an extra attack, counterattack, or Dual Attack, has a 40-80% chance to dispel one buff from the target and a 100% chance to inflict 1000-2000 additional damage."
+  },
+  "Fan of Light and Dark": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "After using a non-attack skill twice, increases Combat Readiness of the ally with the highest Attack by 10-20% and has a 50-100% chance to increase Critical Hit Damage for 2 turns."
+  },
+  "Feed of Criticism": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 10-20%. At the start of battle, grants a barrier equivalent to 50-100% of Attack for 2 turns."
+  },
+  "Flame Dragon's Jewel": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 10-20%. After being attacked, has a 50-100% chance to decrease debuff durations of the caster by 1 turn."
+  },
+  "Flawless Garments": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Effect Resistance by 10-20%. Increases Effectiveness by 15% at the end of the caster's turn. This effect can only stack up to 3 times and resets at the start of battle."
+  },
+  "Frame of Light": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "When attacking with a Single Attack, increases damage dealt by 8-16%. When the enemy is defeated by a Single Attack, gains 10 Souls at the start of the next turn. The effect upon defeating an enemy can only be activated once."
+  },
+  "Frantic Flight": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 10%. After attacking, increases Attack and Critical Hit Damage by 2-4%. Can stack up to 6 times. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Fullmetals Automail": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 10%. After an extra attack, increases Critical Hit Damage by 4-8% and Speed by 4-8%. Can stack up to 4 times."
+  },
+  "Gifted Pen": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 10-20%. After attacking with a Single Attack except for the basic skill, inflicts decreased Hit Chance on the target for 2 turns, and increases Combat Readiness of the ally in the back row by 15-30%. Can only be activated once every 3 turns."
+  },
+  "Glo-Wings 21": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After using a non-attack skill, grants a barrier equivalent to 30-60 per Level to all allies for 2 turns. This effect can only be activated once every 3 turns. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Glorious Flag": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Evasion by 20%. After an ally uses a basic skill, has a 50-100% chance to increase Combat Readiness of the caster by 10%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Glorious Throne": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "After attacking, has a 50-100% chance to inflict additional damage proportional to the caster's max Health on the target."
+  },
+  "Goblet of Oath": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 15-30%. After using a non-attack skill, decreases skill cooldown by 1 turn. Can only be activated three times per battle."
+  },
+  "Golden Rose": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "When attacking, if the caster's Health is 50% or more, increases damage dealt by 8-16%, and when Health is less than 50%, recovers 15-30% of damage dealt."
+  },
+  "Guardian Ice Crystals": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Effect Resistance by 15%. When an ally's Health is 50% or less after being attacked, recovers Health of the target by 10-20%. Can only be activated once per turn."
+  },
+  "Guide to a Decision": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "At the start of battle, has a 50-100% chance to grant a barrier equivalent to 15-30% of the caster's max Health for 2 turns. When the caster is at max Health after being attacked, increases Combat Readiness by 8-16%. Can only be activated once per turn. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Guiding Light": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "At the start of battle, grants stealth for 1 turn. At the end of the caster's turn, has a 35-70% chance to grant stealth for 2 turns. Stealth granted at the end of the caster's turn can be activated once every 2 turns."
+  },
+  "Holy Sacrifice": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "Upon dying, has a 50-100% chance to revive with 25% Health, and grants a barrier (proportional to max Health) for 1 turn. Can only be activated once."
+  },
+  "Homage to Tarman": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "After an ally is attacked, when the damage suffered is equivalent to 25% or more of max Health, grants a barrier to the target for 2 turns. Barrier strength is equivalent to 10-20% of the caster's max Health. Can only be activated once per turn."
+  },
+  "Hostess of the Banquet": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Effect Resistance by 20-40%. When attacking, increases damage dealt by 5-10%, and when the target's Health is 50% or more, increases damage dealt by an additional 4-8%."
+  },
+  "Idol's Cheer": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "When attacked, increases Combat Readiness of the ally with the highest Attack by 10-20%."
+  },
+  "Ignition Cloth Gloves": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases Hit Chance by 10-20% and Attack by 7-14%."
+  },
+  "Indestructible Gaiters": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Attack by 10%. If a non-critical hit is made when attacking, has a 50-100% chance to inflict burn for 1 turn. Can only be activated once per turn."
+  },
+  "Intoxicating Indulgence": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After using a non-attack skill, has a 50-100% chance each to grant swift attack and, for 2 turns, grant increased Speed to the ally with the highest Attack. Can only be activated once every 3 turns."
+  },
+  "Iron Fan": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After using an attack that targets all enemies except for a basic skill, increases Combat Readiness of the caster by 15-30%. Can only be activated once per turn."
+  },
+  "Jack-O's Symbol": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Effectiveness of all allies by 10%. If the target has a debuff when the caster attacks with a Single Attack, increases damage by 12-24%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Jumbo Berry Special": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "When attacking with a Single Attack, increases damage dealt by 10-20%."
+  },
+  "Junkyard Dog": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "After using a basic skill, has a 25-50% chance to inflict burn on the target for 2 turns."
+  },
+  "Justice for All": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "50-100% chance to grant the caster a random buff for 2 turns at the end of the turn (Increase Attack, Defense, Speed, or Critical Hit Chance, Barrier, Immunity, Continuous Heal, or Critical Hit Resistance). Barrier strength increases proportional to the caster's max Health."
+  },
+  "Knowledge Seed": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Upon receiving lethal damage, has a 50-100% chance to grant all allies except for the caster a random buff for 2 turns (Increase Attack (Greater), Increase Defense, Increase Evasion, Immunity, or Increase Critical Hit Resistance). Can only be activated once per battle."
+  },
+  "Land of Lingering Light": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "Increases the Friendship acquired after completing a stage in Episode, Side Story, Spirit Altar, Emergency Mission, Hunt, Rift, and Otherworld Breach by Heroes in the team by 100%. When more than one Friendship increase effect is granted, only the strongest effect is applied. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Last Teatime": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "When using an attack that targets all enemies, increases damage dealt by 7-14%, with a 10-20% chance to decrease skill cooldown by 1 turn."
+  },
+  "Lethal Whispers": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Evasion by 20%. After counterattacking, when the target is still alive, has a 20-40% chance to activate the basic skill once more."
+  },
+  "Light and Darkness": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After using an attack that targets all enemies, deals 1000-2000 additional damage, and has a 50-100% chance to decrease Combat Readiness of the target by 15%."
+  },
+  "M.O.A.S": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "After attacking with a Single Attack, has a 50-100% chance to inflict additional damage proportional to the caster's Defense on the target."
+  },
+  "Magic Bubble Maker": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 15-30%. After attacking on the caster's turn, has a 35-70% chance to inflict a random debuff on the target for 1 turn. (Decreased Speed, Stun, Unhealable, or Venom)"
+  },
+  "Magic for Friends": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "When suffering a critical hit, grants 30% damage reduction. When it is not the caster’s turn, if an ally is attacked, has a 15% chance to activate Dimensional Rupture. Dimensional Rupture can only be activated once every 2 turns. This Artifact’s skill effect does not increase when enhanced."
+  },
+  "Manica of Control": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 15% and Hit Chance by 10-20%."
+  },
+  "Master of the Nightmare": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 10-20%. After using a basic skill on the caster’s turn, has a 20-40% chance to grant an extra turn. Can only be activated once per turn."
+  },
+  "Mature Sunglasses": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "Increases Critical Hit Damage by 15-30%. When attacked, grants 10-20% damage reduction."
+  },
+  "Merciless Glutton": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "When using a Single Attack, increases damage dealt by 8-16%. When defeating the enemy with a Single Attack, increases Combat Readiness of all allies except for the caster by 6-12%."
+  },
+  "Mirrored Lotus Ring": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "At the start of the first battle, gains 10-20 Soul. At the start of the turn, has a 50-100% chance to gain 2 Soul."
+  },
+  "Ms. Confille": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "Has a 30-60% chance to decrease Defense of the enemy for 1 turn after a Single Attack. This effect is not activated by a counterattack, Dual Attack, or extra attack."
+  },
+  "Necro & Undine": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases the caster's Combat Readiness by 10-20% after using an attack that targets all enemies. This effect is not activated by a counterattack, Dual Attack, or extra attack."
+  },
+  "Noble Oath": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "As Health decreases, Defense and Effect Resistance increase by up to 50-100%."
+  },
+  "Old Gardening Shears": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After using an attack that targets all enemies except for a basic skill, has a 60% chance to inflict a random debuff on the target for 1 turn, and has a 50-100% chance to grant stealth to the caster for 1 turn. Can only be activated once per turn. (Decreased Attack, Decreased Speed, Unhealable, or Silence)"
+  },
+  "Otherworldly Machinery": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "Increases damage of attacks that target all enemies by 10%, and when the target is not an Elite or Boss monster, has a 50-100% chance to ignore damage sharing effects."
+  },
+  "P.O.S": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "At the end of the turn, increases Attack by 1-2%, Critical Hit Chance by 1-2%, and Critical Hit Damage by 1-2%. Can stack up to 10 times."
+  },
+  "Pipette Lance": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "When attacking with a Single Attack, increases damage dealt by 10-20% and absorbs 15% of damage dealt as Health."
+  },
+  "Prayer of Solitude": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Health by 5-10%. When attacking, increases damage dealt by 5-10% and when it is an extra attack, increases damage dealt by an additional 5-10%."
+  },
+  "Proof of Friendship": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Health of the caster and the foremost ally except for the caster by 5-10%. At the end of the turn, has a 50-100% chance to increase Combat Readiness of the foremost ally by 15%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Proof of Love": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 8-16%. After attacking with a Single Attack, a critical hit will inflict up to 6-12% injuries."
+  },
+  "Proof of Valor": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "When attacked, grants 15-30% damage reduction. For each attack suffered, decreases this effect by 1.5-3%, down to 7.5-15%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Pure White Trust": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "After using a non-attack skill, gains 10 Soul and has a 50-100% chance to increase Critical Hit Damage of the caster for 2 turns. Soul can only be acquired once."
+  },
+  "Queen's Whistle": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Attack of all allies by 5-10%. At the end of the ally with the highest Attack’s turn, increases Combat Readiness of the caster by 10-20%. Can only be activated once every 2 turns, and this Artifact’s skill effect can only apply to one Hero within a team."
+  },
+  "Refracted Desire": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "When the caster takes the first turn, has a 50-100% chance to grant increased Effectiveness to the caster for 3 turns. When an ally except for the caster takes the first turn, has a 50-100% chance to increase Combat Readiness of the caster by 20%. Can only apply to one Hero within a team."
+  },
+  "Reingar's Special Drink": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After using an attack that targets all enemies, has a 50-100% chance to inflict additional damage proportional to the caster's Attack on the target."
+  },
+  "Renewed Will": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "Increases Attack of all allies by 5-10%. After using an attack that targets all enemies, has a 50-100% chance to increase Combat Readiness of all allies by 15%. Can only be activated once every 3 turns, and the Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Rhianna & Luciella": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 10%. 10-20% chance to be granted an extra turn at the end of the turn. Can only be activated once per turn."
+  },
+  "Rise of a Monarch": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "Increases Defense of all allies by 10%. At the end of the turn, grants a barrier equivalent to 8-16% of the caster's max Health for 2 turns to the ally except for the caster with the lowest Health. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Ritual of Sealing Flames": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Effect Resistance by 15-30%. At the start of battle, grants a barrier equivalent to 60-120% of Attack for 2 turns."
+  },
+  "Rocket Punch Gauntlet": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "After attacking with a Single Attack, has a 50-100% chance to inflict additional damage proportional to the caster's Defense on the target."
+  },
+  "Rod of Amaryllis": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Heals the ally with the lowest Health by 12-24% after using a non-attack skill."
+  },
+  "Ruyi Jingu Bang": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 12-24% and Critical Hit Resistance by 20%."
+  },
+  "Sacred Tree Branch": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 15-30%. After attacking, increases Combat Readiness of the caster and the ally except for the caster with the highest Attack by 10%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Samsara Prayer Beads": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "When attacking with a Single Attack, increases damage dealt by 10%. When attacked by a Single Attack, grants 8-16% damage reduction."
+  },
+  "Scroll of Shadows": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "When attacking outside of the caster’s turn, increases damage dealt by 8-16%, and after attacking, has a 50% chance to inflict a random debuff on the target for 1 turn. (Decreased Defense, Decreased Speed, Silence, or Cannot Buff)"
+  },
+  "Seal of Capture": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "When a non-critical hit is made after using a basic skill, has a 50-100% chance to burn the target for 2 turns. Only applies to Single Attacks."
+  },
+  "Secret Art - Storm Sword": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "After an enemy uses a non-attack skill, increases Combat Readiness of the caster by 12-24% and has a 50-100% chance to increase Attack of the caster for 1 turn. Can only be activated once per turn."
+  },
+  "Seductive Flower": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 15-30%. After an extra attack, decreases Combat Readiness of the target by 12-24%. Can only be activated once every 2 turns."
+  },
+  "Severed Horn Wand": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases Attack by 15%. When attacked by an Elite or Boss monster, grants 10-20% damage reduction. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Shadow Winds 7": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 10-20%. At the start of the first battle, has a 50-100% chance to gain 10 Soul and grant swift attack to the caster. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Sharpshooters Handgun": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 25%. A critical hit has a 35-70% chance to grant increased Speed to the caster for 1 turn."
+  },
+  "Shepherd of the Hollow": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Evasion by 20%. Damage dealt increases by 6-12% when attacking, and as Health decreases, damage dealt increases, up to a maximum of 12-24%."
+  },
+  "Shimadra Staff": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Effect Resistance of all allies by 20% and the effect of healing received by all allies by 20-40%. Effect does not stack with other Artifacts of the same name. When more than one increased healing effect is granted, only the strongest effect is applied."
+  },
+  "Sigurd Scythe": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Attack by 10-20%. When attacking, if the caster's Health is 50% or less, absorbs 25-50% of the damage dealt as Health."
+  },
+  "Snow Crystal": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Critical Hit Resistance by 20%. After the caster suffers a non-critical hit, increases Combat Readiness by 8-16%. Can only be activated once per turn."
+  },
+  "Sole Consolation": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Effect Resistance by 20-40%. After an enemy uses a non-attack skill, increases Combat Readiness of the caster by 8-16%. Can only be activated once per turn."
+  },
+  "Song of Stars": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "50-100% chance for an enemy to become targeted for 2 turns after a single attack."
+  },
+  "Sorrow of the Rose": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "At the start of battle and at the start of every third ally turn, grants a random buff to the caster for 1 turn. (Increase Attack, Immunity, Increase Critical Hit Resistance, Barrier proportional to max Health) The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Spatiotemporal Fan": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 20%. After using a non-attack skill, has a 50-100% chance to grant stealth to the ally with the highest Attack except for the caster for 2 turns. Can only be activated once every 3 turns."
+  },
+  "Spear of a New Dawn": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "After using a basic attack, has a 50-100% chance to inflict additional damage proportional to the caster's Attack on the target."
+  },
+  "Spear of Purification": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Attack by 10-20%. After an enemy uses a non-attack skill, increases Combat Readiness of the caster by 10%. Can only be activated once per turn."
+  },
+  "Sphere of Inferno": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After using a non-attack skill, increases Combat Readiness of the caster by 10-20%, and after the next attack, burns the target for 2 turns."
+  },
+  "Sphere of Sadism": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "At the start of battle, grants a barrier (proportional to max Health) to the caster for 2 turns. When attacking with a Single Attack, increases damage dealt by 8-16%."
+  },
+  "Spirit's Breath": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "50-100% chance to decrease skill cooldown by 1 turn when using a non-attack skill."
+  },
+  "Spotted Mouse Hair Tie": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "At the start of the first battle, acquires 10 Soul. After an ally uses a Soulburn, has a 50-100% chance to acquire 10 Soul. Can only be activated once."
+  },
+  "Staff of Ainz Ooal Gown": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 10-20% and Effect Resistance by 20-40%. The caster's Effect Resistance decreases by 2-4% with each attack suffered, down to 10-20%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Star of the Deep Sea": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 15-30%. Has a 50-100% chance to plant a bomb on the target for 2 turns after using a basic skill. This effect is only applied to Single Attacks and is not activated by a counterattack, Dual Attack, or extra attack."
+  },
+  "Stella Harpa": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "30-60% chance to dispel one debuff from an ally after being attacked."
+  },
+  "Strike of Aspiration": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "At the start of the first battle, has a 50-100% chance to grant immunity for 1 turn. At the start of the turn, when the caster does not have a debuff, has a 50-100% chance to grant increased Attack for 1 turn."
+  },
+  "Summer Photogenic": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 10-20%. When attacking, if the target is not an Elite or Boss monster, has a 50-100% chance to ignore damage sharing effects."
+  },
+  "Sweet Miracle": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Health by 5-10%. At the start of the turn, has a 50-100% chance to decrease debuff durations of the caster by 1 turn. Can only be activated once every 3 turns."
+  },
+  "Sword of Autumn Eclipse": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "Increases Attack of all allies by 5-10%, and increases Hit Chance of the caster by 10-20%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Sword of Cycling Seasons": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Evasion by 20%. When attacking, if the caster is at an elemental advantage, increases damage dealt by 25%. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Sword of Ezera": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "When attacked by an Elite or Boss monster, grants 15-30% damage reduction."
+  },
+  "Sword of Judgment": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "10-20% chance to attack again with a basic skill when the target survives a Single Attack. Can only be activated once per turn."
+  },
+  "Sword of Summer Twilight": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "When using a skill that targets all enemies, penetrates the target's Defense by 10-20%. When defeating an enemy with a skill that targets all enemies, increases Combat Readiness of all allies except for the caster by 10%."
+  },
+  "Sword of Winter Shadow": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 15%. After using a non- attack skill, has a 50-100% chance each to gain 10 Soul and remove 10 Soul from the enemy. Soul can only be acquired once."
+  },
+  "The Armament": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 15%. After using a non-attack skill, grants a barrier equal to 30-60 per Level for 2 turns."
+  },
+  "Thorn of the Blue Rose": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "At the start of the first battle, acquires 10 Soul. When attacking, increases damage dealt by 5-10%, and when using Soulburn, increases damage dealt by an additional 10-20%."
+  },
+  "Time Matter": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases damage by 6-12% when attacking. When an enemy is killed by an attack, increases the damage of the next attack by an additional 12-24% and reduces skill cooldown by 1 turn. Skill cooldown reduction effect can only be activated once per skill."
+  },
+  "Tome of Life's End": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "When attacking, increases damage dealt by 10-20%, and if a non-critical hit is made, deals additional damage proportional to the caster's Attack to the target."
+  },
+  "Torn Sleeve": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "50-100% chance to inflict bleeding for 2 turns after a single attack."
+  },
+  "Touch of Rekos": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "After being attacked, recovers Health of all allies by 5-10%. Can only be activated once per turn."
+  },
+  "Twilight Calamity": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases Effectiveness by 15-30%. Has a 50-100% chance to grant increased Attack to the caster for 2 turns after an ally uses a non- attack skill. Can only be activated once every 2 turns."
+  },
+  "Tyrant's Descent": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "When attacking, increases damage dealt by 8-16%, and for each debuff inflicted on the enemy, increases by 4%, up to 24-32%."
+  },
+  "Uberius's Tooth": {
+   "class": "Warrior",
+   "stars": 5,
+   "effect": "After attacking, has a 50-100% chance to inflict additional damage proportional to the caster's Attack on the target."
+  },
+  "Umbral Keystones": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "Increases Effectiveness of all allies by 10%. At the end of every 2 ally turns except for the caster, increases Combat Readiness of the caster by 10-20%. Can only be activated once every 2 turns. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Unfading Memories": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "Increases Effect Resistance of all allies by 20%. At the start of the turn, recovers Health of all allies by 4-8%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Unleashed Axe of Heavenly Mandate": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 6-12%, and Hit Chance by 10-20%."
+  },
+  "Unseen Observer": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "After the caster uses a non-attack skill, increases Combat Readiness of the caster by 10-20% and acquires 10 Soul. Souls can only be acquired once."
+  },
+  "Upgraded Dragon Knuckles": {
+   "class": "Mage",
+   "stars": 5,
+   "effect": "When the caster suffers a non-critical hit, has a 15-30% chance to counterattack."
+  },
+  "Veritas": {
+   "class": "Soul Weaver",
+   "stars": 5,
+   "effect": "At the end of every 3 enemy turns, increases Combat Readiness of the caster by 10-20% and has a 50-100% chance to dispel one debuff. This Artifact’s skill effect can only apply to one Hero within a team."
+  },
+  "Victorious Flag": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "When attacking, increases damage dealt by 8-16%. When attacked, grants 8-16% damage reduction. This Artifact's skill effect only applies to Fire, Ice, and Earth elements, and can only apply to one Hero within a team."
+  },
+  "Violet Talisman": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 5-10% and Evasion by 5-10% at the start of every turn. Each effect can stack up to 3 times, and resets at the start of battle."
+  },
+  "Wall of Order": {
+   "class": "Ranger",
+   "stars": 5,
+   "effect": "At the start of the turn, for each buff granted to an enemy, has a 6-12% chance to grant increased Attack (Greater) to the caster for 1 turn. At the end of the turn, has a 50-100% chance to grant stealth for 1 turn."
+  },
+  "War Horn": {
+   "class": "Any class",
+   "stars": 5,
+   "effect": "Increases Attack of all allies by 5-10%. At the end of every 3 enemy turns, increases Combat Readiness of the caster by 10-20%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Wind Rider": {
+   "class": "Thief",
+   "stars": 5,
+   "effect": "Increases Attack by 10-20%. When the caster defeats an enemy with an attack, casts stealth for 1 turn and increases Attack of the caster by 20-40% for 1 turn at the start of their next turn."
+  },
+  "Wings of Light and Shadow": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "Increases Critical Hit Chance by 15%. When attacking, increases damage dealt by 7-14%, and a critical hit will increase damage dealt of the next attack by 4-8%."
+  },
+  "With a Little Friend": {
+   "class": "Knight",
+   "stars": 5,
+   "effect": "Increases max Health by 5-10%. Decreases damage received from damage sharing by 25-50%."
+  },
+  "A Song for Everybody": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Dual Attack chance of all allies by 3%. Effect does not stack with other Artifacts of the same name. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Adamant Shield": {
+   "class": "Knight",
+   "stars": 4,
+   "effect": "When an ally suffers a critical hit, grants 8-16% damage reduction."
+  },
+  "Ambrote": {
+   "class": "Ranger",
+   "stars": 4,
+   "effect": "Increases damage dealt by basic skill by 10-20%. After using a basic skill, increases Speed by 1-2%. Increased Speed effect can stack up to 5 times."
+  },
+  "Andre's Crossbow": {
+   "class": "Ranger",
+   "stars": 4,
+   "effect": "Increases Hit Chance and Effectiveness by 10-20%."
+  },
+  "Aurius": {
+   "class": "Knight",
+   "stars": 4,
+   "effect": "Increases Defense of all allies by 10%. Grants 10-20% damage share from the damage received by an ally. Effect does not stack with other Artifacts of the same name."
+  },
+  "Barthez's Orbuculum": {
+   "class": "Mage",
+   "stars": 4,
+   "effect": "10-20% chance to decrease damage received when attacked by 50%. When more than one damage reduction effect is granted, only the strongest effect is applied."
+  },
+  "Blazing Full Moon Trophy": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "When an enemy is defeated, recovers Health of all allies by 7-14%. Can only be activated once per turn. Effect does not stack with other Artifacts of the same name."
+  },
+  "Blessings of Camaraderie": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases the EXP acquired by Heroes in the team by 10%. When more than one Artifact that increases EXP is equipped, only the strongest effect is applied, and this effect will not be applied when used via a Supporter. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Brilliant Confidence": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases the Friendship acquired after completing a stage in Episode, Side Story, Spirit Altar, Emergency Mission, Hunt, Rift, and Otherworld Breach by the Hero who has this Artifact equipped by 100%. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Card of Small Miracles": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Attack and Defense of all allies by 2.5-5%. Effect does not stack with other Artifacts of the same name."
+  },
+  "Crimson Seed": {
+   "class": "Warrior",
+   "stars": 4,
+   "effect": "After attacking, has a 40-80% chance to dispel one debuff. Can only be activated once per turn."
+  },
+  "Cutie Pando": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases the EXP acquired by Heroes in the team by 15%. When more than one Artifact that increases EXP is equipped, only the strongest effect is applied, and this effect will not be applied when used via a Supporter. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Days of Destiny": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases the Friendship acquired after completing a stage in Episode, Side Story, Spirit Altar, Emergency Mission, Hunt, Rift, and Otherworld Breach by the Hero who has this Artifact equipped by 100%. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Dust Devil": {
+   "class": "Thief",
+   "stars": 4,
+   "effect": "15-30% chance to attack again with a basic skill when the target survives a basic skill attack. Can only be activated once per turn."
+  },
+  "El's Fist": {
+   "class": "Warrior",
+   "stars": 4,
+   "effect": "Increases Attack by 10%. As Health decreases, Attack and Speed increase by up to 25-50%."
+  },
+  "Elyha's Knife": {
+   "class": "Thief",
+   "stars": 4,
+   "effect": "Penetrates Defense by 10-20% when attacking an enemy not at max Health."
+  },
+  "Eternus": {
+   "class": "Soul Weaver",
+   "stars": 4,
+   "effect": "Increases Combat Readiness of the caster by 7-14% when an ally has a debuff at the end of an enemy's turn. Can only be activated once per turn."
+  },
+  "Flower Shower": {
+   "class": "Warrior",
+   "stars": 4,
+   "effect": "Increases Effectiveness by 7-14%. When an enemy is defeated, increases Attack of the caster for 2 turns."
+  },
+  "Golden Cocoa Cookie": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Hit Chance and Effect Resistance of all allies by 2.5-5%. Effect does not stack with other Artifacts of the same name."
+  },
+  "Hell Cutter": {
+   "class": "Warrior",
+   "stars": 4,
+   "effect": "At the start of someone's turn, increases Attack and Critical Hit Chance of the caster by 2-4%. Effect stacks, and is removed after the caster attacks."
+  },
+  "Hilag Lance": {
+   "class": "Knight",
+   "stars": 4,
+   "effect": "Increases the caster's Combat Readiness by 5-10% after an ally except for the caster is attacked by a single attack."
+  },
+  "Iela Violin": {
+   "class": "Mage",
+   "stars": 4,
+   "effect": "After attacking, has a 40-80% chance to dispel one buff from the target."
+  },
+  "III. The Empress": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Attack by 6-12%. At the start of the first battle, when anyone on the team is granted the effect of IV. The Emperor, also increases Defense by 6-12%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Infinity Basket": {
+   "class": "Ranger",
+   "stars": 4,
+   "effect": "For the duration of the caster's turn, increases Dual Attack chance of all allies except for the caster by 7-14% and increases Attack of all allies except for the caster by 20%."
+  },
+  "IV. The Emperor": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Defense by 6-12%. At the start of the first battle, when anyone on the team is granted the effect of III. The Empress, also increases Attack by 6-12%. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "Kal'adra": {
+   "class": "Mage",
+   "stars": 4,
+   "effect": "Increases damage dealt by 15-30% if the target is debuffed when the caster attacks."
+  },
+  "Love Potion": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases the effect of all healing received by allies by 5-10%. When more than one increased healing effect is granted, only the strongest effect is applied."
+  },
+  "Magaraha's Tome": {
+   "class": "Soul Weaver",
+   "stars": 4,
+   "effect": "Increases the caster's Combat Readiness by 15-30% after using a non-attack skill."
+  },
+  "Midnight Bloom": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Critical Hit Chance of all allies by 8-16%. Effect does not stack with other Artifacts of the same name."
+  },
+  "Midnight Pizza Delivery": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Critical Hit Chance and Effectiveness of all allies by 10%. Effect does not stack with other Artifacts of the same name. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Moonlight Dreamblade": {
+   "class": "Thief",
+   "stars": 4,
+   "effect": "Increases Evasion by 10-20%. At the moment the caster is attacked, if the caster successfully evades, the caster is granted increased Attack for 1 turn."
+  },
+  "Moonlight's Vestige": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Defense and Effect Resistance of all allies by 2.5-5%. Effect does not stack with other Artifacts of the same name."
+  },
+  "New Year Cookies": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "At the start of battle, recovers Health of all allies by 10%. This Artifact’s skill effect does not increase when enhanced."
+  },
+  "New Year's Festival Souvenir": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases the Friendship acquired after completing a stage in Episode, Side Story, Spirit Altar, Emergency Mission, Hunt, Rift, and Otherworld Breach by the Hero who has this Artifact equipped by 100%. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Nostalgic Music Box": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Defense by 5-10%. At the end of the turn, grants a random buff to one random ally for 1 turn. (Barrier, Increase Defense, Immunity, or Continuous Healing) Barrier strength increases proportional to the target's max Health."
+  },
+  "Official Levulin Beach Volleyball": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Critical Hit Chance of all allies by 5%. After attacking with a Single Attack, inflicts 100-200 additional damage on a random enemy except for the target. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "One Year of Gratitude": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases the EXP acquired by Heroes in the team by 10%. When more than one Artifact that increases EXP is equipped, only the strongest effect is applied, and this effect will not be applied when used via a Supporter. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Our Beautiful Seasons": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "When attacking, increases damage dealt by 20% against Elite or Boss monsters. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Portrait of the Saviors": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases damage dealt by 10-20% if the target's Health is 50% or more when the caster attacks."
+  },
+  "Prelude to a New Era": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Celebrates the new era with a cannon salute. Increases damage dealt by 20% if the target's Health is 50% or more when the caster attacks. This Artifact's effect remains the same regardless of its level."
+  },
+  "Radiant Forever": {
+   "class": "Mage",
+   "stars": 4,
+   "effect": "When using a skill that targets all enemies, increases damage dealt against Elite or Boss monsters by 25-50%."
+  },
+  "Rainbow Scale": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Effectiveness and Effect Resistance of all allies by 5-10%. Effect does not stack with other Artifacts of the same name."
+  },
+  "Records of Unity": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases the EXP acquired by Heroes in the team by 15%. When more than one Artifact that increases EXP is equipped, only the strongest effect is applied, and this effect will not be applied when used via a Supporter. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Reingar Festival Dumpling": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases the Friendship acquired after completing a stage in Episode, Side Story, Spirit Altar, Emergency Mission, Hunt, Rift, and Otherworld Breach by the Hero who has this Artifact equipped by 100%. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Resolute Soldier Series": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Defense and Effectiveness of all allies by 5-10%. Effect does not stack with other Artifacts of the same name."
+  },
+  "Rosa Hargana": {
+   "class": "Ranger",
+   "stars": 4,
+   "effect": "Increases Dual Attack Chance by 7-14%. When it is not the caster's turn, increases Attack by 30%."
+  },
+  "Santa Muerte": {
+   "class": "Thief",
+   "stars": 4,
+   "effect": "Decreases Combat Readiness of the enemy by 5-10% after a single attack if the enemy is an Earth elemental."
+  },
+  "Sashe Ithanes": {
+   "class": "Ranger",
+   "stars": 4,
+   "effect": "Increases Combat Readiness of all allies by 8-16% when the enemy is defeated. Effect does not stack with other Artifacts of the same name."
+  },
+  "Sepulcrum": {
+   "class": "Warrior",
+   "stars": 4,
+   "effect": "When attacked, grants 4-8% damage reduction. For each attack suffered, increases this effect by 4-8%, up to 3 times. At the start of the turn, resets the effect."
+  },
+  "Shepherds of Chaos": {
+   "class": "Thief",
+   "stars": 4,
+   "effect": "Increases Defense by 10%. As Health decreases, Evasion and Defense increase by up to 20-40%."
+  },
+  "Silver Rain": {
+   "class": "Thief",
+   "stars": 4,
+   "effect": "50-100% chance to increase Attack of the ally except for the caster with the highest Attack for 2 turns when the caster uses a non-attack skill."
+  },
+  "Sira-Ren": {
+   "class": "Mage",
+   "stars": 4,
+   "effect": "25-50% chance to inflict a random debuff for 1 turn after attacking (Decrease Attack, Decrease Hit Chance, Silence, Sleep, or Poison)."
+  },
+  "Special Strawberry Cake": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "When attacking, increases damage dealt by 20% against Elite or Boss monsters. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "Spooky Solayu Stories": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Hit Chance and Effectiveness of all allies by 2.5-5%. Effect does not stack with other Artifacts of the same name."
+  },
+  "Steadfast Gatekeeper": {
+   "class": "Knight",
+   "stars": 4,
+   "effect": "Increases Defense of all allies by 5%. When attacked by an Elite or Boss monster, grants 10-20% damage reduction. Effect does not stack with other Artifacts of the same name."
+  },
+  "Strak Gauntlet": {
+   "class": "Warrior",
+   "stars": 4,
+   "effect": "Effect Resistance increases by 30-60% when the caster's Health is 50% or more. When Health is less than 50%, the effect is halved."
+  },
+  "Super Duper Water Gun Shooter": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases all allies' Attack by 5% and Effectiveness by 5-10%. Effect does not stack with other Artifacts of the same name."
+  },
+  "Tagehel's Ancient Book": {
+   "class": "Mage",
+   "stars": 4,
+   "effect": "Acquires 10-20 Souls at the start of the first battle."
+  },
+  "Tear of the Desert": {
+   "class": "Mage",
+   "stars": 4,
+   "effect": "After using an attack that targets all enemies, increases Attack of the caster by 2-4%. Effect can only stack up to 5 times."
+  },
+  "The Guardian Star's Blessing": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "After the caster uses a basic skill, recovers Health of the ally except for the caster with the highest Attack by 4-8%."
+  },
+  "To a New World": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases the EXP acquired by Heroes in the team by 15%. When more than one Artifact that increases EXP is equipped, only the strongest effect is applied, and this effect will not be applied when used via a Supporter. The skill effect of this Artifact does not increase when enhanced."
+  },
+  "VI. The Lovers": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "At the start of battle, grants a barrier equivalent to 20-40 per Level of the caster to the caster and the foremost ally for 2 turns."
+  },
+  "VII. The Chariot": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Defense by 2.5-5%. After attacking on the caster's turn, when the caster is bleeding, dispels one debuff from the caster."
+  },
+  "Water's Origin": {
+   "class": "Soul Weaver",
+   "stars": 4,
+   "effect": "Recovers 8% Health and increases Combat Readiness by 10-20% upon receiving damage equivalent to 20% or more of max Health at the moment the caster is attacked."
+  },
+  "Wondrous Potion Vial": {
+   "class": "Soul Weaver",
+   "stars": 4,
+   "effect": "50-100% chance to dispel one debuff from an ally at the beginning of the turn."
+  },
+  "XII. The Hanged Man": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "Increases Critical Hit Chance by 5-10%. At the start of the turn, has a 30-60% chance to grant increased Critical Hit Damage for 1 turn."
+  },
+  "XIII. Death": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "After attacking with a Single Attack, has a 7.5-15% chance to detonate any bleeding and burn effects inflicted on the target at the end of the turn."
+  },
+  "XIV. Temperance": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "After using a basic skill, grants a barrier equivalent to 5-10% of the caster's max Health for 2 turns to the ally except for the caster with the lowest Health. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "XIX. The Sun": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "At the end of the turn, recovers 400-800 Health, shared between the caster and the ally except for the caster with the lowest Health."
+  },
+  "XV. The Devil": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "At the start of the turn, recovers Health by 250-500. Increases the effect of all healing received by allies by 10-20%. When more than one increased healing effect is granted, only the strongest effect is applied."
+  },
+  "XVI. The Tower": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "After attacking, inflicts 50-100 additional damage on the target."
+  },
+  "XVII. The Star": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "At the start of battle, recovers Health of all allies by 10%, and has a 50-100% chance to decrease skill cooldowns of the caster by 1 turn. Skill cooldown reduction effect can only be activated three times. This Artifact's skill effect can only apply to one Hero within a team."
+  },
+  "XVIII. The Moon": {
+   "class": "Any class",
+   "stars": 4,
+   "effect": "After attacking with a Single Attack, has a 7.5-15% chance to steal one buff from the target."
+  },
+  "Alsacian Spear": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "After attacking with a Single Attack, decreases Combat Readiness of the target by 2.5-5%."
+  },
+  "Ancient Sheath": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases damage dealt by basic skill by 8-16%."
+  },
+  "Aqua Rose": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "50% chance to grant a barrier to the caster equivalent to 5-10% of max Health for 2 turns at the moment the caster is attacked. Can only be granted once every 2 turns."
+  },
+  "Atma's Portal": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "10-20% chance to decrease skill cooldown of all allies by 1 turn at the start of the battle."
+  },
+  "Axe of Heavenly Mandate": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases Critical Hit Chance by 6-12%."
+  },
+  "Butterfly Mandolin": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "4-8% chance to be granted an extra turn at the end of the next turn when attacked."
+  },
+  "Cursed Compass": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases Effectiveness by 25-50% for 1 turn at the start of the battle."
+  },
+  "Daydream Joker": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases damage dealt by 1.5-3% of the enemy's max Health when attacking."
+  },
+  "Devil's Brand": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases Effect Resistance of all allies by 2-4% at the start of the turn. Effect can only stack up to 5 times."
+  },
+  "Egg of Delusion": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases Defense by 10-20% when Health is 50% or more."
+  },
+  "Envoy's Pipe": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "When attacked, grants 5-10% damage reduction."
+  },
+  "Exorcist's Tonfa": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases damage dealt by 8-16% if the target's Health is 50% or more when the caster attacks."
+  },
+  "Forest Totem": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "10-20% chance to grant continuous healing for 2 turns at the moment the caster is attacked. Can only be activated once every 2 turns."
+  },
+  "Goblin's Lamp": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "When an enemy is defeated, has a 50-100% chance to acquire 1 Soul."
+  },
+  "Grail of Blood": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Recovers Health equal to 10-20% of the caster's Attack at the start of the turn. Effect is increased by 50% when the caster's Health is 30% or less."
+  },
+  "Labyrinth Cube": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "10-20% chance to increase the caster's Combat Readiness by 15% at the end of the enemy's turn."
+  },
+  "Mighty Yaksha": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases Attack by 10-20% when Health is 50% or more."
+  },
+  "Oath Key": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases Hit Chance by 10-20%."
+  },
+  "Prophetic Candlestick": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "20-40% chance to reduce cooldown by 1 turn at the moment the caster is attacked. Can only be activated once per turn."
+  },
+  "Ranon's Memorandum": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases Speed by 1-2% after attacking. Can stack up to 10 times."
+  },
+  "Ruby Essence": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "At the start of the turn, when the caster has a debuff, recovers 0.03-0.05% of max Health."
+  },
+  "Sword of the Morning": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "Increases Attack and Speed by 10-20% when Health is 50% or less."
+  },
+  "Timeless Anchor": {
+   "class": "Any class",
+   "stars": 3,
+   "effect": "After attacking, has a 20-40% chance to dispel one debuff."
+  },
+  "Bloodbead Dagger": {
+   "class": "Any class",
+   "stars": 2,
+   "effect": "Increases Critical Hit Damage by 3-6%."
+  },
+  "Deadly Sword": {
+   "class": "Any class",
+   "stars": 2,
+   "effect": "Increases Attack by 3-6%."
+  },
+  "Elf's Bow": {
+   "class": "Any class",
+   "stars": 2,
+   "effect": "Increases Critical Hit Chance by 3-6%."
+  },
+  "Fairy's Grimoire": {
+   "class": "Any class",
+   "stars": 2,
+   "effect": "Increases Effect Resistance by 3-6%."
+  },
+  "Firm Shield": {
+   "class": "Any class",
+   "stars": 2,
+   "effect": "Increases Defense by 3-6%."
+  },
+  "Staff of Wisdom": {
+   "class": "Any class",
+   "stars": 2,
+   "effect": "Increases Effectiveness by 3-6%."
+  },
+  "Biting Wind Star": {
+   "class": "Any class",
+   "stars": 1,
+   "effect": "Increases Critical Hit Damage by 2-4%."
+  },
+  "Demon's Pistol": {
+   "class": "Any class",
+   "stars": 1,
+   "effect": "Increases Critical Hit Chance by 2-4%."
+  },
+  "Dream Scroll": {
+   "class": "Any class",
+   "stars": 1,
+   "effect": "Increases Effect Resistance by 2-4%."
+  },
+  "Enhanced Gauntlet": {
+   "class": "Any class",
+   "stars": 1,
+   "effect": "Increases Defense by 2-4%."
+  },
+  "Sword of the Sun": {
+   "class": "Any class",
+   "stars": 1,
+   "effect": "Increases Attack by 2-4%."
+  },
+  "Venus Orb": {
+   "class": "Any class",
+   "stars": 1,
+   "effect": "Increases Effectiveness by 2-4%."
+  }
+ }
+}

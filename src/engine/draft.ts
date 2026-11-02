@@ -5,7 +5,7 @@
 // epic7rtastats snapshot (Champion+ picks by draft slot, pre-bans, bans).
 // Neither source has hero-vs-hero results, so "answers the enemy" is judged
 // from kits (the Counter Planner's threat table), not from match data.
-import type { AnalyzerSnapshot, Combo } from "./e7analyzer";
+import type { AnalyzerSnapshot, Combo, TableRow } from "./e7analyzer";
 import type { MetaSnapshot, StatRow } from "./metaHistory";
 import { THREATS } from "./counters";
 import type { TeamCandidate } from "./teams";
@@ -31,6 +31,15 @@ export interface DraftData {
   trios: Combo[];
   /** Side-relative slot ("1", "2", "3", "4+5" for first pick; "1+2", "3", "4", "5" for second) -> hero -> share %. */
   slots: { first: Record<string, Map<string, number>>; second: Record<string, Map<string, number>> };
+  /**
+   * E7 Analyzer draft-position tables: [side pick 1..5 - 1] -> hero -> games and win rate
+   * at that pick. Only the most-taken heroes per pick survive the PDF export.
+   */
+  slotStats: { first: Map<string, TableRow>[]; second: Map<string, TableRow>[] } | null;
+  /** Average win rate when the tracked player picks first / second (they run above 50%). */
+  sideMean: { first: number; second: number };
+  /** Approximate drafts per side (matches / 2), the denominator for slot shares. */
+  sideDrafts: number;
   banRate: Map<string, number>;
   prebanRate: Map<string, number>;
   sources: string[];
@@ -65,11 +74,17 @@ export function buildDraftData(analyzer: AnalyzerSnapshot | null, week: MetaSnap
   for (const c of analyzer?.synergies ?? []) if (c.heroes.length === 2 && !c.heroes.some((h) => h.startsWith("("))) pairs.set(pairKey(c.heroes[0], c.heroes[1]), c);
   const slotMap = (rows: Record<string, StatRow[]> | undefined) => Object.fromEntries(Object.entries(rows ?? {}).map(([k, v]) => [k, new Map(v.map((r) => [r.name, r.pct]))]));
   const sources: string[] = [];
-  if (analyzer) sources.push(`E7 Analyzer ${analyzer.generatedAt.slice(0, 10)} (${analyzer.matches.toLocaleString("en-US")} top-player matches)`);
+  if (analyzer) sources.push(`E7 Analyzer ${analyzer.generatedAt.slice(0, 10)}, ${analyzer.window.split(", ").slice(1).join(", ") || "all ranks"} (${analyzer.matches.toLocaleString("en-US")} top-player matches)`);
   if (week) sources.push(`epic7rtastats Champion+ ${week.start} to ${week.end}`);
   return {
     mean, power, pairs, trios: (analyzer?.trios ?? []).filter((t) => !t.heroes.some((h) => h.startsWith("("))),
     slots: { first: slotMap(week?.firstPick), second: slotMap(week?.secondPick) },
+    slotStats: analyzer?.draftSlots ? {
+      first: analyzer.draftSlots.first.map((rows) => new Map(rows.map((r) => [r.name, r]))),
+      second: analyzer.draftSlots.second.map((rows) => new Map(rows.map((r) => [r.name, r]))),
+    } : null,
+    sideMean: { first: analyzer?.firstPickWin || mean, second: analyzer?.secondPickWin || mean },
+    sideDrafts: (analyzer?.matches ?? 0) / 2,
     banRate: new Map((week?.banned ?? []).map((r) => [r.name, r.pct])),
     prebanRate: new Map((week?.prebanned ?? []).map((r) => [r.name, r.pct])),
     sources,
@@ -150,7 +165,9 @@ export function recommendPicks(s: DraftState, cands: TeamCandidate[], d: DraftDa
   const mySlot = turn?.side === "me" ? turn.mySlot : s.myPicks.length + 1;
   const taken = new Set([...s.myPrebans, ...s.enemyPrebans, ...s.myPicks, ...s.enemyPicks]);
   const enemyHd = s.enemyPicks.map(heroData);
-  const slot = d.slots[s.firstPick === "me" ? "first" : "second"][slotKey(s.firstPick === "me", mySlot)];
+  const side = s.firstPick === "me" ? "first" : "second";
+  const slot = d.slots[side][slotKey(s.firstPick === "me", mySlot)];
+  const slotStats = d.slotStats?.[side][mySlot - 1];
   const seen = new Set<string>();
   const out: PickAdvice[] = [];
   for (const c of [...cands].sort((a, b) => b.readiness - a.readiness)) {
@@ -173,8 +190,15 @@ export function recommendPicks(s: DraftState, cands: TeamCandidate[], d: DraftDa
       const a = answersEnemy(c.hd, enemyHd);
       if (a.pts) { parts.push({ label: `Answers ${a.covered.join(", ")}`, pts: a.pts }); }
     }
+    const st = slotStats?.get(name);
     const share = slot?.get(name);
-    if (share) parts.push({ label: `Picked at this slot in ${share.toFixed(1)}% of Champion+ drafts`, pts: Math.round(Math.log1p(share) * 0.5 * 100) / 100 });
+    if (st && d.sideDrafts) {
+      // How often top players take it at exactly this pick, and how those drafts went (shrunk like hero win rates).
+      const pct = (st.games / d.sideDrafts) * 100;
+      const sm = d.sideMean[side];
+      const slotEdge = ((st.win * st.games + sm * SHRINK_GAMES) / (st.games + SHRINK_GAMES) - sm) * 0.5;
+      parts.push({ label: `Top players take it at their pick ${mySlot} in about ${pct.toFixed(1)}% of drafts and win ${st.win.toFixed(1)}% of those`, pts: Math.round((Math.log1p(pct) * 0.5 + slotEdge) * 100) / 100 });
+    } else if (share) parts.push({ label: `Picked at this slot in ${share.toFixed(1)}% of Champion+ drafts`, pts: Math.round(Math.log1p(share) * 0.5 * 100) / 100 });
     parts.push({ label: `Your gear (${Math.round(c.readiness * 100)}% of your best-geared hero)`, pts: Math.round((c.readiness - 0.6) * 4 * 100) / 100 });
     const ban = d.banRate.get(name);
     if (ban && ban >= 5) notes.push(`Often banned in the final ban (${ban.toFixed(1)}%): pairs well with another must-ban threat`);

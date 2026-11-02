@@ -1,7 +1,7 @@
 {
   "name": "e7-forge",
   "productName": "E7 Forge",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Personal Epic Seven gear optimizer: account-wide optimization, speed tuning, upgrade ROI, community benchmarks, stat recommendations and team building. Imports Fribbels optimizer exports.",
   "author": "E7 Forge contributors",
   "license": "GPL-3.0-or-later",
@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "meta:snapshot": "tsx scripts/meta-snapshot.mts",
     "meta:import-e7analyzer": "tsx scripts/import-e7analyzer.mts",
+    "data:import-artifacts": "tsx scripts/import-dictionary.mts",
     "dist:win": "npm run build && npx --yes electron-builder@26.18.0 --win dir --x64 && node scripts/set-exe-icon.mjs \"release/win-unpacked/E7 Forge.exe\""
   },
   "build": {

@@ -5,7 +5,7 @@ Gear optimizer for Epic Seven on Windows, built because Fribbels stopped
 getting updates. It reads gear and heroes from game traffic, so there's no
 export/import step.
 
-Version 0.1.4.
+Version 0.1.5.
 
 Install (portable build)
 ------------------------
@@ -151,19 +151,29 @@ tracks heroes, pairs, sets and artifacts rather than whole teams.
 Top-player data from E7 Analyzer (manual export)
 
 data/meta-history/e7analyzer/ holds saved copies of the E7 Analyzer meta
-dashboard (e7-analyzer-slendymang.vercel.app/meta-dashboard/): about 660,000
+dashboard (e7-analyzer-slendymang.vercel.app/meta-dashboard/): over 600,000
 top-player matches this season, with win rate, games and pick/ban rate for
-every hero, the best pairs and trios, the most pre-banned pairs, and the
-dashboard's week-over-week movers. REPORT.txt summarises the latest export and,
+every hero, the best pairs and trios, the most pre-banned pairs, the
+dashboard's week-over-week movers, and (when the tables are expanded) which
+heroes top players take at each of their five picks and how those drafts went.
+Files are named by date and rank filter (2026-11-02-champion-plus.json); the
+app uses the newest, and a Champion+ export over All Ranks on the same day. REPORT.txt summarises the latest export and,
 from the second export on, the games and win rates in the week between the
 two exports (season totals hardly move, the weekly slice does).
 
 To add a week:
-1. Open the dashboard. Leave the window on Season Start -> Now and All Ranks.
-2. Click "show more" on Meta Hero Pool so every hero is listed.
+1. Open the dashboard. Leave the window on Season Start -> Now and set the
+   rank to Champion+ (keep the same rank each week so weeks compare).
+2. Click "show more" on both hero pools, and "Expand as Table" on Hero
+   Performance, First / Second Pick Performance and all ten Draft Position
+   cards.
 3. Print -> Save as PDF.
 4. Run: npm run meta:import-e7analyzer -- "path/to/the.pdf" (needs pdftotext
    from poppler), or send the PDF to have it imported.
+
+Artifact effects and class locks come from the Artifacts tab of the slendy.gg
+E7 Dictionary, saved as a PDF and imported with:
+npm run data:import-artifacts -- "path/to/the.pdf"
 
 Win rates are from the tracked top player's side, so they sit above 50%;
 compare heroes with each other, not with 50%. Player names on the dashboard's
@@ -205,6 +215,11 @@ Node 20+. The first run downloads the Electron runtime (~120 MB).
 
 Changelog
 ---------
+
+0.1.5
+- RTA Draft: each recommendation is scored for the exact pick you're on (your 1st to 5th, first or second pick), from how often top players take that hero there and how those drafts went.
+- Top-player data now comes from a Champion+ export; exports are kept per rank filter and only compared with the same filter.
+- Hero header shows the equipped artifact's effect and warns when it's locked to another class. Benchmark lists artifacts by name, with the effect on hover.
 
 0.1.4
 - RTA Draft: live draft assistant (pre-bans, picks in E7's 1-2-2-2-2-1 order, next-pick ranking with reasons, final ban advice).

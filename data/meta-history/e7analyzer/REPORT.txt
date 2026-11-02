@@ -1,94 +1,110 @@
 E7 Analyzer top-player RTA data, generated 2026-11-02
-Window: Season Start -> Now, All Ranks. 660,550 matches from 1,788 players.
-Win rates are from the tracked player's side. First pick 57.6%, second pick 55.6%.
+Window: Season Start -> Now, Champion+. 619,406 matches from 1,461 players.
+Win rates are from the tracked player's side. First pick 57.5%, second pick 55.3%.
 
 Most played heroes (season)
- 1. Rhianna and Luciella                135,943 games   55.8% win   92.0% pick/ban
- 2. Estelle                             133,765 games   56.5% win   48.5% pick/ban
- 3. Perfumer Byblis                     132,618 games   59.7% win   62.6% pick/ban
- 4. Boss Arunka                         123,157 games   53.8% win   53.7% pick/ban
- 5. Arbiter Vildred                     119,502 games   56.2% win   45.3% pick/ban
- 6. School Nurse Yulha                  114,766 games   56.2% win   43.8% pick/ban
- 7. Lady of the Scales                  108,878 games   59.5% win   93.3% pick/ban
- 8. Tidal Rift Elvira                    79,865 games   58.5% win   34.1% pick/ban
- 9. Zio                                  73,019 games   50.3% win   49.0% pick/ban
-10. Shepherd of the Dark Diene           72,874 games   62.6% win   38.6% pick/ban
-11. Eye of the Abyss Fumyr               68,151 games   57.0% win   26.3% pick/ban
-12. Notos                                65,883 games   59.9% win   78.5% pick/ban
-13. Belian                               63,188 games   57.4% win   32.7% pick/ban
-14. Rinak                                53,129 games   55.7% win   19.5% pick/ban
-15. Aube                                 51,590 games   59.3% win   18.9% pick/ban
-16. Genesis Ras                          50,749 games   59.9% win   17.8% pick/ban
-17. Kawerik                              50,640 games   56.3% win   18.1% pick/ban
-18. Haru                                 44,180 games   55.3% win   15.2% pick/ban
-19. Frieren                              40,305 games   60.9% win   17.8% pick/ban
-20. Aubade Ludwig                        40,093 games   54.6% win   20.6% pick/ban
-21. Harsetti                             39,352 games   55.9% win   53.4% pick/ban
-22. Briar Witch Iseria                   39,230 games   56.9% win   15.5% pick/ban
-23. Moon Bunny Dominiel                  36,075 games   56.0% win   13.8% pick/ban
-24. Salome                               33,473 games   54.0% win   14.6% pick/ban
-25. Monarch of the Sword Iseria          32,044 games   55.6% win   15.4% pick/ban
+ 1. Rhianna and Luciella                128,321 games   55.6% win   91.9% pick/ban
+ 2. Estelle                             123,833 games   56.4% win   47.9% pick/ban
+ 3. Perfumer Byblis                     123,792 games   59.4% win   61.6% pick/ban
+ 4. Boss Arunka                         114,379 games   53.6% win   53.3% pick/ban
+ 5. School Nurse Yulha                  111,268 games   56.0% win   45.0% pick/ban
+ 6. Arbiter Vildred                     110,532 games   55.8% win   44.9% pick/ban
+ 7. Lady of the Scales                  101,122 games   59.2% win   93.7% pick/ban
+ 8. Tidal Rift Elvira                    72,714 games   58.1% win   33.1% pick/ban
+ 9. Shepherd of the Dark Diene           70,655 games   62.4% win   39.4% pick/ban
+10. Zio                                  66,817 games   50.1% win   47.8% pick/ban
+11. Notos                                63,072 games   59.7% win   78.0% pick/ban
+12. Eye of the Abyss Fumyr               62,308 games   57.2% win   25.1% pick/ban
+13. Belian                               58,681 games   57.2% win   32.3% pick/ban
+14. Kawerik                              50,504 games   56.2% win   19.2% pick/ban
+15. Aube                                 50,150 games   59.2% win   19.6% pick/ban
+16. Rinak                                49,667 games   55.6% win   19.2% pick/ban
+17. Genesis Ras                          48,184 games   59.9% win   17.8% pick/ban
+18. Haru                                 44,060 games   55.2% win   16.2% pick/ban
+19. Briar Witch Iseria                   37,872 games   56.7% win   15.9% pick/ban
+20. Frieren                              37,732 games   60.7% win   17.7% pick/ban
+21. Harsetti                             36,636 games   55.5% win   53.3% pick/ban
+22. Aubade Ludwig                        35,037 games   53.8% win   19.0% pick/ban
+23. Moon Bunny Dominiel                  32,580 games   55.7% win   13.3% pick/ban
+24. Salome                               31,817 games   54.0% win   14.7% pick/ban
+25. Monarch of the Sword Iseria          31,471 games   55.6% win   16.1% pick/ban
 
 Best trios (win rate, min 50 games)
 - Young Senya + Frieren + Shepherd of the Dark Diene: 87.8% over 74 games
-- Schuri + Veronica + Rinak: 86.3% over 51 games
-- Mei Lin + Lisette + Monarch of the Sword Iseria: 85.2% over 54 games
-- Setsuka + Lisette + Perfumer Byblis: 85.0% over 133 games
+- Amid + Briar Witch Iseria + Aram: 85.0% over 60 games
+- Mei Lin + Lisette + Monarch of the Sword Iseria: 84.9% over 53 games
+- Setsuka + Lisette + Perfumer Byblis: 84.8% over 132 games
 - New Moon Luna + Rhianna and Luciella + Lisette: 84.0% over 94 games
-- Belian + Ivana + Aube: 83.7% over 135 games
-- Amid + Briar Witch Iseria + Aram: 83.6% over 61 games
-- Shepherd of the Dark Diene + Lisette + Aubade Ludwig: 83.3% over 60 games
+- Belian + Ivana + Aube: 83.5% over 133 games
+- Shepherd of the Dark Diene + Lisette + Aubade Ludwig: 82.8% over 58 games
 - Young Senya + Shepherd of the Dark Diene + Lisette: 82.7% over 81 games
 - Sage Baal & Sezan + Empyrean Ilynav + Lisette: 82.7% over 52 games
-- Shepherd of the Dark Diene + Aram + Aube: 82.6% over 121 games
-- Little Queen Charlotte + Rhianna and Luciella + Aram: 82.5% over 57 games
+- Shepherd of the Dark Diene + Aram + Aube: 82.2% over 118 games
+- Shepherd of the Dark Diene + Tidal Rift Elvira + Lisette: 81.8% over 220 games
 - Renoa + Shepherd of the Dark Diene + Lisette: 81.7% over 60 games
-- Shepherd of the Dark Diene + Tidal Rift Elvira + Lisette: 81.5% over 222 games
-- Kawerik + Lisette + Aube: 81.5% over 135 games
+- Genesis Ras + Shepherd of the Dark Diene + Aubade Ludwig: 81.7% over 60 games
+- Mort + Arbiter Vildred + Aube: 81.6% over 87 games
+- Frieren + Lisette + Tactical Archetype Coli: 81.5% over 65 games
 - Notos + Rhianna and Luciella + Lisette: 81.4% over 86 games
-- Salome + Lisette + Eye of the Abyss Fumyr: 81.2% over 69 games
-- Shepherd of the Dark Diene + Successor Taeyou + Tidal Rift Elvira: 81.1% over 53 games
+- Kawerik + Lisette + Aube: 81.1% over 132 games
 - Shepherd of the Dark Diene + Lisette + Silvertide Christy: 80.9% over 178 games
-- Mort + Rinak + Shepherd of the Dark Diene: 80.8% over 52 games
-- Frieren + Tidal Rift Elvira + Lisette: 80.7% over 83 games
+- Tidal Rift Elvira + Rhianna and Luciella + Lisette: 80.6% over 175 games
+- Frieren + Tidal Rift Elvira + Lisette: 80.5% over 82 games
+- Rinak + Sage Baal & Sezan + Lady of the Scales: 80.4% over 56 games
 
 Best pairs
-- Operator Sigret + Spirit Eye Celine: 77.0% over 74 games (first pick 76.0%, second pick 79.2%)
-- Dark Corvus + Lisette: 75.3% over 312 games (first pick 74.8%, second pick 78.0%)
-- Frieren + Designer Lilibet: 74.7% over 79 games (first pick 81.2%, second pick 70.2%)
-- Saria + Monarch of the Sword Iseria: 74.6% over 59 games (first pick 82.4%, second pick 64.0%)
-- Aki + Lisette: 74.3% over 175 games (first pick 76.5%, second pick 61.5%)
-- Little Queen Charlotte + Aram: 74.2% over 271 games (first pick 70.5%, second pick 77.7%)
-- Shepherd of the Dark Diene + Lisette: 74.1% over 3,234 games (first pick 73.6%, second pick 76.0%)
-- Silver Blade Aramintha + Seaside Bellona: 73.2% over 56 games (first pick 77.1%, second pick 66.7%)
-- Rhianna and Luciella + Lisette: 72.2% over 2,394 games (first pick 71.4%, second pick 73.7%)
+- Operator Sigret + Spirit Eye Celine: 77.8% over 72 games (first pick 76.0%, second pick 81.8%)
+- Dark Corvus + Lisette: 74.9% over 307 games (first pick 74.4%, second pick 77.6%)
+- Frieren + Designer Lilibet: 74.4% over 78 games (first pick 81.2%, second pick 69.6%)
+- Shepherd of the Dark Diene + (cut off in export): 74.0% over 3,213 games (first pick 73.6%, second pick 75.9%)
+- Aki + Lisette: 74.0% over 173 games (first pick 76.5%, second pick 58.3%)
+- Saria + Monarch of the Sword Iseria: 73.7% over 57 games (first pick 81.8%, second pick 62.5%)
+- Setsuka + Fallen Cecilia: 72.5% over 51 games (first pick 84.0%, second pick 61.5%)
+- Silver Blade Aramintha + Seaside Bellona: 72.5% over 51 games (first pick 78.1%, second pick 63.2%)
+- Little Queen Charlotte + Aram: 72.4% over 232 games (first pick 68.5%, second pick 76.0%)
+- Frieren + Aram: 72.2% over 313 games (first pick 68.9%, second pick 75.7%)
+- Rhianna and Luciella + Lisette: 72.0% over 2,375 games (first pick 71.2%, second pick 73.5%)
 - Silver Blade Aramintha + Lisette: 72.0% over 82 games (first pick 73.6%, second pick 60.0%)
-- Lisette + Perfumer Byblis: 71.8% over 4,439 games (first pick 72.1%, second pick 69.9%)
-- Schuri + Faithless Lidica: 71.6% over 148 games (first pick 70.8%, second pick 73.1%)
-- Frieren + Aram: 71.4% over 336 games (first pick 69.8%, second pick 73.2%)
-- Little Queen Charlotte + Lisette: 71.2% over 723 games (first pick 72.2%, second pick 65.3%)
-- Lisette + Aube: 70.8% over 1,847 games (first pick 71.2%, second pick 65.4%)
-- Mort + Lisette: 70.8% over 380 games (first pick 70.1%, second pick 75.0%)
-- Holiday Yufine + Eye of the Abyss Fumyr: 70.8% over 89 games (first pick 73.0%, second pick 60.0%)
-- Amid + Lisette: 70.7% over 147 games (first pick 70.5%, second pick 72.0%)
-- Dragon King Sharun + Lisette: 70.6% over 136 games (first pick 72.4%, second pick 64.5%)
-- Shepherd of the Dark Diene + Unbound Knight Arowell: 70.5% over 244 games (first pick 69.2%, second pick 71.5%)
-- Fumyr + Lady of the Scales: 70.5% over 112 games (first pick 72.6%, second pick 64.3%)
+- Lisette + Perfumer Byblis: 71.8% over 4,398 games (first pick 72.3%, second pick 69.5%)
+- Amid + Festive Eda: 71.7% over 53 games (first pick 61.8%, second pick 89.5%)
+- Fumyr + Lady of the Scales: 71.4% over 105 games (first pick 73.8%, second pick 64.0%)
+- Schuri + Veronica: 71.4% over 98 games (first pick 79.2%, second pick 50.0%)
+- Little Queen Charlotte + Lisette: 71.2% over 706 games (first pick 72.4%, second pick 63.4%)
+- Amid + Lisette: 71.2% over 146 games (first pick 71.1%, second pick 72.0%)
+- Aki + Notos: 70.7% over 317 games (first pick 69.9%, second pick 73.8%)
+- Lisette + Aube: 70.6% over 1,819 games (first pick 71.1%, second pick 64.8%)
+- Schuri + Amid: 70.6% over 153 games (first pick 67.9%, second pick 73.9%)
 
 Most pre-banned pairs
-- Lisette + Lady of the Scales: 179,285 games
-- Notos + Lisette: 140,803 games
-- Zio + Harsetti: 122,764 games
-- Notos + Lady of the Scales: 98,292 games
-- Rhianna and Luciella + Lady of the Scales: 87,019 games
-- Rhianna and Luciella + Lisette: 83,572 games
-- Notos + Rhianna and Luciella: 71,483 games
-- Boss Arunka + Perfumer Byblis: 34,255 games
-- Belian + Harsetti: 31,589 games
-- Harsetti + Lisette: 23,679 games
+- Lisette + Lady of the Scales: 178,876 games
+- Notos + Lisette: 140,243 games
+- Zio + Harsetti: 115,001 games
+- Notos + Lady of the Scales: 89,164 games
+- Rhianna and Luciella + Lady of the Scales: 83,308 games
+- Rhianna and Luciella + Lisette: 83,292 games
+- Notos + Rhianna and Luciella: 63,424 games
+- Boss Arunka + Perfumer Byblis: 32,409 games
+- Belian + Harsetti: 30,238 games
+- Harsetti + Lisette: 23,529 games
+
+Draft position when picking first (most taken at each of the side's picks)
+Pick 1: Rhianna and Luciella 67,440 (55.3%), Lady of the Scales 54,367 (59.6%), School Nurse Yulha 34,180 (56.9%), Perfumer Byblis 24,596 (57.9%), Lisette 23,753 (66.3%), Notos 20,885 (60.1%)
+Pick 2: Arbiter Vildred 26,809 (57.9%), Tidal Rift Elvira 26,660 (59.1%), Estelle 20,205 (56.9%), Perfumer Byblis 17,559 (62.7%), Kawerik 14,809 (59.1%), School Nurse Yulha 14,232 (58.1%)
+Pick 3: Zio 37,537 (52.8%), Eye of the Abyss Fumyr 25,958 (59.5%), Aube 24,989 (61.7%), Briar Witch Iseria 18,237 (59.1%), Boss Arunka 15,535 (52.8%), Rinak 13,918 (62.2%)
+Pick 4: Shepherd of the Dark Diene 14,868 (66.5%), Belian 6,663 (60.7%), Monarch of the Sword Iseria 5,962 (58.2%), Arbiter Vildred 5,587 (57.3%), Aubade Ludwig 5,238 (57.0%), Frieren 4,095 (65.1%)
+Pick 5: Shepherd of the Dark Diene 13,779 (65.6%), Monarch of the Sword Iseria 7,323 (56.7%), Arbiter Vildred 6,882 (57.5%), Frieren 6,782 (63.8%), Aubade Ludwig 6,180 (56.2%), Belian 6,148 (59.7%)
+
+Draft position when picking second (most taken at each of the side's picks)
+Pick 1: Perfumer Byblis 36,954 (58.3%), Rhianna and Luciella 36,844 (54.5%), Estelle 31,254 (54.0%), Lady of the Scales 29,670 (58.0%), School Nurse Yulha 27,712 (54.7%), Boss Arunka 26,542 (52.3%)
+Pick 2: Estelle 35,013 (56.4%), Arbiter Vildred 32,877 (54.9%), Perfumer Byblis 26,084 (58.5%), School Nurse Yulha 22,755 (55.2%), Boss Arunka 17,397 (51.0%), Tidal Rift Elvira 17,122 (57.1%)
+Pick 3: Harsetti 21,478 (56.0%), Zio 17,770 (47.5%), Rinak 17,434 (55.6%), Belian 16,775 (57.4%), Eye of the Abyss Fumyr 16,414 (58.9%), Boss Arunka 16,177 (56.3%)
+Pick 4: Shepherd of the Dark Diene 28,543 (59.6%), Arbiter Vildred 11,239 (54.5%), Tactical Archetype Coli 9,599 (56.4%), Belian 9,487 (56.3%), Aubade Ludwig 9,092 (51.7%), Tidal Rift Elvira 7,514 (56.8%)
+Pick 5: Shepherd of the Dark Diene 6,708 (62.9%), Monarch of the Sword Iseria 4,995 (58.2%), Arbiter Vildred 4,464 (60.5%), Frieren 4,218 (65.8%), Belian 3,306 (58.7%), Genesis Ras 3,299 (55.9%)
 
 Movers 2026-10-26 to 2026-11-01 (dashboard's own week-over-week)
 Win rate up: Young Senya +5.0, Mort +2.4, Uncharted Pioneer Politis +2.3, Empyrean Ilynav +2.2, Lone Wolf Peira +2.1
 Win rate down: Setsuka -6.5, Aki -5.4, Successor Taeyou -3.9, Lidica -3.6, Witch of the Mere Tenebria -2.1
 Pick rate up: Uncharted Pioneer Politis +2.3, Mei Lin +2.3, Notos +1.6, Boss Arunka +1.5, Monarch of the Sword Iseria +1.0
 Pick rate down: School Nurse Yulha -2.4, Kawerik -1.7, Haru -1.7, Eye of the Abyss Fumyr -1.2, Desert Jewel Basar -1.1
+
+Names not matched to hero data: m8041_apr

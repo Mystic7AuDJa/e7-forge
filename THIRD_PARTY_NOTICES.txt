@@ -95,6 +95,13 @@ Figures read from saved copies of the E7 Analyzer meta dashboard
 No license or terms are published; the figures stay credited to E7 Analyzer.
 The dashboard's player leaderboard is not stored.
 
+data/artifact-dictionary.json
+-----------------------------
+
+Artifact class restrictions, stars and effect text read from a saved copy of
+the slendy.gg E7 Dictionary (https://slendy.gg), game data dated 2026-10-10.
+The text is Smilegate's game text; no license is published for the site.
+
 Runtime services (not shipped)
 ------------------------------
 

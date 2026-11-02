@@ -1,6 +1,7 @@
 // Renderer-side API. In Electron this is window.forge (preload). When opened
 // in a plain browser (preview/dev), a mock backed by the same engine is used.
 import type { Account, Build } from "../engine/types";
+import type { ArtifactInfo } from "../engine/dictionary";
 
 export interface Settings {
   capture: {
@@ -12,7 +13,7 @@ export interface Settings {
 
 export interface InitData {
   version: string; workers: number; platform: string; killedPrior?: string[]; runtime?: { electron: string; chrome: string; node: string }; settings: Settings; account: Account | null;
-  gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; imprints?: Record<string, any>; source: string; heroCount: number };
+  gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; imprints?: Record<string, any>; /** Keyed by artifact name. */ artifacts?: Record<string, { code: string; name: string }>; artifactInfo?: Record<string, ArtifactInfo>; source: string; heroCount: number };
   capture: { state: string; error: string | null };
 }
 

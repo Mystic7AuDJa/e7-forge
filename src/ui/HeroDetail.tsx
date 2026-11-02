@@ -6,6 +6,7 @@ import { ARCHETYPE_LABEL, detectArchetype } from "../engine/recommend";
 import { TAG_LABELS } from "../engine/tagger";
 import { GEAR_SLOTS, type HeroBonuses } from "../engine/types";
 import { classLabel, elementLabel } from "../engine/labels";
+import { artifactFits } from "../engine/dictionary";
 import { fmtImprint, gradeForValue, GRADES, imprintFor, positionLabel, type Grade, type HeroImprint, type ImprintMode } from "../engine/imprint";
 
 const BONUS_FIELDS: { k: keyof HeroBonuses; label: string }[] = [
@@ -15,7 +16,7 @@ const BONUS_FIELDS: { k: keyof HeroBonuses; label: string }[] = [
 ];
 
 export function HeroHeader({ heroId, right }: { heroId: string; right?: React.ReactNode }) {
-  const { heroById, hd, stats, itemById } = useForge();
+  const { heroById, hd, stats, itemById, init } = useForge();
   const [showGear, setShowGear] = useState(false);
   const [showBonus, setShowBonus] = useState(false);
   const [showImprint, setShowImprint] = useState(false);
@@ -36,6 +37,7 @@ export function HeroHeader({ heroId, right }: { heroId: string; right?: React.Re
         </div>
         {right}
       </div>
+      {hero.artifactName && <ArtifactLine name={hero.artifactName} role={d?.role ?? hero.role} info={init.gameData.artifactInfo?.[hero.artifactName]} />}
       <h3 style={{ marginTop: 10 }}>Current build</h3>
       <StatLine s={s} />
       <div className="row" style={{ marginTop: 8 }}>
@@ -46,6 +48,17 @@ export function HeroHeader({ heroId, right }: { heroId: string; right?: React.Re
       {showImprint && <ImprintEditor heroId={hero.id} key={"imp" + hero.id} />}
       {showGear && <table style={{ marginTop: 8 }}><tbody>{GEAR_SLOTS.map((sl) => <tr key={sl}><td className="muted"><SlotLabel slot={sl} /></td><td><ItemSummary item={itemById.get(hero.equipment[sl] ?? "")} /></td></tr>)}</tbody></table>}
       {showBonus && <BonusEditor heroId={hero.id} key={hero.id} />}
+    </div>
+  );
+}
+
+function ArtifactLine({ name, role, info }: { name: string; role?: string; info?: import("../engine/dictionary").ArtifactInfo }) {
+  const fits = artifactFits(info, role);
+  return (
+    <div style={{ marginTop: 8, fontSize: 13 }}>
+      <b>Artifact:</b> {name}{info && <span className="muted"> ({info.class}, {info.stars}★)</span>}
+      {info && <div className="muted" style={{ fontSize: 12 }}>{info.effect}</div>}
+      {!fits && <div className="warn" style={{ fontSize: 12 }}>This artifact is for {info!.class} heroes: only its stats apply, not its effect.</div>}
     </div>
   );
 }

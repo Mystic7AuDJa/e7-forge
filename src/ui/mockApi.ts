@@ -4,6 +4,8 @@
 import herodata from "../../data/herodata.json";
 import heroTags from "../../data/hero-tags.json";
 import imprintsJson from "../../data/imprints.json";
+import artifactJson from "../../data/artifactdata.json";
+import artifactDict from "../../data/artifact-dictionary.json";
 import sample from "../../data/sample-fribbels-export.json";
 import { buildHeroDb, findHeroData } from "../engine/data";
 import { importFribbels } from "../engine/importer";
@@ -18,6 +20,7 @@ import { mapCamping } from "../engine/camping";
 import tiersJson from "../../data/epic7db-tiers.json";
 import presetsJson from "../../data/pve-presets.json";
 import topicsJson from "../../data/camping-topics.json";
+import { preferredSnapshot } from "../engine/e7analyzer";
 import analyzerIndex from "../../data/meta-history/e7analyzer/index.json";
 import weekIndex from "../../data/meta-history/index.json";
 import { DEFAULT_CAPTURE_PORTS, DEFAULT_DECODER_URL } from "../engine/scan";
@@ -41,7 +44,7 @@ export function createMockApi(): ForgeApi {
   return {
     init: async () => ({
       version: "0.1.0-preview", workers: 1, runtime: { electron: "preview", chrome: navigator.userAgent.match(/Chrome\/([\d.]+)/)?.[1] ?? "?", node: "n/a" }, platform: "browser", settings, account,
-      gameData: { herodata: herodata as any, tags: heroTags as any, imprints: imprintsJson as any, source: "bundled (RexQian fork v1.12.9-offline)", heroCount: Object.keys(herodata).length },
+      gameData: { herodata: herodata as any, tags: heroTags as any, imprints: imprintsJson as any, artifacts: artifactJson as any, artifactInfo: artifactDict.artifacts as any, source: "bundled (RexQian fork v1.12.9-offline)", heroCount: Object.keys(herodata).length },
       capture: { state: "off", error: null },
     }),
     setSettings: async (s) => (settings = { ...settings, ...s, capture: { ...settings.capture, ...(s.capture ?? {}) } }),
@@ -127,7 +130,7 @@ export function createMockApi(): ForgeApi {
       } catch (e: any) { errors.push(`Camping data: ${e.message}`); }
       const analyzerFiles = import.meta.glob("../../data/meta-history/e7analyzer/20*.json", { eager: true, import: "default" });
       const weekFiles = import.meta.glob("../../data/meta-history/20*.json", { eager: true, import: "default" });
-      const analyzer: any = analyzerFiles[`../../data/meta-history/e7analyzer/${(analyzerIndex as string[]).at(-1)}`] ?? null;
+      const analyzer: any = analyzerFiles[`../../data/meta-history/e7analyzer/${preferredSnapshot(analyzerIndex as string[])}`] ?? null;
       const week: any = weekFiles[`../../data/meta-history/${(weekIndex as string[]).at(-1)}`] ?? null;
       return { tiers: tiersJson as any, presets: presetsJson, campingTopics: topicsJson as any, rta, camping, analyzer, week, errors };
     },
