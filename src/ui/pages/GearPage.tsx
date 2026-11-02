@@ -193,6 +193,7 @@ export default function GearPage() {
         <div className="card scroll fill" style={{ padding: 0 }}>
           <table className="gear-table">
             <thead><tr>
+              <th style={{ width: 30 }} />
               <SortTh k="enh" label="+ / Lv" sort={sort} onSort={toggle} title="Enhancement (+0 to +15) over gear level; click again to sort by level" />
               <SortTh k="slot" label="Slot" text sort={sort} onSort={toggle} /><SortTh k="set" label="Set" text sort={sort} onSort={toggle} />
               <SortTh k="rank" label="Rank" sort={sort} onSort={toggle} /><SortTh k="lvl" label="Lv" num sort={sort} onSort={toggle} />
@@ -200,27 +201,27 @@ export default function GearPage() {
               {SUB_COLS.map((c) => <SortTh key={c.t} k={c.t} label={c.label} num sort={sort} onSort={toggle} title={`Sort by ${c.label} substat`} />)}
               <SortTh k="gs" label="GS" num sort={sort} onSort={toggle} />
               <SortTh k="tier" label="+15 tier" num sort={sort} onSort={toggle} title={"Monte Carlo rating at +15 for the forecast type and tiers set on this page. Finished gear is graded as it is; unfinished gear shows its most likely tier and that tier's chance.\n\n" + tierHelp(tiers)} />
-              <SortTh k="worn" label="Worn by" text sort={sort} onSort={toggle} /><th style={{ width: 30 }} />
+              <SortTh k="worn" label="Worn by" text sort={sort} onSort={toggle} />
             </tr>
             <tr className="filter-row">
-              <th colSpan={6} className="muted" style={{ fontWeight: 400 }}>Minimum substat ≥ (blank = any)</th>
+              <th colSpan={7} className="muted" style={{ fontWeight: 400 }}>Minimum substat ≥ (blank = any)</th>
               {SUB_COLS.map((c) => (
                 <th key={c.t} className="num"><input type="number" className="mini" value={subMin[c.t] ?? ""} placeholder="–"
                   onChange={(e) => setSubMin({ ...subMin, [c.t]: e.target.value === "" ? undefined : Number(e.target.value) })} /></th>
               ))}
-              <th colSpan={4} />
+              <th colSpan={3} />
             </tr></thead>
             <tbody>{shown.length === 0 && (
               <tr><td colSpan={6 + SUB_COLS.length + 4} className="empty">No items match these filters. <a onClick={clearFilters}>Clear filters</a></td></tr>
             )}{shown.map((i) => (
               <tr key={i.id} className={sel?.id === i.id ? "sel" : ""} onClick={() => setSel(i)} style={{ cursor: "pointer" }}>
+                <td><button className="icon-btn" title="Delete item" aria-label="Delete item" onClick={(e) => { e.stopPropagation(); askDelete(i); }}><TrashIcon /></button></td>
                 <td><ItemBadge item={i} /></td>
                 <td><SlotLabel slot={i.gear} /></td><td><span className="slot-label"><SetIcon set={i.set} />{SETS[i.set]?.label ?? i.set}</span></td><td>{i.rank}</td><td className="num muted" title={i.level ? undefined : "Gear level wasn't read. Select the item and use Update item manually."}>{i.level || "?"}</td>
                 <td className="mono" title={i.main.value ? undefined : "Main stat value wasn't read. Select the item and use Update item manually."}>{i.main.value ? statText(i.main.type, i.main.value) : statText(i.main.type, 0).replace(/0%?$/, "?")}</td>
                 {SUB_COLS.map((c) => { const v = subVal(i, c.t); const hit = v != null && subMin[c.t] != null; return (
                   <td key={c.t} className={"num sub" + (c.t === "Speed" && v != null ? " spd" : "") + (hit ? " hit" : "")}>{v ?? ""}</td>); })}
                 <td className="num">{fmt(i.gs, 1)}</td><TierCell split={splitOf(i)} tiers={tiers} /><td className="muted worn" title={i.equippedById ? heroById.get(i.equippedById)?.name : ""}>{i.equippedById ? heroById.get(i.equippedById)?.name : ""}</td>
-                <td><button className="icon-btn" title="Delete item" aria-label="Delete item" onClick={(e) => { e.stopPropagation(); askDelete(i); }}><TrashIcon /></button></td>
               </tr>
             ))}</tbody>
           </table>

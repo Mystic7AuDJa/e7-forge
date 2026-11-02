@@ -218,7 +218,7 @@ Changelog
 
 0.1.6
 - Fix: gear the Live Sync decoder doesn't know yet (new level-88 pieces) came in with no level and a 0 main stat. The +15 main value is now worked out from the item's base roll, and Update item manually has Gear level and main stat fields (it opens by itself when either is missing). Values you enter are kept through later syncs and re-imports.
-- Gear & Upgrade ROI: trash button at the end of each row deletes an item from E7 Forge (it also leaves the hero wearing it). It asks first, with "Don't ask again this session"; the item comes back on the next Live Sync or import if it's still in the game.
+- Gear & Upgrade ROI: trash button at the start of each row deletes an item from E7 Forge (it also leaves the hero wearing it). It asks first, with "Don't ask again this session"; the item comes back on the next Live Sync or import if it's still in the game.
 - Gear & Upgrade ROI: new "+15 tier" column with each item's Monte Carlo rating (S, A, B or Sell, plus that tier's chance for unfinished gear). It follows the tier thresholds and forecast type you set, matches the Forecast panel, and can be sorted.
 
 0.1.5
