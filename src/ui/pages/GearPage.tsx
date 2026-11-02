@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useForge } from "../state";
 import { Busy, fmt, ItemBadge, NoAccount, Num, pct, Section, SetIcon, SlotIcon, SlotLabel, SortTh, statText, useSort } from "../components";
 import { SETS, STAT_LABEL } from "../../engine/constants";
 import { gearScore, reforgedSubs } from "../../engine/gear";
-import { DEFAULT_TIERS, editItem, forecastItem, tierHelp, type RoiTiers } from "../../engine/roi";
+import { DEFAULT_TIERS, editItem, FORECAST_TRIALS, forecastItem, itemRandom, outcomeKey, simulateScores, tierHelp, tierSplit, type RoiTiers, type TierSplit } from "../../engine/roi";
 import { GEAR_SLOTS, STAT_TYPES, type Item, type StatType, type Substat } from "../../engine/types";
 
 const SUB_COLS: { t: StatType; label: string }[] = [
@@ -20,6 +20,49 @@ const FOCUS: Record<string, Partial<Record<StatType, number>> | undefined> = {
   "Bruiser": { Speed: 1, HealthPercent: 1, CriticalHitChancePercent: 1, CriticalHitDamagePercent: 1, DefensePercent: 0.6 },
   "Support / debuffer": { Speed: 1, HealthPercent: 1, DefensePercent: 1, EffectivenessPercent: 1, EffectResistancePercent: 1 },
 };
+
+/**
+ * Simulated +15 scores for every item, filled in small batches so the page
+ * stays responsive. Keyed on the item and the forecast type; tier edits reuse
+ * the cached scores and only re-bucket them.
+ */
+function useOutcomes(items: Item[], first: Item[], focusName: string) {
+  const cache = useRef(new Map<string, Float64Array>());
+  const [version, bump] = useState(0);
+  useEffect(() => {
+    const focus = FOCUS[focusName];
+    const seen = new Set<string>();
+    const todo = [...first, ...items].filter((i) => { const k = outcomeKey(i, focusName); if (seen.has(k) || cache.current.has(k)) return false; seen.add(k); return true; });
+    if (!todo.length) return;
+    let n = 0, timer = 0;
+    const step = () => {
+      const end = performance.now() + 30;
+      while (n < todo.length && performance.now() < end) { const i = todo[n++]; cache.current.set(outcomeKey(i, focusName), simulateScores(i, focus)); }
+      bump((v) => v + 1);
+      if (n < todo.length) timer = window.setTimeout(step, 0);
+    };
+    timer = window.setTimeout(step, 0);
+    return () => clearTimeout(timer);
+  }, [items, first, focusName]);
+  return { get: (i: Item) => cache.current.get(outcomeKey(i, focusName)), version };
+}
+
+const TIER_COLOR: Record<string, string> = { S: "var(--good)", A: "var(--info)", B: "var(--warn)", Sell: "var(--muted)" };
+const EMPTY_ITEMS: Item[] = [];
+const TIER_RANK: Record<string, number> = { S: 4, A: 3, B: 2, Sell: 1 };
+
+function TierCell({ split, tiers }: { split?: TierSplit; tiers: RoiTiers }) {
+  if (!split) return <td className="num muted">…</td>;
+  const p = { S: split.pS, A: split.pA, B: split.pB, Sell: split.pSell }[split.likely];
+  const title = split.finished
+    ? `Finished: score ${fmt(split.median, 1)} is ${split.likely === "Sell" ? `below B (${tiers.B})` : `${split.likely} tier`}.`
+    : `Forecast at +15: S ${pct(split.pS)} · A ${pct(split.pA)} · B ${pct(split.pB)} · Sell ${pct(split.pSell)}. Median score ${fmt(split.median, 1)}.`;
+  return (
+    <td className="num roi-tier" title={title + "\n\n" + tierHelp(tiers)} style={{ color: TIER_COLOR[split.likely] }}>
+      <b>{split.likely}</b>{!split.finished && <span className="muted"> {pct(p)}</span>}
+    </td>
+  );
+}
 
 export default function GearPage() {
   const { account, heroById, api, toast } = useForge();
@@ -55,6 +98,9 @@ export default function GearPage() {
     }
     return true;
   }), [account, slot, set, rank, mainF, enh, worn, minGs, subMin]);
+  const visibleFirst = useMemo(() => items.slice(0, 300), [items]);
+  const outcomes = useOutcomes(account?.items ?? EMPTY_ITEMS, visibleFirst, focus);
+  const splitOf = (i: Item) => { const sc = outcomes.get(i); return sc ? tierSplit(sc, tiers) : undefined; };
   const activeFilters = [slot, set, rank, mainF, enh, worn].filter(Boolean).length + (minGs != null ? 1 : 0) + Object.values(subMin).filter((v) => v != null).length;
   const RANK_ORDER: Record<string, number> = { Normal: 1, Good: 2, Rare: 3, Heroic: 4, Epic: 5 };
   const SLOT_ORDER: Record<string, number> = { Weapon: 1, Helmet: 2, Armor: 3, Necklace: 4, Ring: 5, Boots: 6 };
@@ -63,7 +109,8 @@ export default function GearPage() {
     main: (i) => `${statText(i.main.type, 0).replace(/ 0%?$/, "")}${i.main.type.endsWith("Percent") ? "%" : ""} ${String(Math.round(i.main.value)).padStart(5, "0")}`,
     ...Object.fromEntries(SUB_COLS.map((c) => [c.t, (i: Item) => subVal(i, c.t)])), gs: (i) => i.gs ?? 0,
     worn: (i) => (i.equippedById ? heroById.get(i.equippedById)?.name ?? "" : ""),
-  }, { key: "gs", dir: -1 });
+    tier: (i) => { const sp = splitOf(i); return sp ? TIER_RANK[sp.likely] * 1000 + sp.median : -1; },
+  }, { key: "gs", dir: -1 }, [tiers, focus, outcomes.version]);
   const shown = sortedItems.slice(0, 1500);
   const qSort = useSort(queue ?? [], {
     item: (q: any) => { const it = account?.items.find((x) => x.id === q.itemId); return it ? `${it.rank} ${SETS[it.set]?.label} ${it.gear}` : ""; },
@@ -103,7 +150,9 @@ export default function GearPage() {
               <SortTh k="rank" label="Rank" sort={sort} onSort={toggle} /><SortTh k="lvl" label="Lv" num sort={sort} onSort={toggle} />
               <SortTh k="main" label="Main" text sort={sort} onSort={toggle} />
               {SUB_COLS.map((c) => <SortTh key={c.t} k={c.t} label={c.label} num sort={sort} onSort={toggle} title={`Sort by ${c.label} substat`} />)}
-              <SortTh k="gs" label="GS" num sort={sort} onSort={toggle} /><SortTh k="worn" label="Worn by" text sort={sort} onSort={toggle} />
+              <SortTh k="gs" label="GS" num sort={sort} onSort={toggle} />
+              <SortTh k="tier" label="+15 tier" num sort={sort} onSort={toggle} title={"Monte Carlo rating at +15 for the forecast type and tiers set on this page. Finished gear is graded as it is; unfinished gear shows its most likely tier and that tier's chance.\n\n" + tierHelp(tiers)} />
+              <SortTh k="worn" label="Worn by" text sort={sort} onSort={toggle} />
             </tr>
             <tr className="filter-row">
               <th colSpan={6} className="muted" style={{ fontWeight: 400 }}>Minimum substat ≥ (blank = any)</th>
@@ -111,10 +160,10 @@ export default function GearPage() {
                 <th key={c.t} className="num"><input type="number" className="mini" value={subMin[c.t] ?? ""} placeholder="–"
                   onChange={(e) => setSubMin({ ...subMin, [c.t]: e.target.value === "" ? undefined : Number(e.target.value) })} /></th>
               ))}
-              <th colSpan={2} />
+              <th colSpan={3} />
             </tr></thead>
             <tbody>{shown.length === 0 && (
-              <tr><td colSpan={6 + SUB_COLS.length + 2} className="empty">No items match these filters. <a onClick={clearFilters}>Clear filters</a></td></tr>
+              <tr><td colSpan={6 + SUB_COLS.length + 3} className="empty">No items match these filters. <a onClick={clearFilters}>Clear filters</a></td></tr>
             )}{shown.map((i) => (
               <tr key={i.id} className={sel?.id === i.id ? "sel" : ""} onClick={() => setSel(i)} style={{ cursor: "pointer" }}>
                 <td><ItemBadge item={i} /></td>
@@ -122,7 +171,7 @@ export default function GearPage() {
                 <td className="mono">{statText(i.main.type, i.main.value)}</td>
                 {SUB_COLS.map((c) => { const v = subVal(i, c.t); const hit = v != null && subMin[c.t] != null; return (
                   <td key={c.t} className={"num sub" + (c.t === "Speed" && v != null ? " spd" : "") + (hit ? " hit" : "")}>{v ?? ""}</td>); })}
-                <td className="num">{fmt(i.gs, 1)}</td><td className="muted worn" title={i.equippedById ? heroById.get(i.equippedById)?.name : ""}>{i.equippedById ? heroById.get(i.equippedById)?.name : ""}</td>
+                <td className="num">{fmt(i.gs, 1)}</td><TierCell split={splitOf(i)} tiers={tiers} /><td className="muted worn" title={i.equippedById ? heroById.get(i.equippedById)?.name : ""}>{i.equippedById ? heroById.get(i.equippedById)?.name : ""}</td>
               </tr>
             ))}</tbody>
           </table>
@@ -147,7 +196,6 @@ export default function GearPage() {
   );
 }
 
-const TIER_COLOR: Record<string, string> = { S: "var(--good)", A: "var(--info)", B: "var(--warn)", Sell: "var(--muted)" };
 
 function ForecastPanel({ item, focus, tiers, onSaved }: { item: Item; focus?: Partial<Record<StatType, number>>; tiers: RoiTiers; onSaved: (i: Item) => void }) {
   const { api, toast } = useForge();
@@ -156,7 +204,7 @@ function ForecastPanel({ item, focus, tiers, onSaved }: { item: Item; focus?: Pa
   const [subs, setSubs] = useState<Substat[]>(() => [...item.substats.map((x) => ({ ...x })), ...Array(Math.max(0, 4 - item.substats.length)).fill(null).map(() => ({ type: "" as StatType, value: 0 }))]);
   const dirty = enhance !== item.enhance || subs.some((x, i) => x.type !== (item.substats[i]?.type ?? "") || x.value !== (item.substats[i]?.value ?? 0));
   const draft = useMemo(() => (dirty ? editItem(item, { enhance, substats: subs }) : item), [item, enhance, subs, dirty]);
-  const fc = useMemo(() => forecastItem(draft, { trials: 4000, tiers, focus }), [draft, tiers, focus]);
+  const fc = useMemo(() => forecastItem(draft, { trials: FORECAST_TRIALS, random: itemRandom(draft), tiers, focus }), [draft, tiers, focus]);
   const help = tierHelp(tiers);
   const setSub = (i: number, patch: Partial<Substat>) => setSubs(subs.map((x, j) => (j === i ? { ...x, ...patch } : x)));
   const save = async () => {

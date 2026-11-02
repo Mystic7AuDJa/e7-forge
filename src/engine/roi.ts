@@ -135,6 +135,53 @@ export function forecastItem(item: Item, o: RoiOptions = {}): RoiResult {
   return { itemId: item.id, trials, pS, pA, pB, pSell, expectedGs, p10: q(0.1), p50: q(0.5), p90: q(0.9), speed, risk, recommendation, stepsLeft, likely, now };
 }
 
+/** Small seeded generator (mulberry32) so a column of forecasts doesn't change on every render. */
+export function seeded(seed: number) {
+  let t = seed >>> 0;
+  return () => {
+    t = (t + 0x6d2b79f5) >>> 0;
+    let r = Math.imul(t ^ (t >>> 15), 1 | t);
+    r = (r + Math.imul(r ^ (r >>> 7), 61 | r)) ^ r;
+    return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const hash = (s: string) => { let h = 2166136261; for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619); return h >>> 0; };
+
+/** Trials for the table column and the forecast panel; the same seed and count make the two agree. */
+export const FORECAST_TRIALS = 1000;
+/** Seeded generator for an item, so its forecast is the same every time it is shown. */
+export const itemRandom = (item: Item) => seeded(hash(outcomeKey(item, "")));
+
+/** Cache key for an item's simulated outcomes: changes when the item or the focus does, not the tiers. */
+export const outcomeKey = (item: Item, focusName: string) => `${item.id}:${item.level}:${item.enhance}:${item.substats.map((x) => x.type + x.value).join(",")}:${focusName}`;
+
+/**
+ * Sorted +15 scores for an item (reforged for level 85). Finished items have
+ * one outcome. Tiers aren't involved, so changing them only re-buckets.
+ */
+export function simulateScores(item: Item, focus: Partial<Record<StatType, number>> | undefined, trials = FORECAST_TRIALS): Float64Array {
+  if (item.enhance >= 15) return Float64Array.of(score(item.level === 85 ? reforgedSubs(item) : item.substats, focus));
+  const rand = itemRandom(item);
+  const out = new Float64Array(trials);
+  for (let i = 0; i < trials; i++) {
+    let subs = simulateEnhance(item, rand);
+    if (item.level === 85) subs = reforgedSubs({ ...item, enhance: 15, substats: subs });
+    out[i] = score(subs, focus);
+  }
+  return out.sort();
+}
+
+export interface TierSplit { pS: number; pA: number; pB: number; pSell: number; likely: Tier; median: number; finished: boolean }
+
+/** Buckets sorted scores into tiers, using the same "most likely tier" rule as the forecast panel. */
+export function tierSplit(scores: Float64Array, t: RoiTiers = DEFAULT_TIERS): TierSplit {
+  const below = (x: number) => { let lo = 0, hi = scores.length; while (lo < hi) { const m = (lo + hi) >> 1; if (scores[m] < x) lo = m + 1; else hi = m; } return lo / scores.length; };
+  const bS = below(t.S), bA = below(t.A), bB = below(t.B);
+  const pS = 1 - bS, pA = Math.max(0, bS - bA), pB = Math.max(0, bA - bB), pSell = bB;
+  const likely = ([["S", pS], ["A", pA], ["B", pB], ["Sell", pSell]] as [Tier, number][]).sort((a, b) => b[1] - a[1])[0][0];
+  return { pS, pA, pB, pSell, likely, median: scores[Math.floor(scores.length / 2)], finished: scores.length === 1 };
+}
+
 /** Ranks unfinished items by expected value so you know where to spend charms/gold first. */
 export function upgradeQueue(items: Item[], o: RoiOptions = {}, maxItems = 200) {
   return items

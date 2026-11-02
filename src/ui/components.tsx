@@ -178,7 +178,8 @@ export type SortState = { key: string; dir: 1 | -1 };
 type Getter<T> = (row: T) => number | string | null | undefined;
 
 /** Sorts rows by a column getter. Empty values always sort last. */
-export function useSort<T>(rows: T[], getters: Record<string, Getter<T>>, initial: SortState) {
+/** `deps`: anything else a getter reads (so the order refreshes when it changes). */
+export function useSort<T>(rows: T[], getters: Record<string, Getter<T>>, initial: SortState, deps: unknown[] = []) {
   const [sort, setSort] = useState<SortState>(initial);
   const sorted = useMemo(() => {
     const g = getters[sort.key];
@@ -192,7 +193,7 @@ export function useSort<T>(rows: T[], getters: Record<string, Getter<T>>, initia
       return c * sort.dir;
     }).map((x) => x.r);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rows, sort]);
+  }, [rows, sort, ...deps]);
   /** First click: text columns A→Z, number columns high→low. Clicking again reverses. */
   const toggle = (key: string, text = false) => setSort((s) => (s.key === key ? { key, dir: (s.dir * -1) as 1 | -1 } : { key, dir: text ? 1 : -1 }));
   return { sorted, sort, toggle };

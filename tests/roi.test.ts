@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { editItem, forecastItem, tierOf } from "../src/engine/roi";
+import { editItem, FORECAST_TRIALS, forecastItem, itemRandom, simulateScores, tierOf, tierSplit } from "../src/engine/roi";
+import sampleExport from "../data/sample-fribbels-export.json";
+import { importFribbels as importSample } from "../src/engine/importer";
 import type { Item } from "../src/engine/types";
 
 const boots: Item = {
@@ -29,5 +31,30 @@ describe("gear forecast", () => {
     expect(["S", "A", "B", "Sell"]).toContain(f.likely);
     expect(f.now).toBeGreaterThan(0);
     expect(f.p50).toBeGreaterThanOrEqual(f.now);
+  });
+});
+
+
+describe("+15 tier column", () => {
+  const items = importSample(sampleExport as any).account.items;
+  const unfinished = items.filter((i) => i.enhance < 15 && i.rank === "Epic").slice(0, 25);
+  it("agrees with the forecast panel for the same item and focus", () => {
+    for (const it of unfinished) {
+      const col = tierSplit(simulateScores(it, undefined));
+      const panel = forecastItem(it, { trials: FORECAST_TRIALS, random: itemRandom(it) });
+      expect(col.likely).toBe(panel.likely);
+      expect(col.pSell).toBeCloseTo(panel.pSell, 6);
+    }
+  });
+  it("re-buckets cached scores when the tiers change", () => {
+    const sc = simulateScores(unfinished[0], undefined);
+    expect(tierSplit(sc, { S: 0, A: 0, B: 0 }).likely).toBe("S");
+    expect(tierSplit(sc, { S: 999, A: 998, B: 997 }).likely).toBe("Sell");
+  });
+  it("grades finished gear as it is", () => {
+    const done = items.find((i) => i.enhance >= 15 && i.level !== 85)!;
+    const sp = tierSplit(simulateScores(done, undefined));
+    expect(sp.finished).toBe(true);
+    expect(sp.pS + sp.pA + sp.pB + sp.pSell).toBeCloseTo(1);
   });
 });

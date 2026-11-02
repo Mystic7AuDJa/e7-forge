@@ -241,3 +241,4 @@ td .row img { width: 26px; height: 26px; }
 .draft-input input { flex: 1; min-width: 0; }
 .draft-input img { width: 26px; height: 26px; border-radius: 50%; }
 .draft-input.ok input { border-color: #2f5a3f; }
+.gear-table td.roi-tier { white-space: nowrap; cursor: help; }

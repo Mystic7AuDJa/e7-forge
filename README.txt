@@ -5,7 +5,7 @@ Gear optimizer for Epic Seven on Windows, built because Fribbels stopped
 getting updates. It reads gear and heroes from game traffic, so there's no
 export/import step.
 
-Version 0.1.5.
+Version 0.1.6.
 
 Install (portable build)
 ------------------------
@@ -215,6 +215,9 @@ Node 20+. The first run downloads the Electron runtime (~120 MB).
 
 Changelog
 ---------
+
+0.1.6
+- Gear & Upgrade ROI: new "+15 tier" column with each item's Monte Carlo rating (S, A, B or Sell, plus that tier's chance for unfinished gear). It follows the tier thresholds and forecast type you set, matches the Forecast panel, and can be sorted.
 
 0.1.5
 - RTA Draft: each recommendation is scored for the exact pick you're on (your 1st to 5th, first or second pick), from how often top players take that hero there and how those drafts went.
