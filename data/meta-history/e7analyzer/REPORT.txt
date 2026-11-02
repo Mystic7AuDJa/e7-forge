@@ -59,7 +59,7 @@ Best pairs
 - Saria + Monarch of the Sword Iseria: 74.6% over 59 games (first pick 82.4%, second pick 64.0%)
 - Aki + Lisette: 74.3% over 175 games (first pick 76.5%, second pick 61.5%)
 - Little Queen Charlotte + Aram: 74.2% over 271 games (first pick 70.5%, second pick 77.7%)
-- Shepherd of the Dark Diene + (cut off in export): 74.1% over 3,234 games (first pick 73.6%, second pick 76.0%)
+- Shepherd of the Dark Diene + Lisette: 74.1% over 3,234 games (first pick 73.6%, second pick 76.0%)
 - Silver Blade Aramintha + Seaside Bellona: 73.2% over 56 games (first pick 77.1%, second pick 66.7%)
 - Rhianna and Luciella + Lisette: 72.2% over 2,394 games (first pick 71.4%, second pick 73.7%)
 - Silver Blade Aramintha + Lisette: 72.0% over 82 games (first pick 73.6%, second pick 60.0%)
@@ -72,7 +72,7 @@ Best pairs
 - Holiday Yufine + Eye of the Abyss Fumyr: 70.8% over 89 games (first pick 73.0%, second pick 60.0%)
 - Amid + Lisette: 70.7% over 147 games (first pick 70.5%, second pick 72.0%)
 - Dragon King Sharun + Lisette: 70.6% over 136 games (first pick 72.4%, second pick 64.5%)
-- Shepherd of the Dark Diene + (cut off in export): 70.5% over 244 games (first pick 69.2%, second pick 71.5%)
+- Shepherd of the Dark Diene + Unbound Knight Arowell: 70.5% over 244 games (first pick 69.2%, second pick 71.5%)
 - Fumyr + Lady of the Scales: 70.5% over 112 games (first pick 72.6%, second pick 64.3%)
 
 Most pre-banned pairs

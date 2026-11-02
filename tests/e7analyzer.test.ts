@@ -79,3 +79,13 @@ describe("E7 Analyzer import", () => {
     expect(h.win).toBe(66); // (930 - 600) / 500
   });
 });
+
+import { applyCorrections } from "../src/engine/e7analyzer";
+describe("corrections", () => {
+  it("fills a cut-off partner matched on hero, games and win rate", () => {
+    const snap = { prebanPairs: [], trios: [], synergies: [{ heroes: ["Shepherd of the Dark Diene", CUT_OFF], win: 74.1, games: 3234 }, { heroes: ["Shepherd of the Dark Diene", CUT_OFF], win: 70.5, games: 244 }] } as unknown as AnalyzerSnapshot;
+    expect(applyCorrections(snap, [{ section: "synergies", known: "Shepherd of the Dark Diene", games: 3234, win: 74.1, partner: "Lisette" }])).toBe(1);
+    expect(snap.synergies[0].heroes).toEqual(["Shepherd of the Dark Diene", "Lisette"]);
+    expect(snap.synergies[1].heroes[1]).toBe(CUT_OFF);
+  });
+});

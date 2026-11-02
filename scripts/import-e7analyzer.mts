@@ -8,7 +8,7 @@
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { analyzerReport, parseAnalyzer, type AnalyzerSnapshot } from "../src/engine/e7analyzer";
+import { analyzerReport, applyCorrections, parseAnalyzer, type AnalyzerSnapshot, type Correction } from "../src/engine/e7analyzer";
 
 const pdf = process.argv[2];
 if (!pdf || !fs.existsSync(pdf)) throw new Error("Give the path to the saved dashboard PDF.");
@@ -18,6 +18,9 @@ const snap = parseAnalyzer(text("-raw"), text("-layout"), heroes);
 
 const dir = path.join("data", "meta-history", "e7analyzer");
 fs.mkdirSync(dir, { recursive: true });
+// Names cut off in an export ("Shepherd of the Dark Diene …") and confirmed by hand on the dashboard.
+const fixFile = path.join(dir, "corrections.json");
+const fixed = fs.existsSync(fixFile) ? applyCorrections(snap, JSON.parse(fs.readFileSync(fixFile, "utf8")) as Correction[]) : 0;
 const indexFile = path.join(dir, "index.json");
 const index: string[] = fs.existsSync(indexFile) ? JSON.parse(fs.readFileSync(indexFile, "utf8")) : [];
 const name = `${snap.generatedAt.slice(0, 10)}.json`;
@@ -29,4 +32,7 @@ const prevName = index[index.indexOf(name) - 1];
 const prev: AnalyzerSnapshot | null = prevName ? JSON.parse(fs.readFileSync(path.join(dir, prevName), "utf8")) : null;
 fs.writeFileSync(path.join(dir, "REPORT.txt"), analyzerReport(snap, prev));
 console.log(`Saved ${name}: ${snap.heroes.length} heroes, ${snap.pickSide.length} pick-side rows, ${snap.trios.length} trios, ${snap.synergies.length} pairs, ${snap.prebanPairs.length} preban pairs, ${snap.matches} matches${prev ? `; compared with ${prevName}` : ""}.`);
+if (fixed) console.log(`Filled ${fixed} cut-off name(s) from corrections.json.`);
+const stillCut = [...snap.prebanPairs, ...snap.synergies, ...snap.trios].filter((c) => c.heroes.some((h) => h.startsWith("(cut off")));
+if (stillCut.length) console.log(`Still cut off (add to corrections.json): ${stillCut.map((c) => `${c.heroes.join(" + ")} ${c.win}% / ${c.games} games`).join("; ")}`);
 if (snap.unmatched.length) console.log(`Unmatched names: ${snap.unmatched.join(", ")}`);

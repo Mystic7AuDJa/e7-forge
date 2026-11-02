@@ -152,6 +152,21 @@ export function parseAnalyzer(raw: string, layout: string, knownHeroes: string[]
   return snap;
 }
 
+export interface Correction { section: "prebanPairs" | "synergies" | "trios"; known: string; games: number; win: number; partner: string; note?: string }
+
+/** Fills names that were cut off in an export, matched on the visible hero plus games and win rate. */
+export function applyCorrections(snap: AnalyzerSnapshot, fixes: Correction[]): number {
+  let n = 0;
+  for (const f of fixes) {
+    for (const c of snap[f.section]) {
+      if (c.games !== f.games || c.win !== f.win || !c.heroes.includes(f.known)) continue;
+      const i = c.heroes.indexOf(CUT_OFF);
+      if (i >= 0) { c.heroes[i] = f.partner; n++; }
+    }
+  }
+  return n;
+}
+
 /**
  * Weekly numbers from two season-to-date snapshots: games and wins played
  * between them. Cumulative season win rates barely move week to week, so
