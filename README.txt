@@ -5,7 +5,7 @@ Gear optimizer for Epic Seven on Windows, built because Fribbels stopped
 getting updates. It reads gear and heroes from game traffic, so there's no
 export/import step.
 
-Personal project. Version 0.1.3.
+Version 0.1.3.
 
 Install (portable build)
 ------------------------
