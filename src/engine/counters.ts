@@ -74,7 +74,7 @@ export function estimateEnemy(name: string, hd: HeroData | undefined, builds: Co
 export interface Threat { id: string; label: string; heroes: string[]; severity: number; answers: string[]; advice: string }
 
 /** Enemy kit features and which of YOUR tags answer them. */
-const THREATS: { id: string; label: string; enemyTags: string[]; answers: string[]; severity: number; advice: string }[] = [
+export const THREATS: { id: string; label: string; enemyTags: string[]; answers: string[]; severity: number; advice: string }[] = [
   { id: "survival", label: "Survival buffs (immortal / invincible / barrier)", enemyTags: ["immortal", "invincible", "barrier"], answers: ["strip", "unbuffable", "extinction"], severity: 3, advice: "Strip or Unbuffable before your burst; otherwise the kill turn gets wasted." },
   { id: "revive", label: "Revive", enemyTags: ["revive"], answers: ["extinction", "strip", "unhealable"], severity: 2.5, advice: "Extinction stops revives; otherwise kill the reviver first." },
   { id: "cc", label: "Crowd control (stun / sleep / silence / provoke)", enemyTags: ["stun", "sleep", "silence", "provoke", "seal"], answers: ["immunity", "cleanse"], severity: 3, advice: "Bring Immunity or a cleanser, or build Effect Resistance on key units." },

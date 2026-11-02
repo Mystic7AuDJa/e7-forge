@@ -57,6 +57,8 @@ export interface MetaBundle {
   campingTopics: import("../engine/camping").TopicRow[];
   rta: import("../engine/meta").RtaMeta | null;
   camping: { fetchedAt: string; heroes: Record<string, import("../engine/camping").HeroCamp> } | null;
+  analyzer: import("../engine/e7analyzer").AnalyzerSnapshot | null;
+  week: import("../engine/metaHistory").MetaSnapshot | null;
   errors: string[];
 }
 

@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 // Browser preview backend: same engine, no Electron. Live capture is simulated
 // (it can't sniff from a browser), everything else runs for real on the sample export.
 import herodata from "../../data/herodata.json";
@@ -17,6 +18,8 @@ import { mapCamping } from "../engine/camping";
 import tiersJson from "../../data/epic7db-tiers.json";
 import presetsJson from "../../data/pve-presets.json";
 import topicsJson from "../../data/camping-topics.json";
+import analyzerIndex from "../../data/meta-history/e7analyzer/index.json";
+import weekIndex from "../../data/meta-history/index.json";
 import { DEFAULT_CAPTURE_PORTS, DEFAULT_DECODER_URL } from "../engine/scan";
 import type { Account, Hero } from "../engine/types";
 import type { ForgeApi, Settings } from "./api";
@@ -122,7 +125,11 @@ export function createMockApi(): ForgeApi {
         const [c, h] = await Promise.all([fetch("https://ceciliabot.github.io/data/CampingData.json").then((r) => r.json()), fetch("https://ceciliabot.github.io/data/HeroDatabase.json").then((r) => r.json())]);
         camping = { fetchedAt: new Date().toISOString(), heroes: mapCamping(c, h, [...db.keys()]) };
       } catch (e: any) { errors.push(`Camping data: ${e.message}`); }
-      return { tiers: tiersJson as any, presets: presetsJson, campingTopics: topicsJson as any, rta, camping, errors };
+      const analyzerFiles = import.meta.glob("../../data/meta-history/e7analyzer/20*.json", { eager: true, import: "default" });
+      const weekFiles = import.meta.glob("../../data/meta-history/20*.json", { eager: true, import: "default" });
+      const analyzer: any = analyzerFiles[`../../data/meta-history/e7analyzer/${(analyzerIndex as string[]).at(-1)}`] ?? null;
+      const week: any = weekFiles[`../../data/meta-history/${(weekIndex as string[]).at(-1)}`] ?? null;
+      return { tiers: tiersJson as any, presets: presetsJson, campingTopics: topicsJson as any, rta, camping, analyzer, week, errors };
     },
     updateData: async () => { throw new Error("Desktop app only"); },
     refreshTags: async () => ({}),

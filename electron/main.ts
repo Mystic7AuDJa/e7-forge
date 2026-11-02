@@ -6,6 +6,7 @@ import { Worker } from "node:worker_threads";
 import { importFribbels } from "../src/engine/importer";
 import { mergeScan, DEFAULT_CAPTURE_PORTS, DEFAULT_DECODER_URL } from "../src/engine/scan";
 import { parseRtaMeta } from "../src/engine/meta";
+import { parseMetaSnapshot } from "../src/engine/metaHistory";
 import { editItem } from "../src/engine/roi";
 import { mapCamping } from "../src/engine/camping";
 import { deriveTags, epic7dbSlug, parseEpic7dbHeroPage } from "../src/engine/tagger";
@@ -364,15 +365,19 @@ function registerIpc() {
     const DAY = 86400_000;
     const ua = { "User-Agent": "e7-forge/0.1 (personal use)" };
     let rta = store.get<any>("meta_rta", null);
+    let week = store.get<any>("meta_rta_week", null);
     const rtaAge = rta ? Date.now() - Date.parse(rta.fetchedAt) : Infinity;
     // Even "refresh" is limited to one request an hour to be polite.
     if (rtaAge > DAY || (refresh && rtaAge > 3600_000)) {
       try {
         const res = await fetch("https://www.epic7rtastats.com/meta", { headers: ua });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const parsed = parseRtaMeta(await res.text());
+        const page = await res.text();
+        const parsed = parseRtaMeta(page);
         if (parsed.picked.length < 10) throw new Error("too few heroes in response");
         rta = parsed; store.set("meta_rta", rta);
+        // Same page, fuller parse (pick order by slot, bans) for the draft assistant.
+        try { week = parseMetaSnapshot(page); store.set("meta_rta_week", week); } catch { /* keep the bundled week */ }
       } catch (e: any) { errors.push(`RTA stats: ${e.message}${rta ? " (showing last good copy)" : ""}`); }
     }
     let camping = store.get<any>("meta_camping", null);
@@ -389,7 +394,17 @@ function registerIpc() {
         store.set("meta_camping", camping);
       } catch (e: any) { errors.push(`Camping data: ${e.message}${camping ? " (showing last good copy)" : ""}`); }
     }
-    return { tiers, presets, campingTopics, rta, camping, errors };
+    // Bundled history (data/meta-history): latest E7 Analyzer export, and the latest weekly snapshot as a fallback.
+    const latest = (dir: string) => {
+      try {
+        const base = path.join(bundledData, "meta-history", dir);
+        const index: string[] = readJson(path.join(base, "index.json"));
+        return index.length ? readJson(path.join(base, index[index.length - 1])) : null;
+      } catch { return null; }
+    };
+    const analyzer = latest("e7analyzer");
+    week ??= latest("");
+    return { tiers, presets, campingTopics, rta, camping, analyzer, week, errors };
   });
 
   // game data updates

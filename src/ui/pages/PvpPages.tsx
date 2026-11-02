@@ -3,6 +3,8 @@ import { useForge } from "../state";
 import { Busy, fmt, HeroIcon, HeroSelect, NoAccount, Section, Toggle } from "../components";
 import { buildMeta, PVP_SIZE, suggestPvp, type PvpMode, type PvpTeam, type TeamStyle } from "../../engine/meta";
 import { ImprintAuras, OpenInAccountOpt, TeamHeroes, useCandidates, useMeta, useOwnedByName } from "./metaShared";
+import { buildDraftData } from "../../engine/draft";
+import { DraftAssistant } from "./DraftAssistant";
 
 const INFO: Record<PvpMode, { title: string; sub: string }> = {
   arena_def: {
@@ -11,7 +13,7 @@ const INFO: Record<PvpMode, { title: string; sub: string }> = {
   },
   rta: {
     title: "RTA Draft",
-    sub: "A five-hero draft core from your roster, ranked against what Champion+ players pick, win with and pre-ban, plus the RTA tier list.",
+    sub: "A live draft assistant and five-hero draft cores from your roster, scored on top-player results (win rates, proven pairs and trios), what Champion+ players pick by slot, and your gear.",
   },
   gw_off: {
     title: "Guild War Offense",
@@ -36,8 +38,9 @@ function PvpPage({ mode }: { mode: PvpMode }) {
   const [style, setStyle] = useState<TeamStyle>("auto");
   const [must, setMust] = useState<string[]>([]);
   const [ownedOnly, setOwnedOnly] = useState(false);
-  const metaMap = useMemo(() => (meta ? buildMeta(meta.tiers, "rta", meta.rta, db) : null), [meta, db]);
-  const result = useMemo(() => (metaMap && cands.length ? suggestPvp(cands, metaMap, mode, { style, mustInclude: must, top: 6 }) : null), [metaMap, cands, mode, style, must]);
+  const draft = useMemo(() => (meta ? buildDraftData(meta.analyzer, meta.week, meta.tiers) : null), [meta]);
+  const metaMap = useMemo(() => (meta ? buildMeta(meta.tiers, "rta", meta.rta, db, draft) : null), [meta, db, draft]);
+  const result = useMemo(() => (metaMap && cands.length ? suggestPvp(cands, metaMap, mode, { style, mustInclude: must, top: 6, draft }) : null), [metaMap, cands, mode, style, must, draft]);
   if (!account) return <NoAccount />;
   const info = INFO[mode];
 
@@ -73,6 +76,8 @@ function PvpPage({ mode }: { mode: PvpMode }) {
           </div>
         )}
 
+        {mode === "rta" && draft && <DraftAssistant cands={cands} data={draft} />}
+
         <Section title={mode === "rta" ? "Draft cores you can field" : "Teams you can field"} right={<span className="muted">Open a team in the Account-Wide Optimizer with its heroes pre-selected</span>}>
           {!result?.teams.length ? <span className="muted">Not enough geared heroes to build a team.</span> : (
             <div className="grid g2">{result.teams.map((t, i) => <PvpTeamCard key={i} rank={i + 1} team={t} mode={mode} metaMap={metaMap!} />)}</div>
@@ -81,13 +86,16 @@ function PvpPage({ mode }: { mode: PvpMode }) {
 
         <Section title="Top-player hero pool" right={<Toggle on={ownedOnly} onChange={setOwnedOnly} label="Owned only" />}>
           <table>
-            <thead><tr><th>Hero</th><th>Tier</th><th className="num">RTA pick %</th><th className="num">RTA win %</th><th className="num">Pre-ban %</th><th className="num">Meta score</th><th>Yours</th><th className="num">Your GS</th></tr></thead>
+            <thead><tr><th>Hero</th><th>Tier</th><th className="num">Top-player win %</th><th className="num">Top-player games</th><th className="num">Pick/ban %</th><th className="num">RTA pick %</th><th className="num">RTA win %</th><th className="num">Pre-ban %</th><th className="num">Meta score</th><th>Yours</th><th className="num">Your GS</th></tr></thead>
             <tbody>{shown.map((m) => {
               const c = owned.get(m.name);
               return (
                 <tr key={m.name} className={c ? "" : "dim"}>
                   <td><span className="row" style={{ gap: 6 }}><HeroIcon name={m.name} />{m.name}</span></td>
                   <td>{m.tier ? <span className={"tierchip t" + m.tier}>{m.tier}</span> : <span className="muted">—</span>}</td>
+                  <td className="num">{m.topWin != null ? fmt(m.topWin, 1) : "—"}</td>
+                  <td className="num">{m.topGames != null ? fmt(m.topGames) : "—"}</td>
+                  <td className="num">{m.topPickBan != null ? fmt(m.topPickBan, 1) : "—"}</td>
                   <td className="num">{m.rtaPick != null ? fmt(m.rtaPick, 1) : "—"}</td>
                   <td className="num">{m.rtaWin != null ? fmt(m.rtaWin, 1) : "—"}</td>
                   <td className="num">{m.rtaPreban != null ? fmt(m.rtaPreban, 1) : "—"}</td>
@@ -98,7 +106,7 @@ function PvpPage({ mode }: { mode: PvpMode }) {
               );
             })}</tbody>
           </table>
-          <p className="muted" style={{ fontSize: 12 }}>Pick, win and pre-ban rates are per game at Champion and above in RTA, and are only available for the 20 most-picked heroes. Pre-ban rate is per side, so ~50% means one of the two players bans it in about half of games.</p>
+          <p className="muted" style={{ fontSize: 12 }}>Top-player columns: season totals from E7 Analyzer; win rates are from the tracked top player's side, so compare heroes with each other rather than with 50%. RTA pick, win and pre-ban rates are per game at Champion and above, and are only available for the 20 most-picked heroes. Pre-ban rate is per side, so ~50% means one of the two players bans it in about half of games.</p>
         </Section>
       </>}
     </div>
@@ -115,7 +123,7 @@ function PvpTeamCard({ rank, team, mode, metaMap }: { rank: number; team: PvpTea
       </div>
       <TeamHeroes heroes={team.heroIds.map((id, i) => {
         const h = heroById.get(id)!; const m = metaMap.get(h.dataKey || h.name);
-        return { hero: h, name: h.name, note: [team.tiers[i] && `Tier ${team.tiers[i]}`, m?.rtaPick != null && `${fmt(m.rtaPick, 1)}% RTA picks`].filter(Boolean).join(" · ") };
+        return { hero: h, name: h.name, note: [team.tiers[i] && `Tier ${team.tiers[i]}`, m?.topWin != null && `${fmt(m.topWin, 1)}% top-player win`, m?.rtaPick != null && `${fmt(m.rtaPick, 1)}% RTA picks`].filter(Boolean).join(" · ") };
       })} />
       <ImprintAuras ids={team.heroIds} />
       <ul className="reasons">{team.reasons.map((r, i) => <li key={i}>{r}</li>)}</ul>

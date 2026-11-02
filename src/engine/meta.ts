@@ -6,6 +6,7 @@
 import { analyzeTeam, type Content, type TeamCandidate } from "./teams";
 import type { HeroDb } from "./data";
 import { tagList } from "./labels";
+import { pairBonus, type DraftData } from "./draft";
 
 export interface RtaHeroStat { code: string; name: string; pct: number; winRate: number; count: number }
 export interface RtaMeta {
@@ -43,13 +44,15 @@ export const TIER_SCORE: Record<string, number> = { SS: 5, "S+": 4.5, S: 4, A: 3
 export interface MetaInfo {
   name: string; tier?: string; tierScore: number;
   rtaPick?: number; rtaWin?: number; rtaPreban?: number;
+  /** Top-player season stats (E7 Analyzer): win %, games, pick/ban %, and win edge over the pool average. */
+  topWin?: number; topGames?: number; topPickBan?: number; topEdge?: number;
   /** Combined 0–10-ish score: tier + RTA popularity + win-rate edge. */
   score: number;
   /** True for A–SS tier or a top RTA pick: the "top player" pool. */
   meta: boolean;
 }
 
-export function buildMeta(tiers: TierFile | null, list: "rta" | "pve", rta: RtaMeta | null, db: HeroDb): Map<string, MetaInfo> {
+export function buildMeta(tiers: TierFile | null, list: "rta" | "pve", rta: RtaMeta | null, db: HeroDb, draft?: DraftData | null): Map<string, MetaInfo> {
   const out = new Map<string, MetaInfo>();
   const codeToName = new Map<string, string>();
   for (const [name, h] of db) codeToName.set(h.code, name);
@@ -66,13 +69,23 @@ export function buildMeta(tiers: TierFile | null, list: "rta" | "pve", rta: RtaM
     for (const r of rta.prebanned) get(nameOf(r)).rtaPreban = r.pct;
     for (const r of rta.winRate) { const m = get(nameOf(r)); if (m.rtaWin == null) m.rtaWin = r.winRate; }
   }
+  if (draft && list === "rta") {
+    for (const p of draft.power.values()) {
+      if (p.basis !== "data" || !db.has(p.name)) continue;
+      const m = get(p.name);
+      m.topWin = p.win; m.topGames = p.games; m.topPickBan = p.pickBan; m.topEdge = p.edge;
+    }
+  }
   const topPick = Math.max(1, ...[...out.values()].map((m) => m.rtaPick ?? 0));
   for (const m of out.values()) {
     const pick = m.rtaPick ? 3 * Math.log1p(m.rtaPick) / Math.log1p(topPick) : 0;
     const win = m.rtaWin != null && (m.rtaPick ?? 0) >= 2 ? Math.max(-1.5, Math.min(1.5, (m.rtaWin - 50) / 4)) : 0;
     const preban = m.rtaPreban ? Math.min(1.5, m.rtaPreban / 40) : 0;
-    m.score = Math.round((m.tierScore + pick + win + preban) * 100) / 100;
-    m.meta = m.tierScore >= TIER_SCORE.A || (m.rtaPick ?? 0) >= 5;
+    // With top-player data, results replace the tier list: 2.5 is roughly an A-tier baseline,
+    // each point of win edge is worth 0.6, and presence (pick/ban) adds up to ~2.
+    const base = m.topEdge != null ? 2.5 + m.topEdge * 0.6 + Math.log1p(m.topPickBan ?? 0) * 0.45 : m.tierScore;
+    m.score = Math.round((base + pick + win + preban) * 100) / 100;
+    m.meta = m.tierScore >= TIER_SCORE.A || (m.rtaPick ?? 0) >= 5 || (m.topPickBan ?? 0) >= 5;
   }
   return out;
 }
@@ -107,7 +120,7 @@ export function cleaveViable(cands: TeamCandidate[]) {
   return dps.length >= 2 && enablers.length >= 1;
 }
 
-export function suggestPvp(cands: TeamCandidate[], meta: Map<string, MetaInfo>, mode: PvpMode, o: { style?: TeamStyle; top?: number; pool?: number; mustInclude?: string[] } = {}) {
+export function suggestPvp(cands: TeamCandidate[], meta: Map<string, MetaInfo>, mode: PvpMode, o: { style?: TeamStyle; top?: number; pool?: number; mustInclude?: string[]; draft?: DraftData | null } = {}) {
   const size = PVP_SIZE[mode];
   const content = CONTENT[mode];
   const mi = (c: TeamCandidate) => meta.get(c.hero.dataKey || c.hero.name) ?? meta.get(c.hd.name);
@@ -170,6 +183,20 @@ export function suggestPvp(cands: TeamCandidate[], meta: Map<string, MetaInfo>, 
       if (anti.length) reasons.push(`Anti-cleave tools: ${tagList(anti.slice(0, 6))}.`);
       const avgRes = team.reduce((a, m) => a + m.current.res, 0) / team.length;
       if (avgRes < 60) warnings.push(`Low average Effect Resistance (${Math.round(avgRes)}%): openers will land their debuffs.`);
+    }
+    if (mode === "rta" && o.draft) {
+      // Proven pairs and trios among top players.
+      const names = team.map((m) => m.hd.name);
+      let syn = 0; const found: string[] = [];
+      for (let a = 0; a < names.length; a++) for (let b = a + 1; b < names.length; b++) {
+        const pb = pairBonus(o.draft, names[a], names[b]);
+        if (pb.combo) { syn += pb.pts; found.push(`${names[a]} + ${names[b]} ${pb.combo.win}%`); }
+      }
+      for (const t of o.draft.trios) if (t.heroes.every((h) => names.includes(h))) { syn += (t.win - o.draft.mean) * (t.games / (t.games + 200)); found.push(`${t.heroes.join(" + ")} ${t.win}%`); }
+      s += syn * 0.4;
+      if (found.length) reasons.push(`Proven together among top players: ${found.join("; ")}.`);
+      const withData = team.filter((_, i) => metas[i]?.topWin != null);
+      if (withData.length) reasons.push(`Top-player win rates: ${withData.map((m) => `${m.hero.name} ${mi(m)!.topWin!.toFixed(1)}%`).join(", ")}.`);
     }
     if (mode === "rta") {
       const banned = team.filter((m, i) => (metas[i]?.rtaPreban ?? 0) >= 30);

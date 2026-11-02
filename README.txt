@@ -5,7 +5,7 @@ Gear optimizer for Epic Seven on Windows, built because Fribbels stopped
 getting updates. It reads gear and heroes from game traffic, so there's no
 export/import step.
 
-Version 0.1.3.
+Version 0.1.4.
 
 Install (portable build)
 ------------------------
@@ -59,6 +59,14 @@ Analyze
 PvP
 - Offense (Counter Planner): enter an enemy defense, get estimated enemy
   builds, the threats in it, and counter teams from your roster.
+- RTA Draft: a live draft assistant. Set who picks first, enter pre-bans and
+  picks as they happen, and it ranks your own heroes for your next pick:
+  top-player win rate (shrunk toward the average so small samples don't
+  dominate), proven pairs and trios with what you've picked, how well the kit
+  answers the enemy's picks so far, how often Champion+ players take the hero
+  at that pick slot, and your gear. Each score shows its parts. When both
+  teams are in, it ranks which enemy hero to ban and which of yours they'll
+  likely ban. Draft cores below it use the same top-player data.
 - Arena Defense, RTA Draft, Guild War Offense, Guild War Defense: teams from
   your roster scored with epic7db's A–SS tiers and Champion+ RTA rates.
   Defense scoring favours anti-cleave tools. Guild War Offense builds cleave
@@ -197,6 +205,11 @@ Node 20+. The first run downloads the Electron runtime (~120 MB).
 
 Changelog
 ---------
+
+0.1.4
+- RTA Draft: live draft assistant (pre-bans, picks in E7's 1-2-2-2-2-1 order, next-pick ranking with reasons, final ban advice).
+- RTA scoring uses top-player data from E7 Analyzer exports (win rates, pick/ban, pairs, trios) and Champion+ pick-by-slot data; heroes top players don't play rank below those they do.
+- Hero pool table shows top-player win rate, games and pick/ban rate.
 
 0.1.3
 - Counter Planner: Reset button clears the enemy defense.

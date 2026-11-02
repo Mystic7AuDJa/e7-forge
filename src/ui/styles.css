@@ -233,3 +233,11 @@ ul.bpchecks { list-style: none; padding-left: 0; columns: 2; }
 .team-hero img, td .row img { width: 40px; height: 40px; border-radius: 50%; flex: none; object-fit: cover; background: #222b3a; }
 td .row img { width: 26px; height: 26px; }
 .help { cursor: help; }
+.draft-board { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+.draft-col h3 { margin: 0 0 8px; }
+.draft-slot { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; padding: 4px 6px; border-radius: 8px; border: 1px solid transparent; }
+.draft-slot.active { border-color: var(--accent); background: #2a2416; }
+.draft-input { display: inline-flex; align-items: center; gap: 6px; flex: 1; min-width: 0; }
+.draft-input input { flex: 1; min-width: 0; }
+.draft-input img { width: 26px; height: 26px; border-radius: 50%; }
+.draft-input.ok input { border-color: #2f5a3f; }
