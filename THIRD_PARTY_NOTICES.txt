@@ -87,6 +87,14 @@ data/pve-presets.json
 Short summaries of community guides (epic7db, game8, Reddit r/EpicSeven,
 BlueStacks). Each entry links its source. The guides keep their own terms.
 
+data/meta-history/e7analyzer/
+-----------------------------
+
+Figures read from saved copies of the E7 Analyzer meta dashboard
+(https://e7-analyzer-slendymang.vercel.app/meta-dashboard/) by slendymang.
+No license or terms are published; the figures stay credited to E7 Analyzer.
+The dashboard's player leaderboard is not stored.
+
 Runtime services (not shipped)
 ------------------------------
 

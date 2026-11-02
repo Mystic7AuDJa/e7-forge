@@ -38,6 +38,8 @@ const DATA: Src[] = [
     use: "Hero camping personalities and topics (CampingData.json, HeroDatabase.json) fetched at runtime and cached 7 days. The topic reaction table and the morale rules were read from the simulator and bundled as camping-topics.json.", shipped: "Topic table only" },
   { name: "PvE guides (game8, Reddit r/EpicSeven, BlueStacks)", url: "https://game8.co/games/Epic-Seven", license: "Site content, no open license", tone: "warn",
     use: "Raid (2020), Abyss 101-110 (2020) and hunt notes summarised into pve-presets.json. Each line keeps its source link, date and a confidence label; 2020 data is marked legacy.", shipped: "Summaries with links" },
+  { name: "E7 Analyzer (slendymang)", url: "https://e7-analyzer-slendymang.vercel.app/meta-dashboard/", license: "No published license or terms", tone: "warn",
+    use: "Top-player RTA figures (hero win and pick/ban rates, best pairs and trios, pre-banned pairs) read from dashboard PDFs you save, kept in data/meta-history/e7analyzer. Player names are not stored.", shipped: "Saved figures" },
   { name: "e7rtabot.com", url: "https://e7rtabot.com", license: "Terms forbid automated access", tone: "warn",
     use: "Reviewed and deliberately not used.", shipped: "No" },
   { name: "CeciliaBot EpicSevenAssetRipper", url: "https://github.com/CeciliaBot/EpicSevenAssetRipper", license: "n/a", tone: "info",

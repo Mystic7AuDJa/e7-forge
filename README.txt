@@ -140,6 +140,27 @@ is already saved). A scheduled task runs it every Monday and pushes the result.
 The site publishes per-hero numbers, not full 5-hero teams, so the history
 tracks heroes, pairs, sets and artifacts rather than whole teams.
 
+Top-player data from E7 Analyzer (manual export)
+
+data/meta-history/e7analyzer/ holds saved copies of the E7 Analyzer meta
+dashboard (e7-analyzer-slendymang.vercel.app/meta-dashboard/): about 660,000
+top-player matches this season, with win rate, games and pick/ban rate for
+every hero, the best pairs and trios, the most pre-banned pairs, and the
+dashboard's week-over-week movers. REPORT.txt summarises the latest export and,
+from the second export on, the games and win rates in the week between the
+two exports (season totals hardly move, the weekly slice does).
+
+To add a week:
+1. Open the dashboard. Leave the window on Season Start -> Now and All Ranks.
+2. Click "show more" on Meta Hero Pool so every hero is listed.
+3. Print -> Save as PDF.
+4. Run: npm run meta:import-e7analyzer -- "path/to/the.pdf" (needs pdftotext
+   from poppler), or send the PDF to have it imported.
+
+Win rates are from the tracked top player's side, so they sit above 50%;
+compare heroes with each other, not with 50%. Player names on the dashboard's
+leaderboard are not stored.
+
 Known issues
 ------------
 

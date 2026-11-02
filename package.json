@@ -16,6 +16,7 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "meta:snapshot": "tsx scripts/meta-snapshot.mts",
+    "meta:import-e7analyzer": "tsx scripts/import-e7analyzer.mts",
     "dist:win": "npm run build && npx --yes electron-builder@26.18.0 --win dir --x64 && node scripts/set-exe-icon.mjs \"release/win-unpacked/E7 Forge.exe\""
   },
   "build": {
