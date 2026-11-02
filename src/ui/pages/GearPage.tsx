@@ -101,7 +101,7 @@ function TierCell({ split, tiers }: { split?: TierSplit; tiers: RoiTiers }) {
 }
 
 export default function GearPage() {
-  const { account, heroById, api, toast } = useForge();
+  const { account, heroById, api, toast, settings, setSettings } = useForge();
   const [slot, setSlot] = useState("");
   const [set, setSet] = useState("");
   const [rank, setRank] = useState("");
@@ -112,8 +112,18 @@ export default function GearPage() {
   const [subMin, setSubMin] = useState<Partial<Record<StatType, number>>>({});
   const clearFilters = () => { setSlot(""); setSet(""); setRank(""); setMainF(""); setEnh(""); setWorn(""); setMinGs(undefined); setSubMin({}); };
   const [sel, setSel] = useState<Item | null>(null);
-  const [focus, setFocus] = useState("Balanced (gear score)");
-  const [tiers, setTiers] = useState<RoiTiers>(DEFAULT_TIERS);
+  // Tier thresholds and forecast type are saved in settings, so they carry over between sessions.
+  const [focus, setFocusState] = useState(settings.roiFocus && settings.roiFocus in FOCUS ? settings.roiFocus : "Balanced (gear score)");
+  const [tiers, setTiersState] = useState<RoiTiers>({ ...DEFAULT_TIERS, ...settings.roiTiers });
+  const saveTimer = useRef(0);
+  const setTiers = (t: RoiTiers) => {
+    setTiersState(t);
+    clearTimeout(saveTimer.current);
+    saveTimer.current = window.setTimeout(() => setSettings({ roiTiers: t }), 400);
+  };
+  const setFocus = (f: string) => { setFocusState(f); setSettings({ roiFocus: f }); };
+  const [drawer, setDrawer] = useState<null | "forecast" | "queue">(null);
+  const openItem = (i: Item) => { setSel(i); setDrawer("forecast"); };
   const [queue, setQueue] = useState<any[] | null>(null);
   const [busy, setBusy] = useState(false);
   const [confirmDel, setConfirmDel] = useState<Item | null>(null);
@@ -125,6 +135,12 @@ export default function GearPage() {
       toast(`Deleted ${item.rank} ${item.gear} +${item.enhance}.`);
     } catch (e: any) { toast(e.message, true); }
   };
+  useEffect(() => {
+    if (!drawer) return;
+    const key = (e: KeyboardEvent) => { if (e.key === "Escape" && !confirmDel) setDrawer(null); };
+    window.addEventListener("keydown", key);
+    return () => window.removeEventListener("keydown", key);
+  }, [drawer, confirmDel]);
   const askDelete = (item: Item) => (skipDeleteConfirm ? deleteItem(item) : setConfirmDel(item));
   const items = useMemo(() => (account?.items ?? []).filter((i) => {
     if (slot && i.gear !== slot) return false;
@@ -184,12 +200,16 @@ export default function GearPage() {
         <button className="small ghost" disabled={!activeFilters} onClick={clearFilters}>Clear filters{activeFilters ? ` (${activeFilters})` : ""}</button>
         <span className="muted">{fmt(items.length)} of {fmt(account.items.length)} items</span>
         <span style={{ flex: 1 }} />
-        <span className="muted help" title={tierHelp(tiers)}>Tiers S/A/B ≥ ⓘ</span>
-        <Num value={tiers.S} width={56} onChange={(v) => setTiers({ ...tiers, S: v ?? 70 })} />
-        <Num value={tiers.A} width={56} onChange={(v) => setTiers({ ...tiers, A: v ?? 60 })} />
-        <Num value={tiers.B} width={56} onChange={(v) => setTiers({ ...tiers, B: v ?? 50 })} />
+        <span className="row nowrap" style={{ gap: 6 }}>
+          <select value={focus} onChange={(e) => setFocus(e.target.value)} title="Forecast type: which stats count toward the +15 score">{Object.keys(FOCUS).map((f) => <option key={f}>{f}</option>)}</select>
+          <span className="muted help" title={tierHelp(tiers)}>Tiers S/A/B ≥ ⓘ</span>
+          <Num value={tiers.S} width={52} onChange={(v) => setTiers({ ...tiers, S: v ?? DEFAULT_TIERS.S })} />
+          <Num value={tiers.A} width={52} onChange={(v) => setTiers({ ...tiers, A: v ?? DEFAULT_TIERS.A })} />
+          <Num value={tiers.B} width={52} onChange={(v) => setTiers({ ...tiers, B: v ?? DEFAULT_TIERS.B })} />
+          <button className="small" onClick={() => setDrawer(drawer === "queue" ? null : "queue")}>Upgrade queue</button>
+        </span>
       </div>
-      <div className="grid" style={{ gridTemplateColumns: "minmax(0,1fr) 400px" }}>
+      <div>
         <div className="card scroll fill" style={{ padding: 0 }}>
           <table className="gear-table">
             <thead><tr>
@@ -214,7 +234,7 @@ export default function GearPage() {
             <tbody>{shown.length === 0 && (
               <tr><td colSpan={6 + SUB_COLS.length + 4} className="empty">No items match these filters. <a onClick={clearFilters}>Clear filters</a></td></tr>
             )}{shown.map((i) => (
-              <tr key={i.id} className={sel?.id === i.id ? "sel" : ""} onClick={() => setSel(i)} style={{ cursor: "pointer" }}>
+              <tr key={i.id} className={sel?.id === i.id ? "sel" : ""} onClick={() => openItem(i)} style={{ cursor: "pointer" }}>
                 <td><button className="icon-btn" title="Delete item" aria-label="Delete item" onClick={(e) => { e.stopPropagation(); askDelete(i); }}><TrashIcon /></button></td>
                 <td><ItemBadge item={i} /></td>
                 <td><SlotLabel slot={i.gear} /></td><td><span className="slot-label"><SetIcon set={i.set} />{SETS[i.set]?.label ?? i.set}</span></td><td>{i.rank}</td><td className="num muted" title={i.level ? undefined : "Gear level wasn't read. Select the item and use Update item manually."}>{i.level || "?"}</td>
@@ -226,22 +246,32 @@ export default function GearPage() {
             ))}</tbody>
           </table>
         </div>
-        <div className="stack side-panel">
-          <Section title="Forecast" right={<select value={focus} onChange={(e) => setFocus(e.target.value)}>{Object.keys(FOCUS).map((f) => <option key={f}>{f}</option>)}</select>}>
+      </div>
+      <aside className={"drawer" + (drawer ? " open" : "")} aria-hidden={!drawer}>
+        <div className="drawer-head">
+          <div className="seg">
+            <button className={drawer === "forecast" ? "on" : ""} onClick={() => setDrawer("forecast")}>Forecast</button>
+            <button className={drawer === "queue" ? "on" : ""} onClick={() => setDrawer("queue")}>Upgrade queue</button>
+          </div>
+          <span className="muted" style={{ fontSize: 12 }}>{focus}</span>
+          <button className="small ghost" title="Close (Esc)" aria-label="Close" onClick={() => setDrawer(null)}>✕</button>
+        </div>
+        <div className="drawer-body">
+          {drawer === "forecast" && <Section title="Forecast">
             {!sel ? <span className="muted">Select an item.</span> : <ForecastPanel key={sel.id + ":" + sel.level + ":" + sel.main.value + ":" + sel.enhance + ":" + sel.substats.map((x) => x.type + x.value).join()} item={sel} focus={FOCUS[focus]} tiers={tiers} onSaved={setSel} />}
-          </Section>
-          <Section title="Upgrade queue" right={busy ? <Busy label="Simulating…" /> : <button className="small" onClick={async () => { setBusy(true); try { setQueue(await api.upgradeQueue({ options: { tiers, focus: FOCUS[focus] }, max: 200 })); } catch (e: any) { toast(e.message, true); } finally { setBusy(false); } }}>Rank unfinished gear</button>}>
+          </Section>}
+          {drawer === "queue" && <Section title="Upgrade queue" right={busy ? <Busy label="Simulating…" /> : <button className="small" onClick={async () => { setBusy(true); try { setQueue(await api.upgradeQueue({ options: { tiers, focus: FOCUS[focus] }, max: 200 })); } catch (e: any) { toast(e.message, true); } finally { setBusy(false); } }}>Rank unfinished gear</button>}>
             {!queue ? <span className="muted">Ranks Epic/Heroic gear below +15 by expected outcome.</span> : (
-              <div className="scroll" style={{ maxHeight: "max(260px, calc(100vh - 640px))" }}>
+              <div>
                 <table><thead><tr><SortTh k="item" label="Item" text sort={qSort.sort} onSort={qSort.toggle} /><SortTh k="sa" label="S+A" num sort={qSort.sort} onSort={qSort.toggle} /><SortTh k="sell" label="Sell" num sort={qSort.sort} onSort={qSort.toggle} /><SortTh k="spd" label="P(spd≥15)" num sort={qSort.sort} onSort={qSort.toggle} /></tr></thead>
                   <tbody>{qSort.sorted.slice(0, 80).map((q) => { const it = byId.get(q.itemId)!; return (
-                    <tr key={q.itemId} onClick={() => setSel(it)} style={{ cursor: "pointer" }}><td><span className="slot-label"><SetIcon set={it.set} /><SlotIcon slot={it.gear} />{it.rank} +{it.enhance}</span> <span className="muted">{STAT_LABEL[it.main.type]}</span></td>
+                    <tr key={q.itemId} onClick={() => openItem(it)} style={{ cursor: "pointer" }}><td><span className="slot-label"><SetIcon set={it.set} /><SlotIcon slot={it.gear} />{it.rank} +{it.enhance}</span> <span className="muted">{STAT_LABEL[it.main.type]}</span></td>
                       <td className="num">{pct(q.f.pS + q.f.pA)}</td><td className="num">{pct(q.f.pSell)}</td><td className="num">{pct(q.f.speed.p15)}</td></tr>); })}</tbody></table>
               </div>
             )}
-          </Section>
+          </Section>}
         </div>
-      </div>
+      </aside>
     </div>
   );
 }

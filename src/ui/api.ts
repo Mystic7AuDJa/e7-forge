@@ -9,6 +9,9 @@ export interface Settings {
     iface: string; minEnhance: number; minStars: number; autoOffMinutes: number; minAutoIntervalSec: number;
   };
   penDefense: number; enemySpeed: [number, number]; speedRng: number;
+  /** Gear & Upgrade ROI: tier thresholds and forecast type, kept between sessions. */
+  roiTiers?: { S: number; A: number; B: number };
+  roiFocus?: string;
 }
 
 export interface InitData {

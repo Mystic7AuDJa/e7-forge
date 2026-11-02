@@ -116,7 +116,7 @@ export function forecastItem(item: Item, o: RoiOptions = {}): RoiResult {
   const pS = frac((x) => x >= tiers.S, scores);
   const pA = frac((x) => x >= tiers.A && x < tiers.S, scores);
   const pB = frac((x) => x >= tiers.B && x < tiers.A, scores);
-  const pSell = 1 - pS - pA - pB;
+  const pSell = Math.max(0, 1 - pS - pA - pB);
   const expectedGs = Math.round((scores.reduce((a, b) => a + b, 0) / trials) * 10) / 10;
   const spread = q(0.9) - q(0.1);
   const risk = pSell > 0.6 ? "high" : pSell > 0.3 || spread > 25 ? "medium" : "low";

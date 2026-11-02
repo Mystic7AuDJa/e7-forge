@@ -37,6 +37,8 @@ interface Settings {
   penDefense: number;
   enemySpeed: [number, number];
   speedRng: number;
+  roiTiers?: { S: number; A: number; B: number };
+  roiFocus?: string;
 }
 const DEFAULT_SETTINGS: Settings = {
   capture: {

@@ -248,3 +248,13 @@ button.danger { background: #7a2e2e; border-color: #9a3c3c; color: #ffe1e1; font
 button.danger:hover:not(:disabled) { background: #8f3636; }
 .modal-backdrop { position: fixed; inset: 0; background: rgba(5, 8, 12, .6); display: flex; align-items: center; justify-content: center; z-index: 100; }
 .modal { width: min(440px, calc(100vw - 32px)); box-shadow: 0 12px 40px rgba(0, 0, 0, .5); }
+.nowrap { flex-wrap: nowrap; }
+/* Slide-out drawer (Gear & Upgrade ROI): sits over the page instead of taking table width. */
+.drawer { position: fixed; top: 56px; right: 0; bottom: 0; width: min(440px, 92vw); z-index: 50; background: var(--bg, #0d1117);
+  border-left: 1px solid var(--line); box-shadow: -14px 0 32px rgba(0, 0, 0, .45); transform: translateX(105%); transition: transform .2s ease, visibility 0s linear .2s;
+  display: flex; flex-direction: column; visibility: hidden; }
+.drawer.open { transform: none; visibility: visible; transition: transform .2s ease; }
+.drawer-head { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.drawer-head > span { flex: 1; text-align: right; }
+.drawer-body { overflow: auto; padding: 12px; flex: 1; }
+@media (prefers-reduced-motion: reduce) { .drawer { transition: none; } }
