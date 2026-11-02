@@ -58,3 +58,12 @@ describe("+15 tier column", () => {
     expect(sp.pS + sp.pA + sp.pB + sp.pSell).toBeCloseTo(1);
   });
 });
+
+describe("manual item edit", () => {
+  it("sets gear level and main value", () => {
+    const e = editItem({ ...boots, level: 0, main: { ...boots.main, value: 0 } }, { level: 88, mainValue: 45 });
+    expect(e.level).toBe(88);
+    expect(e.main.value).toBe(45);
+    expect(editItem(e, { level: undefined }).level).toBe(88);
+  });
+});

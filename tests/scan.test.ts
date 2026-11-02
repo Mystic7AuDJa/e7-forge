@@ -61,3 +61,22 @@ describe("live capture conversion", () => {
     expect(() => convertDecoderResponse({ status: "FAIL" })).toThrow(/Decoder/);
   });
 });
+
+describe("gear the decoder doesn't know yet (new level-88 pieces)", () => {
+  // As captured: no level and no main value, base main roll in op[0].
+  const rawChoker = { id: 333, type: "neck", f: "set_max_hp", g: 5, p: 0,
+    op: [["max_hp_rate", 0.13], ["def_rate", 0.04], ["speed", 4], ["acc", 0.05], ["res", 0.04], ["speed", 4], ["acc", 0.06], ["speed", 4], ["def_rate", 0.04], ["speed", 3]] };
+  it("fills the +15 main value from the base roll and leaves the level unknown", () => {
+    const c = convertRawItem(rawChoker)!;
+    expect(c.enhance).toBe(15);
+    expect(c.main).toEqual({ type: "HealthPercent", value: 65 });
+    expect(c.level).toBe(0);
+  });
+  it("keeps a level entered by hand across later scans", () => {
+    const first = mergeScan(null, convertDecoderResponse({ status: "SUCCESS", data: [rawChoker], units: [] })).account;
+    first.items[0].level = 88;
+    const again = mergeScan(first, convertDecoderResponse({ status: "SUCCESS", data: [rawChoker], units: [] })).account;
+    expect(again.items[0].level).toBe(88);
+    expect(again.items[0].main.value).toBe(65);
+  });
+});

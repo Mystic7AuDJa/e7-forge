@@ -9,7 +9,7 @@ import { parseRtaMeta } from "../src/engine/meta";
 import { parseMetaSnapshot } from "../src/engine/metaHistory";
 import { preferredSnapshot } from "../src/engine/e7analyzer";
 import { editItem } from "../src/engine/roi";
-import { removeItem } from "../src/engine/inventory";
+import { keepManualFixes, removeItem } from "../src/engine/inventory";
 import { mapCamping } from "../src/engine/camping";
 import { deriveTags, epic7dbSlug, parseEpic7dbHeroPage } from "../src/engine/tagger";
 import type { Account, Build, GearSlot } from "../src/engine/types";
@@ -232,11 +232,13 @@ function registerIpc() {
     });
     if (r.canceled || !r.filePaths[0]) return null;
     const { account: acc, report } = importFribbels(fs.readFileSync(r.filePaths[0], "utf8"), path.basename(r.filePaths[0]));
+    if (account) keepManualFixes(account.items, acc.items);
     setAccount(acc);
     return report;
   });
   ipcMain.handle("account:importText", (_e, text: string) => {
     const { account: acc, report } = importFribbels(text, "pasted");
+    if (account) keepManualFixes(account.items, acc.items);
     setAccount(acc);
     return report;
   });
@@ -257,11 +259,11 @@ function registerIpc() {
     return r.filePath;
   });
   // Manual item edit from the Forecast panel (e.g. after enhancing in game without a sync).
-  ipcMain.handle("account:updateItem", (_e, { itemId, enhance, substats }) => {
+  ipcMain.handle("account:updateItem", (_e, { itemId, enhance, substats, level, mainValue }) => {
     if (!account) return null;
     const i = account.items.findIndex((x) => x.id === itemId);
     if (i < 0) return null;
-    account.items[i] = editItem(account.items[i], { enhance, substats });
+    account.items[i] = editItem(account.items[i], { enhance, substats, level, mainValue });
     setAccount(account, true);
     return account.items[i];
   });

@@ -53,10 +53,10 @@ export function createMockApi(): ForgeApi {
     importText: async (text) => { const r = importFribbels(text, "pasted"); account = r.account; emit("account:changed", {}); return r.report; },
     exportFile: async () => null,
     updateHero: async ({ heroId, bonuses, imprint }) => { const h = need().heroes.find((x) => x.id === heroId)!; h.bonuses = { ...h.bonuses, ...bonuses }; if (imprint !== undefined) { if (imprint) h.imprint = imprint; else delete h.imprint; } emit("account:changed", {}); return h; },
-    updateItem: async ({ itemId, enhance, substats }) => {
+    updateItem: async ({ itemId, enhance, substats, level, mainValue }) => {
       const acc = need(); const i = acc.items.findIndex((x) => x.id === itemId);
       if (i < 0) return null;
-      acc.items[i] = editItem(acc.items[i], { enhance, substats }); emit("account:changed", {}); return acc.items[i];
+      acc.items[i] = editItem(acc.items[i], { enhance, substats, level, mainValue }); emit("account:changed", {}); return acc.items[i];
     },
     deleteItem: async ({ itemId }) => { const ok = removeItem(need(), itemId); if (ok) emit("account:changed", {}); return ok; },
     applyBuilds: async (builds) => {

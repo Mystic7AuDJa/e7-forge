@@ -22,10 +22,12 @@ export function tierHelp(t: RoiTiers = DEFAULT_TIERS) {
   ].join("\n");
 }
 
-/** Apply a manual edit (enhance level and substats) and recompute rolls and gear score. */
-export function editItem(item: Item, edit: { enhance?: number; substats?: Substat[] }): Item {
+/** Apply a manual edit (gear level, enhance, main value, substats) and recompute rolls and gear score. */
+export function editItem(item: Item, edit: { enhance?: number; substats?: Substat[]; level?: number; mainValue?: number }): Item {
   const next: Item = {
     ...item,
+    level: edit.level != null && edit.level > 0 ? Math.min(100, Math.round(edit.level)) : item.level,
+    main: edit.mainValue != null && edit.mainValue > 0 ? { ...item.main, value: edit.mainValue } : item.main,
     enhance: Math.max(0, Math.min(15, edit.enhance ?? item.enhance)),
     substats: (edit.substats ?? item.substats).filter((x) => x.type && x.value > 0).map((x) => ({ ...x, rolls: undefined, modified: x.modified })),
   };

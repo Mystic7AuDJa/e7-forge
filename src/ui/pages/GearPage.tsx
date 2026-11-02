@@ -215,8 +215,8 @@ export default function GearPage() {
             )}{shown.map((i) => (
               <tr key={i.id} className={sel?.id === i.id ? "sel" : ""} onClick={() => setSel(i)} style={{ cursor: "pointer" }}>
                 <td><ItemBadge item={i} /></td>
-                <td><SlotLabel slot={i.gear} /></td><td><span className="slot-label"><SetIcon set={i.set} />{SETS[i.set]?.label ?? i.set}</span></td><td>{i.rank}</td><td className="num muted">{i.level || "?"}</td>
-                <td className="mono">{statText(i.main.type, i.main.value)}</td>
+                <td><SlotLabel slot={i.gear} /></td><td><span className="slot-label"><SetIcon set={i.set} />{SETS[i.set]?.label ?? i.set}</span></td><td>{i.rank}</td><td className="num muted" title={i.level ? undefined : "Gear level wasn't read. Select the item and use Update item manually."}>{i.level || "?"}</td>
+                <td className="mono" title={i.main.value ? undefined : "Main stat value wasn't read. Select the item and use Update item manually."}>{i.main.value ? statText(i.main.type, i.main.value) : statText(i.main.type, 0).replace(/0%?$/, "?")}</td>
                 {SUB_COLS.map((c) => { const v = subVal(i, c.t); const hit = v != null && subMin[c.t] != null; return (
                   <td key={c.t} className={"num sub" + (c.t === "Speed" && v != null ? " spd" : "") + (hit ? " hit" : "")}>{v ?? ""}</td>); })}
                 <td className="num">{fmt(i.gs, 1)}</td><TierCell split={splitOf(i)} tiers={tiers} /><td className="muted worn" title={i.equippedById ? heroById.get(i.equippedById)?.name : ""}>{i.equippedById ? heroById.get(i.equippedById)?.name : ""}</td>
@@ -227,7 +227,7 @@ export default function GearPage() {
         </div>
         <div className="stack side-panel">
           <Section title="Forecast" right={<select value={focus} onChange={(e) => setFocus(e.target.value)}>{Object.keys(FOCUS).map((f) => <option key={f}>{f}</option>)}</select>}>
-            {!sel ? <span className="muted">Select an item.</span> : <ForecastPanel key={sel.id + ":" + sel.enhance + ":" + sel.substats.map((x) => x.type + x.value).join()} item={sel} focus={FOCUS[focus]} tiers={tiers} onSaved={setSel} />}
+            {!sel ? <span className="muted">Select an item.</span> : <ForecastPanel key={sel.id + ":" + sel.level + ":" + sel.main.value + ":" + sel.enhance + ":" + sel.substats.map((x) => x.type + x.value).join()} item={sel} focus={FOCUS[focus]} tiers={tiers} onSaved={setSel} />}
           </Section>
           <Section title="Upgrade queue" right={busy ? <Busy label="Simulating…" /> : <button className="small" onClick={async () => { setBusy(true); try { setQueue(await api.upgradeQueue({ options: { tiers, focus: FOCUS[focus] }, max: 200 })); } catch (e: any) { toast(e.message, true); } finally { setBusy(false); } }}>Rank unfinished gear</button>}>
             {!queue ? <span className="muted">Ranks Epic/Heroic gear below +15 by expected outcome.</span> : (
@@ -248,16 +248,19 @@ export default function GearPage() {
 
 function ForecastPanel({ item, focus, tiers, onSaved }: { item: Item; focus?: Partial<Record<StatType, number>>; tiers: RoiTiers; onSaved: (i: Item) => void }) {
   const { api, toast } = useForge();
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(!item.level || !item.main.value);
   const [enhance, setEnhance] = useState(item.enhance);
+  const [level, setLevel] = useState<number | undefined>(item.level || undefined);
+  const [mainValue, setMainValue] = useState<number | undefined>(item.main.value || undefined);
+  const missing = !item.level || !item.main.value;
   const [subs, setSubs] = useState<Substat[]>(() => [...item.substats.map((x) => ({ ...x })), ...Array(Math.max(0, 4 - item.substats.length)).fill(null).map(() => ({ type: "" as StatType, value: 0 }))]);
-  const dirty = enhance !== item.enhance || subs.some((x, i) => x.type !== (item.substats[i]?.type ?? "") || x.value !== (item.substats[i]?.value ?? 0));
-  const draft = useMemo(() => (dirty ? editItem(item, { enhance, substats: subs }) : item), [item, enhance, subs, dirty]);
+  const dirty = enhance !== item.enhance || (level ?? 0) !== (item.level || 0) || (mainValue ?? 0) !== (item.main.value || 0) || subs.some((x, i) => x.type !== (item.substats[i]?.type ?? "") || x.value !== (item.substats[i]?.value ?? 0));
+  const draft = useMemo(() => (dirty ? editItem(item, { enhance, substats: subs, level, mainValue }) : item), [item, enhance, subs, level, mainValue, dirty]);
   const fc = useMemo(() => forecastItem(draft, { trials: FORECAST_TRIALS, random: itemRandom(draft), tiers, focus }), [draft, tiers, focus]);
   const help = tierHelp(tiers);
   const setSub = (i: number, patch: Partial<Substat>) => setSubs(subs.map((x, j) => (j === i ? { ...x, ...patch } : x)));
   const save = async () => {
-    const saved = await api.updateItem({ itemId: item.id, enhance, substats: subs.filter((x) => x.type && x.value > 0) });
+    const saved = await api.updateItem({ itemId: item.id, enhance, level, mainValue, substats: subs.filter((x) => x.type && x.value > 0) });
     if (saved) { toast("Item updated"); onSaved(saved); setEditing(false); }
   };
   const subOptions = STAT_TYPES.filter((t) => t !== item.main.type);
@@ -269,6 +272,7 @@ function ForecastPanel({ item, focus, tiers, onSaved }: { item: Item; focus?: Pa
         <span className={"pill " + (fc.risk === "low" ? "good" : fc.risk === "medium" ? "warn" : "bad")}>{fc.risk} risk</span>
         {dirty && <span className="pill warn">edited, not saved</span>}
       </div>
+      {missing && <div className="warn" style={{ fontSize: 12 }}>The {[!item.level && "gear level", !item.main.value && "main stat value"].filter(Boolean).join(" and ")} didn't come through from the {item.level ? "import" : "scan or import"} (common for new level-88 gear). Enter {!item.level && !item.main.value ? "them" : "it"} below from the in-game item card and save; later syncs keep what you enter.</div>}
       <div className="row" title={help} style={{ cursor: "help", alignItems: "baseline" }}>
         <span className="muted">Likely at +15:</span>
         <b style={{ fontSize: 22, color: TIER_COLOR[fc.likely] }}>{fc.likely === "Sell" ? "Sell" : `${fc.likely} tier`}</b>
@@ -289,17 +293,21 @@ function ForecastPanel({ item, focus, tiers, onSaved }: { item: Item; focus?: Pa
 
       <div className="row" style={{ marginTop: 6 }}>
         <button className="small ghost" onClick={() => setEditing(!editing)}>{editing ? "Hide editor" : "Update item manually"}</button>
-        {dirty && <button className="small ghost" onClick={() => { setEnhance(item.enhance); setSubs(item.substats.map((x) => ({ ...x }))); }}>Reset</button>}
+        {dirty && <button className="small ghost" onClick={() => { setEnhance(item.enhance); setLevel(item.level || undefined); setMainValue(item.main.value || undefined); setSubs(item.substats.map((x) => ({ ...x }))); }}>Reset</button>}
         {dirty && <button className="small primary" onClick={save}>Save to item</button>}
       </div>
       {editing && (
         <div className="col" style={{ gap: 6 }}>
           <span className="muted" style={{ fontSize: 12 }}>Enhanced or rerolled in game without a sync? Enter the new values; the forecast updates as you type.</span>
-          <label className="field">Enhance
-            <select value={enhance} onChange={(e) => setEnhance(Number(e.target.value))}>
-              {Array.from({ length: 16 }, (_, i) => <option key={i} value={i}>+{i}</option>)}
-            </select>
-          </label>
+          <div className="row">
+            <label className="field">Gear level<Num value={level} width={60} onChange={setLevel} /></label>
+            <label className="field">Enhance
+              <select value={enhance} onChange={(e) => setEnhance(Number(e.target.value))}>
+                {Array.from({ length: 16 }, (_, i) => <option key={i} value={i}>+{i}</option>)}
+              </select>
+            </label>
+            <label className="field">{STAT_LABEL[item.main.type] ?? item.main.type} (main){item.main.type.endsWith("Percent") ? " %" : ""}<Num value={mainValue} width={70} onChange={setMainValue} /></label>
+          </div>
           {subs.map((x, i) => (
             <div key={i} className="row">
               <select value={x.type} onChange={(e) => setSub(i, { type: e.target.value as StatType })} style={{ flex: 1 }}>

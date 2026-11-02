@@ -3,6 +3,7 @@
 // merges it into the current account. Field mapping follows Fribbels'
 // scanner.js (RexQian fork v1.12.9).
 import { importFribbels } from "./importer";
+import { keepManualFixes } from "./inventory";
 import type { Account, Hero, Item } from "./types";
 
 export const DEFAULT_DECODER_URL = "https://krivpfvxi0.execute-api.us-west-2.amazonaws.com/dev/getItems";
@@ -38,7 +39,7 @@ export function convertRawItem(raw: any): any | null {
   if (!gear && typeof raw.code === "string") { const base = raw.code.split("_")[0]; gear = GEAR_BY_LETTER[base[base.length - 1]]; }
   const set = SET_BY_INGAME[raw.f];
   if (!gear || !set || rank === "Unknown") return null;
-  const [mType] = raw.op[0];
+  const [mType, mBase] = raw.op[0];
   const mainType = STAT_BY_INGAME[mType];
   let mainValue = FLAT.has(mType) ? raw.mainStatValue : r10((raw.mainStatValue ?? 0) * 100);
   if (mainValue == null || isNaN(mainValue)) mainValue = 0;
@@ -56,6 +57,9 @@ export function convertRawItem(raw: any): any | null {
   }
   const count = Math.min(raw.op.length - 1, COUNT_BY_RANK[rank]);
   const enhance = Math.max((count - OFFSET_BY_RANK[rank]) * 3, 0);
+  // The decoder leaves level and main value empty for gear it doesn't know yet
+  // (new level-88 pieces). At +15 the main stat is five times its base roll.
+  if (!mainValue && enhance === 15 && typeof mBase === "number" && mBase > 0) mainValue = FLAT.has(mType) ? Math.round(mBase * 5) : r10(mBase * 500);
   return {
     id: String(raw.id), ingameId: String(raw.id), gear, rank, set, name: raw.name ?? "Unknown", level: raw.level ?? 0, enhance,
     main: { type: mainType, value: mainValue },
@@ -115,6 +119,7 @@ export function mergeScan(existing: Account | null, scan: { items: any[]; heroes
   }
   const oldIds = new Set(existing.items.map((i) => i.id));
   const items: Item[] = incoming.items.length ? incoming.items : existing.items;
+  keepManualFixes(existing.items, incoming.items);
   if (incoming.items.length) {
     for (const it of items) { if (oldIds.has(it.id)) report.updated++; else report.added++; }
     const newIds = new Set(items.map((i) => i.id));
