@@ -76,6 +76,8 @@ export interface Hero {
   imprint?: import("./imprint").HeroImprint;
   equipment: Partial<Record<GearSlot, string>>; // slot -> item id
   artifactName?: string;
+  /** Combat Power as the game shows it, when the capture includes it. */
+  gameCp?: number;
 }
 
 export interface SkillData {

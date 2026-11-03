@@ -78,6 +78,10 @@ export default function AccountPage() {
               {capture.error && <tr><td>Error</td><td style={{ color: "var(--bad)", whiteSpace: "normal" }}>{capture.error}</td></tr>}
             </tbody>
           </table>
+          {capture.lastSync && <div className="row" style={{ marginTop: 8 }}>
+            <button className="small ghost" onClick={async () => { if (!(await api.showSyncSample())) toast("No sync sample yet. Run a Live Sync first.", true); }}>Show last sync sample</button>
+            <span className="muted" style={{ fontSize: 12 }}>last-sync-sample.json: the field names the decoder sent plus a few heroes and items, for troubleshooting.</span>
+          </div>}
           <h3 style={{ marginTop: 16 }}>Fallback: import a file</h3>
           <div className="row">
             <button onClick={async () => { try { const r = await api.importFile(); if (r) toast(`Imported ${r.heroes} heroes, ${r.items} items`); } catch (e: any) { toast(e.message, true); } }}>Import Fribbels / RexQian save…</button>

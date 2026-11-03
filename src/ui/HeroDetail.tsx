@@ -40,6 +40,7 @@ export function HeroHeader({ heroId, right }: { heroId: string; right?: React.Re
       {hero.artifactName && <ArtifactLine name={hero.artifactName} role={d?.role ?? hero.role} info={init.gameData.artifactInfo?.[hero.artifactName]} />}
       <h3 style={{ marginTop: 10 }}>Current build</h3>
       <StatLine s={s} />
+      {hero.gameCp != null && <div className="muted" style={{ fontSize: 12, marginTop: 4 }}>In-game Combat Power: <b>{hero.gameCp.toLocaleString("en-US")}</b> (from the last Live Sync; it counts more than stats, so it runs higher than E7 Forge's CP).</div>}
       <div className="row" style={{ marginTop: 8 }}>
         <button className="small ghost" onClick={() => setShowGear(!showGear)}>{showGear ? "Hide" : "Show"} equipped gear</button>
         <button className="small ghost" onClick={() => setShowImprint(!showImprint)}>Memory Imprint: {imprintText(hero.imprint, d)}</button>

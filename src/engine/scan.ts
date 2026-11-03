@@ -68,6 +68,16 @@ export function convertRawItem(raw: any): any | null {
   };
 }
 
+/**
+ * In-game Combat Power, if the decoder passes it through. The field name isn't
+ * documented, so a few likely names are tried; nothing is invented when none is there.
+ */
+export const GAME_CP_FIELDS = ["cp", "power", "combat_power", "combatPower", "point", "pt"];
+export function gameCpOf(u: any): number | undefined {
+  for (const k of GAME_CP_FIELDS) { const v = Number(u?.[k]); if (Number.isFinite(v) && v >= 1000 && v < 10_000_000) return Math.round(v); }
+  return undefined;
+}
+
 export interface ScanConvertOptions {
   /** Ignore gear below this enhance level (Fribbels default 6). */
   minEnhance?: number;
@@ -97,7 +107,7 @@ export function convertDecoderResponse(resp: DecoderResponse, o: ScanConvertOpti
     const id = String(u.id);
     const equipment: Record<string, any> = {};
     for (const it of items) if (it.ingameEquippedId === id) equipment[it.gear] = it.id;
-    return { id, name: u.name, stars: u.g, awaken: u.z, level: u.lv ?? u.level ?? u.l, equipment };
+    return { id, name: u.name, stars: u.g, awaken: u.z, level: u.lv ?? u.level ?? u.l, equipment, gameCp: gameCpOf(u) };
   });
   for (const it of items) it.equippedById = it.ingameEquippedId ?? null;
   return { items, heroes };
@@ -134,6 +144,7 @@ export function mergeScan(existing: Account | null, scan: { items: any[]; heroes
       old.stars = nh.stars ?? old.stars;
       old.level = nh.level ?? old.level;
       old.awaken = nh.awaken ?? old.awaken;
+      old.gameCp = nh.gameCp ?? old.gameCp;
       idRemap.set(nh.id, old.id);
       report.heroesUpdated++;
     } else {

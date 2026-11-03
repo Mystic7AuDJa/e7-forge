@@ -199,7 +199,7 @@ export class CaptureService extends EventEmitter {
       const opts: ScanConvertOptions = { minEnhance: s.minEnhance, minStars: s.minStars };
       const scan = convertDecoderResponse(json, opts);
       if (!scan.items.length && !scan.heroes.length) throw new Error("Traffic decoded but held no gear or heroes. Open the Inventory / Heroes screen, wait for it to load, then sync.");
-      this.emit("scan", { scan, trigger, buffers: nonEmpty.length });
+      this.emit("scan", { scan, trigger, buffers: nonEmpty.length, raw: json });
       this.lastError = null;
     } catch (e: any) {
       if (this.decoder.lastExchange && Date.now() - this.decoder.lastExchange < 5000) this.armAutoOff();

@@ -217,6 +217,8 @@ Changelog
 ---------
 
 0.1.6
+- CP is labelled as E7 Forge's stat-based estimate (hover the ⓘ); it won't match the game's Combat Power, which counts more than stats. If the Live Sync data carries the game's CP, the hero header shows it.
+- Account & Live Sync: "Show last sync sample" opens last-sync-sample.json (field names and a few heroes/items from the last sync) for troubleshooting.
 - Gear & Upgrade ROI: the table now uses the full width. Clicking an item slides the Forecast out from the right (Esc or ✕ closes it); the Upgrade queue opens in the same drawer from the toolbar. The forecast type moved to the toolbar next to the tiers.
 - Gear & Upgrade ROI: tier thresholds and forecast type are saved and come back the next time you open the app.
 - Upgrade queue no longer shows "-0%" for Sell.

@@ -58,6 +58,7 @@ export function createMockApi(): ForgeApi {
       if (i < 0) return null;
       acc.items[i] = editItem(acc.items[i], { enhance, substats, level, mainValue }); emit("account:changed", {}); return acc.items[i];
     },
+    showSyncSample: async () => false,
     deleteItem: async ({ itemId }) => { const ok = removeItem(need(), itemId); if (ok) emit("account:changed", {}); return ok; },
     applyBuilds: async (builds) => {
       const acc = need();

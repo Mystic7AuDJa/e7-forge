@@ -108,6 +108,7 @@ export function importFribbels(json: unknown, source = "fribbels"): { account: A
       level: num(h.level ?? h.lv, 0) || undefined,
       awaken: h.awaken != null ? num(h.awaken) : undefined,
       bonuses: bonusesFrom(h), equipment, artifactName: h.artifactName,
+      ...(Number(h.gameCp) > 0 ? { gameCp: Number(h.gameCp) } : {}),
       ...(importedImprint(h) ? { imprint: importedImprint(h) } : {}),
     };
   });

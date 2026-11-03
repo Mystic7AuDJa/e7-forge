@@ -192,7 +192,8 @@ app.whenReady().then(async () => {
   capture.on("activity", (a) => send("capture:activity", a));
   capture.on("syncError", (e) => send("capture:syncError", e));
   capture.on("autoOff", (e) => send("capture:autoOff", e));
-  capture.on("scan", ({ scan, trigger }) => {
+  capture.on("scan", ({ scan, trigger, raw }) => {
+    saveSyncSample(raw);
     const { account: merged, report } = mergeScan(account, scan);
     setAccount(merged);
     send("capture:synced", { trigger, report, at: new Date().toISOString() });
@@ -200,6 +201,24 @@ app.whenReady().then(async () => {
   registerIpc();
   await createWindow();
 });
+// A small copy of the last decoder response (field names plus a few heroes and
+// items) so a field the converter doesn't read yet, like in-game CP, can be found.
+const syncSampleFile = () => path.join(userData, "last-sync-sample.json");
+function saveSyncSample(raw: any) {
+  try {
+    const units = (raw?.units ?? []).reduce((best: any[], u: any) => (Array.isArray(u) && u.length > best.length ? u : best), []);
+    const scalars = (o: any) => Object.fromEntries(Object.entries(o ?? {}).filter(([, v]) => v == null || typeof v !== "object"));
+    const top = [...units].sort((a, b) => (b?.g ?? 0) - (a?.g ?? 0)).slice(0, 12);
+    fs.writeFileSync(syncSampleFile(), JSON.stringify({
+      savedAt: new Date().toISOString(),
+      unitFields: [...new Set(units.flatMap((u: any) => Object.keys(u ?? {})))].sort(),
+      units: top.map(scalars),
+      itemFields: [...new Set((raw?.data ?? []).flatMap((i: any) => Object.keys(i ?? {})))].sort(),
+      items: (raw?.data ?? []).slice(0, 3),
+    }, null, 1));
+  } catch (e) { console.error("sync sample", e); }
+}
+
 let shuttingDown = false;
 function shutdown() {
   if (shuttingDown) return;
@@ -268,6 +287,12 @@ function registerIpc() {
     account.items[i] = editItem(account.items[i], { enhance, substats, level, mainValue });
     setAccount(account, true);
     return account.items[i];
+  });
+
+  ipcMain.handle("capture:showSample", () => {
+    if (!fs.existsSync(syncSampleFile())) return false;
+    shell.showItemInFolder(syncSampleFile());
+    return true;
   });
 
   ipcMain.handle("account:deleteItem", (_e, { itemId }) => {

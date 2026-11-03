@@ -12,6 +12,7 @@ const api = {
   applyBuilds: invoke("account:applyBuilds"),
   updateItem: invoke("account:updateItem"),
   deleteItem: invoke("account:deleteItem"),
+  showSyncSample: invoke("capture:showSample"),
   addHero: invoke("account:addHero"),
   snapshots: invoke("snapshots:list"),
   restoreSnapshot: invoke("snapshots:restore"),

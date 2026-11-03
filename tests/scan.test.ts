@@ -80,3 +80,13 @@ describe("gear the decoder doesn't know yet (new level-88 pieces)", () => {
     expect(again.items[0].main.value).toBe(65);
   });
 });
+
+describe("in-game CP", () => {
+  it("is kept when the decoder sends it, and not invented when it doesn't", () => {
+    const scan = convertDecoderResponse({ status: "SUCCESS", data: [rawSword], units: [[{ id: 9001, name: "Krau", g: 6, cp: 174072 }, { id: 9004, name: "Lots", g: 6 }]] });
+    expect(scan.heroes.find((h: any) => h.name === "Krau")!.gameCp).toBe(174072);
+    expect(scan.heroes.find((h: any) => h.name === "Lots")!.gameCp).toBeUndefined();
+    const acc = mergeScan(null, scan).account;
+    expect(acc.heroes.find((h) => h.name === "Krau")!.gameCp).toBe(174072);
+  });
+});

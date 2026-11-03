@@ -12,6 +12,7 @@ export const STAT_COLS: { k: keyof DerivedStats; label: string }[] = [
   { k: "cp", label: "CP" }, { k: "ehp", label: "EHP" }, { k: "dmg", label: "Dmg" }, { k: "gs", label: "GS" },
 ];
 
+export const CP_HELP = "E7 Forge's CP is the stat-based formula Fribbels used (Atk, crit, Speed, HP, Def, Eff, Res). The game's Combat Power adds value that isn't in the stat sheet (for example skill enhancements, artifact level and Exclusive Equipment) by a formula Smilegate doesn't publish, so the in-game number is higher and the gap differs per hero. Use it to compare builds of the same hero, not to match the game.";
 export const statShort = (k: string) => STAT_COLS.find((c) => c.k === k)?.label ?? k.toUpperCase();
 
 const ICON_BASE = "./icons";
@@ -65,7 +66,7 @@ export function StatLine({ s, compare }: { s: DerivedStats | null; compare?: Der
         const d = c != null ? v - c : 0;
         return (
           <div key={k} className="kpi" style={{ minWidth: 58 }}>
-            <span className="label">{label}</span>
+            <span className="label" title={k === "cp" ? CP_HELP : undefined} style={k === "cp" ? { cursor: "help" } : undefined}>{label}{k === "cp" ? " ⓘ" : ""}</span>
             <span className="mono">{fmt(v)}{c != null && d !== 0 && <span style={{ color: d > 0 ? "var(--good)" : "var(--bad)", fontSize: 11 }}> {d > 0 ? "+" : ""}{fmt(d)}</span>}</span>
           </div>
         );
