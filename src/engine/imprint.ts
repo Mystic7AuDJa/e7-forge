@@ -77,6 +77,7 @@ export function imprintFor(hd: HeroData | undefined): ImprintData {
 /** Hero bonuses plus the hero's own Concentration and any team auras passed in. */
 export function effectiveBonuses(hero: Hero, hd: HeroData, extra?: Partial<HeroBonuses>): HeroBonuses {
   const b = { ...hero.bonuses };
+  if (hero.artifact) { b.atk += hero.artifact.atk; b.hp += hero.artifact.hp; b.def += hero.artifact.def; }
   const imp = hero.imprint;
   if (imp?.mode === "concentration" && !imp.inBonuses) {
     const c = imprintFor(hd).concentration;

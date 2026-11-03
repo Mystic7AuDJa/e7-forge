@@ -16,7 +16,7 @@ export interface Settings {
 
 export interface InitData {
   version: string; workers: number; platform: string; killedPrior?: string[]; runtime?: { electron: string; chrome: string; node: string }; settings: Settings; account: Account | null;
-  gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; imprints?: Record<string, any>; /** Keyed by artifact name. */ artifacts?: Record<string, { code: string; name: string }>; artifactInfo?: Record<string, ArtifactInfo>; source: string; heroCount: number };
+  gameData: { herodata: Record<string, any>; tags: Record<string, string[]>; imprints?: Record<string, any>; /** Keyed by artifact name. */ artifacts?: Record<string, import("../engine/artifact").ArtifactBase>; artifactInfo?: Record<string, ArtifactInfo>; source: string; heroCount: number };
   capture: { state: string; error: string | null };
 }
 
@@ -26,7 +26,7 @@ export interface ForgeApi {
   importFile(): Promise<any>;
   importText(text: string): Promise<any>;
   exportFile(): Promise<string | null>;
-  updateHero(a: { heroId: string; bonuses?: any; dataKey?: string; imprint?: import("../engine/imprint").HeroImprint | null }): Promise<any>;
+  updateHero(a: { heroId: string; bonuses?: any; dataKey?: string; imprint?: import("../engine/imprint").HeroImprint | null; artifact?: import("../engine/artifact").HeroArtifact | null }): Promise<any>;
   applyBuilds(b: Build[]): Promise<any>;
   /** Removes the item from E7 Forge (not from the game) and unequips it. */
   deleteItem(a: { itemId: string }): Promise<boolean>;

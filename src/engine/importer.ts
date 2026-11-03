@@ -1,5 +1,6 @@
 // Imports Fribbels optimizer saves / scanner exports ({heroes, items}).
 // The RexQian fork (v1.12.x-offline) writes the identical format.
+import type { HeroArtifact } from "./artifact";
 import { gearScore, estimateRolls } from "./gear";
 import { GEAR_SLOTS, STAT_TYPES, type Account, type GearSlot, type Hero, type HeroBonuses, type Item, type Rank, type StatType } from "./types";
 import type { HeroImprint } from "./imprint";
@@ -54,11 +55,21 @@ function importedImprint(h: any): HeroImprint | undefined {
   return { grade: null, value: v, mode: "concentration", source: "import", inBonuses: true };
 }
 
+// Fribbels' aei* totals already include the artifact's stats (artifactAttack etc.
+// are copies for display). The artifact is kept separately here, so it's taken
+// back out of the totals; files without aei* fields just get the artifact.
+const aeiFlat = (h: any, aei: string, art: string) => (h[aei] != null ? num(h[aei]) - num(h[art]) : 0);
+function importedArtifact(h: any): HeroArtifact | undefined {
+  const name = typeof h.artifactName === "string" && h.artifactName !== "None" ? h.artifactName : "";
+  const atk = num(h.artifactAttack), hp = num(h.artifactHealth), def = num(h.artifactDefense);
+  if (!name && !atk && !hp && !def) return undefined;
+  return { name: name || "Unknown artifact", level: num(parseInt(h.artifactLevel), 0), atk, hp, def };
+}
 function bonusesFrom(h: any): HeroBonuses {
   return {
-    atk: num(h.bonusAtk) + num(h.aeiAtk) + num(h.artifactAttack),
-    hp: num(h.bonusHp) + num(h.aeiHp) + num(h.artifactHealth),
-    def: num(h.bonusDef) + num(h.aeiDef) + num(h.artifactDefense),
+    atk: num(h.bonusAtk) + aeiFlat(h, "aeiAtk", "artifactAttack"),
+    hp: num(h.bonusHp) + aeiFlat(h, "aeiHp", "artifactHealth"),
+    def: num(h.bonusDef) + aeiFlat(h, "aeiDef", "artifactDefense"),
     atkPct: num(h.bonusAtkPercent) + num(h.aeiAtkPercent),
     hpPct: num(h.bonusHpPercent) + num(h.aeiHpPercent),
     defPct: num(h.bonusDefPercent) + num(h.aeiDefPercent),
@@ -108,6 +119,7 @@ export function importFribbels(json: unknown, source = "fribbels"): { account: A
       level: num(h.level ?? h.lv, 0) || undefined,
       awaken: h.awaken != null ? num(h.awaken) : undefined,
       bonuses: bonusesFrom(h), equipment, artifactName: h.artifactName,
+      ...(importedArtifact(h) ? { artifact: importedArtifact(h) } : {}),
       ...(Number(h.gameCp) > 0 ? { gameCp: Number(h.gameCp) } : {}),
       ...(importedImprint(h) ? { imprint: importedImprint(h) } : {}),
     };

@@ -7,6 +7,7 @@ import { TAG_LABELS } from "../engine/tagger";
 import { GEAR_SLOTS, type HeroBonuses } from "../engine/types";
 import { classLabel, elementLabel } from "../engine/labels";
 import { artifactFits } from "../engine/dictionary";
+import { ARTIFACT_LEVELS, artifactStats } from "../engine/artifact";
 import { fmtImprint, gradeForValue, GRADES, imprintFor, positionLabel, type Grade, type HeroImprint, type ImprintMode } from "../engine/imprint";
 
 const BONUS_FIELDS: { k: keyof HeroBonuses; label: string }[] = [
@@ -20,6 +21,7 @@ export function HeroHeader({ heroId, right }: { heroId: string; right?: React.Re
   const [showGear, setShowGear] = useState(false);
   const [showBonus, setShowBonus] = useState(false);
   const [showImprint, setShowImprint] = useState(false);
+  const [showArtifact, setShowArtifact] = useState(false);
   const hero = heroById.get(heroId);
   if (!hero) return null;
   const d = hd(hero);
@@ -37,29 +39,91 @@ export function HeroHeader({ heroId, right }: { heroId: string; right?: React.Re
         </div>
         {right}
       </div>
-      {hero.artifactName && <ArtifactLine name={hero.artifactName} role={d?.role ?? hero.role} info={init.gameData.artifactInfo?.[hero.artifactName]} />}
+      {hero.artifactName && <ArtifactLine name={hero.artifactName} level={hero.artifact?.level} stats={hero.artifact} role={d?.role ?? hero.role} info={init.gameData.artifactInfo?.[hero.artifactName]} />}
       <h3 style={{ marginTop: 10 }}>Current build</h3>
       <StatLine s={s} />
       {hero.gameCp != null && <div className="muted" style={{ fontSize: 12, marginTop: 4 }}>In-game Combat Power: <b>{hero.gameCp.toLocaleString("en-US")}</b> (from the last Live Sync; it counts more than stats, so it runs higher than E7 Forge's CP).</div>}
       <div className="row" style={{ marginTop: 8 }}>
         <button className="small ghost" onClick={() => setShowGear(!showGear)}>{showGear ? "Hide" : "Show"} equipped gear</button>
         <button className="small ghost" onClick={() => setShowImprint(!showImprint)}>Memory Imprint: {imprintText(hero.imprint, d)}</button>
-        <button className="small ghost" onClick={() => setShowBonus(!showBonus)}>{showBonus ? "Hide" : "Edit"} artifact / EE bonuses</button>
+        <button className="small ghost" onClick={() => setShowArtifact(!showArtifact)}>Artifact: {hero.artifact ? `${hero.artifact.name} +${hero.artifact.level}` : "not set"}</button>
+        <button className="small ghost" onClick={() => setShowBonus(!showBonus)}>{showBonus ? "Hide" : "Edit"} EE / other bonuses</button>
       </div>
       {showImprint && <ImprintEditor heroId={hero.id} key={"imp" + hero.id} />}
+      {showArtifact && <ArtifactEditor heroId={hero.id} key={"art" + hero.id} onDone={() => setShowArtifact(false)} />}
       {showGear && <table style={{ marginTop: 8 }}><tbody>{GEAR_SLOTS.map((sl) => <tr key={sl}><td className="muted"><SlotLabel slot={sl} /></td><td><ItemSummary item={itemById.get(hero.equipment[sl] ?? "")} /></td></tr>)}</tbody></table>}
       {showBonus && <BonusEditor heroId={hero.id} key={hero.id} />}
     </div>
   );
 }
 
-function ArtifactLine({ name, role, info }: { name: string; role?: string; info?: import("../engine/dictionary").ArtifactInfo }) {
+function ArtifactLine({ name, level, stats, role, info }: { name: string; level?: number; stats?: { atk: number; hp: number; def: number }; role?: string; info?: import("../engine/dictionary").ArtifactInfo }) {
   const fits = artifactFits(info, role);
   return (
     <div style={{ marginTop: 8, fontSize: 13 }}>
-      <b>Artifact:</b> {name}{info && <span className="muted"> ({info.class}, {info.stars}★)</span>}
+      <b>Artifact:</b> {name}{level != null && ` +${level}`}{info && <span className="muted"> ({info.class}, {info.stars}★)</span>}
+      {stats && <span className="muted"> · {artifactStatText(stats)}</span>}
       {info && <div className="muted" style={{ fontSize: 12 }}>{info.effect}</div>}
       {!fits && <div className="warn" style={{ fontSize: 12 }}>This artifact is for {info!.class} heroes: only its stats apply, not its effect.</div>}
+    </div>
+  );
+}
+
+const ARTIFACT_MAX = ARTIFACT_LEVELS[ARTIFACT_LEVELS.length - 1];
+const artifactStatText = (s: { atk: number; hp: number; def: number }) =>
+  [s.atk && `Atk +${Math.floor(s.atk)}`, s.hp && `HP +${Math.floor(s.hp)}`, s.def && `Def +${Math.floor(s.def)}`].filter(Boolean).join(", ") || "no flat stats";
+
+const ROLE_CLASS: Record<string, string> = { knight: "Knight", warrior: "Warrior", assassin: "Thief", ranger: "Ranger", mage: "Mage", manauser: "Soul Weaver" };
+
+/** Pick an artifact and its level; its Atk / HP / Def are worked out and added to the hero's stats. */
+function ArtifactEditor({ heroId, onDone }: { heroId: string; onDone: () => void }) {
+  const { heroById, hd, api, toast, init } = useForge();
+  const hero = heroById.get(heroId)!;
+  const role = hd(hero)?.role ?? hero.role;
+  const all = init.gameData.artifacts ?? {};
+  const info = init.gameData.artifactInfo ?? {};
+  const [name, setName] = useState(hero.artifact?.name ?? hero.artifactName ?? "");
+  const [level, setLevel] = useState(hero.artifact?.level ?? ARTIFACT_MAX);
+  const [showAll, setShowAll] = useState(false);
+  // Usable artifacts first: this class's own, then "any class"; others only on request (their effect wouldn't apply).
+  const options = Object.values(all).filter((a) => showAll || !a.role || a.role === role || a.name === name)
+    .sort((a, b) => b.rarity - a.rarity || Number(a.role !== role) - Number(b.role !== role) || a.name.localeCompare(b.name));
+  const base = all[name];
+  const preview = base ? artifactStats(base, level) : null;
+  // A level from an import that isn't a multiple of 3 (e.g. +22) stays selectable.
+  const levels = [...new Set([...ARTIFACT_LEVELS, level])].sort((a, b) => a - b);
+  const save = async (clear = false) => {
+    await api.updateHero({ heroId, artifact: clear ? null : preview });
+    toast(clear ? "Artifact removed" : `Artifact saved: ${preview!.name} +${preview!.level}`);
+    onDone();
+  };
+  return (
+    <div className="card" style={{ marginTop: 10, background: "var(--panel-2)" }}>
+      <div className="row" style={{ alignItems: "flex-end" }}>
+        <label className="field" style={{ flex: 1, minWidth: 240 }}>Artifact
+          <input list={"artifacts-" + heroId} value={name} placeholder="Type to search…" onChange={(e) => setName(e.target.value)} />
+          <datalist id={"artifacts-" + heroId}>{options.map((a) => <option key={a.code} value={a.name}>{"★".repeat(a.rarity)} {a.role ? ROLE_CLASS[a.role] : "Any class"}</option>)}</datalist>
+        </label>
+        <label className="field">Level
+          <select value={level} onChange={(e) => setLevel(Number(e.target.value))}>{levels.map((l) => <option key={l} value={l}>+{l}</option>)}</select>
+        </label>
+        <label className="row" style={{ gap: 6, fontSize: 12 }}><input type="checkbox" checked={showAll} onChange={(e) => setShowAll(e.target.checked)} />Show other classes</label>
+      </div>
+      {!hero.artifact && (hero.bonuses.atk || hero.bonuses.hp || hero.bonuses.def) ? <div className="warn" style={{ fontSize: 12, marginTop: 6 }}>This hero has flat Atk/HP/Def under EE / other bonuses. If that was this artifact, clear it there so it isn't counted twice.</div> : null}
+      {name && !base && <div className="warn" style={{ fontSize: 12, marginTop: 6 }}>No artifact called “{name}” in the game data.</div>}
+      {preview && (
+        <div style={{ fontSize: 13, marginTop: 8 }}>
+          <b>{preview.name} +{preview.level}</b>: {artifactStatText(preview)}
+          {info[preview.name] && <div className="muted" style={{ fontSize: 12 }}>{info[preview.name].effect}</div>}
+          {!artifactFits(info[preview.name], role) && <div className="warn" style={{ fontSize: 12 }}>Locked to {info[preview.name]!.class}: only its stats apply on this hero.</div>}
+        </div>
+      )}
+      <div className="row" style={{ marginTop: 8 }}>
+        <button className="small primary" disabled={!preview} onClick={() => save()}>Save artifact</button>
+        {hero.artifact && <button className="small ghost" onClick={() => save(true)}>Remove</button>}
+        <button className="small ghost" onClick={onDone}>Cancel</button>
+        <span className="muted" style={{ fontSize: 12 }}>Atk / HP / Def are worked out from the level and added to the hero's stats. Live Sync doesn't change it.</span>
+      </div>
     </div>
   );
 }
@@ -75,7 +139,7 @@ function BonusEditor({ heroId }: { heroId: string }) {
       </div>
       <div className="row" style={{ marginTop: 8 }}>
         <button className="small primary" onClick={async () => { await api.updateHero({ heroId, bonuses: b }); toast("Bonuses saved"); }}>Save bonuses</button>
-        <span className="muted" style={{ fontSize: 12 }}>Live Sync doesn't include artifact or EE values. Enter the totals once; they're kept across syncs.</span>
+        <span className="muted" style={{ fontSize: 12 }}>Exclusive Equipment and any other flat bonuses. The artifact is set with the Artifact button, so don't include it here. Kept across syncs.</span>
       </div>
     </div>
   );

@@ -274,6 +274,7 @@ function registerIpc() {
       bonusAtk: h.bonuses.atk, bonusHp: h.bonuses.hp, bonusDef: h.bonuses.def, bonusAtkPercent: h.bonuses.atkPct,
       bonusHpPercent: h.bonuses.hpPct, bonusDefPercent: h.bonuses.defPct, bonusSpeed: h.bonuses.spd, bonusCr: h.bonuses.cr,
       bonusCd: h.bonuses.cd, bonusEff: h.bonuses.eff, bonusRes: h.bonuses.res,
+      ...(h.artifact ? { artifactName: h.artifact.name, artifactLevel: String(h.artifact.level), artifactAttack: h.artifact.atk, artifactHealth: h.artifact.hp, artifactDefense: h.artifact.def } : {}),
       equipment: Object.fromEntries(Object.entries(h.equipment).map(([s, id]) => [s, items.find((i) => i.id === id)])),
     }));
     fs.writeFileSync(r.filePath, JSON.stringify({ heroes, items }));
@@ -301,13 +302,14 @@ function registerIpc() {
     return true;
   });
 
-  ipcMain.handle("account:updateHero", (_e, { heroId, bonuses, dataKey, imprint }) => {
+  ipcMain.handle("account:updateHero", (_e, { heroId, bonuses, dataKey, imprint, artifact }) => {
     if (!account) return null;
     const h = account.heroes.find((x) => x.id === heroId);
     if (!h) return null;
     if (bonuses) h.bonuses = { ...h.bonuses, ...bonuses };
     if (dataKey) h.dataKey = dataKey;
     if (imprint !== undefined) { if (imprint) h.imprint = imprint; else delete h.imprint; }
+    if (artifact !== undefined) { if (artifact) { h.artifact = artifact; h.artifactName = artifact.name; } else { delete h.artifact; delete h.artifactName; } }
     setAccount(account, true);
     return h;
   });

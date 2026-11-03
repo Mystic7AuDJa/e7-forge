@@ -217,6 +217,8 @@ Changelog
 ---------
 
 0.1.6
+- Hero header: Artifact picker. Choose the artifact (your class's and any-class ones first) and its level in steps of 3 (+0 to +30); its Atk / HP / Def are worked out and added to the hero's stats. The old bonus editor is now "EE / other bonuses".
+- Fix: Fribbels files with an artifact counted its Atk / HP / Def twice. The artifact is now read into the picker and counted once.
 - CP is labelled as E7 Forge's stat-based estimate (hover the ⓘ); it won't match the game's Combat Power, which counts more than stats. If the Live Sync data carries the game's CP, the hero header shows it.
 - Account & Live Sync: "Show last sync sample" opens last-sync-sample.json (field names and a few heroes/items from the last sync) for troubleshooting.
 - Gear & Upgrade ROI: the table now uses the full width. Clicking an item slides the Forecast out from the right (Esc or ✕ closes it); the Upgrade queue opens in the same drawer from the toolbar. The forecast type moved to the toolbar next to the tiers.

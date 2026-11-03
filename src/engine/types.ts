@@ -76,6 +76,8 @@ export interface Hero {
   imprint?: import("./imprint").HeroImprint;
   equipment: Partial<Record<GearSlot, string>>; // slot -> item id
   artifactName?: string;
+  /** Artifact chosen in E7 Forge (or read from a Fribbels file), with its flat stats at that level. Kept out of `bonuses`. */
+  artifact?: import("./artifact").HeroArtifact;
   /** Combat Power as the game shows it, when the capture includes it. */
   gameCp?: number;
 }
