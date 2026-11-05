@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { convertDecoderResponse, convertRawItem, mergeScan } from "../src/engine/scan";
+import { importFribbels } from "../src/engine/importer";
+import sampleForPartial from "../data/sample-fribbels-export.json";
 
 // Shapes match what the Fribbels decoder returns (fields used by scanner.js).
 const rawSword = {
@@ -88,5 +90,23 @@ describe("in-game CP", () => {
     expect(scan.heroes.find((h: any) => h.name === "Lots")!.gameCp).toBeUndefined();
     const acc = mergeScan(null, scan).account;
     expect(acc.heroes.find((h) => h.name === "Krau")!.gameCp).toBe(174072);
+  });
+});
+
+describe("partial gear scans", () => {
+  const full = importFribbels(sampleForPartial as any).account;
+  it("merge a few items in instead of replacing the inventory", () => {
+    const one = { ...full.items[0], enhance: 15 };
+    const { account, report } = mergeScan(full, { items: [one], heroes: [] });
+    expect(report.partial).toBe(true);
+    expect(report.removed).toBe(0);
+    expect(account.items).toHaveLength(full.items.length);
+    expect(account.items.find((i) => i.id === one.id)!.enhance).toBe(15);
+  });
+  it("still replace the inventory when the scan is a full one", () => {
+    const most = full.items.slice(0, Math.ceil(full.items.length * 0.9));
+    const { account, report } = mergeScan(full, { items: most, heroes: [] });
+    expect(report.partial).toBeUndefined();
+    expect(account.items).toHaveLength(most.length);
   });
 });

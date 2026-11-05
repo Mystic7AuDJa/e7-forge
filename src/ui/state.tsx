@@ -4,7 +4,9 @@ import { currentBuildStats } from "../engine/optimizer";
 import type { Account, DerivedStats, Hero, HeroData, Item } from "../engine/types";
 import { getApi, type ForgeApi, type InitData, type MetaBundle, type Settings } from "./api";
 
-export interface CaptureStatus { state: string; error?: string | null; bytes?: number; packets?: number; streams?: number; ifaces?: string[]; lastSync?: any }
+/** One Live Sync attempt, newest first in CaptureStatus.log (this session only). */
+export interface SyncLogEntry { at: string; trigger: "auto" | "manual"; ok: boolean; buffers?: number; kb?: number; text: string }
+export interface CaptureStatus { state: string; error?: string | null; bytes?: number; packets?: number; streams?: number; ifaces?: string[]; lastSync?: any; log?: SyncLogEntry[] }
 
 interface Ctx {
   api: ForgeApi;
@@ -85,12 +87,19 @@ export function ForgeProvider({ children }: { children: React.ReactNode }) {
       a.on("account:changed", async () => { const d = await a.init(); setInit(d); setAccount(d.account ? { ...d.account } : null); });
       a.on("capture:status", (s) => setCapture((c) => ({ ...c, ...s })));
       a.on("capture:activity", (s) => setCapture((c) => ({ ...c, ...s })));
+      const logEntry = (e: SyncLogEntry) => setCapture((c) => ({ ...c, log: [e, ...(c.log ?? [])].slice(0, 20) }));
       a.on("capture:synced", (s) => {
         setCapture((c) => ({ ...c, lastSync: s }));
         const r = s.report;
-        toast(`Live Sync: ${r.added} new, ${r.updated} updated, ${r.removed} removed items · ${r.heroesAdded} new / ${r.heroesUpdated} updated heroes`);
+        const text = `${r.partial ? "Partial update: " : ""}${r.added} new, ${r.updated} updated${r.partial ? "" : `, ${r.removed} removed`} items · ${r.heroesAdded} new / ${r.heroesUpdated} updated heroes`;
+        logEntry({ at: s.at, trigger: s.trigger, ok: true, buffers: s.buffers, kb: s.kb, text });
+        toast(`Live Sync: ${text}`);
       });
-      a.on("capture:syncError", (s) => toast(`Sync: ${s.error}`, true));
+      // Auto-syncs fire on any quiet spell in the game's traffic, so a miss is normal and only logged; Sync now reports it.
+      a.on("capture:syncError", (s) => {
+        logEntry({ at: s.at ?? new Date().toISOString(), trigger: s.trigger, ok: false, buffers: s.buffers, kb: s.kb, text: s.error });
+        if (s.trigger === "manual") toast(`Sync: ${s.error}`, true);
+      });
       a.on("capture:autoOff", (s) => toast(`Live Sync turned off: no decoder activity for ${s.minutes} min. Connection closed.`));
     }).catch((e) => setError(String(e)));
   }, [toast]);

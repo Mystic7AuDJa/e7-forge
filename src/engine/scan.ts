@@ -87,7 +87,7 @@ export interface ScanConvertOptions {
 
 /** Decoder response -> Fribbels-format export usable by importFribbels(). */
 export function convertDecoderResponse(resp: DecoderResponse, o: ScanConvertOptions = {}) {
-  if (resp.status !== "SUCCESS") throw new Error("Decoder could not read the captured data. Re-open the screens in game and try again.");
+  if (resp.status !== "SUCCESS") throw new Error(`Decoder couldn't read the captured data. ${RELOAD_HINT}`);
   const items = (resp.data ?? []).map(convertRawItem).filter((x) => x && x.enhance >= (o.minEnhance ?? 0));
   // Several unit lists can be captured; the longest is the full roster.
   const units = (resp.units ?? []).reduce<any[]>((best, u) => (Array.isArray(u) && u.length > best.length ? u : best), []);
@@ -113,7 +113,17 @@ export function convertDecoderResponse(resp: DecoderResponse, o: ScanConvertOpti
   return { items, heroes };
 }
 
-export interface MergeReport { added: number; updated: number; removed: number; heroesAdded: number; heroesUpdated: number }
+/** The decoder reads the data the game sends while loading in; screens opened later don't resend it. */
+export const RELOAD_HINT = "The game sends your gear and heroes while loading into the lobby; opening Inventory or Heroes later doesn't resend them. With Live Sync on, go back to the title screen (or restart the game) and load in again.";
+
+export interface MergeReport { added: number; updated: number; removed: number; heroesAdded: number; heroesUpdated: number; partial?: boolean }
+
+/**
+ * A gear scan with fewer items than this share of what's stored is treated as a
+ * partial update (e.g. a few pieces from an enhance or a craft) and merged in,
+ * instead of replacing the inventory and dropping everything it didn't mention.
+ */
+export const FULL_SCAN_SHARE = 0.6;
 
 /**
  * Merge a fresh scan into an existing account.
@@ -128,12 +138,20 @@ export function mergeScan(existing: Account | null, scan: { items: any[]; heroes
     return { account: incoming, report };
   }
   const oldIds = new Set(existing.items.map((i) => i.id));
-  const items: Item[] = incoming.items.length ? incoming.items : existing.items;
+  const freshIds = new Set(incoming.items.map((i) => i.id));
+  const partial = incoming.items.length > 0 && existing.items.length > 0 && incoming.items.length < existing.items.length * FULL_SCAN_SHARE;
   keepManualFixes(existing.items, incoming.items);
+  let items: Item[];
+  if (!incoming.items.length) items = existing.items;
+  else if (partial) {
+    const merged = new Map(existing.items.map((i) => [i.id, i]));
+    for (const it of incoming.items) merged.set(it.id, it);
+    items = [...merged.values()];
+  } else items = incoming.items;
   if (incoming.items.length) {
-    for (const it of items) { if (oldIds.has(it.id)) report.updated++; else report.added++; }
-    const newIds = new Set(items.map((i) => i.id));
-    report.removed = existing.items.filter((i) => !newIds.has(i.id)).length;
+    for (const it of incoming.items) { if (oldIds.has(it.id)) report.updated++; else report.added++; }
+    if (partial) report.partial = true;
+    else report.removed = existing.items.filter((i) => !freshIds.has(i.id)).length;
   }
   const heroes: Hero[] = existing.heroes.map((h) => ({ ...h, equipment: { ...h.equipment } }));
   const byName = new Map(heroes.map((h) => [h.name, h]));
@@ -162,21 +180,19 @@ export function mergeScan(existing: Account | null, scan: { items: any[]; heroes
     const prevOwner = new Map<string, string>();
     for (const h of heroes) for (const id of Object.values(h.equipment)) if (id) prevOwner.set(id, h.id);
     for (const h of heroes) h.equipment = {};
-    for (const it of items) {
+    // Items this scan didn't carry go first, so a freshly scanned piece wins its slot.
+    const ordered = [...items].sort((a, b) => Number(freshIds.has(a.id)) - Number(freshIds.has(b.id)));
+    for (const it of ordered) {
       const ig = rawEquip.get(it.id) ?? null;
       const prev = prevOwner.get(it.id) ?? null;
-      let target: string | null;
-      if (incoming.items.length) {
-        // Fresh gear scan: the game is the source of truth (no id = unequipped),
-        // except when the wearer simply wasn't part of this scan.
-        target = ig ? idRemap.get(ig) ?? prev : null;
-      } else {
-        // Hero-only scan: use stored in-game links, else keep what we had.
-        target = ig ? idRemap.get(ig) ?? prev : prev;
-      }
+      // In this scan: the game is the source of truth (no id = unequipped), except
+      // when the wearer simply wasn't part of it. Not in it: keep what we had.
+      const target = freshIds.has(it.id) ? (ig ? idRemap.get(ig) ?? prev : null) : (ig ? idRemap.get(ig) ?? prev : prev);
       it.equippedById = target;
       if (target) { const h = heroes.find((x) => x.id === target); if (h) h.equipment[it.gear] = it.id; }
     }
+    // A piece that lost its slot to a newer one is no longer worn.
+    for (const it of items) if (it.equippedById && heroes.find((h) => h.id === it.equippedById)?.equipment[it.gear] !== it.id) it.equippedById = null;
     void itemIds;
   }
   return { account: { heroes, items, importedAt: new Date().toISOString(), source: "live-capture" }, report };

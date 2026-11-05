@@ -4,7 +4,7 @@ import { spawn, spawnSync, type ChildProcessWithoutNullStreams } from "node:chil
 import { EventEmitter } from "node:events";
 import fs from "node:fs";
 import readline from "node:readline";
-import { convertDecoderResponse, type DecoderResponse, type ScanConvertOptions } from "../src/engine/scan";
+import { convertDecoderResponse, RELOAD_HINT, type DecoderResponse, type ScanConvertOptions } from "../src/engine/scan";
 import { DecoderClient } from "./decoder";
 
 export interface CaptureSettings {
@@ -184,6 +184,7 @@ export class CaptureService extends EventEmitter {
     if (!this.child || this.state === "decoding") throw new Error(this.child ? "Already decoding" : "Live Sync is off");
     const s = this.getSettings();
     this.setState("decoding", { trigger });
+    let sent = { buffers: 0, kb: 0 };
     try {
       const bufs = await new Promise<string[]>((resolve, reject) => {
         this.pendingFlush = resolve;
@@ -193,18 +194,19 @@ export class CaptureService extends EventEmitter {
       this.lastSyncedBytes = 0; this.bytes = 0;
       // Only new, non-trivial game buffers go to the decoder; nothing is sent if there's nothing to decode.
       const nonEmpty = this.decoder.select(bufs);
-      if (!nonEmpty.length) throw new Error("No new game data to decode. Open the Heroes list or Inventory in game.");
+      sent = { buffers: nonEmpty.length, kb: Math.round(nonEmpty.reduce((a, b) => a + b.length / 2, 0) / 1024) };
+      if (!nonEmpty.length) throw new Error(`No new game data to decode. ${RELOAD_HINT}`);
       const json = (await this.decoder.decode(s.decoderUrl, nonEmpty)) as DecoderResponse;
       this.armAutoOff();
       const opts: ScanConvertOptions = { minEnhance: s.minEnhance, minStars: s.minStars };
       const scan = convertDecoderResponse(json, opts);
-      if (!scan.items.length && !scan.heroes.length) throw new Error("Traffic decoded but held no gear or heroes. Open the Inventory / Heroes screen, wait for it to load, then sync.");
-      this.emit("scan", { scan, trigger, buffers: nonEmpty.length, raw: json });
+      if (!scan.items.length && !scan.heroes.length) throw new Error(`The decoder found no gear or heroes in this traffic. ${RELOAD_HINT}`);
+      this.emit("scan", { scan, trigger, ...sent, raw: json });
       this.lastError = null;
     } catch (e: any) {
       if (this.decoder.lastExchange && Date.now() - this.decoder.lastExchange < 5000) this.armAutoOff();
       this.lastError = e?.message ?? String(e);
-      this.emit("syncError", { trigger, error: this.lastError });
+      this.emit("syncError", { trigger, error: this.lastError, ...sent, at: new Date().toISOString() });
     } finally {
       if (this.child) this.setState("listening");
     }

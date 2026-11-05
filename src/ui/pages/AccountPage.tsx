@@ -62,7 +62,8 @@ export default function AccountPage() {
             <li>Install <b>Npcap</b> with “WinPcap API-compatible mode” ticked.</li>
             <li>Click <b>Install scapy</b> above (or run <span className="mono">py -m pip install scapy</span>).</li>
             <li>Flip <b>Live Sync</b> on (top right), then start Epic Seven (emulator, Google Play Games or Steam).</li>
-            <li>In game open the <b>Inventory</b> (gear) screen, then the <b>Heroes</b> list. Each screen syncs automatically ~4 s after it loads; <b>Sync now</b> forces it.</li>
+            <li>Start the game (or go back to its <b>title screen</b>) and <b>load into the lobby</b>. The game sends your whole inventory and roster while loading in, and E7 Forge syncs a few seconds later; <b>Sync now</b> forces it.</li>
+            <li>Screens opened later (Inventory, Heroes) don't resend that data. To refresh after enhancing or crafting, return to the title screen and load in again with Live Sync on.</li>
           </ol>
           <p className="muted" style={{ fontSize: 12 }}>Capture is passive (read-only). Captured traffic is decoded by Fribbels' public decoder service, same as Fribbels' scanner. Ports and decoder URL are in Settings.</p>
         </Section>
@@ -74,10 +75,26 @@ export default function AccountPage() {
               <tr><td>Captured since last sync</td><td className="mono">{fmt((capture.bytes ?? 0) / 1024)} KB · {fmt(capture.packets ?? 0)} packets · {capture.streams ?? 0} streams</td></tr>
               <tr><td>Interfaces</td><td className="muted">{capture.ifaces?.join(", ") || "—"}</td></tr>
               <tr><td>Last sync</td><td>{capture.lastSync ? `${new Date(capture.lastSync.at).toLocaleTimeString()} (${capture.lastSync.trigger})` : "—"}</td></tr>
-              {capture.lastSync && <tr><td>Result</td><td>{capture.lastSync.report.added} new · {capture.lastSync.report.updated} updated · {capture.lastSync.report.removed} removed items; {capture.lastSync.report.heroesAdded} new heroes</td></tr>}
+              {capture.lastSync && <tr><td>Result</td><td>{capture.lastSync.report.partial && "Partial update: "}{capture.lastSync.report.added} new · {capture.lastSync.report.updated} updated{!capture.lastSync.report.partial && ` · ${capture.lastSync.report.removed} removed`} items; {capture.lastSync.report.heroesAdded} new heroes</td></tr>}
               {capture.error && <tr><td>Error</td><td style={{ color: "var(--bad)", whiteSpace: "normal" }}>{capture.error}</td></tr>}
             </tbody>
           </table>
+          {!!capture.log?.length && (
+            <details style={{ marginTop: 8 }} open={capture.log.some((e) => !e.ok)}>
+              <summary className="muted">Sync attempts this session ({capture.log.length})</summary>
+              <table style={{ marginTop: 6 }}>
+                <thead><tr><th>Time</th><th>Trigger</th><th className="num">Sent</th><th>Result</th></tr></thead>
+                <tbody>{capture.log.map((e, i) => (
+                  <tr key={i}>
+                    <td className="mono">{new Date(e.at).toLocaleTimeString()}</td>
+                    <td>{e.trigger}</td>
+                    <td className="num mono">{e.buffers ? `${e.buffers} buf · ${fmt(e.kb ?? 0)} KB` : "—"}</td>
+                    <td style={{ whiteSpace: "normal", color: e.ok ? undefined : "var(--bad)" }}>{e.text}</td>
+                  </tr>
+                ))}</tbody>
+              </table>
+            </details>
+          )}
           {capture.lastSync && <div className="row" style={{ marginTop: 8 }}>
             <button className="small ghost" onClick={async () => { if (!(await api.showSyncSample())) toast("No sync sample yet. Run a Live Sync first.", true); }}>Show last sync sample</button>
             <span className="muted" style={{ fontSize: 12 }}>last-sync-sample.json: the field names the decoder sent plus a few heroes and items, for troubleshooting.</span>

@@ -19,9 +19,11 @@ Install (portable build)
    - Npcap from npcap.com, with "WinPcap API-compatible mode" ticked.
    - scapy: Account & Live Sync -> Install scapy, or py -m pip install
      scapy==2.8.0.
-4. Turn on Live Sync (top right), start the game, open Inventory, then the
-   Heroes list. Each screen imports about 4 s after it loads. Sync now forces
-   it.
+4. Turn on Live Sync (top right), then start the game and load into the
+   lobby. The game sends your whole inventory and roster while loading in,
+   and E7 Forge imports it a few seconds later; Sync now forces it. Screens
+   opened later (Inventory, Heroes) don't resend it, so to refresh, go back
+   to the title screen (or restart the game) and load in again.
 5. Memory Imprints, artifacts and EE aren't in the captured data. In Hero
    Optimizer, set each hero's Memory Imprint (Release or Concentration, and
    grade) and enter artifact / EE bonuses once. Later syncs keep them.
@@ -217,6 +219,9 @@ Changelog
 ---------
 
 0.1.6
+- Live Sync: fixed the instructions. The decoder reads what the game sends while loading into the lobby; opening Inventory or Heroes later doesn't resend it. To refresh, return to the title screen and load in again. Error messages now say so.
+- Live Sync: a scan with only a few items (fewer than 60% of what's stored) is merged in as a partial update instead of replacing the inventory and dropping everything else.
+- Live Sync: automatic attempts that find nothing no longer pop an error; every attempt is listed under "Sync attempts this session" on Account & Live Sync.
 - Hero header: Artifact picker. Choose the artifact (your class's and any-class ones first) and its level in steps of 3 (+0 to +30); its Atk / HP / Def are worked out and added to the hero's stats. The old bonus editor is now "EE / other bonuses".
 - Fix: Fribbels files with an artifact counted its Atk / HP / Def twice. The artifact is now read into the picker and counted once.
 - CP is labelled as E7 Forge's stat-based estimate (hover the ⓘ); it won't match the game's Combat Power, which counts more than stats. If the Live Sync data carries the game's CP, the hero header shows it.

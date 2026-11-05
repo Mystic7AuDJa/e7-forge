@@ -192,11 +192,11 @@ app.whenReady().then(async () => {
   capture.on("activity", (a) => send("capture:activity", a));
   capture.on("syncError", (e) => send("capture:syncError", e));
   capture.on("autoOff", (e) => send("capture:autoOff", e));
-  capture.on("scan", ({ scan, trigger, raw }) => {
+  capture.on("scan", ({ scan, trigger, raw, buffers, kb }) => {
     saveSyncSample(raw);
     const { account: merged, report } = mergeScan(account, scan);
     setAccount(merged);
-    send("capture:synced", { trigger, report, at: new Date().toISOString() });
+    send("capture:synced", { trigger, report, buffers, kb, items: scan.items.length, heroes: scan.heroes.length, at: new Date().toISOString() });
   });
   registerIpc();
   await createWindow();
