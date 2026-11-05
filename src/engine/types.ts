@@ -78,6 +78,8 @@ export interface Hero {
   artifactName?: string;
   /** Artifact chosen in E7 Forge (or read from a Fribbels file), with its flat stats at that level. Kept out of `bonuses`. */
   artifact?: import("./artifact").HeroArtifact;
+  /** Teammates and team buffs used when optimizing this hero's build. */
+  team?: import("./teamImprint").HeroTeamSetup;
   /** Combat Power as the game shows it, when the capture includes it. */
   gameCp?: number;
 }

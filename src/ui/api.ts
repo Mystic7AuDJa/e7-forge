@@ -26,7 +26,7 @@ export interface ForgeApi {
   importFile(): Promise<any>;
   importText(text: string): Promise<any>;
   exportFile(): Promise<string | null>;
-  updateHero(a: { heroId: string; bonuses?: any; dataKey?: string; imprint?: import("../engine/imprint").HeroImprint | null; artifact?: import("../engine/artifact").HeroArtifact | null }): Promise<any>;
+  updateHero(a: { heroId: string; bonuses?: any; dataKey?: string; imprint?: import("../engine/imprint").HeroImprint | null; artifact?: import("../engine/artifact").HeroArtifact | null; team?: import("../engine/teamImprint").HeroTeamSetup | null }): Promise<any>;
   applyBuilds(b: Build[]): Promise<any>;
   /** Removes the item from E7 Forge (not from the game) and unequips it. */
   deleteItem(a: { itemId: string }): Promise<boolean>;

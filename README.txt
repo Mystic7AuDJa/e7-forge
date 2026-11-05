@@ -219,6 +219,7 @@ Changelog
 ---------
 
 0.1.6
+- Hero Optimizer: new Team imprints section. Pick up to three teammates; their Memory Imprint Release auras (plus this hero's own) are added to the hero's stats while optimizing, along with any other team buffs you type in (crit chance, crit damage, Atk/HP/Def %, Speed, Eff, Res). Slot-limited auras count when you tick that the hero stands in that slot. Results, targets and "Now" all include them, so a team that gives crit chance stops the build overshooting 100%. Saved per hero.
 - Live Sync: fixed the instructions. The decoder reads what the game sends while loading into the lobby; opening Inventory or Heroes later doesn't resend it. To refresh, return to the title screen and load in again. Error messages now say so.
 - Live Sync: a scan with only a few items (fewer than 60% of what's stored) is merged in as a partial update instead of replacing the inventory and dropping everything else.
 - Live Sync: automatic attempts that find nothing no longer pop an error; every attempt is listed under "Sync attempts this session" on Account & Live Sync.

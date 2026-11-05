@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useForge } from "../state";
 import { HeroRoster } from "../HeroRoster";
 import { AddPlanningHero, HeroHeader } from "../HeroDetail";
-import { Busy, fmt, ItemSummary, NoAccount, Num, Section, SetPicker, StatLine, Toggle, SlotLabel, SetIcons, SortTh, useSort, statShort } from "../components";
+import { Busy, fmt, HeroSelect, ItemSummary, NoAccount, Num, Section, SetPicker, StatLine, Toggle, SlotLabel, SetIcons, SortTh, useSort, statShort } from "../components";
 import { SLOT_MAINS, STAT_LABEL } from "../../engine/constants";
 import { baseRequest, detectArchetype, type Archetype } from "../../engine/recommend";
-import { targetMatch, type StatKey } from "../../engine/optimizer";
+import { computeFor, currentBuildStats, targetMatch, type StatKey } from "../../engine/optimizer";
 import { benchmark, eliteProfile, type EliteProfile } from "../../engine/benchmark";
+import { TEAM_STATS, teamImprintBonus, type HeroTeamSetup } from "../../engine/teamImprint";
 import { GEAR_SLOTS, type Build, type GearSlot, type OptimizeRequest, type StatType } from "../../engine/types";
 
 const WEIGHT_KEYS: { k: StatKey; label: string }[] = [
@@ -53,7 +54,15 @@ export default function OptimizerPage() {
   useEffect(() => { if (typeof pageArg === "string") setHeroId(pageArg); }, [pageArg]);
   useEffect(() => api.on("job:progress", (p) => setProgress((x) => Math.max(x, p.nodes ?? 0))), [api]);
   const hero = heroId ? heroById.get(heroId) : undefined;
-  const cur = hero ? stats(hero) : null;
+  const team = React.useMemo(() => (hero ? teamImprintBonus(hero, hero.team, heroById, hd) : null), [hero, heroById, hd]);
+  const extraBonuses = team?.any ? team.bonus : undefined;
+  // "Now" includes team imprints too, so it compares like for like with the targets and results.
+  const cur = React.useMemo(() => {
+    if (!hero) return null;
+    const d = hd(hero);
+    if (!extraBonuses || !d) return stats(hero);
+    return computeFor(d, hero, currentBuildStats(hero, d, account?.items ?? []).items, "current", undefined, extraBonuses);
+  }, [hero, extraBonuses, account]);
 
   useEffect(() => { try { localStorage.setItem("optMode", mode); } catch { /* ignore */ } }, [mode]);
   const loadCommunity = async (refresh = false) => {
@@ -90,14 +99,14 @@ export default function OptimizerPage() {
     setBusy(true); setRes(null); setProgress(0); setPick(0); setRanMode(mode);
     try {
       if (mode === "custom") {
-        const request: OptimizeRequest = { heroId: hero.id, weights, min: clean(min), max: clean(max), sets, mains, allowEquipped, predictUpgrades: predict, minEnhance, limit: 50 };
+        const request: OptimizeRequest = { heroId: hero.id, weights, min: clean(min), max: clean(max), sets, mains, allowEquipped, predictUpgrades: predict, minEnhance, limit: 50, extraBonuses };
         setRes(await api.optimize({ request }));
         return;
       }
       if (!targets) throw new Error("Community builds aren't loaded for this hero. Refresh, or switch to Custom.");
       const comboSets = useSets && profile ? comboPick.map((i) => profile.setCombos[i]?.sets).filter(Boolean) as string[][] : [];
       const request: OptimizeRequest = {
-        heroId: hero.id, targets: { stats: targets, priorities }, sets: comboSets, mains, allowEquipped, predictUpgrades: predict, minEnhance, limit: 50,
+        heroId: hero.id, targets: { stats: targets, priorities }, sets: comboSets, mains, allowEquipped, predictUpgrades: predict, minEnhance, limit: 50, extraBonuses,
       };
       let out = await api.optimize({ request });
       if (!out.builds.length && comboSets.length) {
@@ -134,6 +143,7 @@ export default function OptimizerPage() {
         {busy ? <Busy label={`Searching… ${fmt(progress)} nodes`} /> : <button className="primary" disabled={!hero} onClick={run}>Optimize</button>}
       </div>
       {hero && <HeroHeader heroId={hero.id} />}
+      {hero && <TeamImprints key={hero.id} heroId={hero.id} />}
 
       {mode === "bench" && hero && (
         <div className="grid" style={{ gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)" }}>
@@ -278,5 +288,66 @@ function TargetCompare({ build, current, targets, priorities, builds }: { build:
         );
       })}</tbody>
     </table>
+  );
+}
+
+/**
+ * Teammates' Release imprints (and other team buffs) for this hero, saved on the
+ * hero and added to every build the optimizer scores, so it stops chasing crit
+ * or other stats the team already gives.
+ */
+function TeamImprints({ heroId }: { heroId: string }) {
+  const { heroById, hd, api, toast } = useForge();
+  const hero = heroById.get(heroId)!;
+  const [setup, setSetup] = useState<HeroTeamSetup>(hero.team ?? { mates: [] });
+  const [open, setOpen] = useState(!!hero.team?.mates.length || !!Object.values(hero.team?.manual ?? {}).some(Boolean));
+  const timer = React.useRef(0);
+  const save = (next: HeroTeamSetup) => {
+    setSetup(next);
+    clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => {
+      const empty = !next.mates.length && !Object.values(next.manual ?? {}).some(Boolean);
+      api.updateHero({ heroId, team: empty ? null : next }).catch((e: any) => toast(e.message, true));
+    }, 400);
+  };
+  const preview = teamImprintBonus(hero, setup, heroById, hd);
+  const setMate = (i: number, id: string) => { const mates = [...setup.mates]; if (id) mates[i] = id; else mates.splice(i, 1); save({ ...setup, mates: mates.filter(Boolean).slice(0, 3) }); };
+  const toggleSlot = (id: string) => save({ ...setup, slotAuras: setup.slotAuras?.includes(id) ? setup.slotAuras.filter((x) => x !== id) : [...(setup.slotAuras ?? []), id] });
+  const noImprint = setup.mates.map((id) => heroById.get(id)).filter((m) => m && m.imprint?.mode !== "release");
+  return (
+    <Section title="Team imprints" right={<span className="row" style={{ gap: 8 }}>
+      {preview.any ? <span className="ok" style={{ fontSize: 12 }}>Counted in every build: {preview.total.join(" · ")}</span> : <span className="muted" style={{ fontSize: 12 }}>None counted</span>}
+      <button className="small ghost" onClick={() => setOpen(!open)}>{open ? "Hide" : "Edit"}</button>
+    </span>}>
+      {open && <>
+        <div className="row" style={{ alignItems: "flex-start" }}>
+          {[0, 1, 2].map((i) => (
+            <label key={i} className="field">Teammate {i + 1}
+              <span className="row" style={{ gap: 4 }}>
+                <HeroSelect value={setup.mates[i] ?? null} onChange={(id) => setMate(i, id)} placeholder="None" exclude={[heroId, ...setup.mates.filter((_, j) => j !== i)]} />
+                {setup.mates[i] && <button className="small ghost" title="Remove" onClick={() => setMate(i, "")}>✕</button>}
+              </span>
+            </label>
+          ))}
+        </div>
+        {preview.lines.length > 0 && <ul className="reasons" style={{ margin: "8px 0" }}>{preview.lines.map((l, i) => (
+          <li key={i}>
+            {l.aura.position === "all" ? l.text : <label className="row" style={{ gap: 6, display: "inline-flex" }}>
+              <input type="checkbox" checked={l.applied} onChange={() => toggleSlot(l.giverId)} />{l.text}<span className="muted">(tick if {hero.name} stands there)</span>
+            </label>}
+          </li>
+        ))}</ul>}
+        {noImprint.length > 0 && <p className="muted" style={{ fontSize: 12, margin: "4px 0" }}>{noImprint.map((m) => m!.name).join(", ")}: no Release imprint set. Set it from that hero's Memory Imprint button.</p>}
+        <h3 style={{ marginTop: 10 }}>Other team buffs</h3>
+        <div className="grid g4">
+          {TEAM_STATS.map((t) => (
+            <label key={t.k} className="field">{t.label}{t.k === "spd" ? "" : " %"}
+              <Num value={setup.manual?.[t.k] || undefined} onChange={(v) => save({ ...setup, manual: { ...setup.manual, [t.k]: v ?? 0 } })} />
+            </label>
+          ))}
+        </div>
+        <p className="muted" style={{ fontSize: 12 }}>Added to {hero.name}'s stats while optimizing (results, targets and "Now"), so a team giving crit chance stops the build overshooting 100%. Saved for this hero; your in-game stat sheet doesn't include these.</p>
+      </>}
+    </Section>
   );
 }

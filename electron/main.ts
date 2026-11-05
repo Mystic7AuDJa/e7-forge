@@ -302,13 +302,14 @@ function registerIpc() {
     return true;
   });
 
-  ipcMain.handle("account:updateHero", (_e, { heroId, bonuses, dataKey, imprint, artifact }) => {
+  ipcMain.handle("account:updateHero", (_e, { heroId, bonuses, dataKey, imprint, artifact, team }) => {
     if (!account) return null;
     const h = account.heroes.find((x) => x.id === heroId);
     if (!h) return null;
     if (bonuses) h.bonuses = { ...h.bonuses, ...bonuses };
     if (dataKey) h.dataKey = dataKey;
     if (imprint !== undefined) { if (imprint) h.imprint = imprint; else delete h.imprint; }
+    if (team !== undefined) { if (team) h.team = team; else delete h.team; }
     if (artifact !== undefined) { if (artifact) { h.artifact = artifact; h.artifactName = artifact.name; } else { delete h.artifact; delete h.artifactName; } }
     setAccount(account, true);
     return h;

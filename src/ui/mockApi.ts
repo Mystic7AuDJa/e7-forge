@@ -52,7 +52,7 @@ export function createMockApi(): ForgeApi {
     importFile: async () => { throw new Error("File dialogs need the desktop app. Paste JSON instead."); },
     importText: async (text) => { const r = importFribbels(text, "pasted"); account = r.account; emit("account:changed", {}); return r.report; },
     exportFile: async () => null,
-    updateHero: async ({ heroId, bonuses, imprint, artifact }) => { const h = need().heroes.find((x) => x.id === heroId)!; h.bonuses = { ...h.bonuses, ...bonuses }; if (imprint !== undefined) { if (imprint) h.imprint = imprint; else delete h.imprint; } if (artifact !== undefined) { if (artifact) { h.artifact = artifact; h.artifactName = artifact.name; } else { delete h.artifact; delete h.artifactName; } } emit("account:changed", {}); return h; },
+    updateHero: async ({ heroId, bonuses, imprint, artifact, team }) => { const h = need().heroes.find((x) => x.id === heroId)!; if (team !== undefined) { if (team) h.team = team; else delete h.team; } h.bonuses = { ...h.bonuses, ...bonuses }; if (imprint !== undefined) { if (imprint) h.imprint = imprint; else delete h.imprint; } if (artifact !== undefined) { if (artifact) { h.artifact = artifact; h.artifactName = artifact.name; } else { delete h.artifact; delete h.artifactName; } } emit("account:changed", {}); return h; },
     updateItem: async ({ itemId, enhance, substats, level, mainValue }) => {
       const acc = need(); const i = acc.items.findIndex((x) => x.id === itemId);
       if (i < 0) return null;
